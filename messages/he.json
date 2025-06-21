@@ -37,6 +37,7 @@
     "breadcrumb": {
       "main": "לוח ניהול",
       "main_users": "משתמשים",
+      "main_developers": "יזמים",
       "main_contacts": "אנשי קשר",
       "main_contacts_new": "איש קשר חדש"
     },
@@ -125,9 +126,94 @@
         }
       }
     },
+    "developers": {
+      "page": {
+        "title": "ניהול יזמים",
+        "create_developer": "הוסף יזם"
+      },
+      "table": {
+        "name": "שם",
+        "email": "אימייל",
+        "phone": "טלפון",
+        "company_info": "מידע על החברה",
+        "total_properties": "סך הכל נכסים",
+        "created_at": "נוצר בתאריך",
+        "actions": "פעולות",
+        "edit_developer": "ערוך יזם",
+        "delete_developer": "מחק יזם",
+        "view_properties": "צפה בנכסים",
+        "no_developers": "לא נמצאו יזמים",
+        "search_placeholder": "חיפוש יזמים...",
+        "toast": {
+          "success": "הצלחה",
+          "error": "שגיאה",
+          "developer_created": "היזם נוצר בהצלחה",
+          "developer_updated": "היזם עודכן בהצלחה",
+          "developer_deleted": "היזם נמחק בהצלחה",
+          "error_message": "אירעה שגיאה בביצוע הפעולה"
+        }
+      },
+      "create_developer_dialog": {
+        "title": "הוסף יזם חדש",
+        "description": "הכנס פרטי היזם החדש",
+        "name": "שם",
+        "name_placeholder": "הכנס שם היזם",
+        "email": "אימייל",
+        "email_placeholder": "הכנס כתובת אימייל",
+        "phone": "טלפון",
+        "phone_placeholder": "הכנס מספר טלפון (אופציונלי)",
+        "company_info": "מידע על החברה",
+        "company_info_placeholder": "הכנס מידע על החברה (אופציונלי)",
+        "cancel": "ביטול",
+        "creating": "יוצר...",
+        "create": "צור",
+        "toast": {
+          "success": "הצלחה",
+          "error": "שגיאה",
+          "developer_created": "היזם נוצר בהצלחה",
+          "error_message": "אירעה שגיאה ביצירת היזם"
+        }
+      },
+      "edit_developer_dialog": {
+        "title": "ערוך יזם",
+        "description": "עדכן פרטי היזם",
+        "name": "שם",
+        "name_placeholder": "הכנס שם היזם",
+        "email": "אימייל",
+        "email_placeholder": "הכנס כתובת אימייל",
+        "phone": "טלפון",
+        "phone_placeholder": "הכנס מספר טלפון (אופציונלי)",
+        "company_info": "מידע על החברה",
+        "company_info_placeholder": "הכנס מידע על החברה (אופציונלי)",
+        "cancel": "ביטול",
+        "updating": "מעדכן...",
+        "update": "עדכן",
+        "toast": {
+          "success": "הצלחה",
+          "error": "שגיאה",
+          "developer_updated": "היזם עודכן בהצלחה",
+          "error_message": "אירעה שגיאה בעדכון היזם"
+        }
+      },
+      "delete_developer_dialog": {
+        "title": "מחק יזם",
+        "description": "האם אתה בטוח שברצונך למחוק את {name}?",
+        "description_with_properties": "ליזם הזה יש {count} נכסים מקושרים. האם אתה בטוח שברצונך למחוק את {name}?",
+        "cancel": "ביטול",
+        "deleting": "מוחק...",
+        "delete": "מחק",
+        "toast": {
+          "success": "הצלחה",
+          "error": "שגיאה",
+          "developer_deleted": "היזם נמחק בהצלחה",
+          "error_message": "אירעה שגיאה במחיקת היזם"
+        }
+      }
+    },
     "sidebar": {
       "platform": "פלטפורמה",
       "users": "משתמשים",
+      "developers": "יזמים",
       "debug": "דיבוג",
       "contacts": "אנשי קשר",
       "families": "משפחות",

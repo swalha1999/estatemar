@@ -37,6 +37,7 @@
     "breadcrumb": {
       "main": "لوحة الإدارة",
       "main_users": "المستخدمين",
+      "main_developers": "المطورين",
       "main_contacts": "جهات الاتصال",
       "main_contacts_new": "جهة اتصال جديدة"
     },
@@ -125,9 +126,94 @@
         }
       }
     },
+    "developers": {
+      "page": {
+        "title": "إدارة المطورين",
+        "create_developer": "إضافة مطور"
+      },
+      "table": {
+        "name": "الاسم",
+        "email": "البريد الإلكتروني",
+        "phone": "الهاتف",
+        "company_info": "معلومات الشركة",
+        "total_properties": "إجمالي العقارات",
+        "created_at": "تاريخ الإنشاء",
+        "actions": "الإجراءات",
+        "edit_developer": "تعديل المطور",
+        "delete_developer": "حذف المطور",
+        "view_properties": "عرض العقارات",
+        "no_developers": "لم يتم العثور على مطورين",
+        "search_placeholder": "البحث عن المطورين...",
+        "toast": {
+          "success": "تم بنجاح",
+          "error": "خطأ",
+          "developer_created": "تم إنشاء المطور بنجاح",
+          "developer_updated": "تم تحديث المطور بنجاح",
+          "developer_deleted": "تم حذف المطور بنجاح",
+          "error_message": "حدث خطأ أثناء تنفيذ العملية"
+        }
+      },
+      "create_developer_dialog": {
+        "title": "إضافة مطور جديد",
+        "description": "أدخل بيانات المطور الجديد",
+        "name": "الاسم",
+        "name_placeholder": "أدخل اسم المطور",
+        "email": "البريد الإلكتروني",
+        "email_placeholder": "أدخل عنوان البريد الإلكتروني",
+        "phone": "الهاتف",
+        "phone_placeholder": "أدخل رقم الهاتف (اختياري)",
+        "company_info": "معلومات الشركة",
+        "company_info_placeholder": "أدخل معلومات الشركة (اختياري)",
+        "cancel": "إلغاء",
+        "creating": "جاري الإنشاء...",
+        "create": "إنشاء",
+        "toast": {
+          "success": "تم بنجاح",
+          "error": "خطأ",
+          "developer_created": "تم إنشاء المطور بنجاح",
+          "error_message": "حدث خطأ أثناء إنشاء المطور"
+        }
+      },
+      "edit_developer_dialog": {
+        "title": "تعديل المطور",
+        "description": "تحديث بيانات المطور",
+        "name": "الاسم",
+        "name_placeholder": "أدخل اسم المطور",
+        "email": "البريد الإلكتروني",
+        "email_placeholder": "أدخل عنوان البريد الإلكتروني",
+        "phone": "الهاتف",
+        "phone_placeholder": "أدخل رقم الهاتف (اختياري)",
+        "company_info": "معلومات الشركة",
+        "company_info_placeholder": "أدخل معلومات الشركة (اختياري)",
+        "cancel": "إلغاء",
+        "updating": "جاري التحديث...",
+        "update": "تحديث",
+        "toast": {
+          "success": "تم بنجاح",
+          "error": "خطأ",
+          "developer_updated": "تم تحديث المطور بنجاح",
+          "error_message": "حدث خطأ أثناء تحديث المطور"
+        }
+      },
+      "delete_developer_dialog": {
+        "title": "حذف المطور",
+        "description": "هل أنت متأكد من أنك تريد حذف {name}؟",
+        "description_with_properties": "هذا المطور لديه {count} عقارات مرتبطة. هل أنت متأكد من أنك تريد حذف {name}؟",
+        "cancel": "إلغاء",
+        "deleting": "جاري الحذف...",
+        "delete": "حذف",
+        "toast": {
+          "success": "تم بنجاح",
+          "error": "خطأ",
+          "developer_deleted": "تم حذف المطور بنجاح",
+          "error_message": "حدث خطأ أثناء حذف المطور"
+        }
+      }
+    },
     "sidebar": {
       "platform": "المنصة",
       "users": "المستخدمين",
+      "developers": "المطورين",
       "debug": "التصحيح",
       "contacts": "جهات الاتصال",
       "families": "العائلات",

@@ -33,7 +33,7 @@ import { useAuth } from '@/providers/auth-provider';
 import { useTheme } from 'next-themes';
 import { useEffect } from 'react';
 
-export function NavUser() {
+export function NavUser({ isRTL = false }: { isRTL?: boolean }) {
 	const { isMobile } = useSidebar();
 	const { theme, setTheme } = useTheme();
 	const { user, logoutUser, refreshUser } = useAuth();

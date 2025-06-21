@@ -1,1 +1,0 @@
-ALTER TABLE "contacts" ADD COLUMN "title" varchar(255);

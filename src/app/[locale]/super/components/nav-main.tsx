@@ -19,6 +19,7 @@ import { useSidebar } from '@/components/ui/sidebar';
 import { useAuth } from '@/providers/auth-provider';
 export function NavMain({
 	items,
+	isRTL = false,
 }: {
 	items: {
 		title: string;
@@ -32,6 +33,7 @@ export function NavMain({
 			isSuperAdmin?: boolean;
 		}[];
 	}[];
+	isRTL?: boolean;
 }) {
 	const { open } = useSidebar();
 	const t = useTranslations('super.sidebar');
@@ -39,7 +41,9 @@ export function NavMain({
 
 	return (
 		<SidebarGroup>
-			<SidebarGroupLabel>{t('platform')}</SidebarGroupLabel>
+			<SidebarGroupLabel className={`${isRTL ? 'text-right' : 'text-left'} admin-form-label`}>
+				{t('platform')}
+			</SidebarGroupLabel>
 			<SidebarMenu>
 				{items.map((item) => {
 					if (item.isSuperAdmin && !user?.is_super_admin) return null;
@@ -48,9 +52,12 @@ export function NavMain({
 							{(item.items || []).length === 0 || !open ? (
 								<Link href={item.url}>
 									<SidebarMenuItem>
-										<SidebarMenuButton tooltip={item.title}>
-											{item.icon && <item.icon />}
-											<span>{item.title}</span>
+										<SidebarMenuButton 
+											tooltip={item.title}
+											className={`admin-dropdown-item ${isRTL ? 'flex-row-reverse' : ''} px-4 py-3 rounded-lg hover:bg-primary/10`}
+										>
+											{item.icon && <item.icon className={`h-5 w-5 ${isRTL ? 'ml-3' : 'mr-3'}`} />}
+											<span className="body-2 font-medium">{item.title}</span>
 										</SidebarMenuButton>
 									</SidebarMenuItem>
 								</Link>
@@ -62,18 +69,21 @@ export function NavMain({
 								>
 									<SidebarMenuItem>
 										<CollapsibleTrigger asChild>
-											<SidebarMenuButton tooltip={item.title}>
-												{item.icon && <item.icon />}
-												<span>{item.title}</span>
-												<ChevronRight className="ml-auto transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90" />
+											<SidebarMenuButton 
+												tooltip={item.title}
+												className={`admin-dropdown-item ${isRTL ? 'flex-row-reverse' : ''} px-4 py-3 rounded-lg hover:bg-primary/10`}
+											>
+												{item.icon && <item.icon className={`h-5 w-5 ${isRTL ? 'ml-3' : 'mr-3'}`} />}
+												<span className="body-2 font-medium">{item.title}</span>
+												<ChevronRight className={`${isRTL ? 'mr-auto rotate-180' : 'ml-auto'} transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90`} />
 											</SidebarMenuButton>
 										</CollapsibleTrigger>
 										<CollapsibleContent>
-											<SidebarMenuSub>
+											<SidebarMenuSub className={isRTL ? 'pr-4' : 'pl-4'}>
 												{item.items?.map((subItem) => (
 													<SidebarMenuSubItem key={subItem.title}>
 														<SidebarMenuSubButton asChild>
-															<Link href={subItem.url}>
+															<Link href={subItem.url} className={`admin-dropdown-item body-2 ${isRTL ? 'text-right' : 'text-left'}`}>
 																<span>{subItem.title}</span>
 															</Link>
 														</SidebarMenuSubButton>

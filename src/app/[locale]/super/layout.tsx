@@ -23,10 +23,15 @@ export default async function AdminLayout(props: { children: React.ReactNode }) 
 		redirect({ href: '/login', locale: locale ?? 'he' });
 	}
 
+	// Determine direction based on locale
+	const isRTL = locale === 'ar' || locale === 'he';
+	const direction = isRTL ? 'rtl' : 'ltr';
+	const sidebarSide = isRTL ? 'right' : 'left';
+
 	return (
-		<main dir="rtl">
+		<main dir={direction} className={`min-h-screen bg-gray-50 ${isRTL ? 'font-arabic' : 'font-latin'}`}>
 			<SidebarProvider>
-				<AdminSidebar side="right" />
+				<AdminSidebar side={sidebarSide} />
 				<SidebarInset>
 					<BreadcrumbLayout>{props.children}</BreadcrumbLayout>
 				</SidebarInset>

@@ -1,3 +1,6 @@
+/* Estatemar Design System Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap');
+
 /* Tajawal Font Face Declarations */
 @font-face {
 	font-family: 'Tajawal';
@@ -29,99 +32,130 @@
 
 @layer base {
 	:root {
-		--background: 216 55% 95%;
-		--foreground: 216 5% 0%;
-		--card: 216 50% 90%;
-		--card-foreground: 216 5% 10%;
-		--popover: 216 55% 95%;
-		--popover-foreground: 216 95% 0%;
-		--primary: 216 91% 31%;
+		/* Estatemar Design System Colors */
+		/* Primary: #027BFF */
+		--primary: 208 100% 51%;
 		--primary-foreground: 0 0% 100%;
-		--secondary: 216 30% 70%;
-		--secondary-foreground: 0 0% 0%;
-		--muted: 178 30% 85%;
-		--muted-foreground: 216 5% 35%;
-		--accent: 178 30% 80%;
-		--accent-foreground: 216 5% 10%;
-		--destructive: 0 55% 30%;
-		--destructive-foreground: 216 5% 90%;
-		--border: 216 30% 50%;
-		--input: 216 30% 18%;
-		--ring: 216 91% 31%;
-		--radius: 0.3rem;
-		--chart-1: oklch(0.646 0.222 41.116);
-		--chart-2: oklch(0.6 0.118 184.704);
-		--chart-3: oklch(0.398 0.07 227.392);
-		--chart-4: oklch(0.828 0.189 84.429);
-		--chart-5: oklch(0.769 0.188 70.08);
-		--sidebar: oklch(0.985 0 0);
-		--sidebar-foreground: oklch(0.141 0.005 285.823);
-		--sidebar-primary: oklch(0.723 0.219 149.579);
-		--sidebar-primary-foreground: oklch(0.982 0.018 155.826);
-		--sidebar-accent: oklch(0.967 0.001 286.375);
-		--sidebar-accent-foreground: oklch(0.21 0.006 285.885);
-		--sidebar-border: oklch(0.92 0.004 286.32);
-		--sidebar-ring: oklch(0.723 0.219 149.579);
-		--success: 142 76% 38%;
+		--primary-soft: 208 100% 94%; /* #E1F0FF equivalent */
+		
+		/* Grey: #363636 */
+		--foreground: 0 0% 21%;
+		--muted-foreground: 0 0% 21%;
+		
+		/* Backgrounds */
+		--background: 0 0% 100%; /* White */
+		--card: 0 0% 100%;
+		--card-foreground: 0 0% 21%;
+		--popover: 0 0% 100%;
+		--popover-foreground: 0 0% 21%;
+		
+		/* Secondary colors */
+		--secondary: 208 100% 94%; /* Soft Blue */
+		--secondary-foreground: 0 0% 21%;
+		--muted: 0 0% 96%;
+		--accent: 208 100% 94%;
+		--accent-foreground: 0 0% 21%;
+		
+		/* Success: #4CAF50 */
+		--success: 122 39% 49%;
 		--success-foreground: 0 0% 100%;
-		--success-muted: 142 60% 85%;
-		--success-emphasis: 142 80% 25%;
-		--error: 0 84% 60%;
+		--success-muted: 122 39% 85%;
+		--success-emphasis: 122 50% 35%;
+		
+		/* Warning: #FF9800 */
+		--warning: 36 100% 50%;
+		--warning-foreground: 0 0% 100%;
+		--warning-muted: 36 100% 85%;
+		
+		/* Error: #E53E3E */
+		--destructive: 0 75% 57%;
+		--destructive-foreground: 0 0% 100%;
+		--error: 0 75% 57%;
 		--error-foreground: 0 0% 100%;
-		--error-muted: 0 70% 90%;
-		--error-emphasis: 0 90% 45%;
-		--correct-highlight: 142 70% 92%;
-		--incorrect-highlight: 0 70% 95%;
-		--success-glow: 142 100% 50% / 0.3;
-		--error-glow: 0 100% 60% / 0.3;
+		--error-muted: 0 75% 90%;
+		--error-emphasis: 0 85% 45%;
+		
+		/* UI Elements */
+		--border: 0 0% 89%;
+		--input: 0 0% 89%;
+		--ring: 208 100% 51%;
+		--radius: 0.5rem;
+		
+		/* Charts */
+		--chart-1: 208 100% 51%;
+		--chart-2: 122 39% 49%;
+		--chart-3: 36 100% 50%;
+		--chart-4: 0 75% 57%;
+		--chart-5: 271 81% 56%;
+		
+		/* Sidebar */
+		--sidebar: 0 0% 100%;
+		--sidebar-foreground: 0 0% 21%;
+		--sidebar-primary: 208 100% 51%;
+		--sidebar-primary-foreground: 0 0% 100%;
+		--sidebar-accent: 208 100% 94%;
+		--sidebar-accent-foreground: 0 0% 21%;
+		--sidebar-border: 0 0% 89%;
+		--sidebar-ring: 208 100% 51%;
+		
+		/* Additional colors */
+		--correct-highlight: 122 39% 92%;
+		--incorrect-highlight: 0 75% 95%;
+		--success-glow: 122 39% 49% / 0.3;
+		--error-glow: 0 75% 57% / 0.3;
 	}
 
 	.dark {
-		--background: 216 50% 5%;
-		--foreground: 216 5% 90%;
-		--card: 216 50% 0%;
-		--card-foreground: 216 5% 90%;
-		--popover: 216 50% 5%;
-		--popover-foreground: 216 5% 90%;
-		--primary: 216 91% 31%;
+		/* Estatemar Design System - Dark Theme */
+		--background: 0 0% 8%;
+		--foreground: 0 0% 90%;
+		--card: 0 0% 10%;
+		--card-foreground: 0 0% 90%;
+		--popover: 0 0% 8%;
+		--popover-foreground: 0 0% 90%;
+		--primary: 208 100% 60%;
 		--primary-foreground: 0 0% 100%;
-		--secondary: 216 30% 10%;
-		--secondary-foreground: 0 0% 100%;
-		--muted: 178 30% 15%;
-		--muted-foreground: 216 5% 60%;
-		--accent: 178 30% 15%;
-		--accent-foreground: 216 5% 90%;
-		--destructive: 0 55% 30%;
-		--destructive-foreground: 216 5% 90%;
-		--border: 216 30% 18%;
-		--input: 216 30% 18%;
-		--ring: 216 91% 31%;
-		--radius: 0.3rem;
-		--chart-1: oklch(0.488 0.243 264.376);
-		--chart-2: oklch(0.696 0.17 162.48);
-		--chart-3: oklch(0.769 0.188 70.08);
-		--chart-4: oklch(0.627 0.265 303.9);
-		--chart-5: oklch(0.645 0.246 16.439);
-		--sidebar: oklch(0.21 0.006 285.885);
-		--sidebar-foreground: oklch(0.985 0 0);
-		--sidebar-primary: oklch(0.696 0.17 162.48);
-		--sidebar-primary-foreground: oklch(0.393 0.095 152.535);
-		--sidebar-accent: oklch(0.274 0.006 286.033);
-		--sidebar-accent-foreground: oklch(0.985 0 0);
-		--sidebar-border: oklch(1 0 0 / 10%);
-		--sidebar-ring: oklch(0.527 0.154 150.069);
-		--success: 142 70% 45%;
+		--primary-soft: 208 100% 15%;
+		--secondary: 208 100% 15%;
+		--secondary-foreground: 0 0% 90%;
+		--muted: 0 0% 15%;
+		--muted-foreground: 0 0% 60%;
+		--accent: 208 100% 15%;
+		--accent-foreground: 0 0% 90%;
+		--destructive: 0 75% 60%;
+		--destructive-foreground: 0 0% 100%;
+		--border: 0 0% 20%;
+		--input: 0 0% 20%;
+		--ring: 208 100% 60%;
+		--radius: 0.5rem;
+		--chart-1: 208 100% 60%;
+		--chart-2: 122 39% 55%;
+		--chart-3: 36 100% 60%;
+		--chart-4: 0 75% 60%;
+		--chart-5: 271 81% 65%;
+		--sidebar: 0 0% 10%;
+		--sidebar-foreground: 0 0% 90%;
+		--sidebar-primary: 208 100% 60%;
+		--sidebar-primary-foreground: 0 0% 100%;
+		--sidebar-accent: 208 100% 15%;
+		--sidebar-accent-foreground: 0 0% 90%;
+		--sidebar-border: 0 0% 20%;
+		--sidebar-ring: 208 100% 60%;
+		--success: 122 39% 55%;
 		--success-foreground: 0 0% 100%;
-		--success-muted: 142 45% 25%;
-		--success-emphasis: 142 85% 60%;
-		--error: 0 70% 50%;
+		--success-muted: 122 39% 20%;
+		--success-emphasis: 122 50% 70%;
+		--warning: 36 100% 60%;
+		--warning-foreground: 0 0% 100%;
+		--warning-muted: 36 100% 20%;
+		--error: 0 75% 60%;
 		--error-foreground: 0 0% 100%;
-		--error-muted: 0 50% 25%;
-		--error-emphasis: 0 80% 65%;
-		--correct-highlight: 142 70% 18%;
-		--incorrect-highlight: 0 70% 18%;
-		--success-glow: 142 100% 60% / 0.4;
-		--error-glow: 0 100% 65% / 0.4;
+		--error-muted: 0 75% 20%;
+		--error-emphasis: 0 85% 70%;
+		--correct-highlight: 122 39% 18%;
+		--incorrect-highlight: 0 75% 18%;
+		--success-glow: 122 39% 55% / 0.4;
+		--error-glow: 0 75% 60% / 0.4;
 	}
 }
 
@@ -133,349 +167,12 @@
 
 	body {
 		@apply bg-background text-foreground antialiased;
-		font-family: 'Tajawal', sans-serif;
+		font-family: 'Montserrat', 'Tajawal', sans-serif;
 		touch-action: manipulation;
 		-webkit-touch-callout: none;
 		-webkit-user-select: text;
 		user-select: text;
 	}
-
-	/* Disable text selection for specific UI components */
-	.no-select,
-	button,
-	.button,
-	[role='button'],
-	.select-none {
-		-webkit-user-select: none;
-		user-select: none;
-	}
-
-	/* Keep text selection enabled for inputs and editable content */
-	input,
-	textarea,
-	[contenteditable='true'] {
-		-webkit-user-select: text;
-		user-select: text;
-	}
-
-	/* Prevent zooming on iOS */
-	@supports (-webkit-touch-callout: none) {
-		body {
-			font-size: 16px;
-			/* Prevent auto-zoom on input focus */
-		}
-
-		/* Prevent double-tap zoom */
-		* {
-			touch-action: manipulation;
-		}
-	}
 }
 
-/* body {
-                                                      min-height: 100vh;
-                                                      overflow-y: auto;
-                                                      -webkit-overflow-scrolling: touch;
-                                                      background: transparent;
-                                                    }
-                                                    
-                                                    body.dragging {
-                                                      overflow: hidden;
-                                                      height: 100%;
-                                                      position: fixed;
-                                                      width: 100%;
-                                                    } */
 
-/* Prevent text selection during drag */
-.dragging * {
-	user-select: none !important;
-	-webkit-user-select: none !important;
-}
-
-@layer utilities {
-	/* Touch-specific utilities */
-	.touch-none {
-		touch-action: none;
-	}
-
-	.touch-auto {
-		touch-action: auto;
-	}
-
-	.touch-pan-x {
-		touch-action: pan-x;
-	}
-
-	.touch-pan-y {
-		touch-action: pan-y;
-	}
-
-	.touch-pinch-zoom {
-		touch-action: pinch-zoom;
-	}
-
-	.touch-manipulation {
-		touch-action: manipulation;
-	}
-
-	.glass-effect {
-		backdrop-filter: blur(8px);
-		-webkit-backdrop-filter: blur(8px);
-	}
-
-	.focus-ring {
-		@apply focus:outline-none focus:ring-2 focus:ring-primary/20 focus:ring-offset-2 dark:focus:ring-offset-background;
-	}
-
-	.mobile-safe-area {
-		padding-bottom: env(safe-area-inset-bottom);
-		padding-top: env(safe-area-inset-top);
-		padding-left: env(safe-area-inset-left);
-		padding-right: env(safe-area-inset-right);
-	}
-
-	/* Better touch target sizes */
-	.touch-target {
-		min-height: 44px;
-		min-width: 44px;
-	}
-
-	/* CSS-only resizable columns */
-	.resizable-table th {
-		position: relative;
-		overflow: hidden;
-		resize: horizontal;
-		min-width: 100px;
-		max-width: 500px;
-	}
-
-	.resizable-table th::after {
-		content: '';
-		position: absolute;
-		top: 0;
-		right: 0;
-		width: 5px;
-		height: 100%;
-		background-color: rgba(0, 0, 0, 0.1);
-		cursor: col-resize;
-	}
-
-	.resizable-table th:hover::after {
-		background-color: rgba(0, 0, 0, 0.2);
-	}
-
-	.resizable-table th:active::after {
-		background-color: rgba(0, 0, 0, 0.3);
-	}
-
-	/* Resizable Columns */
-	.resizable-column {
-		position: relative;
-		overflow: hidden;
-	}
-
-	.resizable-column::after {
-		content: '';
-		position: absolute;
-		right: 0;
-		top: 0;
-		bottom: 0;
-		width: 4px;
-		cursor: col-resize;
-		background: transparent;
-		transition: background-color 0.2s;
-	}
-
-	.resizable-column:hover::after {
-		background-color: hsl(var(--primary) / 0.1);
-	}
-
-	.resizable-column.resizing::after {
-		background-color: hsl(var(--primary) / 0.2);
-	}
-
-	/* Warm Wedding Theme Utilities */
-	.warm-gradient {
-		background: linear-gradient(
-			135deg,
-			hsl(var(--primary) / 0.05) 0%,
-			hsl(45 60% 95%) 25%,
-			hsl(35 70% 96%) 50%,
-			hsl(25 50% 97%) 75%,
-			hsl(var(--primary) / 0.03) 100%
-		);
-	}
-
-	.warm-gradient-dark {
-		background: linear-gradient(
-			135deg,
-			hsl(var(--primary) / 0.1) 0%,
-			hsl(45 20% 15%) 25%,
-			hsl(35 25% 12%) 50%,
-			hsl(25 20% 10%) 75%,
-			hsl(var(--primary) / 0.05) 100%
-		);
-	}
-
-	.wedding-pattern {
-		background-image: radial-gradient(
-				circle at 25% 25%,
-				hsl(var(--primary) / 0.1) 0%,
-				transparent 50%
-			),
-			radial-gradient(circle at 75% 75%, hsl(45 60% 85% / 0.1) 0%, transparent 50%),
-			linear-gradient(45deg, transparent 40%, hsl(var(--primary) / 0.02) 50%, transparent 60%);
-	}
-
-	.elegant-border {
-		border: 1px solid;
-		border-image: linear-gradient(
-				45deg,
-				hsl(var(--primary) / 0.2),
-				hsl(45 60% 85% / 0.3),
-				hsl(var(--primary) / 0.2)
-			)
-			1;
-	}
-
-	.warm-shadow {
-		box-shadow:
-			0 4px 6px -1px hsl(var(--primary) / 0.1),
-			0 2px 4px -1px hsl(45 60% 70% / 0.1),
-			0 0 0 1px hsl(var(--primary) / 0.05);
-	}
-
-	.warm-shadow-lg {
-		box-shadow:
-			0 10px 15px -3px hsl(var(--primary) / 0.1),
-			0 4px 6px -2px hsl(45 60% 70% / 0.1),
-			0 0 0 1px hsl(var(--primary) / 0.05);
-	}
-
-	.golden-accent {
-		background: linear-gradient(
-			135deg,
-			hsl(45 90% 85%) 0%,
-			hsl(40 85% 80%) 50%,
-			hsl(35 80% 75%) 100%
-		);
-	}
-
-	.warm-card {
-		background: linear-gradient(
-			135deg,
-			hsl(0 0% 100%) 0%,
-			hsl(45 30% 98%) 50%,
-			hsl(35 25% 97%) 100%
-		);
-		border: 1px solid hsl(var(--primary) / 0.1);
-	}
-
-	.warm-card-dark {
-		background: linear-gradient(
-			135deg,
-			hsl(45 15% 12%) 0%,
-			hsl(35 20% 10%) 50%,
-			hsl(25 15% 8%) 100%
-		);
-		border: 1px solid hsl(var(--primary) / 0.2);
-	}
-
-	/* Arabic/Islamic decorative patterns */
-	.islamic-pattern {
-		background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23D4AF37' fill-opacity='0.03'%3E%3Cpath d='M30 30m-20 0a20 20 0 1 1 40 0a20 20 0 1 1 -40 0M30 10a20 20 0 0 1 0 40a20 20 0 0 1 0-40'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-	}
-
-	.moroccan-pattern {
-		background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23D4AF37' fill-opacity='0.02'%3E%3Cpath d='M20 20c0-11.046-8.954-20-20-20s-20 8.954-20 20 8.954 20 20 20 20-8.954 20-20zm-30 0c0-5.523 4.477-10 10-10s10 4.477 10 10-4.477 10-10 10-10-4.477-10-10z'/%3E%3C/g%3E%3C/svg%3E");
-	}
-
-	/* Floating animation for decorative elements */
-	.float-animation {
-		animation: float 6s ease-in-out infinite;
-	}
-
-	@keyframes float {
-		0%,
-		100% {
-			transform: translateY(0px) rotate(0deg);
-		}
-		33% {
-			transform: translateY(-10px) rotate(1deg);
-		}
-		66% {
-			transform: translateY(-5px) rotate(-1deg);
-		}
-	}
-
-	.pulse-warm {
-		animation: pulse-warm 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-	}
-
-	@keyframes pulse-warm {
-		0%,
-		100% {
-			opacity: 1;
-			box-shadow: 0 0 0 0 hsl(var(--primary) / 0.4);
-		}
-		50% {
-			opacity: 0.8;
-			box-shadow: 0 0 0 10px hsl(var(--primary) / 0);
-		}
-	}
-
-	/* Hide scrollbars for mobile tab navigation */
-	.scrollbar-hide {
-		-ms-overflow-style: none;  /* IE and Edge */
-		scrollbar-width: none;  /* Firefox */
-	}
-
-	.scrollbar-hide::-webkit-scrollbar {
-		display: none;  /* Chrome, Safari and Opera */
-	}
-
-	/* Invitation Tabs Custom Styles */
-	.invitation-tabs-container {
-		/* Ensure proper overflow handling for tabs */
-		overflow-x: auto;
-		-webkit-overflow-scrolling: touch;
-	}
-
-	.invitation-tab-trigger {
-		/* Better focus and active states for tabs */
-		transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-		will-change: transform, background-color, border-color;
-	}
-
-	.invitation-tab-trigger:focus {
-		outline: none;
-		box-shadow: 0 0 0 2px hsl(var(--ring));
-	}
-
-	.invitation-tab-trigger[data-state="active"] {
-		/* Ensure active state is properly contained */
-		position: relative;
-		z-index: 1;
-	}
-
-	/* Responsive tab sizing that looks good on all screens */
-	@media (min-width: 768px) {
-		.invitation-tabs-container {
-			overflow-x: visible;
-		}
-	}
-
-	@media (min-width: 1024px) {
-		.invitation-tab-trigger {
-			/* On larger screens, allow tabs to be more spaced */
-			min-width: 180px;
-		}
-	}
-
-	@media (min-width: 1280px) {
-		.invitation-tab-trigger {
-			min-width: 200px;
-		}
-	}
-
-}

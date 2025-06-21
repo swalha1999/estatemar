@@ -37,6 +37,7 @@
     "breadcrumb": {
       "main": "Admin Dashboard",
       "main_users": "Users",
+      "main_developers": "Developers",
       "main_contacts": "Contacts",
       "main_contacts_new": "New Contact"
     },
@@ -125,9 +126,94 @@
         }
       }
     },
+    "developers": {
+      "page": {
+        "title": "Developer Management",
+        "create_developer": "Add Developer"
+      },
+      "table": {
+        "name": "Name",
+        "email": "Email",
+        "phone": "Phone",
+        "company_info": "Company Info",
+        "total_properties": "Total Properties",
+        "created_at": "Created At",
+        "actions": "Actions",
+        "edit_developer": "Edit Developer",
+        "delete_developer": "Delete Developer",
+        "view_properties": "View Properties",
+        "no_developers": "No developers found",
+        "search_placeholder": "Search developers...",
+        "toast": {
+          "success": "Success",
+          "error": "Error",
+          "developer_created": "Developer created successfully",
+          "developer_updated": "Developer updated successfully",
+          "developer_deleted": "Developer deleted successfully",
+          "error_message": "An error occurred while performing the operation"
+        }
+      },
+      "create_developer_dialog": {
+        "title": "Add New Developer",
+        "description": "Enter details for the new developer",
+        "name": "Name",
+        "name_placeholder": "Enter developer name",
+        "email": "Email",
+        "email_placeholder": "Enter email address",
+        "phone": "Phone",
+        "phone_placeholder": "Enter phone number (optional)",
+        "company_info": "Company Info",
+        "company_info_placeholder": "Enter company information (optional)",
+        "cancel": "Cancel",
+        "creating": "Creating...",
+        "create": "Create",
+        "toast": {
+          "success": "Success",
+          "error": "Error",
+          "developer_created": "Developer created successfully",
+          "error_message": "An error occurred while creating developer"
+        }
+      },
+      "edit_developer_dialog": {
+        "title": "Edit Developer",
+        "description": "Update developer details",
+        "name": "Name",
+        "name_placeholder": "Enter developer name",
+        "email": "Email",
+        "email_placeholder": "Enter email address",
+        "phone": "Phone",
+        "phone_placeholder": "Enter phone number (optional)",
+        "company_info": "Company Info",
+        "company_info_placeholder": "Enter company information (optional)",
+        "cancel": "Cancel",
+        "updating": "Updating...",
+        "update": "Update",
+        "toast": {
+          "success": "Success",
+          "error": "Error",
+          "developer_updated": "Developer updated successfully",
+          "error_message": "An error occurred while updating developer"
+        }
+      },
+      "delete_developer_dialog": {
+        "title": "Delete Developer",
+        "description": "Are you sure you want to delete {name}?",
+        "description_with_properties": "This developer has {count} properties linked. Are you sure you want to delete {name}?",
+        "cancel": "Cancel",
+        "deleting": "Deleting...",
+        "delete": "Delete",
+        "toast": {
+          "success": "Success",
+          "error": "Error",
+          "developer_deleted": "Developer deleted successfully",
+          "error_message": "An error occurred while deleting developer"
+        }
+      }
+    },
     "sidebar": {
       "platform": "Platform",
       "users": "Users",
+      "developers": "Developers",
       "debug": "Debug",
       "contacts": "Contacts",
       "families": "Families",
