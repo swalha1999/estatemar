@@ -1,6 +1,6 @@
 'use client';
 
-import { BookUser, Terminal, Users, Heart, Mail } from 'lucide-react';
+import { BookUser, Terminal, Users } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import * as React from 'react';
 
@@ -20,13 +20,6 @@ const createNavData = () => {
 				isSuperAdmin: true,
 			},
 			{
-				title: t('debug'),
-				url: '/super/debug',
-				icon: Terminal,
-				isActive: true,
-				isSuperAdmin: true,
-			},
-			{
 				title: t('contacts'),
 				url: '/super/contacts',
 				icon: BookUser,
@@ -41,16 +34,9 @@ const createNavData = () => {
 				isSuperAdmin: false,
 			},
 			{
-				title: t('leads'),
-				url: '/super/leads',
-				icon: Heart,
-				isActive: true,
-				isSuperAdmin: true,
-			},
-			{
-				title: t('invitations'),
-				url: '/super/invitations',
-				icon: Mail,
+				title: t('debug'),
+				url: '/super/debug',
+				icon: Terminal,
 				isActive: true,
 				isSuperAdmin: true,
 			},
