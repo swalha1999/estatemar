@@ -1,0 +1,306 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+# React Composite Design Pattern for Next.js App Router
+
+Always use the React composite design pattern when building components in Next.js App Router. This pattern allows for flexible and reusable component composition while leveraging App Router's server/client component architecture.
+
+## Key Principles
+
+- **Composition over inheritance**: Build complex UIs by composing simpler components
+- **Server-first composition**: Compose server components whenever possible, use client components only when needed
+- **Component slots**: Use children and named slots for flexible content insertion
+- **Compound components**: Create components that work together as a unified API
+- **Streaming boundaries**: Design components to support React Suspense and streaming
+- **Layout composition**: Leverage Next.js layouts, templates, and route groups for page composition
+
+## Layout Examples
+
+### 1. Root Layout with Global Components
+```jsx
+// app/layout.tsx
+export default function RootLayout({ children }) {
+	return (
+		<html>
+			<body>
+				<AppProvider>
+					<Navigation />
+					<main>{children}</main>
+					<Toast />
+				</AppProvider>
+			</body>
+		</html>
+	)
+}
+```
+
+### 2. Route Group Layouts
+```jsx
+// app/(auth)/layout.tsx
+export default function AuthLayout({ children }) {
+	return (
+		<div className="min-h-screen flex">
+			<AuthSidebar />
+			<div className="flex-1 flex flex-col">
+				<AuthHeader />
+				<main className="flex-1 p-6">{children}</main>
+			</div>
+		</div>
+	)
+}
+
+// app/(dashboard)/layout.tsx
+export default function DashboardLayout({ children }) {
+	return (
+		<div className="dashboard-grid">
+			<DashboardSidebar />
+			<DashboardHeader />
+			<main className="main-content">{children}</main>
+		</div>
+	)
+}
+```
+
+### 3. Parallel Routes Layout
+```jsx
+// app/dashboard/layout.tsx
+export default function DashboardLayout({ 
+	children, 
+	analytics, 
+	notifications,
+	sidebar 
+}) {
+	return (
+		<div className="dashboard">
+			<aside>{sidebar}</aside>
+			<div className="main-area">
+				<header>{notifications}</header>
+				<main>{children}</main>
+				<section>{analytics}</section>
+			</div>
+		</div>
+	)
+}
+```
+
+### 4. Template with Client Boundary
+```jsx
+// app/template.tsx
+'use client'
+export default function Template({ children }) {
+	return (
+		<div className="page-transition">
+			<AnimatePresence mode="wait">
+				{children}
+			</AnimatePresence>
+		</div>
+	)
+}
+```
+
+## Component Composition Patterns
+
+### 1. Server Component Composition
+```jsx
+// Server component that composes other server components
+async function ProductPage({ params }) {
+	const { id } = await params
+	const product = await getProduct(id)
+	
+	return (
+		<ProductLayout>
+			<ProductHeader product={product} />
+			<ProductGallery images={product.images} />
+			<ProductDetails product={product} />
+			<ProductReviews productId={product.id} />
+		</ProductLayout>
+	)
+}
+```
+
+### 2. Compound Components with Server/Client Mix
+```jsx
+// Server wrapper
+function DataTable({ children, data }) {
+	return <div className="data-table">{children}</div>
+}
+
+// Server components
+DataTable.Header = function({ children }) {
+	return <thead>{children}</thead>
+}
+
+DataTable.Body = function({ children }) {
+	return <tbody>{children}</tbody>
+}
+
+// Client component for interactivity
+DataTable.Interactive = function({ children, onSort }) {
+	'use client'
+	return <div onClick={onSort}>{children}</div>
+}
+
+DataTable.Pagination = function({ page, total, onPageChange }) {
+	'use client'
+	return (
+		<div className="pagination">
+			<button onClick={() => onPageChange(page - 1)}>Previous</button>
+			<span>{page} of {total}</span>
+			<button onClick={() => onPageChange(page + 1)}>Next</button>
+		</div>
+	)
+}
+```
+
+### 3. Modal with Intercepting Routes
+```jsx
+// app/@modal/(.)product/[id]/page.tsx
+export default function ProductModal({ params }) {
+	return (
+		<Modal>
+			<Modal.Header>
+				<Modal.Title>Product Details</Modal.Title>
+				<Modal.Close />
+			</Modal.Header>
+			<Modal.Body>
+				<ProductDetails productId={params.id} />
+			</Modal.Body>
+		</Modal>
+	)
+}
+
+// Modal compound component
+function Modal({ children }) {
+	'use client'
+	return (
+		<div className="modal-overlay">
+			<div className="modal-content">{children}</div>
+		</div>
+	)
+}
+
+Modal.Header = function({ children }) {
+	return <header className="modal-header">{children}</header>
+}
+
+Modal.Body = function({ children }) {
+	return <div className="modal-body">{children}</div>
+}
+
+Modal.Close = function() {
+	'use client'
+	const router = useRouter()
+	return <button onClick={() => router.back()}>×</button>
+}
+```
+
+### 4. Form with Server Actions
+```jsx
+// Form composition with server actions
+function ContactForm({ children, action }) {
+	return (
+		<form action={action} className="contact-form">
+			{children}
+		</form>
+	)
+}
+
+ContactForm.Field = function({ children, name, label, error }) {
+	return (
+		<div className="form-field">
+			<label htmlFor={name}>{label}</label>
+			{children}
+			{error && <span className="error">{error}</span>}
+		</div>
+	)
+}
+
+ContactForm.Submit = function({ children, pending }) {
+	return (
+		<button type="submit" disabled={pending}>
+			{pending ? 'Submitting...' : children}
+		</button>
+	)
+}
+
+// Usage
+<ContactForm action={submitContact}>
+	<ContactForm.Field name="email" label="Email">
+		<input type="email" name="email" required />
+	</ContactForm.Field>
+	<ContactForm.Field name="message" label="Message">
+		<textarea name="message" required />
+	</ContactForm.Field>
+	<ContactForm.Submit>Send Message</ContactForm.Submit>
+</ContactForm>
+```
+
+### 5. Page with Streaming Boundaries
+```jsx
+function ProductPage({ productId }) {
+	return (
+		<ProductLayout>
+			<ProductHeader productId={productId} />
+			<div className="grid grid-cols-2 gap-6">
+				<Suspense fallback={<ProductDetailsSkeleton />}>
+					<ProductDetails productId={productId} />
+				</Suspense>
+				<Suspense fallback={<ReviewsSkeleton />}>
+					<ProductReviews productId={productId} />
+				</Suspense>
+			</div>
+			<Suspense fallback={<RelatedSkeleton />}>
+				<RelatedProducts productId={productId} />
+			</Suspense>
+		</ProductLayout>
+	)
+}
+```
+
+### 6. Route Groups with Different Layouts
+```jsx
+// app/(marketing)/layout.tsx
+export default function MarketingLayout({ children }) {
+	return (
+		<div>
+			<MarketingHeader />
+			{children}
+			<MarketingFooter />
+		</div>
+	)
+}
+
+// app/(app)/layout.tsx  
+export default function AppLayout({ children }) {
+	return (
+		<div className="app-layout">
+			<AppSidebar />
+			<div className="app-main">
+				<AppHeader />
+				{children}
+			</div>
+		</div>
+	)
+}
+
+// app/(admin)/layout.tsx
+export default function AdminLayout({ children }) {
+	return (
+		<AdminProvider>
+			<AdminSidebar />
+			<main className="admin-content">{children}</main>
+		</AdminProvider>
+	)
+}
+```
+
+## Best Practices
+
+1. **Keep server components as the default**: Only use `'use client'` when necessary
+2. **Compose at the boundary**: Place client components at the lowest level needed
+3. **Pass serializable props**: Ensure data passed between server/client is serializable
+4. **Use Suspense boundaries**: Wrap async components for better loading states
+5. **Leverage parallel routes**: Use for modals, sidebars, and complex layouts
+6. **Design for streaming**: Break large pages into suspense-wrapped sections

@@ -1,0 +1,77 @@
+{
+  "id": "מספר זיהוי",
+  "auth": {
+    "layout": {
+      "terms": "תנאים והגבלות",
+      "privacy": "מדיניות פרטיות"
+    },
+    "login": {
+      "too_many_requests": "יותר מדי בקשות",
+      "title": "כניסה",
+      "email": "אימייל",
+      "password": "סיסמה",
+      "submit": "כניסה",
+      "create_account": "צור חשבון",
+      "forgot_password": "שכחת סיסמה?"
+    },
+    "signup": {
+      "title": "הרשמה לחשבון חדש",
+      "requirements": "אנא מלא את כל השדות הנדרשים כדי ליצור את החשבון שלך",
+      "username": "שם משתמש",
+      "email": "אימייל",
+      "email_placeholder": "הכנס את האימייל שלך",
+      "password": "סיסמה",
+      "password_placeholder": "הכנס סיסמה",
+      "submit": "צור חשבון",
+      "have_account": "יש לך כבר חשבון? התחבר",
+      "loading": "טוען..."
+    }
+  },
+  "dashboard": {
+    "page": {
+      "title": "לוח בקרה",
+      "welcome": "ברוכים הבאים ללוח הבקרה"
+    }
+  },
+  "super": {
+    "breadcrumb": {
+      "main": "לוח ניהול"
+    },
+    "metadata": {
+      "title": "לוח ניהול",
+      "description": "ניהול המערכת וניטור"
+    },
+    "page": {
+      "welcome": "ברוכים הבאים ללוח הניהול"
+    },
+    "sidebar": {
+      "platform": "פלטפורמה",
+      "users": "משתמשים",
+      "debug": "דיבוג",
+      "contacts": "אנשי קשר",
+      "families": "משפחות",
+      "leads": "לידים",
+      "invitations": "הזמנות",
+      "user_controls": {
+        "upgradetopro": "שדרג ל-Pro",
+        "account": "חשבון",
+        "billing": "חיוב",
+        "notifications": "התראות",
+        "darkmode": "מצב כהה",
+        "lightmode": "מצב בהיר",
+        "logout": "התנתק"
+      }
+    }
+  },
+  "a11y": {
+    "accessibility": "נגישות",
+    "increaseTextSize": "הגדל טקסט",
+    "decreaseTextSize": "הקטן טקסט",
+    "grayscale": "גווני אפור",
+    "highContrast": "ניגודיות גבוהה",
+    "invertColors": "הפוך צבעים",
+    "highlightLinks": "הדגש קישורים",
+    "readableFont": "גופן קריא",
+    "textToSpeech": "טקסט לדיבור"
+  }
+}

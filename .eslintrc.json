@@ -1,0 +1,17 @@
+{
+	"extends": ["next/core-web-vitals", "next/typescript"],
+	"rules": {
+		"no-restricted-imports": [
+			"error",
+			{
+				"paths": [
+					{
+						"name": "next/navigation",
+						"importNames": ["redirect"],
+						"message": "Please use the custom wrapper from '@/lib/navigation' instead of Next.js's redirect"
+					}
+				]
+			}
+		]
+	}
+}

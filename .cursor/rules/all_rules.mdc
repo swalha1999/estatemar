@@ -1,0 +1,80 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+# cursor IDE project rules
+
+use always the docs of the next.js for added context
+
+this is a multi-language next.js 15 site using react 19 and `pnpm`.
+
+## localization
+
+- if you want to add a new string:
+  1. add it first in **all languages** in `/messages/**.json`
+  2. in server copmonent use `import {getTranslations} from 'next-intl/server';` to get the language tranaltor and use it as needed if in server copmonent like the following:
+  ```
+export default async function Page() {
+    const t = await getTranslations('auth');
+        return <p className="text-center ">{t('title')}</p>;
+}
+```
+  3. in client copmonent use (in top of the file "use client") the `import {useTranslations} from 'next-intl';` to get the language tranaltor for example:
+```  
+export default function Page() {
+    const t = await useTranslations('auth');
+    return <p className="text-center ">{t('title')}</p>;
+}
+```
+
+## custom wrappers
+
+- always use our modified wrappers instead of the built-in ones:
+  - `src/hooks/use-action-state.tsx` instead of react’s `useFormState` or `useActionState`
+  - `src/lib/navigation` instead of the next.js `redirect`
+
+## routing
+
+- for getting page params use this structure:
+  ```ts
+  export default async function Page({
+    params,
+  }: {
+    params: Promise<{ slug: string }>
+  }) {
+    const { slug } = await params
+    return <div>My Post: {slug}</div>
+  }
+  ```
+
+## ui components and styling
+
+- use `shadcn/ui` components
+- use `tailwindcss` for styling
+- if the component doesn’t exist in `src/components/ui`, prompt me to add it and include this command:  
+  ```bash
+  pnpm dlx shadcn@latest add <component_name>
+  ```
+
+## server actions & types
+
+- **do not** create API routes — use **server actions only**
+- **do not** create a `types` folder — all types must derive from `src/db` schemas
+
+## project structure
+
+- generic components → `src/components`
+- page-specific components → inside the page folder in `components/`
+- same applies to server actions
+- to add a new page, check the `.templates` folder for examples
+
+## development principles
+
+- write clean, extensible code
+- prioritize flexibility and maintainability
+
+## other rules
+always add loading.tsx to each page
+always use the global.css file for the styles and dont hard code the styles in the components
+

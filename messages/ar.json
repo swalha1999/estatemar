@@ -1,0 +1,77 @@
+{
+  "id": "رقم التعريف",
+  "auth": {
+    "layout": {
+      "terms": "الشروط والأحكام",
+      "privacy": "سياسة الخصوصية"
+    },
+    "login": {
+      "too_many_requests": "طلبات كثيرة جداً",
+      "title": "تسجيل الدخول",
+      "email": "البريد الإلكتروني",
+      "password": "كلمة المرور",
+      "submit": "تسجيل الدخول",
+      "create_account": "إنشاء حساب",
+      "forgot_password": "نسيت كلمة المرور؟"
+    },
+    "signup": {
+      "title": "إنشاء حساب جديد",
+      "requirements": "يرجى ملء جميع الحقول المطلوبة لإنشاء حسابك",
+      "username": "اسم المستخدم",
+      "email": "البريد الإلكتروني",
+      "email_placeholder": "أدخل بريدك الإلكتروني",
+      "password": "كلمة المرور",
+      "password_placeholder": "أدخل كلمة المرور",
+      "submit": "إنشاء الحساب",
+      "have_account": "لديك حساب بالفعل؟ تسجيل الدخول",
+      "loading": "جاري التحميل..."
+    }
+  },
+  "dashboard": {
+    "page": {
+      "title": "لوحة التحكم",
+      "welcome": "مرحباً بك في لوحة التحكم"
+    }
+  },
+  "super": {
+    "breadcrumb": {
+      "main": "لوحة الإدارة"
+    },
+    "metadata": {
+      "title": "لوحة الإدارة",
+      "description": "إدارة النظام والمراقبة"
+    },
+    "page": {
+      "welcome": "مرحباً بك في لوحة الإدارة"
+    },
+    "sidebar": {
+      "platform": "المنصة",
+      "users": "المستخدمين",
+      "debug": "التصحيح",
+      "contacts": "جهات الاتصال",
+      "families": "العائلات",
+      "leads": "العملاء المحتملين",
+      "invitations": "الدعوات",
+      "user_controls": {
+        "upgradetopro": "ترقية إلى Pro",
+        "account": "الحساب",
+        "billing": "الفوترة",
+        "notifications": "الإشعارات",
+        "darkmode": "الوضع المظلم",
+        "lightmode": "الوضع المضيء",
+        "logout": "تسجيل الخروج"
+      }
+    }
+  },
+  "a11y": {
+    "accessibility": "إمكانية الوصول",
+    "increaseTextSize": "زيادة حجم النص",
+    "decreaseTextSize": "تقليل حجم النص",
+    "grayscale": "رمادي",
+    "highContrast": "تباين عالي",
+    "invertColors": "عكس الألوان",
+    "highlightLinks": "تمييز الروابط",
+    "readableFont": "خط مقروء",
+    "textToSpeech": "النص إلى كلام"
+  }
+}
