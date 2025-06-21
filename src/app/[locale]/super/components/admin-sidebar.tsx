@@ -26,20 +26,20 @@ const createNavData = () => {
 				isActive: true,
 				isSuperAdmin: false,
 			},
-			{
-				title: t('families'),
-				url: '/super/families',
-				icon: Users,
-				isActive: true,
-				isSuperAdmin: false,
-			},
-			{
-				title: t('debug'),
-				url: '/super/debug',
-				icon: Terminal,
-				isActive: true,
-				isSuperAdmin: true,
-			},
+			// {
+			// 	title: t('families'),
+			// 	url: '/super/families',
+			// 	icon: Users,
+			// 	isActive: true,
+			// 	isSuperAdmin: false,
+			// },
+			// {
+			// 	title: t('debug'),
+			// 	url: '/super/debug',
+			// 	icon: Terminal,
+			// 	isActive: true,
+			// 	isSuperAdmin: true,
+			// },
 		],
 	};
 };

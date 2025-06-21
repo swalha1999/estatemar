@@ -36,7 +36,9 @@
   "super": {
     "breadcrumb": {
       "main": "לוח ניהול",
-      "main_users": "משתמשים"
+      "main_users": "משתמשים",
+      "main_contacts": "אנשי קשר",
+      "main_contacts_new": "איש קשר חדש"
     },
     "metadata": {
       "title": "לוח ניהול",
@@ -137,6 +139,149 @@
         "darkmode": "מצב כהה",
         "lightmode": "מצב בהיר",
         "logout": "התנתק"
+      }
+    },
+    "contacts": {
+      "page": {
+        "page_title": "ניהול אנשי קשר",
+        "add_contact_button": "הוסף איש קשר"
+      },
+      "contacts_list": {
+        "total_contacts": "סה\"כ אנשי קשר",
+        "total_households": "סה\"כ משקי בית",
+        "total_opted_in": "סה\"כ הסכימו",
+        "total_declined": "סה\"כ סירבו",
+        "total_didnt_respond": "סה\"כ לא הגיבו",
+        "total_failed": "סה\"כ נכשלו",
+        "total_didnt_send": "סה\"כ לא נשלחו",
+        "page": "עמוד",
+        "of": "מתוך",
+        "first_page": "העמוד הראשון",
+        "previous_page": "העמוד הקודם",
+        "next_page": "העמוד הבא",
+        "last_page": "העמוד האחרון",
+        "contacts_list": "רשימת אנשי קשר",
+        "view_contacts": "מציג {count} מתוך {total} אנשי קשר",
+        "consent_status": {
+          "gave_consent": "נתן הסכמה",
+          "no_response": "לא הגיב",
+          "declined": "סירב",
+          "concent_message_not_sent": "הודעת הסכמה לא נשלחה",
+          "concent_message_failed": "הודעת הסכמה נכשלה"
+        },
+        "contacts_table": {
+          "contact_title": "תואר",
+          "first_name": "שם פרטי",
+          "middle_name": "שם אמצעי",
+          "family_name": "שם משפחה",
+          "previous_family_name": "שם משפחה קודם",
+          "phone": "טלפון",
+          "village": "כפר",
+          "personal_number": "מספר אישי",
+          "home_number": "מספר בית",
+          "hood": "שכונה",
+          "admin_approval": "אישור מנהל",
+          "consent": "הסכמה",
+          "actions": "פעולות",
+          "no_contacts_found": "לא נמצאו אנשי קשר התואמים לפילטרים שנבחרו",
+          "search_placeholder": "חיפוש..."
+        },
+        "actions_dropdown": {
+          "actions": "פעולות",
+          "action_edit": "ערוך",
+          "action_delete": "מחק",
+          "action_mark_as_opt_out": "סמן כסירב",
+          "action_send_consent": "שלח הודעת הסכמה",
+          "action_reset_consent": "אפס הסכמה",
+          "approved": "מאושר",
+          "not_approved": "לא מאושר"
+        },
+        "status_dropdown": {
+          "concent_message_not_sent": "הודעת הסכמה לא נשלחה",
+          "no_response": "לא הגיב",
+          "gave_consent": "נתן הסכמה",
+          "declined": "סירב",
+          "concent_message_failed": "הודעת הסכמה נכשלה"
+        },
+        "send_all_consent_button": {
+          "send_consent_to_all": "שלח הסכמה לכולם",
+          "sending_all": "שולח...",
+          "sent_all": "נשלח לכולם"
+        },
+        "bulk_approval_button": {
+          "approve_all": "אשר הכל",
+          "approving_all": "מאשר הכל...",
+          "approved_all": "הכל אושר",
+          "unapprove_all": "בטל אישור הכל",
+          "unapproving_all": "מבטל אישור הכל...",
+          "unapproved_all": "אישור הכל בוטל"
+        },
+        "approved": "מאושר",
+        "not_approved": "לא מאושר",
+        "filters": {
+          "all_towns": "כל הכפרים",
+          "town": "כפר",
+          "select_town": "בחר כפר",
+          "all_streets": "כל השכונות",
+          "street": "שכונה",
+          "select_street": "בחר שכונה",
+          "all_families": "כל המשפחות",
+          "family": "משפחה",
+          "select_family": "בחר משפחה",
+          "all_statuses": "כל הסטטוסים",
+          "consent_status": {
+            "title": "סטטוס הסכמה"
+          },
+          "select_status": "בחר סטטוס",
+          "approval_status": "סטטוס אישור",
+          "gave_consent": "נתן הסכמה",
+          "no_response": "לא הגיב",
+          "declined": "סירב",
+          "concent_message_not_sent": "הודעת הסכמה לא נשלחה",
+          "concent_message_failed": "הודעת הסכמה נכשלה",
+          "approved": "מאושר",
+          "not_approved": "לא מאושר"
+        }
+      },
+      "new_contacts": {
+        "personal_info": "מידע אישי",
+        "first_name": "שם פרטי",
+        "middle_name": "שם אמצעי",
+        "previous_family": "שם משפחה קודם",
+        "birth_year": "שנת לידה",
+        "gender": "מגדר",
+        "select_gender": "בחר מגדר",
+        "family": "משפחה",
+        "select_family": "בחר משפחה",
+        "contact_info": "מידע ליצירת קשר",
+        "phone": "טלפון",
+        "phone_placeholder": "הכנס מספר טלפון",
+        "address_info": "מידע כתובת",
+        "personal_number": "מספר אישי",
+        "home_number": "מספר בית",
+        "hood": "שכונה",
+        "village": "כפר",
+        "adding_contact": "מוסיף...",
+        "add_contact": "הוסף איש קשר"
+      },
+      "edit_contact_form": {
+        "page_title": "ערוך איש קשר",
+        "first_name": "שם פרטי",
+        "middle_name": "שם אמצעי",
+        "family": "משפחה",
+        "select_family": "בחר משפחה",
+        "previous_family": "שם משפחה קודם",
+        "phone": "טלפון",
+        "phone_placeholder": "הכנס מספר טלפון",
+        "personal_number": "מספר אישי",
+        "home_number": "מספר בית",
+        "street_number": "מספר רחוב",
+        "town": "כפר",
+        "birth_year": "שנת לידה",
+        "gender": "מגדר",
+        "select_gender": "בחר מגדר",
+        "saving": "שומר...",
+        "save": "שמור"
       }
     }
   },

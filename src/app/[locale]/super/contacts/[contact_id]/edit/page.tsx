@@ -19,7 +19,7 @@ export default async function EditContactPage({
 		redirect('/login');
 	}
 
-	const t = await getTranslations('super.contacts');
+	const t = await getTranslations('super.contacts.edit_contact_form');
 
 	const contact = await getContactById(parseInt(contact_id));
 	if (!contact) {
@@ -35,7 +35,7 @@ export default async function EditContactPage({
 	return (
 		<div className="container mx-auto py-8">
 			<div className="mb-8 flex flex-col items-start justify-between sm:flex-row sm:items-center">
-				<h1 className="text-3xl font-bold">{t('edit_contact.title')}</h1>
+				<h1 className="text-3xl font-bold">{t('page_title')}</h1>
 			</div>
 
 			<div className="grid grid-cols-1 gap-8">

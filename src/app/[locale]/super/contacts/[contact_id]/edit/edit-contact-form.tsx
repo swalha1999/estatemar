@@ -71,7 +71,7 @@ interface EditContactFormProps {
 }
 
 export function EditContactForm({ contact, families }: EditContactFormProps) {
-	const t = useTranslations('super.contacts.edit_contact');
+	const t = useTranslations('super.contacts.edit_contact_form');
 
 	const [state, action, isPending] = useActionState(editContactAction, {});
 

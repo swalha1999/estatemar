@@ -154,25 +154,25 @@ const FiltersSection = ({
 	streets,
 	families,
 	searchParams,
-	t,
 }: {
 	towns: string[];
 	streets: string[];
 	families: string[];
 	searchParams?: ContactSearchParams;
-	t: any;
+
 }) => {
+	const t = useTranslations('super.contacts.contacts_list.filters');
 	const consentOptions: { value: ConsentStatus, label: string }[] = [
-		{ value: 'gave_consent', label: t('consent_status.gave_consent') },
-		{ value: 'no_response', label: t('consent_status.no_response') },
-		{ value: 'declined', label: t('consent_status.declined') },
-		{ value: 'concent_message_not_sent', label: t('consent_status.concent_message_not_sent') },
-		{ value: 'concent_message_failed', label: t('consent_status.concent_message_failed') },
+		{ value: 'gave_consent', label: t('gave_consent') },
+		{ value: 'no_response', label: t('no_response') },
+		{ value: 'declined', label: t('declined') },
+		{ value: 'concent_message_not_sent', label: t('concent_message_not_sent') },
+		{ value: 'concent_message_failed', label: t('concent_message_failed') },
 	];
 
 	const approvalOptions = [
-		{ value: 'true', label: 'المعتمدين' },
-		{ value: 'false', label: 'غير المعتمدين' },
+		{ value: 'true', label: t('approved') },
+		{ value: 'false', label: t('not_approved') },
 	];
 
 	return (
@@ -189,9 +189,9 @@ const FiltersSection = ({
 						paramName="town"
 						options={towns}
 						selectedValue={searchParams?.town}
-						allLabel="كل البلدات"
-						title="البلدة"
-						placeholder="اختر البلدة"
+						allLabel={t('all_towns')}
+						title={t('town')}
+						placeholder={t('select_town')}
 						dependentParams={['street']}
 						width="w-full"
 					/>
@@ -199,36 +199,36 @@ const FiltersSection = ({
 						paramName="street"
 						options={streets}
 						selectedValue={searchParams?.street}
-						allLabel="كل الحارات"
-						title="الحارة"
-						placeholder="اختر الحارة"
+						allLabel={t('all_streets')}
+						title={t('street')}
+						placeholder={t('select_street')}
 						width="w-full"
 					/>
 					<DropdownFilter
 						paramName="family"
 						options={families}
 						selectedValue={searchParams?.family}
-						allLabel="كل العائلات"
-						title="العائلة"
-						placeholder="اختر العائلة"
+						allLabel={t('all_families')}
+						title={t('family')}
+						placeholder={t('select_family')}
 						width="w-full"
 					/>
 					<DropdownFilter
 						paramName="consentStatus"
 						options={consentOptions}
 						selectedValue={searchParams?.consentStatus}
-						allLabel="كل الحالات"
-						title="حالة الموافقة"
-						placeholder="اختر الحالة"
+						allLabel={t('all_statuses')}
+						title={t('consent_status.title')}
+						placeholder={t('select_status')}
 						width="w-full"
 					/>
 					<DropdownFilter
 						paramName="approved"
 						options={approvalOptions}
 						selectedValue={searchParams?.approved}
-						allLabel="كل الحالات"
-						title="حالة الاعتماد"
-						placeholder="اختر حالة الاعتماد"
+						allLabel={t('all_statuses')}
+						title={t('approval_status')}
+						placeholder={t('select_status')}
 						width="w-full"
 					/>
 				</div>
@@ -249,7 +249,7 @@ const AdminApprovalBadge = ({ approved }: { approved: boolean }) => {
 						) : (
 							<XCircle className="h-3 w-3 mr-1" />
 						)}
-						{approved ? 'معتمد' : 'غير معتمد'}
+						{approved ? t('approved') : t('not_approved')}
 					</Badge>
 				</TooltipTrigger>
 				<TooltipContent>
@@ -271,7 +271,7 @@ const ContactActionsDropdown = ({ contact, onEdit, onDelete, onOptOut, onSendCon
 	onUnapprove: () => void;
 	loading: boolean;
 }) => {
-	const t = useTranslations('super.contacts.contacts_list');
+	const t = useTranslations('super.contacts.contacts_list.actions_dropdown');
 	return (
 		<DropdownMenu>
 			<DropdownMenuTrigger asChild>
@@ -324,7 +324,7 @@ const StatusDropdown = ({
 	contact: any; 
 	currentStatus: ConsentStatus 
 }) => {
-	const t = useTranslations('super.contacts.contacts_list.consent_status');
+	const t = useTranslations('super.contacts.contacts_list.status_dropdown');
 	const [isLoading, setIsLoading] = useState(false);
 
 	const handleStatusChange = async (newStatus: ConsentStatus) => {
@@ -378,7 +378,7 @@ const ContactsTable = ({
 	contacts: any[];
 	searchParams?: ContactSearchParams;
 }) => {
-	const t = useTranslations('super.contacts.contacts_list');
+	const t = useTranslations('super.contacts.contacts_list.contacts_table');
 	const router = useRouter();
 	const [isLoading, setIsLoading] = useState(false);
 
@@ -408,70 +408,70 @@ const ContactsTable = ({
 							<TableCell className="p-2">
 								<SearchInput
 									paramName="title"
-									placeholder="بحث..."
+									placeholder={t('search_placeholder')}
 									className="w-full h-8"
 								/>
 							</TableCell>
 							<TableCell className="p-2">
 								<SearchInput
 									paramName="firstName"
-									placeholder="بحث..."
+									placeholder={t('search_placeholder')}
 									className="w-full h-8"
 								/>
 							</TableCell>
 							<TableCell className="p-2">
 								<SearchInput
 									paramName="middleName"
-									placeholder="بحث..."
+									placeholder={t('search_placeholder')}
 									className="w-full h-8"
 								/>
 							</TableCell>
 							<TableCell className="p-2">
 								<SearchInput
 									paramName="family"
-									placeholder="بحث..."
+									placeholder={t('search_placeholder')}
 									className="w-full h-8"
 								/>
 							</TableCell>
 							<TableCell className="p-2">
 								<SearchInput
 									paramName="previousFamilyName"
-									placeholder="بحث..."
+									placeholder={t('search_placeholder')}
 									className="w-full h-8"
 								/>
 							</TableCell>
 							<TableCell className="p-2">
 								<SearchInput
 									paramName="phone"
-									placeholder="بحث..."
+									placeholder={t('search_placeholder')}
 									className="w-full h-8"
 								/>
 							</TableCell>
 							<TableCell className="p-2">
 								<SearchInput
 									paramName="town"
-									placeholder="بحث..."
+									placeholder={t('search_placeholder')}
 									className="w-full h-8"
 								/>
 							</TableCell>
 							<TableCell className="hidden p-2 md:table-cell">
 								<SearchInput
 									paramName="personalNumber"
-									placeholder="بحث..."
+									placeholder={t('search_placeholder')}
 									className="w-full h-8"
 								/>
 							</TableCell>
 							<TableCell className="hidden p-2 md:table-cell">
 								<SearchInput
 									paramName="home"
-									placeholder="بحث..."
+									placeholder={t('search_placeholder')}
 									className="w-full h-8"
 								/>
 							</TableCell>
 							<TableCell className="hidden p-2 md:table-cell">
 								<SearchInput
 									paramName="street"
-									placeholder="بحث..."
+									placeholder={t('search_placeholder')}
 									className="w-full h-8"
 								/>
 							</TableCell>
@@ -535,7 +535,7 @@ const ContactsTable = ({
 						{contacts.length === 0 && (
 							<TableRow>
 								<TableCell colSpan={13} className="text-center py-8 text-muted-foreground">
-									لا توجد جهات اتصال متطابقة مع المرشحات المحددة
+									{t('no_contacts_found')}
 								</TableCell>
 							</TableRow>
 						)}
@@ -548,14 +548,12 @@ const ContactsTable = ({
 
 function SendAllConsentButton({
 	contacts,
-	t,
 }: {
 	contacts: any[];
-	t: ReturnType<typeof useTranslations>;
 }) {
 	const [isLoading, setIsLoading] = useState(false);
 	const [done, setDone] = useState(false);
-
+	const t = useTranslations('super.contacts.contacts_list.send_all_consent_button');
 	const eligibleContacts = contacts.filter(
 		(contact) =>
 			!contact.contactConsent &&
@@ -599,16 +597,14 @@ function SendAllConsentButton({
 
 function BulkApprovalButton({
 	searchParams,
-	t,
 }: {
 	searchParams?: ContactSearchParams;
-	t: ReturnType<typeof useTranslations>;
 }) {
 	const [isApproving, setIsApproving] = useState(false);
 	const [isUnapproving, setIsUnapproving] = useState(false);
 	const [approveDone, setApproveDone] = useState(false);
 	const [unapproveDone, setUnapproveDone] = useState(false);
-
+	const t = useTranslations('super.contacts.contacts_list.bulk_approval_button');
 	const handleApproveAll = async () => {
 		setIsApproving(true);
 		try {
@@ -650,10 +646,10 @@ function BulkApprovalButton({
 			>
 				<CheckCircle className="h-4 w-4 text-emerald-500" />
 				{isApproving
-					? 'جاري اعتماد الكل...'
+					? t('approving_all')
 					: approveDone
-						? 'تم اعتماد الكل'
-						: 'اعتماد الكل'}
+						? t('approved_all')
+						: t('approve_all')}
 			</Button>
 			
 			<Button
@@ -665,10 +661,10 @@ function BulkApprovalButton({
 			>
 				<XCircle className="h-4 w-4 text-rose-500" />
 				{isUnapproving
-					? 'جاري إلغاء اعتماد الكل...'
+					? t('unapproving_all')
 					: unapproveDone
-						? 'تم إلغاء اعتماد الكل'
-						: 'إلغاء اعتماد الكل'}
+						? t('unapproved_all')
+						: t('unapprove_all')}
 			</Button>
 		</div>
 	);
@@ -698,7 +694,6 @@ export function ContactsList({
 				streets={streets}
 				families={families}
 				searchParams={searchParams}
-				t={t}
 			/>
 
 			{/* Main Content */}
@@ -707,14 +702,14 @@ export function ContactsList({
 					<div>
 						<CardTitle className="text-xl">{t('contacts_list')}</CardTitle>
 						<p className="text-sm text-muted-foreground mt-1">
-							عرض {contacts.length} من أصل {totalContacts} جهة اتصال
+							{t('view_contacts', { count: contacts.length, total: totalContacts })}
 						</p>
 					</div>
 
 					{user?.is_super_admin && (
 						<div className="flex gap-2">
-							<SendAllConsentButton contacts={contacts} t={t} />
-							<BulkApprovalButton searchParams={searchParams} t={t} />
+							<SendAllConsentButton contacts={contacts} />
+							<BulkApprovalButton searchParams={searchParams} />
 						</div>
 					)}
 				</CardHeader>

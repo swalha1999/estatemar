@@ -36,7 +36,9 @@
   "super": {
     "breadcrumb": {
       "main": "لوحة الإدارة",
-      "main_users": "المستخدمين"
+      "main_users": "المستخدمين",
+      "main_contacts": "جهات الاتصال",
+      "main_contacts_new": "جهة اتصال جديدة"
     },
     "metadata": {
       "title": "لوحة الإدارة",
@@ -137,6 +139,148 @@
         "darkmode": "الوضع المظلم",
         "lightmode": "الوضع المضيء",
         "logout": "تسجيل الخروج"
+      }
+    },
+    "contacts": {
+      "page": {
+        "page_title": "إدارة جهات الاتصال",
+        "add_contact_button": "إضافة جهة اتصال"
+      },
+      "contacts_list": {
+        "total_contacts": "إجمالي جهات الاتصال",
+        "total_households": "إجمالي الأسر",
+        "total_opted_in": "إجمالي الموافقين",
+        "total_declined": "إجمالي الرافضين",
+        "total_didnt_respond": "إجمالي من لم يستجيبوا",
+        "total_failed": "إجمالي الفاشلين",
+        "total_didnt_send": "إجمالي من لم يرسل لهم",
+        "page": "صفحة",
+        "of": "من",
+        "first_page": "الصفحة الأولى",
+        "previous_page": "الصفحة السابقة",
+        "next_page": "الصفحة التالية",
+        "last_page": "الصفحة الأخيرة",
+        "view_contacts": "عرض {count} من أصل {total} جهة اتصال",
+        "consent_status": {
+          "gave_consent": "أعطى الموافقة",
+          "no_response": "لم يستجب",
+          "declined": "رفض",
+          "concent_message_not_sent": "لم يرسل رسالة الموافقة",
+          "concent_message_failed": "فشلت رسالة الموافقة"
+        },
+        "contacts_table": {
+          "contact_title": "اللقب",
+          "first_name": "الاسم الأول",
+          "middle_name": "الاسم الأوسط",
+          "family_name": "اسم العائلة",
+          "previous_family_name": "اسم العائلة السابق",
+          "phone": "الهاتف",
+          "village": "القرية",
+          "personal_number": "الرقم الشخصي",
+          "home_number": "رقم المنزل",
+          "hood": "الحارة",
+          "admin_approval": "اعتماد الإدارة",
+          "consent": "الموافقة",
+          "actions": "الإجراءات",
+          "no_contacts_found": "لا توجد جهات اتصال متطابقة مع المرشحات المحددة",
+          "search_placeholder": "بحث..."
+        },
+        "actions_dropdown": {
+          "actions": "الإجراءات",
+          "action_edit": "تعديل",
+          "action_delete": "حذف",
+          "action_mark_as_opt_out": "تحديد كرافض",
+          "action_send_consent": "إرسال رسالة الموافقة",
+          "action_reset_consent": "إعادة تعيين الموافقة",
+          "approved": "معتمد",
+          "not_approved": "غير معتمد"
+        },
+        "status_dropdown": {
+          "concent_message_not_sent": "لم يرسل رسالة الموافقة",
+          "no_response": "لم يستجب",
+          "gave_consent": "أعطى الموافقة",
+          "declined": "رفض",
+          "concent_message_failed": "فشلت رسالة الموافقة"
+        },
+        "send_all_consent_button": {
+          "send_consent_to_all": "إرسال الموافقة للجميع",
+          "sending_all": "جاري الإرسال...",
+          "sent_all": "تم الإرسال للجميع"
+        },
+        "bulk_approval_button": {
+          "approve_all": "اعتماد الكل",
+          "approving_all": "جاري اعتماد الكل...",
+          "approved_all": "تم اعتماد الكل",
+          "unapprove_all": "إلغاء اعتماد الكل",
+          "unapproving_all": "جاري إلغاء اعتماد الكل...",
+          "unapproved_all": "تم إلغاء اعتماد الكل"
+        },
+        "approved": "معتمد",
+        "not_approved": "غير معتمد",
+        "filters": {
+          "all_towns": "كل البلدات",
+          "town": "البلدة",
+          "select_town": "اختر البلدة",
+          "all_streets": "كل الحارات",
+          "street": "الحارة",
+          "select_street": "اختر الحارة",
+          "all_families": "كل العائلات",
+          "family": "العائلة",
+          "select_family": "اختر العائلة",
+          "all_statuses": "كل الحالات",
+          "consent_status": {
+            "title": "حالة الموافقة"
+          },
+          "select_status": "اختر الحالة",
+          "approval_status": "حالة الاعتماد",
+          "gave_consent": "أعطى الموافقة",
+          "no_response": "لم يستجب",
+          "declined": "رفض",
+          "concent_message_not_sent": "لم يرسل رسالة الموافقة",
+          "concent_message_failed": "فشلت رسالة الموافقة",
+          "approved": "معتمد",
+          "not_approved": "غير معتمد"
+        }
+      },
+      "new_contacts": {
+        "personal_info": "المعلومات الشخصية",
+        "first_name": "الاسم الأول",
+        "middle_name": "الاسم الأوسط",
+        "previous_family": "اسم العائلة السابق",
+        "birth_year": "سنة الميلاد",
+        "gender": "الجنس",
+        "select_gender": "اختر الجنس",
+        "family": "العائلة",
+        "select_family": "اختر العائلة",
+        "contact_info": "معلومات الاتصال",
+        "phone": "الهاتف",
+        "phone_placeholder": "أدخل رقم الهاتف",
+        "address_info": "معلومات العنوان",
+        "personal_number": "الرقم الشخصي",
+        "home_number": "رقم المنزل",
+        "hood": "الحارة",
+        "village": "القرية",
+        "adding_contact": "جاري الإضافة...",
+        "add_contact": "إضافة جهة اتصال"
+      },
+      "edit_contact_form": {
+        "page_title": "تعديل جهة الاتصال",
+        "first_name": "الاسم الأول",
+        "middle_name": "الاسم الأوسط",
+        "family": "العائلة",
+        "select_family": "اختر العائلة",
+        "previous_family": "اسم العائلة السابق",
+        "phone": "الهاتف",
+        "phone_placeholder": "أدخل رقم الهاتف",
+        "personal_number": "الرقم الشخصي",
+        "home_number": "رقم المنزل",
+        "street_number": "رقم الشارع",
+        "town": "القرية",
+        "birth_year": "سنة الميلاد",
+        "gender": "الجنس",
+        "select_gender": "اختر الجنس",
+        "saving": "جاري الحفظ...",
+        "save": "حفظ"
       }
     }
   },

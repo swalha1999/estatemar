@@ -18,7 +18,7 @@ export default async function ContactsPage({
 		redirect('/login');
 	}
 
-	const t = await getTranslations('super.contacts');
+	const t = await getTranslations('super.contacts.page');
 
 	const towns = await dal.households.getUniqueTowns();
 	const streets = await dal.households.getUniqueStreets();
@@ -47,7 +47,7 @@ export default async function ContactsPage({
 					<Button asChild size="lg" className="flex items-center gap-2">
 						<Link href="/super/contacts/new">
 							<UserPlus className="h-4 w-4" />
-							{t('add_contact')}
+							{t('add_contact_button')}
 						</Link>
 					</Button>
 				</div>
