@@ -50,17 +50,35 @@
   - Actions (Edit/Delete)
 
 ### Actions:
-- Add New Property:
-  - Name
-  - Type (Apartment, Villa, etc.)
-  - Developer (select from dropdown)
-  - Address / Location
-  - Size (sqm/sqft), Bedrooms, Bathrooms
-  - Price
-  - Upload images
-  - Status (Draft or Published)
-- Edit Property (same form with prefilled data)
-- Delete Property (with confirmation dialog)
+- **Add/Edit Property Form Fields:**
+
+| Field | Type | Notes |
+|---|---|---|
+| Title | String | |
+| Description | Text | |
+| Price | Decimal | |
+| Developer | Relation | Links to Developer table |
+| Property Type | Enum | 'Apartment', 'Villa', 'Townhouse', etc. |
+| Listing Type | Enum | 'For Sale', 'For Rent' |
+| Location | String | e.g., 'Downtown Dubai' |
+| Address | String | Full address |
+| Latitude | Float | |
+| Longitude | Float | |
+| Area | Decimal | In sqm or sqft |
+| Bedrooms | Integer | |
+| Bathrooms | Integer | |
+| Parking Spaces | Integer | |
+| Year Built | Integer | |
+| Amenities | Array/Tags | e.g., ['Pool', 'Gym'] |
+| Image URLs | Array/JSON | List of URLs for the gallery |
+| Virtual Tour URL | String | Optional |
+| Status | Enum | 'Available', 'Sold', 'Rented' |
+| Is Featured | Boolean | For highlighting properties |
+| Agent Name | String | |
+| Agent Phone | String | |
+| Agent Email | String | |
+
+- **Delete Property** (with confirmation dialog)
 
 ---
 
