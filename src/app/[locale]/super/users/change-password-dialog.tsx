@@ -27,7 +27,7 @@ interface ChangePasswordDialogProps {
 export function ChangePasswordDialog({ userId, username, open, onOpenChange }: ChangePasswordDialogProps) {
 	const [password, setPassword] = useState('');
 	const [isLoading, setIsLoading] = useState(false);
-	const t = useTranslations('super.users');
+	const t = useTranslations('super.users.change_password_dialog');
 	const { toast } = useToast();
 	const router = useRouter();
 
@@ -74,20 +74,20 @@ export function ChangePasswordDialog({ userId, username, open, onOpenChange }: C
 			<DialogContent className="sm:max-w-md">
 				<form onSubmit={handleSubmit}>
 					<DialogHeader>
-						<DialogTitle>{t('change_password_dialog.title')}</DialogTitle>
+						<DialogTitle>{t('title')}</DialogTitle>
 						<DialogDescription>
-							{t('change_password_dialog.description')} ({username})
+							{t('description')} ({username})
 						</DialogDescription>
 					</DialogHeader>
 					<div className="grid gap-4 py-4">
 						<div className="grid gap-2">
-							<Label htmlFor="password">{t('change_password_dialog.new_password')}</Label>
+							<Label htmlFor="password">{t('new_password')}</Label>
 							<Input
 								id="password"
 								type="password"
 								value={password}
 								onChange={(e) => setPassword(e.target.value)}
-								placeholder={t('change_password_dialog.new_password_placeholder')}
+								placeholder={t('new_password_placeholder')}
 								required
 								minLength={8}
 								disabled={isLoading}
@@ -101,10 +101,10 @@ export function ChangePasswordDialog({ userId, username, open, onOpenChange }: C
 							onClick={handleCancel}
 							disabled={isLoading}
 						>
-							{t('change_password_dialog.cancel')}
+							{t('cancel')}
 						</Button>
 						<Button type="submit" disabled={isLoading || !password.trim()}>
-							{isLoading ? t('change_password_dialog.changing') : t('change_password_dialog.confirm')}
+							{isLoading ? t('changing') : t('confirm')}
 						</Button>
 					</DialogFooter>
 				</form>

@@ -24,7 +24,7 @@ interface DeleteUserDialogProps {
 
 export function DeleteUserDialog({ userId, username, open, onOpenChange }: DeleteUserDialogProps) {
 	const [isLoading, setIsLoading] = useState(false);
-	const t = useTranslations('super.users');
+	const t = useTranslations('super.users.delete_user_dialog');
 	const { toast } = useToast();
 	const router = useRouter();
 
@@ -67,9 +67,9 @@ export function DeleteUserDialog({ userId, username, open, onOpenChange }: Delet
 		<Dialog open={open} onOpenChange={onOpenChange}>
 			<DialogContent className="sm:max-w-md">
 				<DialogHeader>
-					<DialogTitle>{t('delete_user_dialog.title')}</DialogTitle>
+					<DialogTitle>{t('title')}</DialogTitle>
 					<DialogDescription>
-						{t('delete_user_dialog.description', { username })}
+						{t('description', { username })}
 					</DialogDescription>
 				</DialogHeader>
 				<DialogFooter>
@@ -79,7 +79,7 @@ export function DeleteUserDialog({ userId, username, open, onOpenChange }: Delet
 						onClick={handleCancel}
 						disabled={isLoading}
 					>
-						{t('delete_user_dialog.cancel')}
+						{t('cancel')}
 					</Button>
 					<Button
 						type="button"
@@ -87,7 +87,7 @@ export function DeleteUserDialog({ userId, username, open, onOpenChange }: Delet
 						onClick={handleDelete}
 						disabled={isLoading}
 					>
-						{isLoading ? t('delete_user_dialog.deleting') : t('delete_user_dialog.confirm')}
+						{isLoading ? t('deleting') : t('confirm')}
 					</Button>
 				</DialogFooter>
 			</DialogContent>

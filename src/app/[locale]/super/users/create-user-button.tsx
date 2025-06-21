@@ -7,7 +7,7 @@ import { CreateUserDialog } from './create-user-dialog';
 
 export function CreateUserButton() {
 	const [dialogOpen, setDialogOpen] = useState(false);
-	const t = useTranslations('super.users');
+	const t = useTranslations('super.users.page');
 
 	return (
 		<>

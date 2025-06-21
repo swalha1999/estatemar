@@ -3,7 +3,7 @@
 import { toggleUserAdmin, toggleUserSuperAdmin } from '@/db/access-layer/users';
 import { ActionResult } from '@/types/actionType';
 import { generateSessionToken, invalidateSession, createSession, getCurrentSession, setSessionTokenCookie } from '@/core/auth/session';
-import { redirect } from 'next/navigation';
+import { redirect } from '@/i18n/navigation';
 import { revalidatePath } from 'next/cache';
 import { updateUserPassword } from '@/core/auth/user';
 import { verifyPasswordStrength } from '@/core/auth/password';
@@ -12,11 +12,13 @@ import { verifyEmailInput } from '@/core/auth/email';
 import { getUserFromEmail } from '@/core/auth/user';
 import { updateUser } from '@/db/access-layer/users';
 import { deleteUser } from '@/db/access-layer/users';
+import { getLocale } from 'next-intl/server';
 
 export async function toggleAdminAction(userId: number): Promise<ActionResult> {
+	const locale = await getLocale();
 	const { session, user } = await getCurrentSession();
 	if (!session || !user || !user.is_super_admin) {
-		redirect('/login');
+		return redirect({ href: '/login', locale });
 	}
 
 	try {
@@ -29,9 +31,10 @@ export async function toggleAdminAction(userId: number): Promise<ActionResult> {
 }
 
 export async function toggleSuperAdminAction(userId: number): Promise<ActionResult> {
+	const locale = await getLocale();
 	const { session, user } = await getCurrentSession();
 	if (!session || !user || !user.is_super_admin) {
-		redirect('/login');
+		return redirect({ href: '/login', locale });
 	}
 
 	try {
@@ -44,9 +47,10 @@ export async function toggleSuperAdminAction(userId: number): Promise<ActionResu
 }
 
 export async function loginAsUserAction(userId: number): Promise<ActionResult> {
+	const locale = await getLocale();
 	const { session, user } = await getCurrentSession();
 	if (!session || !user || !user.is_super_admin) {
-		redirect('/login');
+		return redirect({ href: '/login', locale });
 	}
 
 	try {
@@ -60,16 +64,17 @@ export async function loginAsUserAction(userId: number): Promise<ActionResult> {
 		// set the new session token in the cookie
 		setSessionTokenCookie(sessionToken, newSession.expiresAt);
 		// redirect to the dashboard
-		redirect('/dashboard');
+		return redirect({ href: '/dashboard', locale });
 	} catch (error) {
 		return { is_success: false, message: 'error' };
 	}
 }
 
 export async function changeUserPasswordAction(userId: number, newPassword: string): Promise<ActionResult> {
+	const locale = await getLocale();
 	const { session, user } = await getCurrentSession();
 	if (!session || !user || !user.is_super_admin) {
-		redirect('/login');
+		return redirect({ href: '/login', locale });
 	}
 
 	if (!newPassword || newPassword.trim() === '') {
@@ -96,9 +101,10 @@ export async function createUserAction(formData: {
 	isAdmin: boolean;
 	isSuperAdmin: boolean;
 }): Promise<ActionResult> {
+	const locale = await getLocale();
 	const { session, user } = await getCurrentSession();
 	if (!session || !user || !user.is_super_admin) {
-		redirect('/login');
+		return redirect({ href: '/login', locale });
 	}
 
 	const { username, email, password, isAdmin, isSuperAdmin } = formData;
@@ -137,9 +143,10 @@ export async function createUserAction(formData: {
 }
 
 export async function deleteUserAction(userId: number): Promise<ActionResult> {
+	const locale = await getLocale();
 	const { session, user } = await getCurrentSession();
 	if (!session || !user || !user.is_super_admin) {
-		redirect('/login');
+		return redirect({ href: '/login', locale });
 	}
 
 	// Prevent super admin from deleting themselves

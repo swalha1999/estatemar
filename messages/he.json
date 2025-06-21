@@ -35,7 +35,8 @@
   },
   "super": {
     "breadcrumb": {
-      "main": "לוח ניהול"
+      "main": "לוח ניהול",
+      "main_users": "משתמשים"
     },
     "metadata": {
       "title": "לוח ניהול",
@@ -43,6 +44,84 @@
     },
     "page": {
       "welcome": "ברוכים הבאים ללוח הניהול"
+    },
+    "users": {
+      "page": {
+        "title": "ניהול משתמשים",
+        "create_user": "צור משתמש"
+      },
+      "table": {
+        "username": "שם משתמש",
+        "email": "אימייל",
+        "roles": "תפקידים",
+        "actions": "פעולות",
+        "super_admin": "מנהל כללי",
+        "admin": "מנהל",
+        "remove_admin": "הסר מנהל",
+        "make_admin": "הפוך למנהל",
+        "remove_super_admin": "הסר מנהל כללי",
+        "make_super_admin": "הפוך למנהל כללי",
+        "login_as_user": "התחבר כמשתמש",
+        "change_password": "שנה סיסמה",
+        "delete_user": "מחק משתמש",
+        "toast": {
+          "success": "הצלחה",
+          "error": "שגיאה",
+          "admin_toggled": "סטטוס המנהל שונה בהצלחה",
+          "super_admin_toggled": "סטטוס המנהל הכללי שונה בהצלחה",
+          "login_as_user": "התחברות כמשתמש הצליחה",
+          "error_message": "אירעה שגיאה בביצוע הפעולה"
+        }
+      },
+      "change_password_dialog": {
+        "title": "שנה סיסמה",
+        "description": "שנה סיסמה למשתמש",
+        "new_password": "סיסמה חדשה",
+        "new_password_placeholder": "הכנס סיסמה חדשה",
+        "cancel": "ביטול",
+        "changing": "משנה...",
+        "confirm": "אישור",
+        "toast": {
+          "success": "הצלחה",
+          "error": "שגיאה",
+          "password_changed": "הסיסמה שונתה בהצלחה",
+          "error_message": "אירעה שגיאה בשינוי הסיסמה"
+        }
+      },
+      "create_user_dialog": {
+        "title": "צור משתמש חדש",
+        "description": "הכנס פרטי המשתמש החדש",
+        "username": "שם משתמש",
+        "username_placeholder": "הכנס שם משתמש",
+        "email": "אימייל",
+        "email_placeholder": "הכנס אימייל",
+        "password": "סיסמה",
+        "password_placeholder": "הכנס סיסמה",
+        "is_admin": "מנהל",
+        "is_super_admin": "מנהל כללי",
+        "cancel": "ביטול",
+        "creating": "יוצר...",
+        "create": "צור",
+        "toast": {
+          "success": "הצלחה",
+          "error": "שגיאה",
+          "user_created": "המשתמש נוצר בהצלחה",
+          "error_message": "אירעה שגיאה ביצירת המשתמש"
+        }
+      },
+      "delete_user_dialog": {
+        "title": "מחק משתמש",
+        "description": "האם אתה בטוח שברצונך למחוק את המשתמש {username}?",
+        "cancel": "ביטול",
+        "deleting": "מוחק...",
+        "delete": "מחק",
+        "toast": {
+          "success": "הצלחה",
+          "error": "שגיאה",
+          "user_deleted": "המשתמש נמחק בהצלחה",
+          "error_message": "אירעה שגיאה במחיקת המשתמש"
+        }
+      }
     },
     "sidebar": {
       "platform": "פלטפורמה",

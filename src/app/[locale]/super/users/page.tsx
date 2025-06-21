@@ -1,22 +1,23 @@
-import { getTranslations } from 'next-intl/server';
+import { getLocale, getTranslations } from 'next-intl/server';
 import { getCurrentSession } from '@/core/auth/session';
-import { redirect } from 'next/navigation';
+import { redirect } from '@/i18n/navigation';
 import { getAllUsersWithoutDevelopers } from '@/db/access-layer/users';
 import { UsersTable } from './users-table';
 import { CreateUserButton } from './create-user-button';
 
 export default async function UsersPage() {
+	const locale = await getLocale();
 	const { session, user } = await getCurrentSession();
 
 	if (!session || !user) {
-		redirect('/login');
+		return redirect({ href: '/login', locale });
 	}
 
 	if (!user.is_super_admin) {
-		redirect('/super');
+		return redirect({ href: '/super', locale });
 	}
 
-	const t = await getTranslations('super.users');
+	const t = await getTranslations('super.users.page');
 	const users = await getAllUsersWithoutDevelopers();
 
 	return (

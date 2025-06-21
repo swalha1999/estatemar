@@ -35,7 +35,8 @@
   },
   "super": {
     "breadcrumb": {
-      "main": "لوحة الإدارة"
+      "main": "لوحة الإدارة",
+      "main_users": "المستخدمين"
     },
     "metadata": {
       "title": "لوحة الإدارة",
@@ -43,6 +44,84 @@
     },
     "page": {
       "welcome": "مرحباً بك في لوحة الإدارة"
+    },
+    "users": {
+      "page": {
+        "title": "إدارة المستخدمين",
+        "create_user": "إنشاء مستخدم"
+      },
+      "table": {
+        "username": "اسم المستخدم",
+        "email": "البريد الإلكتروني",
+        "roles": "الأدوار",
+        "actions": "الإجراءات",
+        "super_admin": "مدير عام",
+        "admin": "مدير",
+        "remove_admin": "إزالة المدير",
+        "make_admin": "تعيين مدير",
+        "remove_super_admin": "إزالة المدير العام",
+        "make_super_admin": "تعيين مدير عام",
+        "login_as_user": "تسجيل الدخول كالمستخدم",
+        "change_password": "تغيير كلمة المرور",
+        "delete_user": "حذف المستخدم",
+        "toast": {
+          "success": "تم بنجاح",
+          "error": "خطأ",
+          "admin_toggled": "تم تغيير حالة المدير بنجاح",
+          "super_admin_toggled": "تم تغيير حالة المدير العام بنجاح",
+          "login_as_user": "تم تسجيل الدخول كالمستخدم بنجاح",
+          "error_message": "حدث خطأ أثناء تنفيذ العملية"
+        }
+      },
+      "change_password_dialog": {
+        "title": "تغيير كلمة المرور",
+        "description": "تغيير كلمة المرور للمستخدم",
+        "new_password": "كلمة المرور الجديدة",
+        "new_password_placeholder": "أدخل كلمة المرور الجديدة",
+        "cancel": "إلغاء",
+        "changing": "جاري التغيير...",
+        "confirm": "تأكيد",
+        "toast": {
+          "success": "تم بنجاح",
+          "error": "خطأ",
+          "password_changed": "تم تغيير كلمة المرور بنجاح",
+          "error_message": "حدث خطأ أثناء تغيير كلمة المرور"
+        }
+      },
+      "create_user_dialog": {
+        "title": "إنشاء مستخدم جديد",
+        "description": "أدخل بيانات المستخدم الجديد",
+        "username": "اسم المستخدم",
+        "username_placeholder": "أدخل اسم المستخدم",
+        "email": "البريد الإلكتروني",
+        "email_placeholder": "أدخل البريد الإلكتروني",
+        "password": "كلمة المرور",
+        "password_placeholder": "أدخل كلمة المرور",
+        "is_admin": "مدير",
+        "is_super_admin": "مدير عام",
+        "cancel": "إلغاء",
+        "creating": "جاري الإنشاء...",
+        "create": "إنشاء",
+        "toast": {
+          "success": "تم بنجاح",
+          "error": "خطأ",
+          "user_created": "تم إنشاء المستخدم بنجاح",
+          "error_message": "حدث خطأ أثناء إنشاء المستخدم"
+        },
+        "delete_user_dialog": {
+          "title": "حذف المستخدم",
+          "description": "هل أنت متأكد من حذف المستخدم {username}؟",
+          "cancel": "إلغاء",
+          "deleting": "جاري الحذف...",
+          "delete": "حذف",
+          "toast": {
+            "success": "تم بنجاح",
+            "error": "خطأ",
+            "user_deleted": "تم حذف المستخدم بنجاح",
+            "error_message": "حدث خطأ أثناء حذف المستخدم"
+          }
+        }
+      }
     },
     "sidebar": {
       "platform": "المنصة",
