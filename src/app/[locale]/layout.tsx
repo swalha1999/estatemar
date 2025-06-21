@@ -64,3 +64,7 @@ export default async function RootLayout({
 		</NextIntlClientProvider>
 	);
 }
+
+export function generateStaticParams() {
+	return routing.locales.map((locale) => ({ locale }));
+}
