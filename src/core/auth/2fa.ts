@@ -1,6 +1,6 @@
 import { and, eq } from 'drizzle-orm';
-import { db } from '@/db';
-import { users, sessions } from '@/db/schema-auth';
+import { db } from '@/data';
+import { users, sessions } from '@/data/access-layer-v2/schemas/auth.schema';
 import { decryptString, encryptString } from '@/core/auth/encryption';
 import { ExpiringTokenBucket } from '@/core/auth/rate-limit';
 import { generateRandomRecoveryCode } from './utils';

@@ -1,16 +1,8 @@
-import {
-	setMessageAsApproved,
-	setMessageAsDeclined,
-	setMessageAsDelivered,
-	setMessageAsFailed,
-	setMessageAsSeen,
-} from '@/db/access-layer/whatsapp';
-import { sendErrorNotification } from '@/lib/discord';
-import { sendNoReplyMessage } from '@/lib/whatsapp';
 import { parseWhatsAppPayload } from '@/lib/whatsapp/payload';
 import { NextRequest, NextResponse } from 'next/server';
 
 export async function POST(req: NextRequest) {
+	
 	try {
 		const body = await parseWhatsAppPayload(req);
 		console.log('Body:', body);
@@ -25,49 +17,18 @@ export async function POST(req: NextRequest) {
 				const messages = change.value.messages || [];
 
 				for (const message of messages) {
-					console.log('Message received:', message);
-					if (message.type === 'button') {
-						if (
-							message.button?.payload === 'rsvp_yes' ||
-							message.button?.payload === 'موافق' ||
-							message.button?.text === 'موافق' ||
-							message.button?.text === 'تأكيد الحضور'
-						) {
-							await setMessageAsApproved(message.context?.id || null);
-						} else if (
-							message.button?.payload === 'rsvp_no' ||
-							message.button?.payload === 'عدم الحضور' ||
-							message.button?.text === 'عدم الحضور'
-						) {
-							await setMessageAsDeclined(message.context?.id || null);
-						}
-					} else if (message.type === 'text') {
-						if (
-							message.text?.body === 'موافق' ||
-							message.text?.body === 'تأكيد الحضور'
-						) {
-							await setMessageAsApproved(message.context?.id || null);
-						} else if (message.text?.body === 'عدم الحضور') {
-							await setMessageAsDeclined(message.context?.id || null);
-						} else {
-							try {
-								await sendNoReplyMessage({ phoneNumber: message.from });
-								console.log('Message sent to:', message.from);
-							} catch (error) {
-								console.error('Failed to send no reply message:', error);
-							}
-						}
-					}
+					console.log('Message received:', JSON.stringify(message, null, 2));
+					
 				}
 
 				const statuses = change.value.statuses || [];
 				for (const status of statuses) {
 					if (status.status === 'read') {
-						await setMessageAsSeen(status.id);
+						// await setMessageAsSeen(status.id);
 					} else if (status.status === 'delivered') {
-						await setMessageAsDelivered(status.id);
+						// await setMessageAsDelivered(status.id);
 					} else if (status.status === 'failed') {
-						await setMessageAsFailed(status.id);
+						// await setMessageAsFailed(status.id);
 					}
 				}
 			}
@@ -75,7 +36,7 @@ export async function POST(req: NextRequest) {
 		return NextResponse.json({ status: 'ok' });
 	} catch (error) {
 		console.error('Webhook error:', error);
-		await sendErrorNotification(`Webhook error`, `${error}`);
+		// await sendErrorNotification(`Webhook error`, `${error}`);
 		return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
 	}
 }

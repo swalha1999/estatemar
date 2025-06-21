@@ -2,13 +2,13 @@ import { cookies } from 'next/headers';
 
 import { cache } from 'react';
 
-import { db } from '@/db';
-import { users, sessions } from '@/db/schema-auth';
+import { db } from '@/data';
+import { users, sessions } from '@/data/access-layer-v2/schemas/auth.schema';
 import { eq } from 'drizzle-orm';
 import { encodeBase32LowerCaseNoPadding, encodeHexLowerCase } from '@oslojs/encoding';
 import { sha256 } from '@oslojs/crypto/sha2';
 
-import type { User, Session } from '@/db/schema-auth';
+import type { User, Session } from '@/data/access-layer-v2/schemas/auth.schema';
 
 export function getSessionCookieName(): string {
 	return 'session';

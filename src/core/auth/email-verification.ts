@@ -2,8 +2,8 @@ import { encodeBase32 } from '@oslojs/encoding';
 import { and, eq } from 'drizzle-orm';
 import { cookies } from 'next/headers';
 
-import { db } from '@/db';
-import { email_verification_requests } from '@/db/schema-auth';
+import { db } from '@/data';
+import { email_verification_requests } from '@/data/access-layer-v2/schemas/auth.schema';
 import { sendEmailVerificationCode } from '@/lib/email/sendEmail';
 import { ExpiringTokenBucket } from '@/core/auth/rate-limit';
 import { getCurrentSession } from '@/core/auth/session';

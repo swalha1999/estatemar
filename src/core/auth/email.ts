@@ -1,7 +1,7 @@
 import { eq, count } from 'drizzle-orm';
 
-import { db } from '@/db';
-import { users } from '@/db/schema-auth';
+import { db } from '@/data';
+import { users } from '@/data/access-layer-v2/schemas/auth.schema';
 
 export function verifyEmailInput(email: string): boolean {
 	return /^.+@.+\..+$/.test(email) && email.length < 256;

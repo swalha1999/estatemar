@@ -1,9 +1,0 @@
-export { BaseRepository } from './base';
-export { UsersRepository } from './users.repository';
-export { ContactsRepository } from './contacts.repository';
-export { HouseholdsRepository } from './households.repository';
-export { FamiliesRepository } from './families.repository';
-export { WhatsAppRepository } from './whatsapp.repository';
-export { InvitesRepository } from './invites.repository';
-export { FilesRepository } from './files.repository';
-export { LeadsRepository } from './leads.repository'; 

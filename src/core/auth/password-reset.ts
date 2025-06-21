@@ -3,12 +3,12 @@ import { encodeHexLowerCase } from '@oslojs/encoding';
 import { eq } from 'drizzle-orm';
 import { cookies } from 'next/headers';
 
-import { db } from '@/db';
-import { password_reset_sessions } from '@/db/schema-auth';
+import { db } from '@/data';
+import { password_reset_sessions } from '@/data/access-layer-v2/schemas/auth.schema';
 import { returnSafeUser } from '@/core/auth/user';
 import { generateRandomOTP } from '@/core/auth/utils';
 
-import type { PasswordResetSession, SafeUser, User } from '@/db/schema-auth';
+import type { PasswordResetSession, SafeUser, User } from '@/data/access-layer-v2/schemas/auth.schema';
 
 export async function createPasswordResetSession(
 	token: string,

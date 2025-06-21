@@ -1,6 +1,6 @@
 'use server';
 
-import type { SafeUser } from '@/db/schema-auth';
+import type { SafeUser } from '@/data/access-layer-v2/schemas/auth.schema';
 import type { ActionResult } from '@/types/actionType';
 import {
 	deleteSessionTokenCookie,

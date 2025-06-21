@@ -1,7 +1,7 @@
 import { and, eq } from 'drizzle-orm';
 
-import { db } from '@/db';
-import { SafeUser, User, users } from '@/db/schema-auth';
+import { db } from '@/data';
+import { SafeUser, User, users } from '@/data/access-layer-v2/schemas/auth.schema';
 import { decryptString, encryptString } from '@/core/auth/encryption';
 import { hashPassword } from '@/core/auth/password';
 import { generateRandomRecoveryCode } from '@/core/auth/utils';
