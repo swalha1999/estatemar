@@ -53,6 +53,9 @@
         "title": "ניהול משתמשים",
         "create_user": "צור משתמש"
       },
+      "create_user_button": {
+        "create_user": "צור משתמש"
+      },
       "table": {
         "username": "שם משתמש",
         "email": "אימייל",
@@ -65,6 +68,7 @@
         "remove_super_admin": "הסר מנהל כללי",
         "make_super_admin": "הפוך למנהל כללי",
         "login_as_user": "התחבר כמשתמש",
+        "change_username": "שנה שם משתמש",
         "change_password": "שנה סיסמה",
         "delete_user": "מחק משתמש",
         "toast": {
@@ -117,12 +121,27 @@
         "description": "האם אתה בטוח שברצונך למחוק את המשתמש {username}?",
         "cancel": "ביטול",
         "deleting": "מוחק...",
-        "delete": "מחק",
+        "delete": "מחق",
         "toast": {
           "success": "הצלחה",
           "error": "שגיאה",
           "user_deleted": "המשתמש נמחק בהצלחה",
           "error_message": "אירעה שגיאה במחיקת המשתמש"
+        }
+      },
+      "change_username_dialog": {
+        "title": "שנה שם משתמש",
+        "description": "שנה שם משתמש עבור המשתמש",
+        "new_username": "שם משתמש חדש",
+        "new_username_placeholder": "הזן שם משתמש חדש",
+        "cancel": "ביטול",
+        "changing": "משנה...",
+        "confirm": "אישור",
+        "toast": {
+          "success": "הצלחה",
+          "error": "שגיאה",
+          "username_changed": "שם המשתמש שונה בהצלחה",
+          "error_message": "אירעה שגיאה בשינוי שם המשתמש"
         }
       }
     },

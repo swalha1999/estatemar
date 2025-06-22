@@ -53,6 +53,9 @@
         "title": "إدارة المستخدمين",
         "create_user": "إنشاء مستخدم"
       },
+      "create_user_button": {
+        "create_user": "إنشاء مستخدم"
+      },
       "table": {
         "username": "اسم المستخدم",
         "email": "البريد الإلكتروني",
@@ -65,6 +68,7 @@
         "remove_super_admin": "إزالة المدير العام",
         "make_super_admin": "تعيين مدير عام",
         "login_as_user": "تسجيل الدخول كالمستخدم",
+        "change_username": "تغيير اسم المستخدم",
         "change_password": "تغيير كلمة المرور",
         "delete_user": "حذف المستخدم",
         "toast": {
@@ -110,19 +114,34 @@
           "error": "خطأ",
           "user_created": "تم إنشاء المستخدم بنجاح",
           "error_message": "حدث خطأ أثناء إنشاء المستخدم"
-        },
-        "delete_user_dialog": {
-          "title": "حذف المستخدم",
-          "description": "هل أنت متأكد من حذف المستخدم {username}؟",
-          "cancel": "إلغاء",
-          "deleting": "جاري الحذف...",
-          "delete": "حذف",
-          "toast": {
-            "success": "تم بنجاح",
-            "error": "خطأ",
-            "user_deleted": "تم حذف المستخدم بنجاح",
-            "error_message": "حدث خطأ أثناء حذف المستخدم"
-          }
+        }
+      },
+      "delete_user_dialog": {
+        "title": "حذف المستخدم",
+        "description": "هل أنت متأكد من حذف المستخدم {username}؟",
+        "cancel": "إلغاء",
+        "deleting": "جاري الحذف...",
+        "delete": "حذف",
+        "toast": {
+          "success": "تم بنجاح",
+          "error": "خطأ",
+          "user_deleted": "تم حذف المستخدم بنجاح",
+          "error_message": "حدث خطأ أثناء حذف المستخدم"
+        }
+      },
+      "change_username_dialog": {
+        "title": "تغيير اسم المستخدم",
+        "description": "تغيير اسم المستخدم للمستخدم",
+        "new_username": "اسم المستخدم الجديد",
+        "new_username_placeholder": "أدخل اسم المستخدم الجديد",
+        "cancel": "إلغاء",
+        "changing": "جاري التغيير...",
+        "confirm": "تأكيد",
+        "toast": {
+          "success": "تم بنجاح",
+          "error": "خطأ",
+          "username_changed": "تم تغيير اسم المستخدم بنجاح",
+          "error_message": "حدث خطأ أثناء تغيير اسم المستخدم"
         }
       }
     },

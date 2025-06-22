@@ -65,6 +65,7 @@
         "remove_super_admin": "Remove Super Admin",
         "make_super_admin": "Make Super Admin",
         "login_as_user": "Login as User",
+        "change_username": "Change Username",
         "change_password": "Change Password",
         "delete_user": "Delete User",
         "toast": {
@@ -124,6 +125,24 @@
           "user_deleted": "User deleted successfully",
           "error_message": "An error occurred while deleting user"
         }
+      },
+      "change_username_dialog": {
+        "title": "Change Username",
+        "description": "Change username for user",
+        "new_username": "New Username",
+        "new_username_placeholder": "Enter new username",
+        "cancel": "Cancel",
+        "changing": "Changing...",
+        "confirm": "Confirm",
+        "toast": {
+          "success": "Success",
+          "error": "Error",
+          "username_changed": "Username changed successfully",
+          "error_message": "An error occurred while changing username"
+        }
+      },
+      "create_user_button": {
+        "create_user": "Craete user"
       }
     },
     "developers": {
@@ -382,4 +401,4 @@
     "readableFont": "Readable Font",
     "textToSpeech": "Text to Speech"
   }
-} 
+}
