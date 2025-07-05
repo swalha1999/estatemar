@@ -48,6 +48,19 @@ export async function GET(request: NextRequest) {
 				// Get images for this property
 				const images = await propertiesService.getPropertyImages(property.id);
 				
+				// Generate signed URLs for images
+				const imageUrls = await Promise.all(
+					images.map(async (img) => {
+						try {
+							const url = await getSignedUrlForDownload(img.fileName);
+							return url;
+						} catch (error) {
+							console.error('Error generating signed URL for', img.fileName, ':', error);
+							return null;
+						}
+					})
+				);
+				
 				// Transform to match the API specification format
 				return {
 					id: property.id.toString(),
@@ -59,9 +72,7 @@ export async function GET(request: NextRequest) {
 					bedrooms: property.bedrooms,
 					bathrooms: property.bathrooms,
 					area: parseFloat(property.area),
-					imageUrls: images.map(img => {
-						return getSignedUrlForDownload(img.fileName);
-					}),
+					imageUrls: imageUrls.filter(Boolean),
 					propertyType: property.propertyType,
 					listingType: property.listingType,
 					isAvailable: property.isAvailable,

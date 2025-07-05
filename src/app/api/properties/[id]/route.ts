@@ -27,6 +27,19 @@ export async function GET(
 			);
 		}
 
+		// Generate signed URLs for images
+		const imageUrls = await Promise.all(
+			propertyWithImages.images.map(async (img) => {
+				try {
+					const url = await getSignedUrlForDownload(img.fileName);
+					return url;
+				} catch (error) {
+					console.error('Error generating signed URL for', img.fileName, ':', error);
+					return null;
+				}
+			})
+		);
+
 		// Transform to match the API specification format
 		const transformedProperty = {
 			id: propertyWithImages.id.toString(),
@@ -38,9 +51,7 @@ export async function GET(
 			bedrooms: propertyWithImages.bedrooms,
 			bathrooms: propertyWithImages.bathrooms,
 			area: parseFloat(propertyWithImages.area),
-			imageUrls: propertyWithImages.images.map(img => {
-				return getSignedUrlForDownload(img.fileName);
-			}),
+			imageUrls: imageUrls.filter(Boolean),
 			propertyType: propertyWithImages.propertyType,
 			listingType: propertyWithImages.listingType,
 			isAvailable: propertyWithImages.isAvailable,
@@ -103,6 +114,19 @@ export async function PUT(
 		// Get the updated property with images
 		const propertyWithImages = await propertiesService.getPropertyWithImages(propertyId);
 
+		// Generate signed URLs for images
+		const imageUrls = await Promise.all(
+			propertyWithImages.images.map(async (img) => {
+				try {
+					const url = await getSignedUrlForDownload(img.fileName);
+					return url;
+				} catch (error) {
+					console.error('Error generating signed URL for', img.fileName, ':', error);
+					return null;
+				}
+			})
+		);
+
 		// Transform to match the API specification format
 		const transformedProperty = {
 			id: propertyWithImages.id.toString(),
@@ -114,9 +138,7 @@ export async function PUT(
 			bedrooms: propertyWithImages.bedrooms,
 			bathrooms: propertyWithImages.bathrooms,
 			area: parseFloat(propertyWithImages.area),
-			imageUrls: propertyWithImages.images.map(img => {
-				return `https://estatemar.d97515014e92cd4f04045d814b2679c4.r2.cloudflarestorage.com/${img.fileName}`;
-			}),
+			imageUrls: imageUrls.filter(Boolean),
 			propertyType: propertyWithImages.propertyType,
 			listingType: propertyWithImages.listingType,
 			isAvailable: propertyWithImages.isAvailable,
