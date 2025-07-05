@@ -51,19 +51,6 @@ export function MultiImageUploader({
 	const [isDragging, setIsDragging] = useState(false);
 	const fileInputRef = useRef<HTMLInputElement>(null);
 
-	// Update images when existingImages prop changes
-	useEffect(() => {
-		const mappedImages = existingImages.map(img => ({
-			id: img.id,
-			fileName: img.fileName,
-			preview: img.url,
-			isPrimary: img.isPrimary,
-			displayOrder: img.displayOrder,
-		}));
-		setImages(mappedImages);
-		onImagesChange(mappedImages.map(img => img.id));
-	}, [existingImages, onImagesChange]);
-
 	const maxSizeBytes = maxSizeMB * 1024 * 1024;
 
 	const validateFile = (file: File): boolean => {
