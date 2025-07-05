@@ -1,5 +1,9 @@
 import { properties, Property } from "@/data/access-layer-v2/schemas/property.schema";
 import { BaseSearchParams } from "./base.interface";
+import { z } from 'zod';
+
+// Re-export the Property type from schema
+export type { Property } from "@/data/access-layer-v2/schemas/property.schema";
 
 /**
  * Interface for the property table
@@ -34,6 +38,44 @@ export const propertyInterfaceSelect = {
     createdAt: properties.createdAt,
     updatedAt: properties.updatedAt,
     addedBy: properties.addedBy,
+}
+
+export const propertyFormSchema = z.object({
+	title: z.string().min(1, 'Title is required'),
+	description: z.string().min(1, 'Description is required'),
+	price: z.string().min(1, 'Price is required'),
+	location: z.string().min(1, 'Location is required'),
+	address: z.string().min(1, 'Address is required'),
+	bedrooms: z.number().min(0),
+	bathrooms: z.number().min(0),
+	area: z.string().min(1, 'Area is required'),
+	propertyType: z.enum(['villa', 'apartment', 'house', 'commercial', 'land', 'other']),
+	listingType: z.enum(['sale', 'rent', 'both']),
+	isAvailable: z.boolean(),
+	isFeatured: z.boolean(),
+	amenities: z.string().optional(),
+	latitude: z.number().optional(),
+	longitude: z.number().optional(),
+	yearBuilt: z.number().optional(),
+	parkingSpaces: z.number().min(0),
+	agentName: z.string().optional(),
+	agentPhone: z.string().optional(),
+	agentEmail: z.string().email().optional().or(z.literal('')),
+	virtualTourUrl: z.string().url().optional().or(z.literal('')),
+	monthlyRent: z.string().optional(),
+	annualAppreciationRate: z.string().optional(),
+});
+
+export type PropertyFormData = z.infer<typeof propertyFormSchema>;
+
+export interface PropertyWithImages extends Property {
+	images?: Array<{
+		id: number;
+		fileName: string;
+		url: string;
+		isPrimary: boolean;
+		displayOrder: number;
+	}>;
 }
 
 export interface PropertyCreatePayload {

@@ -5,10 +5,9 @@ import { Property } from '@/data/access-layer-v2/schemas/property.schema';
 import { Button } from '@/components/ui/button';
 import { Plus } from 'lucide-react';
 import { PropertiesTable } from '@/app/[locale]/super/properties/components/properties-table';
-import { CreatePropertyDialog } from '@/app/[locale]/super/properties/components/create-property-dialog';
-import { EditPropertyDialog } from '@/app/[locale]/super/properties/components/edit-property-dialog';
 import { DeletePropertyDialog } from '@/app/[locale]/super/properties/components/delete-property-dialog';
 import { useTranslations } from 'next-intl';
+import Link from 'next/link';
 
 interface PropertyManagementProps {
 	properties: Property[];
@@ -26,8 +25,6 @@ export function PropertyManagement({
 	limit 
 }: PropertyManagementProps) {
 	const t = useTranslations('properties');
-	const [isCreateOpen, setIsCreateOpen] = useState(false);
-	const [editingProperty, setEditingProperty] = useState<Property | null>(null);
 	const [deletingProperty, setDeletingProperty] = useState<Property | null>(null);
 
 	return (
@@ -36,30 +33,22 @@ export function PropertyManagement({
 				<div className="flex gap-2">
 					{/* Add filters here later */}
 				</div>
-				<Button onClick={() => setIsCreateOpen(true)}>
-					<Plus className="mr-2 h-4 w-4" />
-					Add Property
-				</Button>
+				<Link href="/super/properties/create">
+					<Button>
+						<Plus className="mr-2 h-4 w-4" />
+						Add Property
+					</Button>
+				</Link>
 			</div>
 
 			<PropertiesTable
 				properties={properties}
-				onEdit={setEditingProperty}
+				onEdit={(property) => {
+					// Navigate to edit page
+					window.location.href = `/super/properties/${property.id}/edit`;
+				}}
 				onDelete={setDeletingProperty}
 			/>
-
-			<CreatePropertyDialog
-				open={isCreateOpen}
-				onOpenChange={setIsCreateOpen}
-			/>
-
-			{editingProperty && (
-				<EditPropertyDialog
-					property={editingProperty}
-					open={!!editingProperty}
-					onOpenChange={(open) => !open && setEditingProperty(null)}
-				/>
-			)}
 
 			{deletingProperty && (
 				<DeletePropertyDialog

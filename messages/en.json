@@ -39,6 +39,8 @@
       "main_users": "Users",
       "main_developers": "Developers",
       "main_properties": "Properties",
+      "main_properties_create": "Create Property",
+      "main_properties_propertie_id_edit": "Edit Property",
       "main_contacts": "Contacts",
       "main_contacts_new": "New Contact"
     },
@@ -522,7 +524,15 @@
       "rent": "For Rent",
       "both": "Both"
     },
-    "add_property": "Add Property"
+    "add_property": "Add Property",
+    "create": {
+      "title": "Create New Property",
+      "description": "Add a new property to the system"
+    },
+    "edit": {
+      "title": "Edit Property",
+      "description": "Edit property"
+    }
   },
   "a11y": {
     "accessibility": "Accessibility",

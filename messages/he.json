@@ -39,6 +39,9 @@
       "main_users": "משתמשים",
       "main_developers": "יזמים",
       "main_properties": "נכסים",
+      "main_properties_create": "צור נכס",
+      "main_properties_propertie_id": "פרטי הנכס",
+      "main_properties_propertie_id_edit": "עריכת הנכס",
       "main_contacts": "אנשי קשר",
       "main_contacts_new": "איש קשר חדש"
     },
@@ -522,7 +525,15 @@
       "rent": "להשכרה",
       "both": "שניהם"
     },
-    "add_property": "הוסף נכס"
+    "add_property": "הוסף נכס",
+    "create": {
+      "title": "צור נכס חדש",
+      "description": "הוסף נכס חדש למערכת"
+    },
+    "edit": {
+      "title": "ערוך נכס",
+      "description": "ערוך נכס"
+    }
   },
   "a11y": {
     "accessibility": "נגישות",

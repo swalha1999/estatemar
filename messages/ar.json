@@ -39,6 +39,9 @@
       "main_users": "المستخدمين",
       "main_developers": "المطورين",
       "main_properties": "العقارات",
+      "main_properties_create": "إنشاء عقار",
+      "main_properties_propertie_id": "تفاصيل العقار",
+      "main_properties_propertie_id_edit": "تعديل العقار",
       "main_contacts": "جهات الاتصال",
       "main_contacts_new": "جهة اتصال جديدة"
     },
@@ -521,7 +524,15 @@
       "rent": "للإيجار",
       "both": "كلاهما"
     },
-    "add_property": "إضافة عقار"
+    "add_property": "إضافة عقار",
+    "create": {
+      "title": "إنشاء عقار جديد",
+      "description": "إضافة عقار جديد للنظام"
+    },
+    "edit": {
+      "title": "تعديل العقار",
+      "description": "تعديل العقار"
+    }
   },
   "a11y": {
     "accessibility": "إمكانية الوصول",

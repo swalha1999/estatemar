@@ -1,20 +1,21 @@
 'use server';
 
+import { PropertiesService } from '@/data/access-layer-v2/services';
+
 export async function getLabelForParam(key: string, slug: string): Promise<string> {
+	console.log('key', 	key);
+	console.log('slug', slug);
 	switch (key) {
-		case 'contact_id':
-			return (await getContactName(slug)) ?? slug;
-		case 'family_id':
-			return (await getFamilyName(slug)) ?? slug;
+		case 'propertie_id':
+			return (await getPropertyTitle(slug)) ?? slug;
 		default:
 			return slug;
 	}
 }
 
-async function getContactName(contact_id: string) {
-	return 'the contact name';
+async function getPropertyTitle(property_id: string) {
+	const propertiesService = new PropertiesService();
+	const property = await propertiesService.getPropertyById(parseInt(property_id));
+	return property?.title ?? property_id;
 }
 
-async function getFamilyName(family_id: string) {
-	return 'the family name';
-}

@@ -7,8 +7,8 @@ import { Skeleton } from '../ui/skeleton';
 import { useSelectedLayoutSegments } from 'next/navigation';
 import { useTranslations } from 'next-intl';
 import { useParams, usePathname } from 'next/navigation';
-import { getLabelForParam } from './actions';
 import { useState, useEffect, useCallback } from 'react';
+import { getLabelForParam } from './actions';
 
 interface BreadcrumbLayoutProps {
 	children: React.ReactNode;
@@ -36,7 +36,7 @@ export const BreadcrumbLayout = ({ children }: BreadcrumbLayoutProps) => {
 		let t_key = '';
 
 		for (const page of filteredPages) {
-			currentPath = currentPath === '' ? `/${page}` : `${currentPath}/${page}`;
+			currentPath = currentPath === '' ? `/super` : `${currentPath}/${page}`;
 
 			if (paramValues.includes(page)) {
 				const paramKey = Object.keys(params).find((key) => params[key] === page);
@@ -47,7 +47,7 @@ export const BreadcrumbLayout = ({ children }: BreadcrumbLayoutProps) => {
 
 				const label = await getLabelForParam(paramKey, page);
 				config.push({
-					label,
+					label: label,
 					href: currentPath,
 				});
 			} else {

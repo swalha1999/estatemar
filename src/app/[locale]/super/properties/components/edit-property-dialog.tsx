@@ -31,6 +31,16 @@ import { useToast } from '@/hooks/use-toast';
 import { Property } from '@/data/access-layer-v2/schemas/property.schema';
 import { MultiImageUploader } from './multi-image-uploader';
 
+interface PropertyWithImages extends Property {
+	images?: Array<{
+		id: number;
+		fileName: string;
+		url: string;
+		isPrimary: boolean;
+		displayOrder: number;
+	}>;
+}
+
 const formSchema = z.object({
 	title: z.string().min(1, 'Title is required'),
 	description: z.string().min(1, 'Description is required'),
@@ -70,6 +80,34 @@ export function EditPropertyDialog({ property, open, onOpenChange }: EditPropert
 	const { toast } = useToast();
 	const [isSubmitting, setIsSubmitting] = useState(false);
 	const [uploadedFileIds, setUploadedFileIds] = useState<number[]>([]);
+	const [propertyWithImages, setPropertyWithImages] = useState<PropertyWithImages | null>(null);
+	const [isLoading, setIsLoading] = useState(false);
+
+	// Fetch property with images when dialog opens
+	useEffect(() => {
+		if (open && property) {
+			const fetchPropertyWithImages = async () => {
+				setIsLoading(true);
+				try {
+					const response = await fetch(`/api/properties/${property.id}`);
+					if (response.ok) {
+						const data = await response.json();
+						setPropertyWithImages(data);
+					} else {
+						console.error('Failed to fetch property with images');
+						setPropertyWithImages(property as PropertyWithImages);
+					}
+				} catch (error) {
+					console.error('Error fetching property with images:', error);
+					setPropertyWithImages(property as PropertyWithImages);
+				} finally {
+					setIsLoading(false);
+				}
+			};
+
+			fetchPropertyWithImages();
+		}
+	}, [open, property]);
 
 	const form = useForm<FormData>({
 		resolver: zodResolver(formSchema),
@@ -100,36 +138,37 @@ export function EditPropertyDialog({ property, open, onOpenChange }: EditPropert
 		},
 	});
 
-	// Update form when property changes
+	// Update form when property with images changes
 	useEffect(() => {
-		if (property) {
+		const currentProperty = propertyWithImages || property;
+		if (currentProperty) {
 			form.reset({
-				title: property.title,
-				description: property.description,
-				price: property.price.toString(),
-				location: property.location,
-				address: property.address,
-				bedrooms: property.bedrooms,
-				bathrooms: property.bathrooms,
-				area: property.area.toString(),
-				propertyType: property.propertyType,
-				listingType: property.listingType,
-				isAvailable: property.isAvailable,
-				isFeatured: property.isFeatured,
-				amenities: property.amenities?.join(', ') || '',
-				latitude: property.latitude || undefined,
-				longitude: property.longitude || undefined,
-				yearBuilt: property.yearBuilt || undefined,
-				parkingSpaces: property.parkingSpaces || 0,
-				agentName: property.agentName || '',
-				agentPhone: property.agentPhone || '',
-				agentEmail: property.agentEmail || '',
-				virtualTourUrl: property.virtualTourUrl || '',
-				monthlyRent: property.monthlyRent?.toString() || '',
-				annualAppreciationRate: property.annualAppreciationRate?.toString() || '',
+				title: currentProperty.title,
+				description: currentProperty.description,
+				price: currentProperty.price?.toString() || '',
+				location: currentProperty.location,
+				address: currentProperty.address,
+				bedrooms: currentProperty.bedrooms,
+				bathrooms: currentProperty.bathrooms,
+				area: currentProperty.area?.toString() || '',
+				propertyType: currentProperty.propertyType,
+				listingType: currentProperty.listingType,
+				isAvailable: currentProperty.isAvailable,
+				isFeatured: currentProperty.isFeatured,
+				amenities: currentProperty.amenities?.join(', ') || '',
+				latitude: currentProperty.latitude || undefined,
+				longitude: currentProperty.longitude || undefined,
+				yearBuilt: currentProperty.yearBuilt || undefined,
+				parkingSpaces: currentProperty.parkingSpaces || 0,
+				agentName: currentProperty.agentName || '',
+				agentPhone: currentProperty.agentPhone || '',
+				agentEmail: currentProperty.agentEmail || '',
+				virtualTourUrl: currentProperty.virtualTourUrl || '',
+				monthlyRent: currentProperty.monthlyRent?.toString() || '',
+				annualAppreciationRate: currentProperty.annualAppreciationRate?.toString() || '',
 			});
 		}
-	}, [property, form]);
+	}, [propertyWithImages, property, form]);
 
 	const onSubmit = async (data: FormData) => {
 		try {
@@ -140,7 +179,7 @@ export function EditPropertyDialog({ property, open, onOpenChange }: EditPropert
 				: [];
 
 			// Update property data
-			const result = await updateProperty(property.id, {
+			const result = await updateProperty(propertyWithImages?.id || property.id, {
 				...data,
 				amenities: amenitiesArray,
 				price: parseFloat(data.price),
@@ -163,7 +202,7 @@ export function EditPropertyDialog({ property, open, onOpenChange }: EditPropert
 				// Add new images to the property
 				for (let i = 0; i < uploadedFileIds.length; i++) {
 					await addPropertyImage(
-						property.id,
+						propertyWithImages?.id || property.id,
 						uploadedFileIds[i],
 						false, // Not primary by default
 						i // Add to end
@@ -201,9 +240,18 @@ export function EditPropertyDialog({ property, open, onOpenChange }: EditPropert
 				<DialogHeader>
 					<DialogTitle>Edit Property</DialogTitle>
 					<DialogDescription>
-						Edit property: {property.title}
+						Edit property: {propertyWithImages?.title || property.title}
 					</DialogDescription>
 				</DialogHeader>
+
+				{isLoading ? (
+					<div className="flex items-center justify-center py-8">
+						<div className="text-center">
+							<div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary mx-auto mb-4"></div>
+							<p className="text-muted-foreground">Loading property details...</p>
+						</div>
+					</div>
+				) : (
 
 				<Form {...form}>
 					<form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
@@ -618,6 +666,7 @@ export function EditPropertyDialog({ property, open, onOpenChange }: EditPropert
 									onImagesChange={setUploadedFileIds}
 									maxImages={10}
 									maxSizeMB={5}
+									existingImages={propertyWithImages?.images || []}
 								/>
 							</div>
 						</div>
@@ -632,6 +681,7 @@ export function EditPropertyDialog({ property, open, onOpenChange }: EditPropert
 						</div>
 					</form>
 				</Form>
+				)}
 			</DialogContent>
 		</Dialog>
 	);

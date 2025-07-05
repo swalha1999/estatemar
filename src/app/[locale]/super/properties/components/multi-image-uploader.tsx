@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useRef, useEffect, type ChangeEvent } from 'react';
+import { useState, useRef, useEffect, useMemo, type ChangeEvent } from 'react';
 import Image from 'next/image';
 import { Upload, X, ImageIcon, Loader2, GripVertical } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
@@ -38,20 +38,30 @@ export function MultiImageUploader({
 	acceptedFileTypes = 'image/*',
 	existingImages = [],
 }: MultiImageUploaderProps) {
-	const [images, setImages] = useState<UploadedImage[]>(() => 
-		existingImages.map(img => ({
-			id: img.id,
-			fileName: img.fileName,
-			preview: img.url,
-			isPrimary: img.isPrimary,
-			displayOrder: img.displayOrder,
-		}))
-	);
+	const [images, setImages] = useState<UploadedImage[]>([]);
 	const [uploadingCount, setUploadingCount] = useState(0);
 	const [isDragging, setIsDragging] = useState(false);
 	const fileInputRef = useRef<HTMLInputElement>(null);
 
 	const maxSizeBytes = maxSizeMB * 1024 * 1024;
+
+	// Memoize the processed existing images to prevent unnecessary re-renders
+	const processedExistingImages = useMemo(() => {
+		return existingImages?.filter(img => img && img.id && img.fileName && img.url).map(img => ({
+			id: img.id,
+			fileName: img.fileName,
+			preview: img.url,
+			isPrimary: img.isPrimary || false,
+			displayOrder: img.displayOrder || 0,
+		})) || [];
+	}, [existingImages]);
+
+	// Initialize images from existingImages only once
+	useEffect(() => {
+		if (processedExistingImages.length > 0 && images.length === 0) {
+			setImages(processedExistingImages);
+		}
+	}, [processedExistingImages, images.length]);
 
 	const validateFile = (file: File): boolean => {
 		const fileTypeIsValid = file.type.startsWith(acceptedFileTypes.replace('/*', '/'));
@@ -304,6 +314,7 @@ export function MultiImageUploader({
 										src={image.preview}
 										alt={image.fileName}
 										fill
+										sizes="(max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
 										className="object-cover"
 									/>
 									
