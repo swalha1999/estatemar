@@ -7,7 +7,6 @@ import {
 	getCurrentSession,
 	invalidateSession,
 } from '@/core/auth/session';
-import { redirect } from 'next/navigation';
 
 export async function getSession() {
 	const { user: sessionUser } = await getCurrentSession();
@@ -38,14 +37,4 @@ export async function logout(): Promise<ActionResult> {
 	return {
 		message: 'تم تسجيل الخروج',
 	};
-}
-
-export async function protectedPage(onlyAdmin: boolean = false) {
-	const { session, user } = await getCurrentSession();
-	if (!session || !user) {
-		return redirect('/login');
-	}
-	if (onlyAdmin && !user.is_admin) {
-		return redirect('/');
-	}
 }

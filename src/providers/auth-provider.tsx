@@ -1,6 +1,6 @@
 'use client';
 
-import { getSession, logout } from '@/app/actions/auth';
+import { getSession, logout } from '@/app/_auth_actions/auth';
 import type { SafeUser } from '@/data/access-layer-v2/schemas/auth.schema';
 import { useToast } from '@/hooks/use-toast';
 import {

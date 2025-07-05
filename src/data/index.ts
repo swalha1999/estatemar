@@ -18,9 +18,6 @@ const connectionString = process.env.DATABASE_URL!;
 const client = postgres(connectionString, {
 	ssl: false,
 	max: 1,
-	// connection: {
-	// 	application_name: "bosalieh.com",
-	// },
 });
 
 export const db = drizzle(client, {
