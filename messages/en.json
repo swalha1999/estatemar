@@ -38,6 +38,7 @@
       "main": "Admin Dashboard",
       "main_users": "Users",
       "main_developers": "Developers",
+      "main_properties": "Properties",
       "main_contacts": "Contacts",
       "main_contacts_new": "New Contact"
     },
@@ -232,6 +233,7 @@
     "sidebar": {
       "platform": "Platform",
       "users": "Users",
+      "properties": "Properties",
       "developers": "Developers",
       "debug": "Debug",
       "contacts": "Contacts",
@@ -389,6 +391,9 @@
         "save": "Save"
       }
     }
+  },
+  "properties": {
+    "title": "Property Management"
   },
   "a11y": {
     "accessibility": "Accessibility",

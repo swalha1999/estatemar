@@ -1,6 +1,6 @@
 'use client';
 
-import { BookUser, Building2, Terminal, Users } from 'lucide-react';
+import { BookUser, Building2, Terminal, Users, Home } from 'lucide-react';
 import { useTranslations, useLocale } from 'next-intl';
 import * as React from 'react';
 
@@ -21,6 +21,13 @@ const createNavData = () => {
 				icon: Users,
 				isActive: true,
 				isSuperAdmin: true,
+			},
+			{
+				title: t('properties'),
+				url: `/${locale}/super/properties`,
+				icon: Home,
+				isActive: true,
+				isSuperAdmin: false,
 			},
 			{
 				title: t('developers'),

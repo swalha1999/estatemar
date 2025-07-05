@@ -22,11 +22,16 @@ export class FilesService extends BaseService {
 			throw new Error(fileError.message);
 		}
 
-		if (fileExists) {
-			return fileExists;
+		// Check if fileExists is an array and has items
+		if (fileExists && Array.isArray(fileExists) && fileExists.length > 0) {
+			return fileExists[0];
 		}
 
 		const result = await this.filesRepo.create(address, user.id);
+
+		if (!result || result.length === 0) {
+			throw new Error('Failed to create file record');
+		}
 
 		return result[0];
 	}

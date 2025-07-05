@@ -1,5 +1,7 @@
 export { BaseRepository } from './base';
-export { UsersRepository } from './users.repository';
-export { ContactsRepository } from './contacts.repository';
-export { FilesRepository } from './files.repository';
-export { DevelopersRepository } from './developers.repository';
+export * from './users.repository';
+export * from './contacts.repository';
+export * from './files.repository';
+export * from './developers.repository';
+export * from './properties.repository';
+export * from './properties-files.repository';

@@ -1,6 +1,7 @@
 import { pgTable, serial, varchar, integer, timestamp } from "drizzle-orm/pg-core";
 import { InferSelectModel, relations } from "drizzle-orm";
 import { users } from "./auth.schema";
+import { propertiesFiles } from "./properties-files.schema";
 
 export const files = pgTable('files', {
 	id: serial('id').primaryKey(),
@@ -18,7 +19,7 @@ export const files_relations = relations(files, ({ one, many }) => ({
 		references: [users.id],
 		relationName: 'uploaded_by',
 	}),
+	propertyFiles: many(propertiesFiles),
 }));
-
 
 export type File = InferSelectModel<typeof files>;

@@ -38,6 +38,7 @@
       "main": "لوحة الإدارة",
       "main_users": "المستخدمين",
       "main_developers": "المطورين",
+      "main_properties": "العقارات",
       "main_contacts": "جهات الاتصال",
       "main_contacts_new": "جهة اتصال جديدة"
     },
@@ -232,6 +233,7 @@
     "sidebar": {
       "platform": "المنصة",
       "users": "المستخدمين",
+      "properties": "العقارات",
       "developers": "المطورين",
       "debug": "التصحيح",
       "contacts": "جهات الاتصال",

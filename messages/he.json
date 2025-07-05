@@ -38,6 +38,7 @@
       "main": "לוח ניהול",
       "main_users": "משתמשים",
       "main_developers": "יזמים",
+      "main_properties": "נכסים",
       "main_contacts": "אנשי קשר",
       "main_contacts_new": "איש קשר חדש"
     },
@@ -121,7 +122,7 @@
         "description": "האם אתה בטוח שברצונך למחוק את המשתמש {username}?",
         "cancel": "ביטול",
         "deleting": "מוחק...",
-        "delete": "מחق",
+        "delete": "מחק",
         "toast": {
           "success": "הצלחה",
           "error": "שגיאה",
@@ -232,6 +233,7 @@
     "sidebar": {
       "platform": "פלטפורמה",
       "users": "משתמשים",
+      "properties": "נכסים",
       "developers": "יזמים",
       "debug": "דיבוג",
       "contacts": "אנשי קשר",
