@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useRef, type ChangeEvent } from 'react';
+import { useState, useRef, useEffect, type ChangeEvent } from 'react';
 import Image from 'next/image';
 import { Upload, X, ImageIcon, Loader2, GripVertical } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
@@ -22,6 +22,13 @@ interface MultiImageUploaderProps {
 	maxImages?: number;
 	maxSizeMB?: number;
 	acceptedFileTypes?: string;
+	existingImages?: Array<{
+		id: number;
+		fileName: string;
+		url: string;
+		isPrimary: boolean;
+		displayOrder: number;
+	}>;
 }
 
 export function MultiImageUploader({
@@ -29,11 +36,33 @@ export function MultiImageUploader({
 	maxImages = 10,
 	maxSizeMB = 5,
 	acceptedFileTypes = 'image/*',
+	existingImages = [],
 }: MultiImageUploaderProps) {
-	const [images, setImages] = useState<UploadedImage[]>([]);
+	const [images, setImages] = useState<UploadedImage[]>(() => 
+		existingImages.map(img => ({
+			id: img.id,
+			fileName: img.fileName,
+			preview: img.url,
+			isPrimary: img.isPrimary,
+			displayOrder: img.displayOrder,
+		}))
+	);
 	const [uploadingCount, setUploadingCount] = useState(0);
 	const [isDragging, setIsDragging] = useState(false);
 	const fileInputRef = useRef<HTMLInputElement>(null);
+
+	// Update images when existingImages prop changes
+	useEffect(() => {
+		const mappedImages = existingImages.map(img => ({
+			id: img.id,
+			fileName: img.fileName,
+			preview: img.url,
+			isPrimary: img.isPrimary,
+			displayOrder: img.displayOrder,
+		}));
+		setImages(mappedImages);
+		onImagesChange(mappedImages.map(img => img.id));
+	}, [existingImages, onImagesChange]);
 
 	const maxSizeBytes = maxSizeMB * 1024 * 1024;
 
