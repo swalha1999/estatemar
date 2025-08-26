@@ -1,11 +1,20 @@
-"use client";
+"use client"
+
 import { useQuery } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
+import { AppSidebar } from "@/components/app-sidebar";
+import { ChartAreaInteractive } from "@/components/chart-area-interactive";
+import { DataTable } from "@/components/data-table";
+import { SectionCards } from "@/components/section-cards";
+import { SiteHeader } from "@/components/site-header";
+import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
 import { authClient } from "@/lib/auth-client";
 import { orpc } from "@/utils/orpc";
 
-export default function Dashboard() {
+import data from "./data.json";
+
+export default function Page() {
 	const router = useRouter();
 	const { data: session, isPending } = authClient.useSession();
 
@@ -15,17 +24,32 @@ export default function Dashboard() {
 		if (!session && !isPending) {
 			router.push("/login");
 		}
-	}, [session, isPending]);
-
-	if (isPending) {
-		return <div>Loading...</div>;
-	}
-
+	}, [session, isPending, router]);
 	return (
-		<div>
-			<h1>Dashboard</h1>
-			<p>Welcome {session?.user.name}</p>
-			<p>privateData: {privateData.data?.message}</p>
-		</div>
+		<SidebarProvider
+			style={
+				{
+					"--sidebar-width": "calc(var(--spacing) * 72)",
+					"--header-height": "calc(var(--spacing) * 12)",
+				} as React.CSSProperties
+			}
+			className="bg-background"
+		>
+			<AppSidebar variant="inset" />
+			<SidebarInset>
+				<SiteHeader />
+				<div className="flex flex-1 flex-col">
+					<div className="@container/main flex flex-1 flex-col gap-2">
+						<div className="flex flex-col gap-4 py-4 md:gap-6 md:py-6">
+							<SectionCards />
+							<div className="px-4 lg:px-6">
+								<ChartAreaInteractive />
+							</div>
+							<DataTable data={data} />
+						</div>
+					</div>
+				</div>
+			</SidebarInset>
+		</SidebarProvider>
 	);
 }
