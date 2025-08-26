@@ -132,7 +132,7 @@ const chartConfig = {
 	},
 	mobile: {
 		label: "Mobile",
-		color: "var(--primary)",
+		color: "var(--secondary)",
 	},
 } satisfies ChartConfig;
 
