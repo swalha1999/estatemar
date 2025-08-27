@@ -6,12 +6,12 @@ import {
 	IconFileAi,
 	IconFileDescription,
 	IconFileWord,
-	IconFolder,
 	IconHelp,
-	IconListDetails,
+	IconHome,
 	IconReport,
 	IconSearch,
 	IconSettings,
+	IconUser,
 	IconUsers,
 } from "@tabler/icons-react";
 import type * as React from "react";
@@ -29,37 +29,33 @@ import {
 	SidebarMenuButton,
 	SidebarMenuItem,
 } from "@/components/ui/sidebar";
+import { authClient } from "@/lib/auth-client";
 
 const data = {
-	user: {
-		name: "shadcn",
-		email: "m@example.com",
-		avatar: "/avatars/shadcn.jpg",
-	},
 	navMain: [
 		{
 			title: "Dashboard",
-			url: "#",
+			url: "/dashboard" as const,
 			icon: IconDashboard,
 		},
 		{
-			title: "Lifecycle",
-			url: "#",
-			icon: IconListDetails,
+			title: "My Properties",
+			url: "/dashboard/properties" as const,
+			icon: IconHome,
+		},
+		{
+			title: "Profile",
+			url: "/dashboard/profile" as const,
+			icon: IconUser,
 		},
 		{
 			title: "Analytics",
-			url: "#",
+			url: "#" as const,
 			icon: IconChartBar,
 		},
 		{
-			title: "Projects",
-			url: "#",
-			icon: IconFolder,
-		},
-		{
 			title: "Team",
-			url: "#",
+			url: "#" as const,
 			icon: IconUsers,
 		},
 	],
@@ -150,6 +146,12 @@ const data = {
 export function DashboardSidebar({
 	...props
 }: React.ComponentProps<typeof Sidebar>) {
+	const { data: session, isPending } = authClient.useSession();
+
+	if (!session || isPending) {
+		return <div>Loading...</div>;
+	}
+
 	return (
 		<Sidebar collapsible="offcanvas" {...props}>
 			<SidebarHeader>
@@ -172,7 +174,11 @@ export function DashboardSidebar({
 				<NavSecondary items={data.navSecondary} className="mt-auto" />
 			</SidebarContent>
 			<SidebarFooter>
-				<NavUser user={data.user} />
+				<NavUser user={{
+					name: session.user.name,
+					email: session.user.email,
+					avatar: session.user.image || "",
+				}} />
 			</SidebarFooter>
 		</Sidebar>
 	);

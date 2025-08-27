@@ -1,5 +1,6 @@
 import { type Icon, IconCirclePlusFilled, IconMail } from "@tabler/icons-react";
-
+import type { RouteType } from "next/dist/lib/load-custom-routes";
+import Link, { type LinkProps } from "next/link";
 import { Button } from "@/components/ui/button";
 import {
 	SidebarGroup,
@@ -14,7 +15,7 @@ export function NavMain({
 }: {
 	items: {
 		title: string;
-		url: string;
+		url: LinkProps<RouteType>["href"];
 		icon?: Icon;
 	}[];
 }) {
@@ -43,10 +44,12 @@ export function NavMain({
 				<SidebarMenu>
 					{items.map((item) => (
 						<SidebarMenuItem key={item.title}>
-							<SidebarMenuButton tooltip={item.title}>
-								{item.icon && <item.icon />}
-								<span>{item.title}</span>
-							</SidebarMenuButton>
+							<Link href={item.url} className="flex w-full">
+								<SidebarMenuButton tooltip={item.title}>
+									{item.icon && <item.icon />}
+									<span>{item.title}</span>
+								</SidebarMenuButton>
+							</Link>
 						</SidebarMenuItem>
 					))}
 				</SidebarMenu>
