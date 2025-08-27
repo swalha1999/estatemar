@@ -174,11 +174,13 @@ export function DashboardSidebar({
 				<NavSecondary items={data.navSecondary} className="mt-auto" />
 			</SidebarContent>
 			<SidebarFooter>
-				<NavUser user={{
-					name: session.user.name,
-					email: session.user.email,
-					avatar: session.user.image || "",
-				}} />
+				<NavUser
+					user={{
+						name: session.user.name,
+						email: session.user.email,
+						avatar: session.user.image || "",
+					}}
+				/>
 			</SidebarFooter>
 		</Sidebar>
 	);

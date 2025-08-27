@@ -138,8 +138,12 @@ export default function ProfilePage() {
 								<h4 className="font-medium">Email Notifications</h4>
 								<div className="space-y-2">
 									<div className="flex items-center space-x-2">
-																			<input type="checkbox" id={emailPropertyId} defaultChecked />
-									<Label htmlFor={emailPropertyId}>New property alerts</Label>
+										<input
+											type="checkbox"
+											id={emailPropertyId}
+											defaultChecked
+										/>
+										<Label htmlFor={emailPropertyId}>New property alerts</Label>
 									</div>
 									<div className="flex items-center space-x-2">
 										<input type="checkbox" id={emailPriceId} defaultChecked />
@@ -157,8 +161,8 @@ export default function ProfilePage() {
 								<h4 className="font-medium">SMS Notifications</h4>
 								<div className="space-y-2">
 									<div className="flex items-center space-x-2">
-																			<input type="checkbox" id={smsUrgentId} />
-									<Label htmlFor={smsUrgentId}>Urgent updates only</Label>
+										<input type="checkbox" id={smsUrgentId} />
+										<Label htmlFor={smsUrgentId}>Urgent updates only</Label>
 									</div>
 									<div className="flex items-center space-x-2">
 										<input type="checkbox" id={smsInquiryId} />

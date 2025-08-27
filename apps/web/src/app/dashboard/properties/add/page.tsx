@@ -25,7 +25,7 @@ import {
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
 import { authClient } from "@/lib/auth-client";
-import { orpc } from "@/utils/orpc";
+import { client, orpc } from "@/utils/orpc";
 
 const amenitiesOptions = [
 	"Ocean View",
@@ -120,18 +120,35 @@ export default function AddPropertyPage() {
 		e.preventDefault();
 		setIsSubmitting(true);
 
-		// Simulate API call
-		await new Promise((resolve) => setTimeout(resolve, 2000));
+		try {
+			// Upload images first
+			const uploadedImages: string[] = [];
+			for (const image of images) {
+				const result = await client.uploadFile({
+					file: image,
+					fileName: `properties/${Date.now()}-${image.name}`,
+				});
 
-		// Here you would normally submit to your API
-		console.log("Property Data:", {
-			...formData,
-			amenities: selectedAmenities,
-			images: images.map((img) => img.name),
-		});
+				if (result.success && result.data) {
+					uploadedImages.push(result.data.objectKey);
+				} else {
+					console.error("Failed to upload image:", result.error);
+				}
+			}
 
-		setIsSubmitting(false);
-		router.push("/dashboard/properties");
+			// Here you would normally submit the property data to your API
+			console.log("Property Data:", {
+				...formData,
+				amenities: selectedAmenities,
+				images: uploadedImages,
+			});
+
+			router.push("/dashboard/properties");
+		} catch (error) {
+			console.error("Error submitting property:", error);
+		} finally {
+			setIsSubmitting(false);
+		}
 	};
 
 	return (

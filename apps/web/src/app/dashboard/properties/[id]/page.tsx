@@ -85,7 +85,9 @@ const mockProperty = {
 	},
 };
 
-const amenityIcons: { [key: string]: React.ComponentType<{ className?: string }> } = {
+const amenityIcons: {
+	[key: string]: React.ComponentType<{ className?: string }>;
+} = {
 	"Ocean View": IconMapPin,
 	"Private Pool": IconSwimming,
 	"Gym/Fitness Center": IconBarbell,
