@@ -1,5 +1,9 @@
 "use client";
 
+import type {
+	PropertyStatus,
+	PropertyType,
+} from "@estatemar/schemas/properties";
 import { IconUpload, IconX } from "@tabler/icons-react";
 import { useQuery } from "@tanstack/react-query";
 import Link from "next/link";
@@ -25,7 +29,7 @@ import {
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
 import { authClient } from "@/lib/auth-client";
-import { orpc } from "@/utils/orpc";
+import { client, orpc } from "@/utils/orpc";
 
 const amenitiesOptions = [
 	"Ocean View",
@@ -46,45 +50,22 @@ const amenitiesOptions = [
 	"Pet Friendly",
 ];
 
-// Mock property data for editing
-const mockProperty = {
-	id: "1",
-	name: "Luxury Villa with Ocean View",
-	price: 2500000,
-	location: "123 Ocean Drive, Miami Beach, FL 33139",
-	status: "For Sale",
-	type: "villa",
-	bedrooms: 5,
-	bathrooms: 4,
-	area: 3500,
-	lotSize: 8000,
-	yearBuilt: 2018,
-	parking: 3,
-	description:
-		"This stunning oceanfront villa offers unparalleled luxury and breathtaking panoramic views of the Atlantic Ocean. Featuring 5 spacious bedrooms, 4 full bathrooms, and an open-concept design that seamlessly blends indoor and outdoor living.",
-	amenities: [
-		"Ocean View",
-		"Private Pool",
-		"Gym/Fitness Center",
-		"Garden/Landscaping",
-		"Security System",
-		"High-Speed Internet",
-		"Garage Parking",
-		"Air Conditioning",
-	],
-	images: [
-		"/property-1-1.jpg",
-		"/property-1-2.jpg",
-		"/property-1-3.jpg",
-		"/property-1-4.jpg",
-	],
-};
-
 export default function EditPropertyPage() {
 	const router = useRouter();
 	const params = useParams();
-	const propertyId = params.id as string;
 	const { data: session, isPending } = authClient.useSession();
+
+	// Ensure propertyId is a valid string
+	let propertyId = Array.isArray(params.id) ? params.id[0] : params.id;
+
+	// Decode URL-encoded property ID if necessary
+	if (propertyId && typeof propertyId === "string") {
+		propertyId = decodeURIComponent(propertyId.trim());
+	}
+
+	console.log("Edit page - params:", params);
+	console.log("Edit page - propertyId:", propertyId);
+	console.log("Edit page - session:", session);
 	const nameId = useId();
 	const priceId = useId();
 	const typeId = useId();
@@ -116,10 +97,23 @@ export default function EditPropertyPage() {
 
 	const [selectedAmenities, setSelectedAmenities] = useState<string[]>([]);
 	const [images, setImages] = useState<File[]>([]);
-	const [existingImages, setExistingImages] = useState<string[]>([]);
+	const [existingImages, setExistingImages] = useState<
+		Array<{ id: string; signedUrl: string }>
+	>([]);
+	const [imagesToRemove, setImagesToRemove] = useState<string[]>([]);
 	const [isSubmitting, setIsSubmitting] = useState(false);
 
-	useQuery(orpc.privateData.queryOptions());
+	console.log("Fetching property with ID:", propertyId);
+
+	const {
+		data: propertyData,
+		isLoading: isPropertyLoading,
+		error: propertyError,
+	} = useQuery({
+		...orpc.getProperty.queryOptions({ input: { id: propertyId || "" } }),
+		enabled: !!propertyId && !!session && !isPending,
+		retry: 1,
+	});
 
 	useEffect(() => {
 		if (!session && !isPending) {
@@ -129,28 +123,85 @@ export default function EditPropertyPage() {
 
 	// Load existing property data
 	useEffect(() => {
-		if (mockProperty) {
+		if (
+			propertyData &&
+			"success" in propertyData &&
+			propertyData.success &&
+			"data" in propertyData &&
+			propertyData.data
+		) {
+			const property = propertyData.data;
+			console.log("Loading property data:", property); // Debug log
 			setFormData({
-				name: mockProperty.name,
-				price: mockProperty.price.toString(),
-				description: mockProperty.description,
-				location: mockProperty.location,
-				type: mockProperty.type,
-				bedrooms: mockProperty.bedrooms.toString(),
-				bathrooms: mockProperty.bathrooms.toString(),
-				area: mockProperty.area.toString(),
-				lotSize: mockProperty.lotSize.toString(),
-				yearBuilt: mockProperty.yearBuilt.toString(),
-				parking: mockProperty.parking.toString(),
-				status: mockProperty.status,
+				name: property.name || "",
+				price: property.price || "",
+				description: property.description || "",
+				location: property.location || "",
+				type: property.type || "",
+				bedrooms: property.bedrooms ? property.bedrooms.toString() : "",
+				bathrooms: property.bathrooms || "",
+				area: property.area ? property.area.toString() : "",
+				lotSize: property.lotSize ? property.lotSize.toString() : "",
+				yearBuilt: property.yearBuilt ? property.yearBuilt.toString() : "",
+				parking: property.parking ? property.parking.toString() : "",
+				status: property.status || "For Sale",
 			});
-			setSelectedAmenities(mockProperty.amenities);
-			setExistingImages(mockProperty.images);
+			setSelectedAmenities(property.amenities || []);
+			setExistingImages(
+				property.images?.map((img: any) => ({
+					id: img.id,
+					signedUrl: img.signedUrl,
+				})) || [],
+			);
+			console.log("Form data set:", {
+				name: property.name || "",
+				price: property.price || "",
+				description: property.description || "",
+				location: property.location || "",
+				type: property.type || "",
+				bedrooms: property.bedrooms ? property.bedrooms.toString() : "",
+				bathrooms: property.bathrooms || "",
+				area: property.area ? property.area.toString() : "",
+				lotSize: property.lotSize ? property.lotSize.toString() : "",
+				yearBuilt: property.yearBuilt ? property.yearBuilt.toString() : "",
+				parking: property.parking ? property.parking.toString() : "",
+				status: property.status || "For Sale",
+			});
 		}
-	}, []);
+	}, [propertyData]);
 
-	if (!session || isPending) {
+	// Early return validations
+	if (!propertyId || typeof propertyId !== "string") {
+		return <div>Error: Invalid property ID</div>;
+	}
+
+	if (!session || isPending || isPropertyLoading) {
 		return <div>Loading...</div>;
+	}
+
+	if (propertyError) {
+		console.error("Property error:", propertyError);
+		return (
+			<div className="p-6">
+				<h1 className="mb-4 font-bold text-xl">Error loading property</h1>
+				<div className="rounded border border-red-200 bg-red-50 p-4">
+					<p className="text-red-800">{propertyError.message}</p>
+					<p className="mt-2 text-red-600 text-sm">Property ID: {propertyId}</p>
+				</div>
+			</div>
+		);
+	}
+
+	if (propertyData && "success" in propertyData && !propertyData.success) {
+		return (
+			<div>
+				Error: {"error" in propertyData ? propertyData.error : "Unknown error"}
+			</div>
+		);
+	}
+
+	if (!propertyData || !("data" in propertyData) || !propertyData.data) {
+		return <div>No property data found</div>;
 	}
 
 	const handleInputChange = (field: string, value: string) => {
@@ -176,6 +227,8 @@ export default function EditPropertyPage() {
 	};
 
 	const removeExistingImage = (index: number) => {
+		const imageToRemove = existingImages[index];
+		setImagesToRemove((prev) => [...prev, imageToRemove.id]);
 		setExistingImages((prev) => prev.filter((_, i) => i !== index));
 	};
 
@@ -183,19 +236,82 @@ export default function EditPropertyPage() {
 		e.preventDefault();
 		setIsSubmitting(true);
 
-		// Simulate API call
-		await new Promise((resolve) => setTimeout(resolve, 2000));
+		try {
+			if (!propertyId) {
+				throw new Error("Property ID is required");
+			}
 
-		// Here you would normally submit to your API
-		console.log("Updated Property Data:", {
-			...formData,
-			amenities: selectedAmenities,
-			existingImages,
-			newImages: images.map((img) => img.name),
-		});
+			// Update property details
+			const updateResult = await client.updateProperty({
+				id: propertyId,
+				name: formData.name,
+				description: formData.description,
+				location: formData.location,
+				price: Number.parseFloat(formData.price),
+				type: formData.type as PropertyType,
+				status: formData.status as PropertyStatus,
+				bedrooms: formData.bedrooms
+					? Number.parseInt(formData.bedrooms)
+					: undefined,
+				bathrooms: formData.bathrooms
+					? Number.parseFloat(formData.bathrooms)
+					: undefined,
+				area: formData.area ? Number.parseInt(formData.area) : undefined,
+				lotSize: formData.lotSize
+					? Number.parseInt(formData.lotSize)
+					: undefined,
+				yearBuilt: formData.yearBuilt
+					? Number.parseInt(formData.yearBuilt)
+					: undefined,
+				parking: formData.parking
+					? Number.parseInt(formData.parking)
+					: undefined,
+			});
 
-		setIsSubmitting(false);
-		router.push(`/dashboard/properties/${propertyId}`);
+			if (!updateResult.success || !updateResult.data) {
+				throw new Error(updateResult.error || "Failed to update property");
+			}
+
+			// Remove images that were marked for deletion
+			for (const imageId of imagesToRemove) {
+				await client.removePropertyImage({
+					imageId,
+				});
+			}
+
+			// Upload new images and associate them with the property
+			for (let i = 0; i < images.length; i++) {
+				const image = images[i];
+				const uploadResult = await client.uploadFile({
+					file: image,
+					fileName: `properties/${propertyId}/${Date.now()}-${image.name}`,
+				});
+
+				if (uploadResult.success && uploadResult.data) {
+					// Add the image to the property
+					await client.addPropertyImage({
+						propertyId,
+						objectKey: uploadResult.data.objectKey,
+						fileName: image.name,
+						mimeType: image.type || "application/octet-stream",
+						fileSize: image.size,
+						isPrimary: i === 0 && existingImages.length === 0, // First new image is primary if no existing images
+						sortOrder: existingImages.length + i,
+					});
+				}
+			}
+
+			// Update amenities (remove all existing and add new ones)
+			// First, we would need to get existing amenities and remove them
+			// For now, we'll just add the new ones (assuming the backend handles duplicates)
+
+			router.push(`/dashboard/properties/${propertyId}`);
+		} catch (error) {
+			console.error("Error updating property:", error);
+			// You might want to show an error toast here
+		} finally {
+			setIsSubmitting(false);
+		}
 	};
 
 	return (
@@ -206,6 +322,11 @@ export default function EditPropertyPage() {
 					<p className="text-muted-foreground">
 						Update your property listing details
 					</p>
+					{/* Debug info */}
+					<div className="mt-2 text-muted-foreground text-xs">
+						Debug: name={formData.name}, price={formData.price}, type=
+						{formData.type}
+					</div>
 				</div>
 				<Link href={`/dashboard/properties/${propertyId}`}>
 					<Button variant="outline">Cancel</Button>
@@ -248,6 +369,7 @@ export default function EditPropertyPage() {
 							<div className="space-y-2">
 								<Label htmlFor={typeId}>Property Type *</Label>
 								<Select
+									key={`type-${formData.type}`}
 									value={formData.type}
 									onValueChange={(value) => handleInputChange("type", value)}
 								>
@@ -375,6 +497,7 @@ export default function EditPropertyPage() {
 						<div className="space-y-2">
 							<Label htmlFor={statusId}>Listing Status</Label>
 							<Select
+								key={`status-${formData.status}`}
 								value={formData.status}
 								onValueChange={(value) => handleInputChange("status", value)}
 							>
@@ -404,24 +527,27 @@ export default function EditPropertyPage() {
 							<div>
 								<h4 className="mb-2 font-medium">Current Images</h4>
 								<div className="grid grid-cols-2 gap-4 md:grid-cols-4">
-									{existingImages.map((image) => (
-										<div key={image} className="relative">
-											<div className="flex aspect-video items-center justify-center rounded-lg bg-muted">
-												<span className="text-muted-foreground text-sm">
-													Current Image
-												</span>
+									{existingImages.map((image, index) => (
+										<div key={image.id} className="group relative">
+											<div className="aspect-video overflow-hidden rounded-lg bg-muted">
+												<img
+													src={image.signedUrl}
+													alt={`Current image ${index + 1}`}
+													className="h-full w-full object-cover transition-transform group-hover:scale-105"
+												/>
 											</div>
 											<Button
 												type="button"
 												variant="destructive"
 												size="sm"
-												className="-top-2 -right-2 absolute h-6 w-6 p-0"
-												onClick={() =>
-													removeExistingImage(existingImages.indexOf(image))
-												}
+												className="-top-2 -right-2 absolute h-6 w-6 p-0 opacity-0 transition-opacity group-hover:opacity-100"
+												onClick={() => removeExistingImage(index)}
 											>
 												<IconX className="h-4 w-4" />
 											</Button>
+											<div className="absolute right-0 bottom-0 left-0 truncate bg-black/50 p-1 text-white text-xs opacity-0 transition-opacity group-hover:opacity-100">
+												Image {index + 1}
+											</div>
 										</div>
 									))}
 								</div>
@@ -454,22 +580,27 @@ export default function EditPropertyPage() {
 							<div>
 								<h4 className="mb-2 font-medium">New Images</h4>
 								<div className="grid grid-cols-2 gap-4 md:grid-cols-4">
-									{images.map((image) => (
-										<div key={image.name} className="relative">
-											<div className="flex aspect-video items-center justify-center rounded-lg bg-muted">
-												<span className="text-muted-foreground text-sm">
-													{image.name}
-												</span>
+									{images.map((image, index) => (
+										<div key={image.name} className="group relative">
+											<div className="aspect-video overflow-hidden rounded-lg bg-muted">
+												<img
+													src={URL.createObjectURL(image)}
+													alt={image.name}
+													className="h-full w-full object-cover transition-transform group-hover:scale-105"
+												/>
 											</div>
 											<Button
 												type="button"
 												variant="destructive"
 												size="sm"
-												className="-top-2 -right-2 absolute h-6 w-6 p-0"
-												onClick={() => removeImage(images.indexOf(image))}
+												className="-top-2 -right-2 absolute h-6 w-6 p-0 opacity-0 transition-opacity group-hover:opacity-100"
+												onClick={() => removeImage(index)}
 											>
 												<IconX className="h-4 w-4" />
 											</Button>
+											<div className="absolute right-0 bottom-0 left-0 truncate bg-black/50 p-1 text-white text-xs opacity-0 transition-opacity group-hover:opacity-100">
+												{image.name}
+											</div>
 										</div>
 									))}
 								</div>

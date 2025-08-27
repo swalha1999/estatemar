@@ -1,20 +1,10 @@
-import { z } from "zod";
+import {
+	deleteFileSchema,
+	getSignedUrlSchema,
+	uploadFileSchema,
+} from "@estatemar/schemas/files";
 import { protectedProcedure } from "../lib/orpc";
 import { bucket } from "../lib/r2";
-
-const uploadFileSchema = z.object({
-	file: z.instanceof(File),
-	fileName: z.string().optional(),
-});
-
-const getSignedUrlSchema = z.object({
-	fileName: z.string(),
-	expiresIn: z.number().default(3600), // 1 hour default
-});
-
-const deleteFileSchema = z.object({
-	fileName: z.string(),
-});
 
 export const filesRouter = {
 	uploadFile: protectedProcedure
@@ -35,12 +25,18 @@ export const filesRouter = {
 					file.type,
 				);
 
+				// Generate signed URL for the uploaded file
+				const signedUrl = await bucket.getObjectSignedUrl(
+					result.objectKey,
+					3600,
+				); // 1 hour
+
 				return {
 					success: true,
 					data: {
 						objectKey: result.objectKey,
 						uri: result.uri,
-						publicUrl: result.publicUrl,
+						signedUrl,
 						etag: result.etag,
 						versionId: result.versionId,
 					},

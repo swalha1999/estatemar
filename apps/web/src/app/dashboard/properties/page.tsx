@@ -23,63 +23,7 @@ import {
 	SelectValue,
 } from "@/components/ui/select";
 import { authClient } from "@/lib/auth-client";
-import { orpc } from "@/utils/orpc";
-
-// Mock data for properties
-const mockProperties = [
-	{
-		id: "1",
-		name: "Luxury Villa with Ocean View",
-		price: 2500000,
-		location: "Miami Beach, FL",
-		status: "For Sale",
-		type: "Villa",
-		bedrooms: 5,
-		bathrooms: 4,
-		area: 3500,
-		images: ["/property-1.jpg"],
-		description: "Stunning oceanfront villa with panoramic views...",
-	},
-	{
-		id: "2",
-		name: "Modern Downtown Apartment",
-		price: 850000,
-		location: "Downtown, Miami",
-		status: "Sold",
-		type: "Apartment",
-		bedrooms: 2,
-		bathrooms: 2,
-		area: 1200,
-		images: ["/property-2.jpg"],
-		description: "Contemporary apartment in the heart of the city...",
-	},
-	{
-		id: "3",
-		name: "Family Home with Garden",
-		price: 675000,
-		location: "Coral Gables, FL",
-		status: "For Sale",
-		type: "House",
-		bedrooms: 4,
-		bathrooms: 3,
-		area: 2800,
-		images: ["/property-3.jpg"],
-		description: "Beautiful family home with spacious garden...",
-	},
-	{
-		id: "4",
-		name: "Beachside Condo",
-		price: 1200000,
-		location: "South Beach, FL",
-		status: "Pending",
-		type: "Condo",
-		bedrooms: 3,
-		bathrooms: 2,
-		area: 1800,
-		images: ["/property-4.jpg"],
-		description: "Luxury beachside condominium with resort amenities...",
-	},
-];
+import { client, orpc } from "@/utils/orpc";
 
 export default function PropertiesPage() {
 	const router = useRouter();
@@ -89,6 +33,10 @@ export default function PropertiesPage() {
 	const [typeFilter, setTypeFilter] = useState("all");
 	const searchId = useId();
 
+	const { data: propertiesData, isLoading: propertiesLoading } = useQuery(
+		orpc.getUserProperties.queryOptions({ input: { limit: 10, offset: 0 } }),
+	);
+
 	useQuery(orpc.privateData.queryOptions());
 
 	useEffect(() => {
@@ -97,11 +45,17 @@ export default function PropertiesPage() {
 		}
 	}, [session, isPending, router]);
 
-	if (!session || isPending) {
+	if (!session || isPending || propertiesLoading) {
 		return <div>Loading...</div>;
 	}
 
-	const filteredProperties = mockProperties.filter((property) => {
+	const properties = propertiesData?.success ? propertiesData.data : [];
+
+	if (!properties) {
+		return <div>No properties found</div>;
+	}
+
+	const filteredProperties = properties.filter((property) => {
 		const matchesSearch =
 			property.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
 			property.location.toLowerCase().includes(searchTerm.toLowerCase());
@@ -150,7 +104,7 @@ export default function PropertiesPage() {
 						</CardTitle>
 					</CardHeader>
 					<CardContent>
-						<div className="font-bold text-2xl">{mockProperties.length}</div>
+						<div className="font-bold text-2xl">{properties.length}</div>
 					</CardContent>
 				</Card>
 				<Card>
@@ -159,7 +113,7 @@ export default function PropertiesPage() {
 					</CardHeader>
 					<CardContent>
 						<div className="font-bold text-2xl text-green-600">
-							{mockProperties.filter((p) => p.status === "For Sale").length}
+							{properties.filter((p) => p.status === "For Sale").length}
 						</div>
 					</CardContent>
 				</Card>
@@ -169,7 +123,7 @@ export default function PropertiesPage() {
 					</CardHeader>
 					<CardContent>
 						<div className="font-bold text-2xl text-blue-600">
-							{mockProperties.filter((p) => p.status === "Sold").length}
+							{properties.filter((p) => p.status === "Sold").length}
 						</div>
 					</CardContent>
 				</Card>
@@ -180,8 +134,8 @@ export default function PropertiesPage() {
 					<CardContent>
 						<div className="font-bold text-2xl">
 							$
-							{mockProperties
-								.reduce((sum, p) => sum + p.price, 0)
+							{properties
+								.reduce((sum, p) => sum + Number(p.price), 0)
 								.toLocaleString()}
 						</div>
 					</CardContent>
@@ -244,10 +198,20 @@ export default function PropertiesPage() {
 						key={property.id}
 						className="overflow-hidden transition-shadow hover:shadow-lg"
 					>
-						<div className="relative aspect-video bg-muted">
-							<div className="absolute inset-0 flex items-center justify-center text-muted-foreground">
-								Property Image
-							</div>
+						<div className="relative aspect-video overflow-hidden rounded-t-lg bg-muted">
+							{property.images &&
+							property.images.length > 0 &&
+							property.images[0].signedUrl ? (
+								<img
+									src={property.images[0].signedUrl}
+									alt={property.name}
+									className="h-full w-full object-cover transition-transform hover:scale-105"
+								/>
+							) : (
+								<div className="absolute inset-0 flex items-center justify-center text-muted-foreground">
+									No Image
+								</div>
+							)}
 						</div>
 						<CardHeader>
 							<div className="flex items-start justify-between">
@@ -264,12 +228,12 @@ export default function PropertiesPage() {
 						</CardHeader>
 						<CardContent className="space-y-4">
 							<div className="font-bold text-2xl text-primary">
-								${property.price.toLocaleString()}
+								${Number(property.price).toLocaleString()}
 							</div>
 							<div className="flex justify-between text-muted-foreground text-sm">
-								<span>{property.bedrooms} bed</span>
-								<span>{property.bathrooms} bath</span>
-								<span>{property.area.toLocaleString()} sqft</span>
+								<span>{property.bedrooms || 0} bed</span>
+								<span>{property.bathrooms || 0} bath</span>
+								<span>{property.area?.toLocaleString() || 0} sqft</span>
 							</div>
 							<p className="line-clamp-2 text-muted-foreground text-sm">
 								{property.description}

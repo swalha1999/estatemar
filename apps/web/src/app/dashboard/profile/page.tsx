@@ -1,6 +1,5 @@
 "use client";
 
-import { useQuery } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 import { useEffect, useId } from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -17,7 +16,6 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 
 import { authClient } from "@/lib/auth-client";
-import { orpc } from "@/utils/orpc";
 
 export default function ProfilePage() {
 	const router = useRouter();
@@ -33,8 +31,6 @@ export default function ProfilePage() {
 	const emailInquiryId = useId();
 	const smsUrgentId = useId();
 	const smsInquiryId = useId();
-
-	useQuery(orpc.privateData.queryOptions());
 
 	useEffect(() => {
 		if (!session && !isPending) {

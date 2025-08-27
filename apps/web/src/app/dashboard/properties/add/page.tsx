@@ -46,6 +46,15 @@ const amenitiesOptions = [
 	"Pet Friendly",
 ];
 
+type PropertyType =
+	| "villa"
+	| "apartment"
+	| "house"
+	| "condo"
+	| "townhouse"
+	| "commercial";
+type PropertyStatus = "For Sale" | "For Rent" | "Pending" | "Sold";
+
 export default function AddPropertyPage() {
 	const router = useRouter();
 	const { data: session, isPending } = authClient.useSession();
@@ -68,14 +77,14 @@ export default function AddPropertyPage() {
 		price: "",
 		description: "",
 		location: "",
-		type: "",
+		type: "" as PropertyType | "",
 		bedrooms: "",
 		bathrooms: "",
 		area: "",
 		lotSize: "",
 		yearBuilt: "",
 		parking: "",
-		status: "For Sale",
+		status: "For Sale" as PropertyStatus,
 	});
 
 	const [selectedAmenities, setSelectedAmenities] = useState<string[]>([]);
@@ -121,31 +130,77 @@ export default function AddPropertyPage() {
 		setIsSubmitting(true);
 
 		try {
-			// Upload images first
-			const uploadedImages: string[] = [];
-			for (const image of images) {
-				const result = await client.uploadFile({
+			// Validate required fields
+			if (!formData.type) {
+				throw new Error("Property type is required");
+			}
+
+			// Create the property first
+			const propertyResult = await client.createProperty({
+				name: formData.name,
+				description: formData.description,
+				location: formData.location,
+				price: Number.parseFloat(formData.price),
+				type: formData.type as PropertyType,
+				status: formData.status,
+				bedrooms: formData.bedrooms
+					? Number.parseInt(formData.bedrooms)
+					: undefined,
+				bathrooms: formData.bathrooms
+					? Number.parseFloat(formData.bathrooms)
+					: undefined,
+				area: formData.area ? Number.parseInt(formData.area) : undefined,
+				lotSize: formData.lotSize
+					? Number.parseInt(formData.lotSize)
+					: undefined,
+				yearBuilt: formData.yearBuilt
+					? Number.parseInt(formData.yearBuilt)
+					: undefined,
+				parking: formData.parking
+					? Number.parseInt(formData.parking)
+					: undefined,
+			});
+
+			if (!propertyResult.success || !propertyResult.data) {
+				throw new Error(propertyResult.error || "Failed to create property");
+			}
+
+			const propertyId = propertyResult.data.id;
+
+			// Upload images and associate them with the property
+			for (let i = 0; i < images.length; i++) {
+				const image = images[i];
+				const uploadResult = await client.uploadFile({
 					file: image,
-					fileName: `properties/${Date.now()}-${image.name}`,
+					fileName: `properties/${propertyId}/${Date.now()}-${image.name}`,
 				});
 
-				if (result.success && result.data) {
-					uploadedImages.push(result.data.objectKey);
-				} else {
-					console.error("Failed to upload image:", result.error);
+				if (uploadResult.success && uploadResult.data) {
+					// Add the image to the property
+					await client.addPropertyImage({
+						propertyId,
+						objectKey: uploadResult.data.objectKey,
+						fileName: image.name,
+						mimeType: image.type || "application/octet-stream",
+						fileSize: image.size,
+						isPrimary: i === 0, // First image is primary
+						sortOrder: i,
+					});
 				}
 			}
 
-			// Here you would normally submit the property data to your API
-			console.log("Property Data:", {
-				...formData,
-				amenities: selectedAmenities,
-				images: uploadedImages,
-			});
+			// Add amenities to the property
+			for (const amenity of selectedAmenities) {
+				await client.addPropertyAmenity({
+					propertyId,
+					name: amenity,
+				});
+			}
 
 			router.push("/dashboard/properties");
 		} catch (error) {
 			console.error("Error submitting property:", error);
+			// You might want to show an error toast here
 		} finally {
 			setIsSubmitting(false);
 		}
@@ -203,6 +258,7 @@ export default function AddPropertyPage() {
 								<Select
 									value={formData.type}
 									onValueChange={(value) => handleInputChange("type", value)}
+									required
 								>
 									<SelectTrigger>
 										<SelectValue placeholder="Select property type" />
@@ -376,22 +432,27 @@ export default function AddPropertyPage() {
 
 						{images.length > 0 && (
 							<div className="grid grid-cols-2 gap-4 md:grid-cols-4">
-								{images.map((image) => (
-									<div key={image.name} className="relative">
-										<div className="flex aspect-video items-center justify-center rounded-lg bg-muted">
-											<span className="text-muted-foreground text-sm">
-												{image.name}
-											</span>
+								{images.map((image, index) => (
+									<div key={image.name} className="group relative">
+										<div className="aspect-video overflow-hidden rounded-lg bg-muted">
+											<img
+												src={URL.createObjectURL(image)}
+												alt={image.name}
+												className="h-full w-full object-cover transition-transform group-hover:scale-105"
+											/>
 										</div>
 										<Button
 											type="button"
 											variant="destructive"
 											size="sm"
-											className="-top-2 -right-2 absolute h-6 w-6 p-0"
-											onClick={() => removeImage(images.indexOf(image))}
+											className="-top-2 -right-2 absolute h-6 w-6 p-0 opacity-0 transition-opacity group-hover:opacity-100"
+											onClick={() => removeImage(index)}
 										>
 											<IconX className="h-4 w-4" />
 										</Button>
+										<div className="absolute right-0 bottom-0 left-0 truncate bg-black/50 p-1 text-white text-xs opacity-0 transition-opacity group-hover:opacity-100">
+											{image.name}
+										</div>
 									</div>
 								))}
 							</div>

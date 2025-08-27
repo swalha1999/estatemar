@@ -9,13 +9,14 @@ interface FileUploadProps {
 	files: File[];
 	onFilesChange: (files: File[]) => void;
 	onUploadSuccess?: (
-		uploadedFiles: Array<{ objectKey: string; publicUrl: string | null }>,
+		uploadedFiles: Array<{ objectKey: string; signedUrl: string }>,
 	) => void;
 	onUploadError?: (error: string) => void;
 	accept?: string;
 	multiple?: boolean;
 	maxSize?: number; // in MB
 	className?: string;
+	showPreview?: boolean;
 }
 
 export function FileUpload({
@@ -27,6 +28,7 @@ export function FileUpload({
 	multiple = true,
 	maxSize = 10,
 	className = "",
+	showPreview = true,
 }: FileUploadProps) {
 	const uploadId = useId();
 
@@ -54,7 +56,7 @@ export function FileUpload({
 	const uploadFiles = async () => {
 		const uploadedFiles: Array<{
 			objectKey: string;
-			publicUrl: string | null;
+			signedUrl: string;
 		}> = [];
 
 		for (const file of files) {
@@ -67,7 +69,7 @@ export function FileUpload({
 				if (result.success && result.data) {
 					uploadedFiles.push({
 						objectKey: result.data.objectKey,
-						publicUrl: result.data.publicUrl,
+						signedUrl: result.data.signedUrl,
 					});
 				} else {
 					onUploadError?.(`Failed to upload ${file.name}: ${result.error}`);
@@ -121,27 +123,36 @@ export function FileUpload({
 							Upload All
 						</Button>
 					</div>
-					<div className="grid grid-cols-1 gap-2 md:grid-cols-2">
+					<div className="grid grid-cols-2 gap-4 md:grid-cols-4">
 						{files.map((file, index) => (
-							<div
-								key={file.name}
-								className="flex items-center justify-between rounded-lg border p-2"
-							>
-								<div className="min-w-0 flex-1">
-									<p className="truncate font-medium text-sm">{file.name}</p>
-									<p className="text-muted-foreground text-xs">
-										{(file.size / 1024 / 1024).toFixed(2)} MB
-									</p>
-								</div>
+							<div key={file.name} className="group relative">
+								{showPreview && file.type.startsWith("image/") ? (
+									<div className="aspect-video overflow-hidden rounded-lg bg-muted">
+										<img
+											src={URL.createObjectURL(file)}
+											alt={file.name}
+											className="h-full w-full object-cover transition-transform group-hover:scale-105"
+										/>
+									</div>
+								) : (
+									<div className="flex aspect-video items-center justify-center rounded-lg bg-muted">
+										<span className="px-2 text-center text-muted-foreground text-sm">
+											{file.name}
+										</span>
+									</div>
+								)}
 								<Button
 									type="button"
-									variant="ghost"
+									variant="destructive"
 									size="sm"
-									className="h-8 w-8 p-0"
+									className="-top-2 -right-2 absolute h-6 w-6 p-0 opacity-0 transition-opacity group-hover:opacity-100"
 									onClick={() => removeFile(index)}
 								>
 									<IconX className="h-4 w-4" />
 								</Button>
+								<div className="absolute right-0 bottom-0 left-0 truncate bg-black/50 p-1 text-white text-xs opacity-0 transition-opacity group-hover:opacity-100">
+									{file.name} ({(file.size / 1024 / 1024).toFixed(2)} MB)
+								</div>
 							</div>
 						))}
 					</div>

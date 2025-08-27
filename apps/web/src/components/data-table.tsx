@@ -17,6 +17,7 @@ import {
 	verticalListSortingStrategy,
 } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
+import { dataTableItemSchema } from "@estatemar/schemas/common";
 import {
 	IconChevronDown,
 	IconChevronLeft,
@@ -49,7 +50,7 @@ import {
 import * as React from "react";
 import { Area, AreaChart, CartesianGrid, XAxis } from "recharts";
 import { toast } from "sonner";
-import { z } from "zod";
+import type { z } from "zod";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
@@ -98,15 +99,7 @@ import {
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useIsMobile } from "@/hooks/use-mobile";
 
-export const schema = z.object({
-	id: z.number(),
-	header: z.string(),
-	type: z.string(),
-	status: z.string(),
-	target: z.string(),
-	limit: z.string(),
-	reviewer: z.string(),
-});
+export const schema = dataTableItemSchema;
 
 // Create a separate component for the drag handle
 function DragHandle({ id }: { id: number }) {
@@ -128,7 +121,7 @@ function DragHandle({ id }: { id: number }) {
 	);
 }
 
-const columns: ColumnDef<z.infer<typeof schema>>[] = [
+const columns: ColumnDef<z.infer<typeof dataTableItemSchema>>[] = [
 	{
 		id: "drag",
 		header: () => null,
@@ -303,7 +296,11 @@ const columns: ColumnDef<z.infer<typeof schema>>[] = [
 	},
 ];
 
-function DraggableRow({ row }: { row: Row<z.infer<typeof schema>> }) {
+function DraggableRow({
+	row,
+}: {
+	row: Row<z.infer<typeof dataTableItemSchema>>;
+}) {
 	const { transform, transition, setNodeRef, isDragging } = useSortable({
 		id: row.original.id,
 	});
@@ -331,7 +328,7 @@ function DraggableRow({ row }: { row: Row<z.infer<typeof schema>> }) {
 export function DataTable({
 	data: initialData,
 }: {
-	data: z.infer<typeof schema>[];
+	data: z.infer<typeof dataTableItemSchema>[];
 }) {
 	const viewSelectorId = React.useId();
 	const rowsPerPageId = React.useId();
@@ -641,7 +638,11 @@ const chartConfig = {
 	},
 } satisfies ChartConfig;
 
-function TableCellViewer({ item }: { item: z.infer<typeof schema> }) {
+function TableCellViewer({
+	item,
+}: {
+	item: z.infer<typeof dataTableItemSchema>;
+}) {
 	const isMobile = useIsMobile();
 	const headerId = React.useId();
 	const typeId = React.useId();

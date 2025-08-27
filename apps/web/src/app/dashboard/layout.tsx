@@ -1,19 +1,15 @@
 "use client";
 
-import { useQuery } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import { DashboardSidebar } from "@/components/dashboard-sidebar";
 import { SiteHeader } from "@/components/site-header";
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
 import { authClient } from "@/lib/auth-client";
-import { orpc } from "@/utils/orpc";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
 	const router = useRouter();
 	const { data: session, isPending } = authClient.useSession();
-
-	const privateData = useQuery(orpc.privateData.queryOptions());
 
 	useEffect(() => {
 		if (!session && !isPending) {
