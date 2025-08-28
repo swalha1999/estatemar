@@ -18,7 +18,8 @@
 		"web#build": {
 			"dependsOn": ["server#build"],
 			"inputs": ["$TURBO_DEFAULT$", ".env*"],
-			"outputs": [".next/**"]
+			"outputs": [".next/**"],
+			"env": ["NEXT_PUBLIC_SERVER_URL"]
 		},
 		"lint": {
 			"dependsOn": ["^lint"]
