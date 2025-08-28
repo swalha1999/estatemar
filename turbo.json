@@ -7,6 +7,11 @@
 			"inputs": ["$TURBO_DEFAULT$", ".env*"],
 			"outputs": ["dist/**", "lib/**", ".next/**"]
 		},
+		"start": {
+			"dependsOn": ["^start"],
+			"inputs": ["$TURBO_DEFAULT$", ".env*"],
+			"outputs": ["dist/**", "lib/**", ".next/**"]
+		},
 		"web#build": {
 			"dependsOn": ["server#build"],
 			"inputs": ["$TURBO_DEFAULT$", ".env*"],
