@@ -1,4 +1,4 @@
-import { z } from "zod";
+import type { z } from "zod";
 export declare const propertyTypeEnum: z.ZodEnum<{
     villa: "villa";
     apartment: "apartment";

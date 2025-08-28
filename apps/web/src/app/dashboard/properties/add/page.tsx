@@ -2,6 +2,7 @@
 
 import { IconUpload, IconX } from "@tabler/icons-react";
 import { useQuery } from "@tanstack/react-query";
+import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useId, useState } from "react";
@@ -435,11 +436,12 @@ export default function AddPropertyPage() {
 								{images.map((image, index) => (
 									<div key={image.name} className="group relative">
 										<div className="aspect-video overflow-hidden rounded-lg bg-muted">
-											<img
-												src={URL.createObjectURL(image)}
-												alt={image.name}
-												className="h-full w-full object-cover transition-transform group-hover:scale-105"
-											/>
+																				<Image
+										src={URL.createObjectURL(image)}
+										alt={image.name}
+										fill
+										className="object-cover transition-transform group-hover:scale-105"
+									/>
 										</div>
 										<Button
 											type="button"

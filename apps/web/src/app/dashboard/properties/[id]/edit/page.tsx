@@ -6,6 +6,7 @@ import type {
 } from "@estatemar/schemas/properties";
 import { IconUpload, IconX } from "@tabler/icons-react";
 import { useQuery } from "@tanstack/react-query";
+import Image from "next/image";
 import Link from "next/link";
 import { useParams, useRouter } from "next/navigation";
 import { useEffect, useId, useState } from "react";
@@ -148,7 +149,7 @@ export default function EditPropertyPage() {
 			});
 			setSelectedAmenities(property.amenities || []);
 			setExistingImages(
-				property.images?.map((img: any) => ({
+				property.images?.map((img: { id: string; signedUrl: string }) => ({
 					id: img.id,
 					signedUrl: img.signedUrl,
 				})) || [],
@@ -530,11 +531,12 @@ export default function EditPropertyPage() {
 									{existingImages.map((image, index) => (
 										<div key={image.id} className="group relative">
 											<div className="aspect-video overflow-hidden rounded-lg bg-muted">
-												<img
-													src={image.signedUrl}
-													alt={`Current image ${index + 1}`}
-													className="h-full w-full object-cover transition-transform group-hover:scale-105"
-												/>
+																					<Image
+										src={image.signedUrl}
+										alt={`Property view ${index + 1}`}
+										fill
+										className="object-cover transition-transform group-hover:scale-105"
+									/>
 											</div>
 											<Button
 												type="button"
@@ -583,11 +585,12 @@ export default function EditPropertyPage() {
 									{images.map((image, index) => (
 										<div key={image.name} className="group relative">
 											<div className="aspect-video overflow-hidden rounded-lg bg-muted">
-												<img
-													src={URL.createObjectURL(image)}
-													alt={image.name}
-													className="h-full w-full object-cover transition-transform group-hover:scale-105"
-												/>
+																					<Image
+										src={URL.createObjectURL(image)}
+										alt={image.name}
+										fill
+										className="object-cover transition-transform group-hover:scale-105"
+									/>
 											</div>
 											<Button
 												type="button"

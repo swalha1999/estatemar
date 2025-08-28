@@ -13,6 +13,7 @@ import {
 	IconWifi,
 } from "@tabler/icons-react";
 import { useQuery } from "@tanstack/react-query";
+import Image from "next/image";
 import Link from "next/link";
 import { useParams, useRouter } from "next/navigation";
 import { useEffect } from "react";
@@ -166,11 +167,12 @@ export default function PropertyDetailsPage() {
 									key={image.id}
 									className="group relative aspect-video overflow-hidden rounded-lg bg-muted"
 								>
-									<img
-										src={image.signedUrl}
-										alt={property.name}
-										className="h-full w-full object-cover transition-transform group-hover:scale-105"
-									/>
+																	<Image
+									src={image.signedUrl}
+									alt={property.name}
+									fill
+									className="object-cover transition-transform group-hover:scale-105"
+								/>
 								</div>
 							))}
 						</div>

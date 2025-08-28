@@ -1,6 +1,7 @@
 "use client";
 
 import { useQuery } from "@tanstack/react-query";
+import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useId, useState } from "react";
@@ -23,7 +24,7 @@ import {
 	SelectValue,
 } from "@/components/ui/select";
 import { authClient } from "@/lib/auth-client";
-import { client, orpc } from "@/utils/orpc";
+import { orpc } from "@/utils/orpc";
 
 export default function PropertiesPage() {
 	const router = useRouter();
@@ -202,11 +203,12 @@ export default function PropertiesPage() {
 							{property.images &&
 							property.images.length > 0 &&
 							property.images[0].signedUrl ? (
-								<img
-									src={property.images[0].signedUrl}
-									alt={property.name}
-									className="h-full w-full object-cover transition-transform hover:scale-105"
-								/>
+															<Image
+								src={property.images[0].signedUrl}
+								alt={property.name}
+								fill
+								className="object-cover transition-transform hover:scale-105"
+							/>
 							) : (
 								<div className="absolute inset-0 flex items-center justify-center text-muted-foreground">
 									No Image

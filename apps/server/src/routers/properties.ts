@@ -61,7 +61,7 @@ export const propertiesRouter = {
 
 	addPropertyImage: protectedProcedure
 		.input(addPropertyImageSchema)
-		.handler(async ({ input, context }) => {
+		.handler(async ({ input }) => {
 			try {
 				const imageId = crypto.randomUUID();
 
@@ -153,7 +153,7 @@ export const propertiesRouter = {
 				}
 
 				// Prepare update data
-				const updateValues: any = {
+				const updateValues: Record<string, unknown> = {
 					updatedAt: new Date(),
 				};
 
