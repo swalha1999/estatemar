@@ -9,6 +9,7 @@ import { appRouter } from "./routers/index";
 
 const app = new Hono();
 
+
 app.use(logger());
 app.use(
 	"/*",
