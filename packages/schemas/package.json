@@ -37,6 +37,7 @@
 		}
 	},
 	"dependencies": {
+		"@web-std/file": "^3.0.3",
 		"zod": "^4.0.2"
 	},
 	"devDependencies": {

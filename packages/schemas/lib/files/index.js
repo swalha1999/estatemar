@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { File } from "@web-std/file";
 // Upload file schema
 export const uploadFileSchema = z.object({
     file: z.instanceof(File),
