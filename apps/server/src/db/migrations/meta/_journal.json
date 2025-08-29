@@ -5,22 +5,8 @@
     {
       "idx": 0,
       "version": "7",
-      "when": 1756207548911,
-      "tag": "0000_mixed_grim_reaper",
-      "breakpoints": true
-    },
-    {
-      "idx": 1,
-      "version": "7",
-      "when": 1756324657263,
-      "tag": "0001_wonderful_zarek",
-      "breakpoints": true
-    },
-    {
-      "idx": 2,
-      "version": "7",
-      "when": 1756485568995,
-      "tag": "0002_good_clea",
+      "when": 1756487190950,
+      "tag": "0000_wooden_silver_fox",
       "breakpoints": true
     }
   ]

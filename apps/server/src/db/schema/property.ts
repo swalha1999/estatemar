@@ -11,7 +11,7 @@ import { user } from "./auth";
 
 export const property = pgTable("property", {
 	id: uuid("id").primaryKey().defaultRandom(),
-	userId: text("user_id")
+	userId: uuid("user_id")
 		.notNull()
 		.references(() => user.id, { onDelete: "cascade" }),
 
