@@ -5,11 +5,12 @@ import {
 	pgTable,
 	text,
 	timestamp,
+	uuid,
 } from "drizzle-orm/pg-core";
 import { user } from "./auth";
 
 export const property = pgTable("property", {
-	id: text("id").primaryKey(),
+	id: uuid("id").primaryKey().defaultRandom(),
 	userId: text("user_id")
 		.notNull()
 		.references(() => user.id, { onDelete: "cascade" }),
@@ -38,8 +39,8 @@ export const property = pgTable("property", {
 });
 
 export const propertyImage = pgTable("property_image", {
-	id: text("id").primaryKey(),
-	propertyId: text("property_id")
+	id: uuid("id").primaryKey().defaultRandom(),
+	propertyId: uuid("property_id")
 		.notNull()
 		.references(() => property.id, { onDelete: "cascade" }),
 
@@ -59,8 +60,8 @@ export const propertyImage = pgTable("property_image", {
 });
 
 export const propertyAmenity = pgTable("property_amenity", {
-	id: text("id").primaryKey(),
-	propertyId: text("property_id")
+	id: uuid("id").primaryKey().defaultRandom(),
+	propertyId: uuid("property_id")
 		.notNull()
 		.references(() => property.id, { onDelete: "cascade" }),
 
