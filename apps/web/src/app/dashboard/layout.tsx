@@ -15,7 +15,8 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 		if (!session && !isPending) {
 			router.push("/login");
 		}
-	}, [session, isPending, router]);
+	}, [session, isPending]);
+
 	return (
 		<SidebarProvider
 			style={
