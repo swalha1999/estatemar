@@ -1,5 +1,5 @@
-import { z } from "zod";
 import { File } from "@web-std/file";
+import { z } from "zod";
 // Upload file schema
 export const uploadFileSchema = z.object({
     file: z.instanceof(File),

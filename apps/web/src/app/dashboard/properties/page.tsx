@@ -83,7 +83,7 @@ export default function PropertiesPage() {
 	};
 
 	return (
-		<div className="mx-auto max-w-7xl space-y-6 p-6">
+		<div className="space-y-6">
 			<div className="flex items-center justify-between">
 				<div>
 					<h1 className="font-bold text-3xl">My Properties</h1>
@@ -203,12 +203,12 @@ export default function PropertiesPage() {
 							{property.images &&
 							property.images.length > 0 &&
 							property.images[0].signedUrl ? (
-															<Image
-								src={property.images[0].signedUrl}
-								alt={property.name}
-								fill
-								className="object-cover transition-transform hover:scale-105"
-							/>
+								<Image
+									src={property.images[0].signedUrl}
+									alt={property.name}
+									fill
+									className="object-cover transition-transform hover:scale-105"
+								/>
 							) : (
 								<div className="absolute inset-0 flex items-center justify-center text-muted-foreground">
 									No Image

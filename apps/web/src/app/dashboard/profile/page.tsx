@@ -43,7 +43,7 @@ export default function ProfilePage() {
 	}
 
 	return (
-		<div className="mx-auto max-w-4xl space-y-6 p-6">
+		<>
 			<div className="flex items-center justify-between">
 				<div>
 					<h1 className="font-bold text-3xl">Profile</h1>
@@ -210,6 +210,6 @@ export default function ProfilePage() {
 				<Button variant="outline">Cancel</Button>
 				<Button>Save Changes</Button>
 			</div>
-		</div>
+		</>
 	);
 }
