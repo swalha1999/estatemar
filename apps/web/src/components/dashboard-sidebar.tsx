@@ -146,11 +146,7 @@ const data = {
 export function DashboardSidebar({
 	...props
 }: React.ComponentProps<typeof Sidebar>) {
-	const { data: session, isPending } = authClient.useSession();
-
-	if (!session || isPending) {
-		return <div>Loading...</div>;
-	}
+	const { data: session } = authClient.useSession();
 
 	return (
 		<Sidebar collapsible="offcanvas" {...props}>
@@ -176,9 +172,9 @@ export function DashboardSidebar({
 			<SidebarFooter>
 				<NavUser
 					user={{
-						name: session.user.name,
-						email: session.user.email,
-						avatar: session.user.image || "",
+						name: session?.user.name || "username",
+						email: session?.user.email || "email@email.com",
+						avatar: session?.user.image || "",
 					}}
 				/>
 			</SidebarFooter>
