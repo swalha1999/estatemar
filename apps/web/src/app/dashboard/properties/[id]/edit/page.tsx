@@ -111,7 +111,7 @@ export default function EditPropertyPage() {
 		isLoading: isPropertyLoading,
 		error: propertyError,
 	} = useQuery({
-		...orpc.getProperty.queryOptions({ input: { id: propertyId || "" } }),
+		...orpc.properties.getProperty.queryOptions({ input: { id: propertyId || "" } }),
 		enabled: !!propertyId && !!session && !isPending,
 		retry: 1,
 	});
@@ -243,7 +243,7 @@ export default function EditPropertyPage() {
 			}
 
 			// Update property details
-			const updateResult = await client.updateProperty({
+			const updateResult = await client.properties.updateProperty({
 				id: propertyId,
 				name: formData.name,
 				description: formData.description,
@@ -275,7 +275,7 @@ export default function EditPropertyPage() {
 
 			// Remove images that were marked for deletion
 			for (const imageId of imagesToRemove) {
-				await client.removePropertyImage({
+				await client.properties.removePropertyImage({
 					imageId,
 				});
 			}
@@ -283,14 +283,14 @@ export default function EditPropertyPage() {
 			// Upload new images and associate them with the property
 			for (let i = 0; i < images.length; i++) {
 				const image = images[i];
-				const uploadResult = await client.uploadFile({
+				const uploadResult = await client.files.uploadFile({
 					file: image,
 					fileName: `properties/${propertyId}/${Date.now()}-${image.name}`,
 				});
 
 				if (uploadResult.success && uploadResult.data) {
 					// Add the image to the property
-					await client.addPropertyImage({
+					await client.properties.addPropertyImage({
 						propertyId,
 						objectKey: uploadResult.data.objectKey,
 						fileName: image.name,

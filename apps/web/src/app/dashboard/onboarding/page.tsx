@@ -41,7 +41,7 @@ export default function OnboardingPage() {
 		isLoading: invitationsLoading,
 		refetch: refetchInvitations,
 	} = useQuery({
-		...orpc.getUserInvitations.queryOptions({
+		...orpc.organizations.getUserInvitations.queryOptions({
 			input: { limit: 10, offset: 0 },
 		}),
 		staleTime: 30 * 1000, // 30 seconds
@@ -52,11 +52,11 @@ export default function OnboardingPage() {
 		: [];
 
 	const mutation = useMutation({
-		...orpc.createOrganization.mutationOptions(),
+		...orpc.organizations.createOrganization.mutationOptions(),
 	});
 
 	const acceptInviteMutation = useMutation({
-		...orpc.acceptInvitation.mutationOptions(),
+		...orpc.organizations.acceptInvitation.mutationOptions(),
 	});
 
 	const generateSlug = (name: string) => {

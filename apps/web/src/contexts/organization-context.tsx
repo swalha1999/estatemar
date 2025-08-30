@@ -44,7 +44,7 @@ export function OrganizationProvider({ children }: OrganizationProviderProps) {
 		isLoading,
 		refetch,
 	} = useQuery({
-		...orpc.getUserOrganizations.queryOptions({
+		...orpc.organizations.getUserOrganizations.queryOptions({
 			input: { limit: 25, offset: 0 },
 		}),
 		staleTime: 5 * 60 * 1000,

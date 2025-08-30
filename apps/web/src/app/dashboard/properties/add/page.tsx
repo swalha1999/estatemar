@@ -96,7 +96,7 @@ export default function AddPropertyPage() {
 	>([]);
 	const [isSubmitting, setIsSubmitting] = useState(false);
 
-	useQuery(orpc.privateData.queryOptions());
+	useQuery(orpc.auth.privateData.queryOptions());
 
 	useEffect(() => {
 		if (!session && !isPending) {
@@ -154,7 +154,7 @@ export default function AddPropertyPage() {
 			}
 
 			// Create the property first
-			const propertyResult = await client.createProperty({
+			const propertyResult = await client.properties.createProperty({
 				name: formData.name,
 				description: formData.description,
 				location: formData.location,
@@ -194,7 +194,7 @@ export default function AddPropertyPage() {
 				const imageFile = images[i]; // Get corresponding file for metadata
 
 				try {
-					const addImageResult = await client.addPropertyImage({
+					const addImageResult = await client.properties.addPropertyImage({
 						propertyId,
 						objectKey: uploadedImage.objectKey,
 						fileName: imageFile?.name || `image-${i + 1}`,
@@ -221,7 +221,7 @@ export default function AddPropertyPage() {
 			let amenitiesAdded = 0;
 			for (const amenity of selectedAmenities) {
 				try {
-					const amenityResult = await client.addPropertyAmenity({
+					const amenityResult = await client.properties.addPropertyAmenity({
 						propertyId,
 						name: amenity,
 					});

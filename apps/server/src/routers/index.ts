@@ -3,14 +3,14 @@ import { authRouter } from "./auth";
 import { filesRouter } from "./files";
 import { healthRouter } from "./health";
 import { organizationsRouter } from "./organizations";
-import { propertiesRouter } from "./properties";
+import { propertiesRouterNew } from "./properties-new";
 
 export const appRouter = {
-	...healthRouter,
-	...authRouter,
-	...filesRouter,
-	...organizationsRouter,
-	...propertiesRouter,
+	health: healthRouter,
+	auth: authRouter,
+	files: filesRouter,
+	organizations: organizationsRouter,
+	properties: propertiesRouterNew,
 };
 
 export type AppRouter = typeof appRouter;

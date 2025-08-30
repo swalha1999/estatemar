@@ -50,10 +50,10 @@ export default function PropertyDetailsPage() {
 	const { data: session, isPending } = authClient.useSession();
 
 	const { data: propertyData, isLoading } = useQuery(
-		orpc.getProperty.queryOptions({ input: { id: propertyId } }),
+		orpc.properties.getProperty.queryOptions({ input: { id: propertyId } }),
 	);
 
-	useQuery(orpc.privateData.queryOptions());
+	useQuery(orpc.auth.privateData.queryOptions());
 
 	useEffect(() => {
 		if (!session && !isPending) {

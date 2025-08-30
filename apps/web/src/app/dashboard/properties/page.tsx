@@ -37,7 +37,7 @@ export default function PropertiesPage() {
 	const searchId = useId();
 
 	const { data: propertiesData, isLoading: propertiesLoading } = useQuery({
-		...orpc.getUserProperties.queryOptions({
+		...orpc.properties.getUserProperties.queryOptions({
 			input: {
 				limit: 50,
 				offset: 0,
@@ -47,7 +47,7 @@ export default function PropertiesPage() {
 		enabled: !!currentOrg?.id,
 	});
 
-	useQuery(orpc.privateData.queryOptions());
+	useQuery(orpc.auth.privateData.queryOptions());
 
 	useEffect(() => {
 		if (!session && !isPending) {

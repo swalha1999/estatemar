@@ -66,7 +66,7 @@ export default function TeamPage() {
 		isLoading: membersLoading,
 		refetch: refetchMembers,
 	} = useQuery({
-		...orpc.getOrganizationMembers.queryOptions({
+		...orpc.organizations.getOrganizationMembers.queryOptions({
 			input: { organizationId: currentOrg?.id || "", limit: 50, offset: 0 },
 		}),
 		enabled: !!currentOrg?.id,
@@ -81,7 +81,7 @@ export default function TeamPage() {
 		isLoading: invitationsLoading,
 		refetch: refetchInvitations,
 	} = useQuery({
-		...orpc.getOrganizationInvitations.queryOptions({
+		...orpc.organizations.getOrganizationInvitations.queryOptions({
 			input: { organizationId: currentOrg?.id || "", limit: 50, offset: 0 },
 		}),
 		enabled: !!currentOrg?.id && canInvite,
@@ -94,17 +94,17 @@ export default function TeamPage() {
 
 	// Invite mutation
 	const inviteMutation = useMutation({
-		...orpc.inviteMember.mutationOptions(),
+		...orpc.organizations.inviteMember.mutationOptions(),
 	});
 
 	// Remove member mutation
 	const removeMemberMutation = useMutation({
-		...orpc.removeMember.mutationOptions(),
+		...orpc.organizations.removeMember.mutationOptions(),
 	});
 
 	// Delete invitation mutation
 	const deleteInvitationMutation = useMutation({
-		...orpc.deleteInvitation.mutationOptions(),
+		...orpc.organizations.deleteInvitation.mutationOptions(),
 	});
 
 	const handleInvite = (e: React.FormEvent) => {

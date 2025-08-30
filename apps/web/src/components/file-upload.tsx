@@ -61,7 +61,7 @@ export function FileUpload({
 
 		for (const file of files) {
 			try {
-				const result = await client.uploadFile({
+				const result = await client.files.uploadFile({
 					file,
 					fileName: `${Date.now()}-${file.name}`,
 				});
