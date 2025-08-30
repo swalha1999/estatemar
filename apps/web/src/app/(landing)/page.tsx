@@ -1,46 +1,49 @@
-"use client";
-import { useQuery } from "@tanstack/react-query";
-import { orpc } from "@/utils/orpc";
+import { AndroidSmartBanner } from "@/components/landing/android-smart-banner";
+import { CTASection } from "@/components/landing/cta";
+import { FAQSection } from "@/components/landing/faq";
+import FeaturesSection from "@/components/landing/features";
+import { FloatingElements } from "@/components/landing/floating-elements";
+import { Footer } from "@/components/landing/footer";
+import { HeroShowcase } from "@/components/landing/hero";
+import { HowItWorksSection } from "@/components/landing/how-it-works";
+import { StatisticsSection } from "@/components/landing/statistics";
+import { TestimonialsSection } from "@/components/landing/testimonials";
 
-const TITLE_TEXT = `
- ██████╗ ███████╗████████╗████████╗███████╗██████╗
- ██╔══██╗██╔════╝╚══██╔══╝╚══██╔══╝██╔════╝██╔══██╗
- ██████╔╝█████╗     ██║      ██║   █████╗  ██████╔╝
- ██╔══██╗██╔══╝     ██║      ██║   ██╔══╝  ██╔══██╗
- ██████╔╝███████╗   ██║      ██║   ███████╗██║  ██║
- ╚═════╝ ╚══════╝   ╚═╝      ╚═╝   ╚══════╝╚═╝  ╚═╝
-
- ████████╗    ███████╗████████╗ █████╗  ██████╗██╗  ██╗
- ╚══██╔══╝    ██╔════╝╚══██╔══╝██╔══██╗██╔════╝██║ ██╔╝
-    ██║       ███████╗   ██║   ███████║██║     █████╔╝
-    ██║       ╚════██║   ██║   ██╔══██║██║     ██╔═██╗
-    ██║       ███████║   ██║   ██║  ██║╚██████╗██║  ██╗
-    ╚═╝       ╚══════╝   ╚═╝   ╚═╝  ╚═╝ ╚═════╝╚═╝  ╚═╝
- `;
-
-export default function Home() {
-	const healthCheck = useQuery(orpc.healthCheck.queryOptions());
-
+export default function LandingPage() {
 	return (
-		<div className="container mx-auto max-w-3xl px-4 py-2">
-			<pre className="overflow-x-auto font-mono text-sm">{TITLE_TEXT}</pre>
-			<div className="grid gap-6">
-				<section className="rounded-lg border p-4">
-					<h2 className="mb-2 font-medium">API Status</h2>
-					<div className="flex items-center gap-2">
-						<div
-							className={`h-2 w-2 rounded-full ${healthCheck.data ? "bg-green-500" : "bg-red-500"}`}
-						/>
-						<span className="text-muted-foreground text-sm">
-							{healthCheck.isLoading
-								? "Checking..."
-								: healthCheck.data
-									? "Connected"
-									: "Disconnected"}
-						</span>
-					</div>
-				</section>
+		<div className="relative overflow-hidden">
+			{/* Android Smart App Banner */}
+			<AndroidSmartBanner />
+
+			{/* Floating elements background */}
+			<FloatingElements />
+
+			{/* Background gradient animation */}
+			<div className="-z-10 fixed inset-0">
+				<div className="absolute inset-0 bg-gradient-to-br from-blue-50/50 via-transparent to-green-50/50 dark:from-blue-950/20 dark:via-transparent dark:to-green-950/20" />
+				<div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_120%,rgba(59,130,246,0.1),transparent)] dark:bg-[radial-gradient(circle_at_50%_120%,rgba(59,130,246,0.05),transparent)]" />
 			</div>
+
+			<HeroShowcase />
+			<section id="features">
+				<FeaturesSection />
+			</section>
+			<section id="statistics">
+				<StatisticsSection />
+			</section>
+			<section id="how-it-works">
+				<HowItWorksSection />
+			</section>
+			<section id="testimonials">
+				<TestimonialsSection />
+			</section>
+			<section id="faq">
+				<FAQSection />
+			</section>
+			<section id="download">
+				<CTASection />
+			</section>
+			<Footer />
 		</div>
 	);
 }
