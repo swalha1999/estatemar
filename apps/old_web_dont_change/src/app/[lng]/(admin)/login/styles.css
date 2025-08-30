@@ -1,0 +1,212 @@
+.login-page {
+    display: flex;
+    height: 100vh;
+}
+
+.login-left {
+    background-color: #2e2e2e;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 60px;
+    align-items: center;
+    width: 40%;
+}
+
+.login-right {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: space-around;
+    padding: 20px;
+    color: white;
+    background: linear-gradient(135deg, #ffffff 0%, #1b6ef7 50%, #3a3a3a 100%);
+    flex: 1;
+}
+
+.top-header {
+    margin-bottom: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.top-header p {
+    font-size: 16px;
+    color: #cccccc;
+}
+
+.login-title {
+    font-size: 36px;
+    margin: 0;
+    color: white;
+    font-weight: 200;
+}
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.login-buttons {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+}
+
+.login-links {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 20px;
+}
+
+.login-link {
+    font-size: 14px;
+    font-weight: 500;
+    color: #cccccc;
+    text-decoration: none;
+    margin: 0 10px;
+}
+
+.login-link:hover {
+    text-decoration: underline;
+    color: white;
+}
+
+.input-field {
+    background-color: #3a3a3a;
+    color: white;
+    border: none;
+    padding: 12px;
+    border-radius: 5px;
+    font-size: 16px;
+    width: 100%;
+    margin: 0;
+}
+
+.input-field:last-of-type {
+    margin-bottom: 5px;
+}
+
+.input-field:focus {
+    outline: none;
+    border: #1b6ef7 1px solid;
+}
+
+.input-field::placeholder {
+    color: #cccccc;
+}
+
+.login-button {
+    background-color: #1b6ef7;
+    color: white;
+    padding: 12px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    width: 100%;
+}
+
+.login-button:hover {
+    background-color: #155bb2;
+}
+
+.error {
+    color: #ff4d4d;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.login-left:after {
+    content: "";
+    display: block;
+    width: 100%;
+    background-color: #1b1a55;
+}
+
+.profile {
+    border-radius: 4px;
+    background-color: #1b6ef7;
+}
+
+@media (max-width: 768px) {
+    .login-page {
+        flex-direction: column;
+        height: 100vh;
+    }
+
+    .login-left {
+        padding: 40px;
+        text-align: center;
+        height: 100%;
+        width: 100%;
+        display: flex;
+        justify-content: space-around;
+    }
+
+    .login-right {
+        padding: 20px;
+        justify-content: center;
+        align-items: center;
+        display: none;
+    }
+
+    .top-header {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .login-form {
+        width: 90%;
+    }
+
+    .input-field {
+        padding: 10px;
+        font-size: 14px;
+    }
+
+    .login-button {
+        padding: 10px;
+        font-size: 14px;
+    }
+}
+
+/* Add these new styles to your existing styles.css */
+
+.login-form-wrapper {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.input-container {
+    width: 100%;
+}
+
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+.button-container {
+    width: 100%;
+    margin-top: 10px;
+}

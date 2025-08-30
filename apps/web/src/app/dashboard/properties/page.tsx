@@ -23,8 +23,8 @@ import {
 	SelectTrigger,
 	SelectValue,
 } from "@/components/ui/select";
-import { authClient } from "@/lib/auth-client";
 import { useOrganization } from "@/contexts/organization-context";
+import { authClient } from "@/lib/auth-client";
 import { orpc } from "@/utils/orpc";
 
 export default function PropertiesPage() {

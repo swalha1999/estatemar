@@ -1,0 +1,51 @@
+{
+    "title": "Terms & Conditions",
+    "lastModified": "Last modified: March 19, 2024",
+    "welcome": "Welcome to Estatemar ('Platform'). These Terms of Use govern your access to and use of estatemar.com and its services.",
+    "sections": {
+        "terms": {
+            "title": "1. Terms",
+            "content": "These Terms of Use apply to Estatemar, operated by our team (referred to as 'we,' 'our,' 'us'). By accessing estatemar.com, you agree to these Terms and our Privacy Policy, complying with all applicable Israeli laws. Users must be 18 or older to access our services."
+        },
+        "license": {
+            "title": "2. License to Use",
+            "content": "You are granted a temporary, non-transferable license for personal, non-commercial use. This license prohibits: modifying content, reverse engineering the platform, or creating unauthorized databases from our content."
+        },
+        "responsibilities": {
+            "title": "3. User Responsibilities",
+            "content": "Estatemar facilitates property listings but is not a real estate agency. We do not verify listings independently. Users must conduct due diligence and seek professional advice before making property decisions. All communications between users and agents are direct and independent of Estatemar."
+        },
+        "limitations": {
+            "title": "4. Limitations of Liability",
+            "content": "We are not liable for any damages, including loss of data, profit, or business interruption. This includes system errors, password losses, or service interruptions. The Platform is provided 'as is' without warranties."
+        },
+        "availability": {
+            "title": "5. Platform Availability",
+            "content": "While we strive for continuous service, the Platform may be temporarily unavailable for maintenance or updates. We are not liable for any downtime or service interruptions."
+        },
+        "thirdParty": {
+            "title": "6. Third-Party Content",
+            "content": "Links and content from third parties are not under our control. We are not responsible for external content accuracy or quality. Using third-party services is at your own risk."
+        },
+        "intellectual": {
+            "title": "7. Intellectual Property",
+            "content": "All Platform content is protected by Israeli and international copyright laws. Users may not reproduce, distribute, or create derivative works without authorization."
+        },
+        "contributions": {
+            "title": "8. User Contributions",
+            "content": "By submitting content to our Platform, you grant us a perpetual, worldwide license to use that content. We may remove any content that violates our terms or applicable laws."
+        },
+        "modifications": {
+            "title": "9. Terms Modifications",
+            "content": "We reserve the right to modify these terms at any time. Continued use of the Platform constitutes acceptance of updated terms."
+        },
+        "jurisdiction": {
+            "title": "10. Governing Law",
+            "content": "These Terms are governed by Israeli law. Any disputes shall be subject to the exclusive jurisdiction of the Israeli courts."
+        },
+        "contact": {
+            "title": "Contact Information",
+            "content": "For inquiries, support and reporting violations: info@estatemar.com"
+        }
+    }
+}

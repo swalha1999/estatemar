@@ -1,0 +1,25 @@
+{
+    "title": "About Us",
+    "description": "Estatemar is a platform that simplifies real estate investing by connecting investors with opportunities. We provide the tools and insights you need to make informed decisions. Whether you're an experienced investor or just starting out, Estatemar is here to support your success.",
+    "visionTitle": "Our Vision",
+    "visionDescription": "We aim to make real estate investing accessible to everyone. Estatemar connects you with up-to-date market insights and exclusive opportunities. Our goal is to remove barriers and build a community where investors can grow and achieve financial success.",
+    "goalsTitle": "Our Goals",
+    "goals": {
+        "trust": {
+            "title": "Simplify Access",
+            "description": "We aim to create a straightforward and approachable platform that makes real estate investment easier to navigate."
+        },
+        "sustainable": {
+            "title": "Promote Sustainable Investment",
+            "description": "By carefully curating our offerings, we strive to promote investments that offer long-term value and contribute positively to both investors and communities."
+        },
+        "insights": {
+            "title": "Deliver Market-Driven Insights",
+            "description": "Our platform integrates market analytics, trend reports, and data-backed insights so investors are always informed and ready to act on opportunities."
+        },
+        "partnerships": {
+            "title": "Foster Lasting Partnerships",
+            "description": "Through collaborative efforts, Estatemar seeks to foster strong partnerships between investors and real estate companies, enhancing success for all involved parties."
+        }
+    }
+}

@@ -1,0 +1,128 @@
+.article-page {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+.article-page h1 {
+    font-size: 2.5rem;
+    color: #333;
+    margin-bottom: 1rem;
+}
+
+.article-image {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+}
+
+.article-meta {
+    font-size: 0.9rem;
+    color: #666;
+    margin-bottom: 2rem;
+}
+
+.article-content {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: #333;
+}
+
+.article-content p {
+    margin-bottom: 1.5rem;
+    line-height: 1.8;
+}
+
+.article-content h2 {
+    font-size: 1.5rem;
+    color: #444;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    font-weight: bold;
+}
+
+.article-content ul {
+    list-style-type: disc;
+    margin-left: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.article-content ol {
+    list-style-type: decimal;
+    margin-left: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.article-content li {
+    margin-bottom: 1rem; /* Increased spacing between list items */
+}
+
+.article-content strong {
+    font-weight: bold;
+    color: #222;
+}
+
+@media screen and (max-width: 720px) {
+    .article-page h1 {
+        font-size: 1.8rem;
+        color: #333;
+        margin-bottom: 1rem;
+    }
+}
+
+.article-layout {
+    margin: 0 auto;
+    padding: 1.5rem 1rem;
+    max-width: 800px;
+}
+
+.article-nav {
+    margin-bottom: 1.5rem;
+}
+
+.back-link {
+    display: flex;
+    align-items: center;
+    color: #333;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.back-icon {
+    width: 24px;
+    height: 24px;
+    margin-right: 8px;
+    transition: transform 0.3s ease;
+}
+
+.rtl-icon {
+    transform: scaleX(-1);
+    margin-right: 0;
+    margin-left: 8px;
+}
+
+.back-link:hover {
+    color: #0070f3;
+}
+
+.back-link:hover .back-icon {
+    transform: translateX(-5px);
+}
+
+.back-link:hover .rtl-icon {
+    transform: scaleX(-1) translateX(-5px);
+}
+
+.ar .back-icon,
+.he .back-icon {
+    margin-right: 0;
+    margin-left: 8px;
+    transform: scaleX(-1);
+}
+
+.ar .back-link:hover .back-icon,
+.he .back-link:hover .back-icon {
+    transform: scaleX(-1) translateX(-5px);
+}

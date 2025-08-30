@@ -1,0 +1,160 @@
+.modalOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modalContent {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    max-width: 90%;
+    max-height: 90vh;
+    position: relative;
+    width: 800px;
+    display: flex;
+    flex-direction: column;
+}
+
+.modalHeader {
+    position: sticky;
+    top: 0;
+    background: white;
+    padding-bottom: 15px;
+    border-bottom: 2px solid #f0f0f0;
+    z-index: 1;
+}
+
+.modalScrollContent {
+    overflow-y: auto;
+    padding-right: 10px;
+}
+
+.closeButton {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.bottomCloseButton {
+    margin-top: 20px;
+    padding: 8px 16px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+[dir="rtl"] .closeButton {
+    right: auto;
+    left: 10px;
+}
+
+/* Content Styles */
+.lastModified {
+    color: #666;
+    font-style: italic;
+    margin-bottom: 10px;
+    text-align: center;
+    font-size: 0.85em;
+}
+
+.section {
+    margin: 25px 0;
+    padding: 20px;
+    background: #f8f9fa;
+    border-radius: 1px;
+    transition: all 0.3s ease;
+}
+
+.section h2 {
+    color: #1e1e1e;
+    font-size: 1.1em;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.section p {
+    color: #444;
+    line-height: 1.5;
+    font-size: 0.9em;
+    margin: 0;
+}
+
+/* Modal Header */
+.modalContent h1 {
+    color: #333;
+    text-align: center;
+    font-size: 1.4em;
+    margin-bottom: 10px;
+}
+
+.modalContent > p {
+    color: #666;
+    line-height: 1.5;
+    margin: 20px 0;
+    font-size: 0.9em;
+}
+
+/* Scrollbar Styles */
+.modalContent::-webkit-scrollbar {
+    width: 8px;
+}
+
+.modalContent::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 4px;
+}
+
+.modalContent::-webkit-scrollbar-thumb {
+    background: #444;
+    border-radius: 4px;
+}
+
+.modalContent::-webkit-scrollbar-thumb:hover {
+    background: #0190bd;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .modalContent {
+        padding: 20px;
+        margin: 10px;
+    }
+
+    .section {
+        padding: 15px;
+        margin: 15px 0;
+    }
+
+    .modalContent h1 {
+        font-size: 1.2em;
+    }
+
+    .section h2 {
+        font-size: 1em;
+    }
+
+    .section p {
+        font-size: 0.85em;
+    }
+
+    .bottomCloseButton {
+        padding: 8px 16px;
+        font-size: 14px;
+    }
+}

@@ -1,0 +1,53 @@
+"use server";
+
+import { updateArticle, createArticle, deleteArticle } from "@/utils/content/articles";
+import { redirect } from "next/navigation";
+import { Article } from "@/db/schema";
+import { revalidatePath } from "next/dist/server/web/spec-extension/revalidate";
+import { getCurrentSession } from "@/utils/auth/session";
+
+export async function handleArticleUpdate(id: number, data: Article, lng: string) {
+    const { session } = await getCurrentSession();
+
+    if (!session) {
+        return { success: false, error: "Unauthorized" };
+    }
+
+    await updateArticle(id, {
+        ...data,
+        updatedAt: new Date(),
+    });
+    revalidatePath("/", "layout");
+    redirect(`/${lng}/dashboard/articles`);
+}
+
+export async function handleArticleCreate(data: Article, lng: string) {
+    const { session, user } = await getCurrentSession();
+    if (!session) {
+        return { success: false, error: "Unauthorized" };
+    }
+    await createArticle({
+        ...data,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+        // author_id: user.id,
+    });
+    revalidatePath("/", "layout");
+    redirect(`/${lng}/dashboard/articles`);
+}
+
+export async function handleArticleDelete(id: number, lng: string, slug: string) {
+    const { session } = await getCurrentSession();
+
+    if (!session) {
+        return { success: false, error: "Unauthorized" };
+    }
+
+    try {
+        await deleteArticle(id);
+        revalidatePath("/", "layout");
+        return { success: true };
+    } catch (error) {
+        return { success: false, error: "Failed to delete article" };
+    }
+}

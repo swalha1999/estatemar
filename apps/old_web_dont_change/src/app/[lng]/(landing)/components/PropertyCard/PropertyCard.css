@@ -1,0 +1,136 @@
+/* Copy all the CSS from ListingTable.css */
+
+.units-status-container {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    border-bottom: 1px solid #e5e7eb;
+    background-color: #f8fafc; /* Slate 50 */
+    padding: 0.5rem 0;
+}
+
+.units-status {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #4b5563;
+    transition: all 0.3s ease;
+    margin: 0 auto;
+}
+
+.units-icon {
+    color: #3b82f6; /* Blue 500 */
+    font-size: 1rem;
+}
+
+.units-available {
+    color: #3b82f6; /* Blue 500 */
+    font-weight: 700;
+}
+
+.units-separator {
+    color: #9ca3af; /* Gray 400 */
+}
+
+.units-total {
+    color: #6b7280; /* Gray 500 */
+    font-weight: 600;
+}
+
+.units-label {
+    margin-left: 0.5rem;
+    color: #6b7280; /* Gray 500 */
+}
+
+.most-popular-item:hover .units-status {
+    transform: scale(1.05);
+}
+
+.location-icon {
+    font-size: 1rem;
+}
+
+.most-popular-location {
+    color: #4b5563; /* Gray 600 */
+    font-weight: 500;
+    margin: 0;
+    flex: 1;
+}
+
+.card-badge {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 4px 12px;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    opacity: 0.9;
+    background-color: white;
+}
+
+.best-seller-badge {
+    color: rgb(0, 123, 255);
+}
+
+.best-seller-badge .badge-icon {
+    color: rgb(0, 123, 255);
+}
+
+.recommended-badge {
+    color: #4caf50;
+}
+
+.recommended-badge .badge-icon {
+    color: #4caf50;
+}
+
+.most-popular-item:hover .card-badge {
+    transform: scale(1.05);
+    opacity: 1;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
+}
+
+.badge-container {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    z-index: 1;
+}
+
+/* RTL support */
+[dir="rtl"] .badge-container {
+    left: auto;
+    right: 10px;
+}
+
+[dir="rtl"] .card-badge {
+    flex-direction: row-reverse;
+}
+
+[dir="rtl"] .badge-icon {
+    margin-left: 4px;
+    margin-right: 0;
+}
+
+[dir="rtl"] .units-label {
+    margin-right: 0.5rem;
+    margin-left: 0;
+}
+
+[dir="rtl"] .units-status {
+    direction: rtl;
+}
+
+.sold-out {
+    color: #ef4444; /* Red 500 */
+    font-weight: 600;
+}
