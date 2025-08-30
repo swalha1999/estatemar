@@ -26,6 +26,7 @@ import {
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
 import { authClient } from "@/lib/auth-client";
+import { useOrganization } from "@/contexts/organization-context";
 import { client, orpc } from "@/utils/orpc";
 
 const amenitiesOptions = [
@@ -59,6 +60,7 @@ type PropertyStatus = "For Sale" | "For Rent" | "Pending" | "Sold";
 export default function AddPropertyPage() {
 	const router = useRouter();
 	const { data: session, isPending } = authClient.useSession();
+	const { currentOrg } = useOrganization();
 	const nameId = useId();
 	const priceId = useId();
 	const typeId = useId();
@@ -144,6 +146,7 @@ export default function AddPropertyPage() {
 				price: Number.parseFloat(formData.price),
 				type: formData.type as PropertyType,
 				status: formData.status,
+				organizationId: currentOrg?.id,
 				bedrooms: formData.bedrooms
 					? Number.parseInt(formData.bedrooms)
 					: undefined,

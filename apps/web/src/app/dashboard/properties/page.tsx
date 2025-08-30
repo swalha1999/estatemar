@@ -24,19 +24,28 @@ import {
 	SelectValue,
 } from "@/components/ui/select";
 import { authClient } from "@/lib/auth-client";
+import { useOrganization } from "@/contexts/organization-context";
 import { orpc } from "@/utils/orpc";
 
 export default function PropertiesPage() {
 	const router = useRouter();
 	const { data: session, isPending } = authClient.useSession();
+	const { currentOrg } = useOrganization();
 	const [searchTerm, setSearchTerm] = useState("");
 	const [statusFilter, setStatusFilter] = useState("all");
 	const [typeFilter, setTypeFilter] = useState("all");
 	const searchId = useId();
 
-	const { data: propertiesData, isLoading: propertiesLoading } = useQuery(
-		orpc.getUserProperties.queryOptions({ input: { limit: 10, offset: 0 } }),
-	);
+	const { data: propertiesData, isLoading: propertiesLoading } = useQuery({
+		...orpc.getUserProperties.queryOptions({
+			input: {
+				limit: 50,
+				offset: 0,
+				organizationId: currentOrg?.id,
+			},
+		}),
+		enabled: !!currentOrg?.id,
+	});
 
 	useQuery(orpc.privateData.queryOptions());
 

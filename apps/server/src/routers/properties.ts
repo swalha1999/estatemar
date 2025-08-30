@@ -77,7 +77,7 @@ export const propertiesRouter = {
 					.insert(property)
 					.values({
 						id: propertyId,
-						userId: input.organizationId ? null : userId, // Set userId only if not org property
+						userId: userId, // Always set the user who created it
 						organizationId: input.organizationId || null,
 						name: input.name,
 						description: input.description,
@@ -282,17 +282,33 @@ export const propertiesRouter = {
 					};
 				}
 
-				// Check if user owns the property
+				// Check if user can edit this property
 				const propertyData = await db
 					.select()
 					.from(property)
 					.where(eq(property.id, existingImage[0].propertyId))
 					.limit(1);
 
-				if (
-					propertyData.length === 0 ||
-					propertyData[0].userId !== context.session?.user?.id
-				) {
+				if (propertyData.length === 0) {
+					return {
+						success: false,
+						error: "Property not found",
+					};
+				}
+
+				const prop = propertyData[0];
+				const userId = context.session?.user?.id;
+				let canEdit = false;
+
+				if (prop.userId === userId) {
+					// User owns the property directly
+					canEdit = true;
+				} else if (prop.organizationId && userId) {
+					// Property belongs to organization - check if user can edit
+					canEdit = await canEditOrgProperties(userId, prop.organizationId);
+				}
+
+				if (!canEdit) {
 					return {
 						success: false,
 						error: "Unauthorized",
