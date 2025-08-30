@@ -8,13 +8,11 @@ import { Footer } from "@/components/landing/footer";
 import { HeroShowcase } from "@/components/landing/hero";
 import { HowItWorksSection } from "@/components/landing/how-it-works";
 import { StatisticsSection } from "@/components/landing/statistics";
-import { TestimonialsSection } from "@/components/landing/testimonials";
 
 export default function LandingPage() {
 	const featureId = useId();
 	const statisticsId = useId();
 	const howItWorksId = useId();
-	const testimonialsId = useId();
 	const faqId = useId();
 	const downloadId = useId();
 
@@ -41,9 +39,6 @@ export default function LandingPage() {
 			</section>
 			<section id={howItWorksId}>
 				<HowItWorksSection />
-			</section>
-			<section id={testimonialsId}>
-				<TestimonialsSection />
 			</section>
 			<section id={faqId}>
 				<FAQSection />

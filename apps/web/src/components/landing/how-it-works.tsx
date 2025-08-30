@@ -1,37 +1,46 @@
 "use client";
 
-import { Bell, Compass, Download, Heart } from "lucide-react";
+import { Search, Building2, Scale, TrendingUp } from "lucide-react";
 import { motion, useInView } from "motion/react";
 import { useRef } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 
+// Import Montserrat font
+import { Montserrat } from 'next/font/google'
+
+const montserrat = Montserrat({ 
+  subsets: ['latin'],
+  weight: ['300', '400', '500', '600', '700'],
+  variable: '--font-montserrat'
+})
+
 const steps = [
 	{
-		icon: Download,
-		title: "Download & Install",
+		icon: Search,
+		title: "Discover Properties",
 		description:
-			"Get Salati from the App Store or Google Play Store. Quick and easy installation process.",
+			"Browse our extensive database of properties with real-time market data and virtual 3D tours.",
 		step: "01",
 	},
 	{
-		icon: Bell,
-		title: "Set Your Location",
+		icon: Building2,
+		title: "Evaluate Investments",
 		description:
-			"Allow location access to get accurate prayer times for your area. Your privacy is protected.",
+			"Access comprehensive property analytics, ROI projections, and market trends to make informed decisions.",
 		step: "02",
 	},
 	{
-		icon: Compass,
-		title: "Find Qibla Direction",
+		icon: Scale,
+		title: "Legal Support",
 		description:
-			"Use the built-in compass to find the correct direction for prayer, anywhere in the world.",
+			"Get expert legal guidance from our in-house real estate lawyers for safe and transparent transactions.",
 		step: "03",
 	},
 	{
-		icon: Heart,
-		title: "Start Your Journey",
+		icon: TrendingUp,
+		title: "Manage & Grow",
 		description:
-			"Receive prayer notifications, access athkar, and enhance your spiritual connection daily.",
+			"Use our dashboard to manage your properties, track performance, and explore new investment opportunities.",
 		step: "04",
 	},
 ];
@@ -89,8 +98,8 @@ function StepCard({ step, index }: { step: (typeof steps)[0]; index: number }) {
 					</motion.div>
 
 					{/* Content */}
-					<h3 className="mb-4 font-semibold text-xl">{step.title}</h3>
-					<p className="text-foreground/70 leading-relaxed">
+					<h3 className={`mb-4 font-semibold text-xl text-primary ${montserrat.className}`}>{step.title}</h3>
+					<p className={`text-foreground/80 leading-relaxed font-medium ${montserrat.className}`}>
 						{step.description}
 					</p>
 				</CardContent>
@@ -105,7 +114,7 @@ export function HowItWorksSection() {
 	const isTitleInView = useInView(titleRef, { once: true });
 
 	return (
-		<section ref={containerRef} className="bg-background py-16 md:py-32">
+		<section ref={containerRef} id="how-it-works" className="bg-background py-16 md:py-32">
 			<div className="container mx-auto max-w-6xl px-6">
 				<motion.div
 					ref={titleRef}
@@ -114,12 +123,12 @@ export function HowItWorksSection() {
 					transition={{ duration: 0.6 }}
 					className="mb-16 text-center"
 				>
-					<h2 className="mb-4 font-bold text-3xl md:text-4xl">
-						How Salati Works
+					<h2 className={`mb-4 font-bold text-3xl md:text-4xl text-primary ${montserrat.className}`}>
+						How Estatemar Works
 					</h2>
-					<p className="mx-auto max-w-2xl text-foreground/70">
-						Get started with Salati in just a few simple steps and transform
-						your prayer experience
+					<p className={`mx-auto max-w-2xl text-foreground/80 text-lg font-medium ${montserrat.className}`}>
+						Get started with Estatemar in just a few simple steps and transform
+						your real estate experience
 					</p>
 				</motion.div>
 

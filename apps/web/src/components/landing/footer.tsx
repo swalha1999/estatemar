@@ -20,22 +20,19 @@ export function Footer() {
 						>
 							<div className="mb-4 flex items-center space-x-3">
 								<Image
-									src="/salati-logo.png"
-									alt="Salati Logo"
-									width={140}
-									height={60}
-									className="h-16 w-auto"
+									src="/blue_estatemar_logo.svg"
+									alt="Estatemar Logo"
+									width={300}
+									height={90}
+									className="h-64 w-auto"
 								/>
 							</div>
 							<p className="mb-6 max-w-md text-foreground/70">
-								Your guide to deeper Qur&apos;an in prayer. Salati helps you
-								follow and recite Qur&apos;anic verses with ease during prayer,
-								offering reminders, guidance, and a focused spiritual
-								experience.
+								Your complete real estate platform for data-driven investing, property management, and seamless experiences. With Estatemar, you invest with confidence.
 							</p>
 							<div className="flex items-center gap-4">
 								<Link
-									href="mailto:info@salati.app"
+									href="mailto:info@estatemar.com"
 									className="text-foreground/70 transition-colors hover:text-foreground"
 								>
 									<Mail className="size-5" />
@@ -126,12 +123,12 @@ export function Footer() {
 					className="mt-8 flex flex-col items-center justify-between gap-4 border-t pt-8 md:flex-row"
 				>
 					<p className="text-foreground/60 text-sm">
-						© 2025 Salati. All rights reserved.
+						© 2025 Estatemar. All rights reserved.
 					</p>
 					<div className="flex items-center gap-2 text-foreground/60 text-sm">
 						<span>Made with</span>
 						<Heart className="size-4 fill-red-500 text-red-500" />
-						<span>for the Muslim community</span>
+						<span>for the real estate community</span>
 					</div>
 				</motion.div>
 			</div>

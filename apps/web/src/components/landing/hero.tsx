@@ -2,55 +2,27 @@
 
 import * as React from "react"
 import Image from "next/image"
-import { Star } from "lucide-react"
 import { motion } from "motion/react"
 import { AnimatedGroup } from "@/components/landing/animated-group"
 import { AnimatedText } from "@/components/landing/animated-text"
-import { Avatar, AvatarImage } from "@/components/ui/avatar"
+
+// Import Montserrat font
+import { Montserrat } from 'next/font/google'
+
+const montserrat = Montserrat({ 
+  subsets: ['latin'],
+  weight: ['300', '400', '500', '600', '700'],
+  variable: '--font-montserrat'
+})
 
 interface HeroShowcaseProps {
   heading?: string
   description?: string
-  reviews?: {
-    count: number
-    avatars: {
-      src: string
-      alt: string
-    }[]
-    rating?: number
-  }
 }
 
 export function HeroShowcase({
-  heading = "Your guide to deeper Qur’an in prayer.",
-  description = "Salati helps you follow and recite Qur’anic verses with ease during prayer, offering reminders, guidance, and a focused spiritual experience.",
-
-  reviews = {
-    count: 100,
-    rating: 5.0,
-    avatars: [
-      {
-        src: "https://github.com/educlopez.png",
-        alt: "Avatar 1",
-      },
-      {
-        src: "https://github.com/emilkowalski.png",
-        alt: "Avatar 2",
-      },
-      {
-        src: "https://github.com/raunofreiberg.png",
-        alt: "Avatar 3",
-      },
-      {
-        src: "https://github.com/shadcn.png",
-        alt: "Avatar 4",
-      },
-      {
-        src: "https://github.com/swalha1999.png",
-        alt: "Avatar 5",
-      },
-    ],
-  },
+  heading = "Estatemar – Smarter Real Estate at Your Fingertips",
+  description = "Your complete real estate platform for data-driven investing, property management, and seamless experiences.",
 }: HeroShowcaseProps) {
 
   return (
@@ -67,7 +39,7 @@ export function HeroShowcase({
         >
           <AnimatedText
             as="h1"
-            className="my-6 text-4xl font-bold text-pretty lg:text-6xl xl:text-7xl"
+            className={`my-6 text-2xl font-light text-pretty lg:text-3xl xl:text-4xl ${montserrat.className}`}
           >
             {heading}
           </AnimatedText>
@@ -80,45 +52,10 @@ export function HeroShowcase({
           </AnimatedText>
           <AnimatedGroup
             preset="slide"
-            className="mb-12 flex w-fit flex-col items-center gap-4 sm:flex-row"
-          >
-            <span className="inline-flex items-center -space-x-4">
-              {reviews.avatars.map((avatar, index) => (
-                <motion.div
-                  key={index}
-                  whileHover={{ y: -8 }}
-                  transition={{ type: "spring", stiffness: 300, damping: 20 }}
-                  style={{ display: "inline-block" }}
-                >
-                  <Avatar className="size-12 border">
-                    <AvatarImage src={avatar.src} alt={avatar.alt} />
-                  </Avatar>
-                </motion.div>
-              ))}
-            </span>
-            <div>
-              <div className="flex items-center gap-1">
-                {[...Array(5)].map((_, index) => (
-                  <Star
-                    key={index}
-                    className="size-5 fill-yellow-400 text-yellow-400"
-                  />
-                ))}
-                <span className="mr-1 font-semibold">
-                  {reviews.rating?.toFixed(1)}
-                </span>
-              </div>
-              <p className="text-foreground/70 text-left font-medium">
-                from {reviews.count}+ reviews
-              </p>
-            </div>
-          </AnimatedGroup>
-          <AnimatedGroup
-            preset="slide"
             className="flex w-full flex-col justify-center gap-4 sm:flex-row lg:justify-start"
           >
             <a 
-              href="https://apps.apple.com/us/app/salati-%D8%B5%D9%84%D8%A7%D8%AA%D9%8A/id1546722792?itscg=30200&itsct=apps_box_badge&mttnsubad=1546722792" 
+              href="#" 
               className="inline-block"
             >
               <img 
@@ -128,7 +65,7 @@ export function HeroShowcase({
               />
             </a>
             <a 
-              href="https://play.google.com/store/apps/details?id=net.nadsoft.salati&hl=en&gl=US" 
+              href="#" 
               className="inline-block"
             >
               <img 
@@ -141,8 +78,8 @@ export function HeroShowcase({
         </AnimatedGroup>
         <div className="flex">
           <Image
-            src="/iPhone_bg.png"
-            alt="app screen"
+            src="/app1.png"
+            alt="Estatemar app screen"
             width={2880}
             height={1842}
             className="h-full w-full rounded-md object-cover"

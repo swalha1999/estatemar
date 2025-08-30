@@ -36,10 +36,11 @@ export function Header() {
 							className="flex items-center space-x-2"
 						>
 							<Image
-								src="/salati-logo.png"
-								alt="Salati App Icon"
-								width={126}
-								height={54}
+								src="/blue_estatemar_logo.svg"
+								alt="Estatemar Logo"
+								width={300}
+								height={90}
+								className="h-64 w-auto"
 							/>
 						</motion.div>
 					</Link>
@@ -49,10 +50,10 @@ export function Header() {
 				{isHomePage && (
 					<nav className="hidden items-center space-x-6 md:flex">
 						<Link
-							href="#features"
+							href="#why-estatemar"
 							className="text-foreground/70 transition-colors hover:text-foreground"
 						>
-							Features
+							Why Estatemar
 						</Link>
 						<Link
 							href="#how-it-works"
@@ -61,22 +62,16 @@ export function Header() {
 							How It Works
 						</Link>
 						<Link
-							href="#testimonials"
+							href="#trusted-expertise"
 							className="text-foreground/70 transition-colors hover:text-foreground"
 						>
-							Reviews
+							Trusted Expertise
 						</Link>
 						<Link
 							href="#faq"
 							className="text-foreground/70 transition-colors hover:text-foreground"
 						>
 							FAQ
-						</Link>
-						<Link
-							href="#download"
-							className="text-foreground/70 transition-colors hover:text-foreground"
-						>
-							Download
 						</Link>
 					</nav>
 				)}
@@ -85,8 +80,8 @@ export function Header() {
 				<div className="hidden items-center space-x-4 md:flex">
 					<ModeToggle />
 					<Button asChild>
-						<Link href="https://apps.apple.com/us/app/salati-%D8%B5%D9%84%D8%A7%D8%AA%D9%8A/id1546722792">
-							Download App
+						<Link href="/dashboard">
+							Dashboard
 						</Link>
 					</Button>
 				</div>
@@ -123,11 +118,11 @@ export function Header() {
 				>
 					<nav className="container mx-auto space-y-4 px-6 py-4">
 						<Link
-							href="#features"
+							href="#why-estatemar"
 							className="block text-foreground/70 transition-colors hover:text-foreground"
 							onClick={() => setIsMenuOpen(false)}
 						>
-							Features
+							Why Estatemar
 						</Link>
 						<Link
 							href="#how-it-works"
@@ -137,11 +132,11 @@ export function Header() {
 							How It Works
 						</Link>
 						<Link
-							href="#testimonials"
+							href="#trusted-expertise"
 							className="block text-foreground/70 transition-colors hover:text-foreground"
 							onClick={() => setIsMenuOpen(false)}
 						>
-							Reviews
+							Trusted Expertise
 						</Link>
 						<Link
 							href="#faq"
@@ -150,19 +145,12 @@ export function Header() {
 						>
 							FAQ
 						</Link>
-						<Link
-							href="#download"
-							className="block text-foreground/70 transition-colors hover:text-foreground"
-							onClick={() => setIsMenuOpen(false)}
-						>
-							Download
-						</Link>
 						<Button asChild className="w-full">
 							<Link
-								href="https://apps.apple.com/us/app/salati-%D8%B5%D9%84%D8%A7%D8%AA%D9%8A/id1546722792"
+								href="/dashboard"
 								onClick={() => setIsMenuOpen(false)}
 							>
-								Download App
+								Dashboard
 							</Link>
 						</Button>
 					</nav>

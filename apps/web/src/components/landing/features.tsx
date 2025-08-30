@@ -1,9 +1,20 @@
 "use client";
 
-import { BookOpen, Clock, Compass, Volume2 } from "lucide-react";
+import { TrendingUp, Building2, Scale, Eye, Users, Shield } from "lucide-react";
 import { motion, useInView } from "motion/react";
 import { useRef } from "react";
 import { Card, CardContent } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
+
+// Import Montserrat font
+import { Montserrat } from 'next/font/google'
+
+const montserrat = Montserrat({ 
+  subsets: ['latin'],
+  weight: ['300', '400', '500', '600', '700'],
+  variable: '--font-montserrat'
+})
 
 // Animated card wrapper component
 function AnimatedCard({
@@ -52,10 +63,11 @@ export default function FeaturesSection() {
 	const isTitleInView = useInView(titleRef, { once: true });
 
 	return (
-		<section
-			ref={containerRef}
-			className="overflow-hidden bg-gray-50 py-16 md:py-32 dark:bg-transparent"
-		>
+			<section
+		ref={containerRef}
+		id="why-estatemar"
+		className="overflow-hidden bg-gray-50 py-16 md:py-32 dark:bg-transparent"
+	>
 			<div className="mx-auto max-w-5xl px-6">
 				<div className="relative">
 					{/* Animated section title */}
@@ -68,12 +80,11 @@ export default function FeaturesSection() {
 						transition={{ duration: 0.6 }}
 						className="mb-16 text-center"
 					>
-						<h2 className="mb-4 font-bold text-3xl md:text-4xl">
-							Features that enhance your spiritual journey
+						<h2 className={`mb-4 font-bold text-3xl md:text-4xl text-primary ${montserrat.className}`}>
+							Why Estatemar?
 						</h2>
-						<p className="mx-auto max-w-2xl text-foreground/70">
-							Salati brings together all the tools you need for a focused and
-							meaningful prayer experience.
+						<p className={`mx-auto max-w-2xl text-foreground/80 text-lg font-medium ${montserrat.className}`}>
+							We bring together real-time data, legal expertise, and innovative technology to make property ownership and investing easier than ever.
 						</p>
 					</motion.div>
 
@@ -95,7 +106,7 @@ export default function FeaturesSection() {
 											animate={{ scale: 1, rotate: 0 }}
 											transition={{ type: "spring", bounce: 0.6, delay: 0.8 }}
 										>
-											100%
+											Live
 										</motion.span>
 									</motion.div>
 									<motion.h2
@@ -104,7 +115,7 @@ export default function FeaturesSection() {
 										animate={{ opacity: 1, y: 0 }}
 										transition={{ delay: 0.6 }}
 									>
-										Prayer Times
+										Real Data & ROI
 									</motion.h2>
 									<motion.p
 										className="mt-2 text-center text-foreground/70"
@@ -112,7 +123,7 @@ export default function FeaturesSection() {
 										animate={{ opacity: 1 }}
 										transition={{ delay: 0.8 }}
 									>
-										Accurate prayer times for your location
+										Track live market value and rental potential of your properties
 									</motion.p>
 								</CardContent>
 							</Card>
@@ -138,7 +149,7 @@ export default function FeaturesSection() {
 											}}
 											className="m-auto"
 										>
-											<Compass className="h-16 w-16 text-primary-600 dark:text-primary-500" />
+											<Building2 className="h-16 w-16 text-primary-600 dark:text-primary-500" />
 										</motion.div>
 									</motion.div>
 									<div className="relative z-10 mt-6 space-y-2 text-center">
@@ -148,7 +159,7 @@ export default function FeaturesSection() {
 											animate={{ opacity: 1, y: 0 }}
 											transition={{ delay: 0.4 }}
 										>
-											Qibla Direction
+											Projects & Financing
 										</motion.h2>
 										<motion.p
 											className="text-foreground/70"
@@ -156,8 +167,7 @@ export default function FeaturesSection() {
 											animate={{ opacity: 1 }}
 											transition={{ delay: 0.6 }}
 										>
-											Accurate compass pointing towards Mecca for proper prayer
-											orientation.
+											Explore developments with flexible financing options
 										</motion.p>
 									</div>
 								</CardContent>
@@ -176,7 +186,7 @@ export default function FeaturesSection() {
 												transition={{ type: "spring", stiffness: 400 }}
 												className="flex items-center justify-center"
 											>
-												<BookOpen className="h-16 w-16 text-primary-600 dark:text-primary-500" />
+												<Scale className="h-16 w-16 text-primary-600 dark:text-primary-500" />
 											</motion.div>
 										</div>
 									</motion.div>
@@ -187,7 +197,7 @@ export default function FeaturesSection() {
 											animate={{ opacity: 1, y: 0 }}
 											transition={{ delay: 0.5 }}
 										>
-											Quran Reading
+											Legal Support
 										</motion.h2>
 										<motion.p
 											className="text-foreground/70"
@@ -195,8 +205,7 @@ export default function FeaturesSection() {
 											animate={{ opacity: 1 }}
 											transition={{ delay: 0.7 }}
 										>
-											Beautiful Arabic typography with smooth recitation
-											experience.
+											In-house legal experts ensure safe and transparent transactions
 										</motion.p>
 									</div>
 								</CardContent>
@@ -214,7 +223,7 @@ export default function FeaturesSection() {
 											whileHover={{ scale: 1.1, rotate: 5 }}
 											transition={{ type: "spring", stiffness: 300 }}
 										>
-											<Volume2
+											<Eye
 												className="m-auto size-5 text-primary-600 dark:text-primary-500"
 												strokeWidth={1}
 											/>
@@ -226,11 +235,10 @@ export default function FeaturesSection() {
 											transition={{ delay: 0.6 }}
 										>
 											<h2 className="font-medium text-lg text-zinc-800 transition dark:text-white">
-												Audio Recitations
+												Virtual 3D Tours
 											</h2>
 											<p className="text-foreground/70">
-												Listen to beautiful Quran recitations with different
-												reciters and follow along with the text.
+												Walk through properties anytime, anywhere with immersive virtual tours
 											</p>
 										</motion.div>
 									</div>
@@ -270,7 +278,7 @@ export default function FeaturesSection() {
 											/>
 										</div>
 
-										{/* Audio waveform visualization */}
+										{/* 3D Tour visualization */}
 										<div className="flex h-32 items-center justify-center space-x-1">
 											{Array.from({ length: 20 }).map((_, i) => (
 												<motion.div
@@ -305,7 +313,7 @@ export default function FeaturesSection() {
 											whileHover={{ scale: 1.1 }}
 											transition={{ type: "spring", stiffness: 300 }}
 										>
-											<Clock
+											<Users
 												className="m-auto size-6 text-primary-600 dark:text-primary-500"
 												strokeWidth={1}
 											/>
@@ -317,11 +325,10 @@ export default function FeaturesSection() {
 											transition={{ delay: 0.7 }}
 										>
 											<h2 className="font-medium text-lg transition">
-												Smart Reminders
+												Free Dashboard
 											</h2>
 											<p className="text-foreground/70">
-												Customizable prayer reminders and notifications to keep
-												you connected with your spiritual routine.
+												Free property management dashboard for agents & partners
 											</p>
 										</motion.div>
 									</div>
@@ -339,7 +346,7 @@ export default function FeaturesSection() {
 												transition={{ delay: 1.1 }}
 											>
 												<span className="block h-fit rounded border px-2 py-1 text-xs shadow-sm">
-													Fajr 5:30 AM
+													Agents
 												</span>
 												<motion.div
 													className="flex size-7 items-center justify-center rounded-full bg-blue-100 ring-4 ring-background dark:bg-blue-900"
@@ -361,7 +368,7 @@ export default function FeaturesSection() {
 													<div className="h-3 w-3 rounded-full bg-orange-500" />
 												</motion.div>
 												<span className="block h-fit rounded border px-2 py-1 text-xs shadow-sm">
-													Maghrib 7:15 PM
+													Partners
 												</span>
 											</motion.div>
 											<motion.div
@@ -371,7 +378,7 @@ export default function FeaturesSection() {
 												transition={{ delay: 1.5 }}
 											>
 												<span className="block h-fit rounded border px-2 py-1 text-xs shadow-sm">
-													Isha 8:45 PM
+													Companies
 												</span>
 												<motion.div
 													className="flex size-7 items-center justify-center rounded-full bg-purple-100 ring-4 ring-background dark:bg-purple-900"
@@ -387,6 +394,28 @@ export default function FeaturesSection() {
 						</AnimatedCard>
 					</div>
 				</div>
+				
+				{/* Dashboard CTA for Partners */}
+				<motion.div
+					initial={{ opacity: 0, y: 30 }}
+					animate={isTitleInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+					transition={{ duration: 0.6, delay: 0.8 }}
+					className="mt-16 text-center"
+				>
+					<div className="mx-auto max-w-2xl">
+						<h3 className="mb-4 text-2xl font-semibold">
+							Ready to Get Started?
+						</h3>
+						<p className="mb-8 text-foreground/70">
+							Join thousands of real estate professionals who are already using Estatemar to grow their business.
+						</p>
+						<Button asChild size="lg">
+							<Link href="/dashboard">
+								Go To Dashboard
+							</Link>
+						</Button>
+					</div>
+				</motion.div>
 			</div>
 		</section>
 	);

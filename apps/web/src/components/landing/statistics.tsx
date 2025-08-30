@@ -1,38 +1,47 @@
 "use client";
 
-import { Download, Globe, Star, Users } from "lucide-react";
+import { TrendingUp, Building2, DollarSign, Award, Users } from "lucide-react";
 import { motion, useInView } from "motion/react";
 import { useEffect, useRef, useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 
+// Import Montserrat font
+import { Montserrat } from 'next/font/google'
+
+const montserrat = Montserrat({ 
+  subsets: ['latin'],
+  weight: ['300', '400', '500', '600', '700'],
+  variable: '--font-montserrat'
+})
+
 const stats = [
 	{
+		icon: Building2,
+		value: 430,
+		suffix: "+",
+		label: "Successful Deals",
+		description: "Properties closed",
+	},
+	{
 		icon: Users,
-		value: 50000,
+		value: 4300,
 		suffix: "+",
-		label: "Active Users",
-		description: "Muslims worldwide",
+		label: "Satisfied Customers",
+		description: "Happy clients",
 	},
 	{
-		icon: Download,
-		value: 100000,
-		suffix: "+",
-		label: "Downloads",
-		description: "Across all platforms",
+		icon: DollarSign,
+		value: 400,
+		suffix: "M+",
+		label: "Trading Volume",
+		description: "In property value",
 	},
 	{
-		icon: Star,
-		value: 4.8,
-		suffix: "",
-		label: "App Rating",
-		description: "Out of 5 stars",
-	},
-	{
-		icon: Globe,
-		value: 150,
+		icon: Award,
+		value: 25,
 		suffix: "+",
-		label: "Countries",
-		description: "Global reach",
+		label: "Years Experience",
+		description: "In real estate law",
 	},
 ];
 
@@ -134,6 +143,7 @@ export function StatisticsSection() {
 	return (
 		<section
 			ref={containerRef}
+			id="trusted-expertise"
 			className="bg-gradient-to-br from-primary/5 via-transparent to-primary/5 py-16 md:py-32"
 		>
 			<div className="container mx-auto max-w-6xl px-6">
@@ -144,12 +154,11 @@ export function StatisticsSection() {
 					transition={{ duration: 0.6 }}
 					className="mb-16 text-center"
 				>
-					<h2 className="mb-4 font-bold text-3xl md:text-4xl">
-						Trusted by Muslims worldwide
+					<h2 className={`mb-4 font-bold text-3xl md:text-4xl text-primary ${montserrat.className}`}>
+						Trusted Expertise
 					</h2>
-					<p className="mx-auto max-w-2xl text-foreground/70">
-						Join our growing community of users who have made Salati their daily
-						companion for prayer
+					<p className={`mx-auto max-w-2xl text-foreground/80 text-lg font-medium ${montserrat.className}`}>
+						Our co-founders are seasoned real estate lawyers with a proven track record
 					</p>
 				</motion.div>
 

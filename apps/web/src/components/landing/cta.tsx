@@ -1,6 +1,6 @@
 "use client";
 
-import { Download, Star, Users } from "lucide-react";
+import { Building2, Star, Users } from "lucide-react";
 import { motion, useInView } from "motion/react";
 import { useRef } from "react";
 
@@ -20,12 +20,11 @@ export function CTASection() {
 					transition={{ duration: 0.6 }}
 				>
 					<h2 className="mb-6 font-bold text-3xl md:text-4xl lg:text-5xl">
-						Start Your Spiritual Journey Today
+						Start Your Smarter Real Estate Journey Today
 					</h2>
 					<p className="mx-auto mb-8 max-w-2xl text-foreground/70 text-lg">
-						Join thousands of Muslims worldwide who have transformed their
-						prayer experience with Salati. Download now and never miss a prayer
-						again.
+						Join thousands of real estate professionals worldwide who have transformed their
+						business with Estatemar. Download now and experience the future of property management.
 					</p>
 
 					{/* Stats */}
@@ -39,7 +38,7 @@ export function CTASection() {
 							className="flex items-center gap-2"
 						>
 							<Star className="size-5 fill-yellow-400 text-yellow-400" />
-							<span className="font-semibold">4.8/5 Rating</span>
+							<span className="font-semibold">4.9/5 Rating</span>
 						</motion.div>
 						<motion.div
 							initial={{ opacity: 0, scale: 0.8 }}
@@ -50,7 +49,7 @@ export function CTASection() {
 							className="flex items-center gap-2"
 						>
 							<Users className="size-5 text-primary" />
-							<span className="font-semibold">50K+ Users</span>
+							<span className="font-semibold">4.3K+ Customers</span>
 						</motion.div>
 						<motion.div
 							initial={{ opacity: 0, scale: 0.8 }}
@@ -60,8 +59,8 @@ export function CTASection() {
 							transition={{ delay: 0.4 }}
 							className="flex items-center gap-2"
 						>
-							<Download className="size-5 text-primary" />
-							<span className="font-semibold">100K+ Downloads</span>
+							<Building2 className="size-5 text-primary" />
+							<span className="font-semibold">430+ Deals</span>
 						</motion.div>
 					</div>
 
@@ -73,7 +72,7 @@ export function CTASection() {
 						className="flex flex-col items-center justify-center gap-4 sm:flex-row"
 					>
 						<a
-							href="https://apps.apple.com/us/app/salati-%D8%B5%D9%84%D8%A7%D8%AA%D9%8A/id1546722792?itscg=30200&itsct=apps_box_badge&mttnsubad=1546722792"
+							href="#"
 							className="inline-block"
 						>
 							<img
@@ -83,7 +82,7 @@ export function CTASection() {
 							/>
 						</a>
 						<a
-							href="https://play.google.com/store/apps/details?id=net.nadsoft.salati&hl=en&gl=US"
+							href="#"
 							className="inline-block"
 						>
 							<img
@@ -102,7 +101,7 @@ export function CTASection() {
 						className="mt-8"
 					>
 						<p className="text-foreground/60 text-sm">
-							Free to download • No ads • Privacy focused
+							Free dashboard for agents • Real-time data • Legal support included
 						</p>
 					</motion.div>
 				</motion.div>

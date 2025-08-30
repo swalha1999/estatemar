@@ -7,44 +7,44 @@ import { Card, CardContent } from "@/components/ui/card";
 
 const faqs = [
 	{
-		question: "Is Salati free to use?",
+		question: "Is Estatemar free to use?",
 		answer:
-			"Yes, Salati is completely free to download and use. All core features including prayer times, qibla finder, and athkar are available at no cost.",
+			"Yes, Estatemar offers a free dashboard for agents and partners. Core features are available at no cost, with premium features for advanced users.",
 	},
 	{
-		question: "Does Salati work offline?",
+		question: "How accurate is the market data?",
 		answer:
-			"Yes! Once you've set your location, Salati works offline for prayer times and qibla direction. You'll need internet connection for initial setup and updates.",
+			"Estatemar uses real-time data from multiple sources to provide accurate market valuations, rental yields, and investment projections for your properties.",
 	},
 	{
-		question: "How accurate are the prayer times?",
+		question: "What legal support do you provide?",
 		answer:
-			"Salati uses precise astronomical calculations and multiple calculation methods to provide highly accurate prayer times for your exact location.",
+			"Our in-house legal experts ensure safe and transparent transactions, providing guidance on contracts, regulations, and compliance throughout the process.",
 	},
 	{
-		question: "Can I customize the athan notifications?",
+		question: "Can I manage multiple properties?",
 		answer:
-			"Absolutely! You can choose different athan sounds, adjust notification timing, and set custom reminders for each prayer.",
+			"Absolutely! Our dashboard allows you to manage multiple properties in one place, track performance, and access comprehensive analytics for each investment.",
 	},
 	{
-		question: "Is my location data private?",
+		question: "How do virtual 3D tours work?",
 		answer:
-			"Yes, your location data is only used to calculate accurate prayer times and is never shared with third parties. We prioritize your privacy.",
+			"Virtual 3D tours allow potential buyers and tenants to explore properties remotely, providing an immersive experience that saves time and increases engagement.",
 	},
 	{
-		question: "Does Salati support multiple languages?",
+		question: "What financing options are available?",
 		answer:
-			"Yes, Salati supports multiple languages including English, Arabic, and others. You can change the language in the app settings.",
+			"Estatemar partners with various financial institutions to offer flexible financing options for property purchases and development projects.",
 	},
 	{
-		question: "Can I use Salati while traveling?",
+		question: "Can I use Estatemar for commercial properties?",
 		answer:
-			"Yes! Salati automatically updates prayer times when you travel to different locations, and the qibla finder works worldwide.",
+			"Yes! Estatemar supports both residential and commercial properties, with specialized tools and data for different property types and investment strategies.",
 	},
 	{
-		question: "How do I report a bug or suggest a feature?",
+		question: "How do I get started as an agent or partner?",
 		answer:
-			"You can contact us through the app settings or email us directly. We value your feedback and continuously work to improve Salati.",
+			"Simply sign up for a free account and access our dashboard. Our team will guide you through the setup process and help you maximize your real estate business.",
 	},
 ];
 
@@ -109,7 +109,7 @@ export function FAQSection() {
 	const isTitleInView = useInView(titleRef, { once: true });
 	
 	return (
-		<section ref={containerRef} className="bg-background/50 py-16 md:py-32">
+		<section ref={containerRef} id="faq" className="bg-background/50 py-16 md:py-32">
 			<div className="container mx-auto max-w-4xl px-6">
 				<motion.div
 					ref={titleRef}
@@ -122,8 +122,8 @@ export function FAQSection() {
 						Frequently Asked Questions
 					</h2>
 					<p className="mx-auto max-w-2xl text-foreground/70">
-						Find answers to common questions about Salati and how it can enhance
-						your prayer experience
+						Find answers to common questions about Estatemar and how it can enhance
+						your real estate experience
 					</p>
 				</motion.div>
 

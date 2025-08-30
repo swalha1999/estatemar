@@ -3,6 +3,7 @@
 import { X } from "lucide-react";
 import { useEffect, useState } from "react";
 import { Button } from "../ui/button";
+import Image from "next/image";
 
 export function AndroidSmartBanner() {
 	const [isVisible, setIsVisible] = useState(false);
@@ -30,7 +31,7 @@ export function AndroidSmartBanner() {
 	const handleInstall = () => {
 		// Replace with your Android app's Play Store URL
 		window.open(
-			"https://play.google.com/store/apps/details?id=net.nadsoft.salati",
+			"#",
 			"_blank",
 		);
 	};
@@ -44,25 +45,23 @@ export function AndroidSmartBanner() {
 			<div className="flex items-center justify-between px-4 py-3">
 				<div className="flex items-center space-x-3">
 					{/* App Icon */}
-					<div className="flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-blue-500 to-green-500">
-						<svg
-							className="h-6 w-6 text-white"
-							fill="currentColor"
-							viewBox="0 0 24 24"
-							aria-label="App icon"
-						>
-							<title>App icon</title>
-							<path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" />
-						</svg>
+					<div className="flex h-12 w-12 items-center justify-center rounded-xl">
+						<Image
+							src="/blue_estatemar_logo.svg"
+							alt="Estatemar App Icon"
+							width={100}
+							height={80}
+							className="h-12 w-auto"
+						/>
 					</div>
 
 					{/* App Info */}
 					<div className="flex-1">
 						<div className="font-semibold text-gray-900 text-sm dark:text-white">
-							Salati
+							Estatemar
 						</div>
 						<div className="text-gray-500 text-xs dark:text-gray-400">
-							Islamic Prayer Times & Qibla
+							Smarter Real Estate Platform
 						</div>
 						<div className="font-medium text-blue-600 text-xs dark:text-blue-400">
 							FREE

@@ -9,50 +9,50 @@ import { Card, CardContent } from "@/components/ui/card";
 const testimonials = [
 	{
 		name: "Ahmed Hassan",
-		role: "Software Engineer",
+		role: "Property Investor",
 		avatar: "https://github.com/shadcn.png",
 		content:
-			"Salati has completely transformed my prayer experience. The accurate prayer times and beautiful athan notifications keep me connected to my faith throughout the day.",
+			"Estatemar has completely transformed my real estate investing. The real-time data and ROI projections help me make informed decisions that maximize my returns.",
 		rating: 5,
 	},
 	{
 		name: "Fatima Al-Zahra",
-		role: "Teacher",
+		role: "Real Estate Agent",
 		avatar: "https://github.com/emilkowalski.png",
 		content:
-			"As a busy teacher, I love how Salati reminds me of prayer times and helps me stay focused during salah. The interface is so clean and intuitive.",
+			"As a busy agent, I love how Estatemar's free dashboard helps me manage properties and reach more clients. The virtual tours are a game-changer for showings.",
 		rating: 5,
 	},
 	{
 		name: "Omar Khalil",
-		role: "Student",
+		role: "Property Developer",
 		avatar: "https://github.com/raunofreiberg.png",
 		content:
-			"The qibla finder feature is amazing! I travel a lot and it's so helpful to have accurate qibla direction wherever I am. Highly recommend!",
+			"The legal support team is exceptional! They ensure all our transactions are safe and transparent. Estatemar makes complex deals feel simple.",
 		rating: 5,
 	},
 	{
 		name: "Aisha Rahman",
-		role: "Healthcare Worker",
+		role: "Property Manager",
 		avatar: "https://github.com/educlopez.png",
 		content:
-			"Working in healthcare means irregular hours, but Salati ensures I never miss a prayer. The notifications are perfect and not intrusive.",
+			"Managing multiple properties used to be overwhelming, but Estatemar's dashboard keeps everything organized. The market insights are invaluable.",
 		rating: 5,
 	},
 	{
 		name: "Yusuf Ibrahim",
-		role: "Business Owner",
+		role: "First-time Buyer",
 		avatar: "https://github.com/swalha1999.png",
 		content:
-			"The athkar feature is wonderful. It helps me maintain my spiritual connection throughout the day with beautiful reminders and dhikr.",
+			"Buying my first property was intimidating, but Estatemar's guidance and legal support made the process smooth and stress-free.",
 		rating: 5,
 	},
 	{
 		name: "Zara Malik",
-		role: "Designer",
+		role: "Real Estate Partner",
 		avatar: "https://github.com/shadcn.png",
 		content:
-			"I love the beautiful design and smooth animations. It makes using the app a pleasure while helping me stay connected to my faith.",
+			"I love the beautiful interface and comprehensive features. Estatemar has helped me grow my real estate business significantly.",
 		rating: 5,
 	},
 ];
@@ -125,7 +125,7 @@ export function TestimonialsSection() {
 	const isTitleInView = useInView(titleRef, { once: true });
 
 	return (
-		<section ref={containerRef} className="bg-background/50 py-16 md:py-32">
+		<section ref={containerRef} id="testimonials" className="bg-background/50 py-16 md:py-32">
 			<div className="container mx-auto max-w-6xl px-6">
 				<motion.div
 					ref={titleRef}
@@ -135,11 +135,11 @@ export function TestimonialsSection() {
 					className="mb-16 text-center"
 				>
 					<h2 className="mb-4 font-bold text-3xl md:text-4xl">
-						Loved by Muslims worldwide
+						Loved by real estate professionals
 					</h2>
 					<p className="mx-auto max-w-2xl text-foreground/70">
-						Join thousands of users who have transformed their prayer experience
-						with Salati
+						Join thousands of users who have transformed their real estate experience
+						with Estatemar
 					</p>
 				</motion.div>
 
