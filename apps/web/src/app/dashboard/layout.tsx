@@ -1,21 +1,51 @@
 "use client";
 
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useEffect } from "react";
 import { DashboardSidebar } from "@/components/dashboard-sidebar";
 import { SiteHeader } from "@/components/site-header";
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
+import { useOrganization } from "@/contexts/organization-context";
 import { authClient } from "@/lib/auth-client";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
 	const router = useRouter();
+	const pathname = usePathname();
 	const { data: session, isPending } = authClient.useSession();
+	const { userOrgs, isLoading: orgsLoading } = useOrganization();
 
 	useEffect(() => {
 		if (!session && !isPending) {
 			router.push("/login");
 		}
-	}, [session, isPending]);
+	}, [session, isPending, router]);
+
+	useEffect(() => {
+		if (
+			session &&
+			!orgsLoading &&
+			userOrgs.length === 0 &&
+			pathname !== "/dashboard/onboarding"
+		) {
+			router.push("/dashboard/onboarding");
+		}
+	}, [session, orgsLoading, userOrgs.length, pathname, router]);
+
+	if (isPending || orgsLoading) {
+		return (
+			<div className="flex h-screen items-center justify-center">
+				<div className="h-8 w-8 animate-spin rounded-full border-gray-900 border-b-2" />
+			</div>
+		);
+	}
+
+	if (!session) {
+		return null;
+	}
+
+	if (userOrgs.length === 0 && pathname !== "/dashboard/onboarding") {
+		return null;
+	}
 
 	return (
 		<SidebarProvider

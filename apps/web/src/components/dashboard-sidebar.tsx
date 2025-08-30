@@ -20,6 +20,7 @@ import { NavDocuments } from "@/components/nav-documents";
 import { NavMain } from "@/components/nav-main";
 import { NavSecondary } from "@/components/nav-secondary";
 import { NavUser } from "@/components/nav-user";
+import { OrgSwitcher } from "@/components/org-switcher";
 import {
 	Sidebar,
 	SidebarContent,
@@ -28,7 +29,9 @@ import {
 	SidebarMenu,
 	SidebarMenuButton,
 	SidebarMenuItem,
+	SidebarSeparator,
 } from "@/components/ui/sidebar";
+import { useOrganization } from "@/contexts/organization-context";
 import { authClient } from "@/lib/auth-client";
 
 const data = {
@@ -148,6 +151,34 @@ export function DashboardSidebar({
 }: React.ComponentProps<typeof Sidebar>) {
 	const { data: session } = authClient.useSession();
 
+	const navigationItems = [
+		{
+			title: "Dashboard",
+			url: "/dashboard" as const,
+			icon: IconDashboard,
+		},
+		{
+			title: "Properties",
+			url: "/dashboard/properties" as const,
+			icon: IconHome,
+		},
+		{
+			title: "Profile",
+			url: "/dashboard/profile" as const,
+			icon: IconUser,
+		},
+		{
+			title: "Analytics",
+			url: "#" as const,
+			icon: IconChartBar,
+		},
+		{
+			title: "Team",
+			url: "/dashboard/team" as const,
+			icon: IconUsers,
+		},
+	];
+
 	return (
 		<Sidebar collapsible="offcanvas" {...props}>
 			<SidebarHeader>
@@ -163,9 +194,13 @@ export function DashboardSidebar({
 						</SidebarMenuButton>
 					</SidebarMenuItem>
 				</SidebarMenu>
+				<SidebarSeparator className="mx-0" />
+				<div className="px-2">
+					<OrgSwitcher />
+				</div>
 			</SidebarHeader>
 			<SidebarContent>
-				<NavMain items={data.navMain} />
+				<NavMain items={navigationItems} />
 				<NavDocuments items={data.documents} />
 				<NavSecondary items={data.navSecondary} className="mt-auto" />
 			</SidebarContent>

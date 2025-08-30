@@ -38,6 +38,7 @@ export declare const createPropertySchema: z.ZodObject<{
     lotSize: z.ZodOptional<z.ZodNumber>;
     yearBuilt: z.ZodOptional<z.ZodNumber>;
     parking: z.ZodOptional<z.ZodNumber>;
+    organizationId: z.ZodOptional<z.ZodString>;
 }, z.core.$strip>;
 export declare const addPropertyImageSchema: z.ZodObject<{
     propertyId: z.ZodString;
@@ -55,6 +56,7 @@ export declare const addPropertyAmenitySchema: z.ZodObject<{
 export declare const getPropertiesSchema: z.ZodObject<{
     limit: z.ZodDefault<z.ZodNumber>;
     offset: z.ZodDefault<z.ZodNumber>;
+    organizationId: z.ZodOptional<z.ZodString>;
 }, z.core.$strip>;
 export declare const updatePropertySchema: z.ZodObject<{
     id: z.ZodString;
@@ -91,7 +93,8 @@ export declare const getPropertySchema: z.ZodObject<{
 }, z.core.$strip>;
 export declare const propertySchema: z.ZodObject<{
     id: z.ZodString;
-    userId: z.ZodString;
+    userId: z.ZodNullable<z.ZodString>;
+    organizationId: z.ZodNullable<z.ZodString>;
     name: z.ZodString;
     description: z.ZodString;
     location: z.ZodString;
@@ -127,7 +130,8 @@ export declare const propertyAmenitySchema: z.ZodObject<{
 }, z.core.$strip>;
 export declare const propertyWithDetailsSchema: z.ZodObject<{
     id: z.ZodString;
-    userId: z.ZodString;
+    userId: z.ZodNullable<z.ZodString>;
+    organizationId: z.ZodNullable<z.ZodString>;
     name: z.ZodString;
     description: z.ZodString;
     location: z.ZodString;

@@ -6,9 +6,10 @@ const nextConfig: NextConfig = {
 		remotePatterns: [
 			{
 				protocol: "https",
-				hostname: "estatemar.d97515014e92cd4f04045d814b2679c4.r2.cloudflarestorage.com",
-			}
-		]
+				hostname:
+					"estatemar.d97515014e92cd4f04045d814b2679c4.r2.cloudflarestorage.com",
+			},
+		],
 	},
 };
 

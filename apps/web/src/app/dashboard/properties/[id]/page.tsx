@@ -167,12 +167,12 @@ export default function PropertyDetailsPage() {
 									key={image.id}
 									className="group relative aspect-video overflow-hidden rounded-lg bg-muted"
 								>
-																	<Image
-									src={image.signedUrl}
-									alt={property.name}
-									fill
-									className="object-cover transition-transform group-hover:scale-105"
-								/>
+									<Image
+										src={image.signedUrl}
+										alt={property.name}
+										fill
+										className="object-cover transition-transform group-hover:scale-105"
+									/>
 								</div>
 							))}
 						</div>

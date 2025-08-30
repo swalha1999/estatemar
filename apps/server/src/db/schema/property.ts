@@ -8,12 +8,14 @@ import {
 	uuid,
 } from "drizzle-orm/pg-core";
 import { user } from "./auth";
+import { organization } from "./organizations";
 
 export const property = pgTable("property", {
 	id: uuid("id").primaryKey().defaultRandom(),
-	userId: uuid("user_id")
-		.notNull()
-		.references(() => user.id, { onDelete: "cascade" }),
+	userId: uuid("user_id").references(() => user.id, { onDelete: "cascade" }),
+	organizationId: uuid("organization_id").references(() => organization.id, {
+		onDelete: "cascade",
+	}),
 
 	// Basic Information
 	name: text("name").notNull(),

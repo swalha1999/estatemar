@@ -7,8 +7,9 @@ import {
 	removePropertyImageSchema,
 	updatePropertySchema,
 } from "@estatemar/schemas/properties";
-import { eq } from "drizzle-orm";
+import { and, eq, isNull } from "drizzle-orm";
 import { db } from "../db";
+import { organizationMember } from "../db/schema/organizations";
 import {
 	property,
 	propertyAmenity,
@@ -17,18 +18,67 @@ import {
 import { protectedProcedure } from "../lib/orpc";
 import { bucket } from "../lib/r2";
 
+// Helper function to check if user has access to organization
+async function hasOrgAccess(
+	userId: string,
+	orgId: string,
+	requiredRoles: string[] = ["owner", "admin", "member", "viewer"],
+): Promise<boolean> {
+	const membership = await db
+		.select()
+		.from(organizationMember)
+		.where(
+			and(
+				eq(organizationMember.userId, userId),
+				eq(organizationMember.organizationId, orgId),
+			),
+		)
+		.limit(1);
+
+	return membership.length > 0 && requiredRoles.includes(membership[0].role);
+}
+
+// Helper function to check if user can edit properties in organization
+async function canEditOrgProperties(
+	userId: string,
+	orgId: string,
+): Promise<boolean> {
+	return hasOrgAccess(userId, orgId, ["owner", "admin", "member"]);
+}
+
 export const propertiesRouter = {
 	createProperty: protectedProcedure
 		.input(createPropertySchema)
 		.handler(async ({ input, context }) => {
 			try {
+				const userId = context.session?.user?.id;
+				if (!userId) {
+					return { success: false, error: "Unauthorized" };
+				}
+
+				// If organizationId is provided, check if user can create properties in org
+				if (input.organizationId) {
+					const canEdit = await canEditOrgProperties(
+						userId,
+						input.organizationId,
+					);
+					if (!canEdit) {
+						return {
+							success: false,
+							error:
+								"Insufficient permissions to create properties in this organization",
+						};
+					}
+				}
+
 				const propertyId = crypto.randomUUID();
 
 				const newProperty = await db
 					.insert(property)
 					.values({
 						id: propertyId,
-						userId: context.session?.user?.id || "",
+						userId: input.organizationId ? null : userId, // Set userId only if not org property
+						organizationId: input.organizationId || null,
 						name: input.name,
 						description: input.description,
 						location: input.location,
@@ -145,7 +195,21 @@ export const propertiesRouter = {
 					};
 				}
 
-				if (existingProperty[0].userId !== context.session?.user?.id) {
+				const userId = context.session?.user?.id;
+				let canEdit = false;
+
+				if (existingProperty[0].userId === userId) {
+					// User owns the property directly
+					canEdit = true;
+				} else if (existingProperty[0].organizationId && userId) {
+					// Property belongs to organization - check if user can edit
+					canEdit = await canEditOrgProperties(
+						userId,
+						existingProperty[0].organizationId,
+					);
+				}
+
+				if (!canEdit) {
 					return {
 						success: false,
 						error: "Unauthorized",
@@ -267,10 +331,34 @@ export const propertiesRouter = {
 		.input(getPropertiesSchema)
 		.handler(async ({ input, context }) => {
 			try {
+				const userId = context.session?.user?.id;
+				if (!userId) {
+					return { success: false, error: "Unauthorized" };
+				}
+
+				let whereCondition: ReturnType<typeof eq> | ReturnType<typeof and>;
+
+				if (input.organizationId) {
+					// Check if user has access to this organization
+					const hasAccess = await hasOrgAccess(userId, input.organizationId);
+					if (!hasAccess) {
+						return { success: false, error: "Access denied to organization" };
+					}
+
+					// Get organization properties
+					whereCondition = eq(property.organizationId, input.organizationId);
+				} else {
+					// Get user's personal properties (where organizationId is null)
+					whereCondition = and(
+						eq(property.userId, userId),
+						isNull(property.organizationId),
+					);
+				}
+
 				const properties = await db
 					.select()
 					.from(property)
-					.where(eq(property.userId, context.session?.user?.id || ""))
+					.where(whereCondition)
 					.limit(input.limit)
 					.offset(input.offset);
 
@@ -350,11 +438,19 @@ export const propertiesRouter = {
 
 				const prop = propertyData[0];
 
-				// Check if user owns this property
-				console.log("Server: Property userId:", prop.userId);
-				console.log("Server: Session userId:", context.session?.user?.id);
-				if (prop.userId !== context.session?.user?.id) {
-					console.log("Server: User does not own this property");
+				// Check if user has access to this property
+				const userId = context.session?.user?.id;
+				let hasAccess = false;
+
+				if (prop.userId === userId) {
+					// User owns the property directly
+					hasAccess = true;
+				} else if (prop.organizationId && userId) {
+					// Property belongs to organization - check if user is member
+					hasAccess = await hasOrgAccess(userId, prop.organizationId);
+				}
+
+				if (!hasAccess) {
 					return {
 						success: false,
 						error: "Unauthorized",

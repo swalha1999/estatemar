@@ -34,6 +34,10 @@
 		"./common": {
 			"types": "./lib/common/index.d.ts",
 			"default": "./lib/common/index.js"
+		},
+		"./organizations": {
+			"types": "./lib/organizations/index.d.ts",
+			"default": "./lib/organizations/index.js"
 		}
 	},
 	"dependencies": {

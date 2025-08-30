@@ -436,12 +436,12 @@ export default function AddPropertyPage() {
 								{images.map((image, index) => (
 									<div key={image.name} className="group relative">
 										<div className="aspect-video overflow-hidden rounded-lg bg-muted">
-																				<Image
-										src={URL.createObjectURL(image)}
-										alt={image.name}
-										fill
-										className="object-cover transition-transform group-hover:scale-105"
-									/>
+											<Image
+												src={URL.createObjectURL(image)}
+												alt={image.name}
+												fill
+												className="object-cover transition-transform group-hover:scale-105"
+											/>
 										</div>
 										<Button
 											type="button"

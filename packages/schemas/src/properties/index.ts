@@ -32,6 +32,7 @@ export const createPropertySchema = z.object({
 	lotSize: z.number().int().positive().optional(),
 	yearBuilt: z.number().int().positive().optional(),
 	parking: z.number().int().nonnegative().optional(),
+	organizationId: z.string().uuid().optional(), // Add organization support
 });
 
 // Add property image schema
@@ -55,6 +56,7 @@ export const addPropertyAmenitySchema = z.object({
 export const getPropertiesSchema = z.object({
 	limit: z.number().int().positive().default(10),
 	offset: z.number().int().nonnegative().default(0),
+	organizationId: z.string().uuid().optional(), // Add organization context
 });
 
 // Update property schema
@@ -87,7 +89,8 @@ export const getPropertySchema = z.object({
 // Property schema (for responses)
 export const propertySchema = z.object({
 	id: z.string(),
-	userId: z.string(),
+	userId: z.string().nullable(),
+	organizationId: z.string().nullable(),
 	name: z.string(),
 	description: z.string(),
 	location: z.string(),
@@ -129,7 +132,8 @@ export const propertyAmenitySchema = z.object({
 // Property with images and amenities schema
 export const propertyWithDetailsSchema = z.object({
 	id: z.string(),
-	userId: z.string(),
+	userId: z.string().nullable(),
+	organizationId: z.string().nullable(),
 	name: z.string(),
 	description: z.string(),
 	location: z.string(),

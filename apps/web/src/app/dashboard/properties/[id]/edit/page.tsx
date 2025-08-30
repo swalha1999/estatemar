@@ -531,12 +531,12 @@ export default function EditPropertyPage() {
 									{existingImages.map((image, index) => (
 										<div key={image.id} className="group relative">
 											<div className="aspect-video overflow-hidden rounded-lg bg-muted">
-																					<Image
-										src={image.signedUrl}
-										alt={`Property view ${index + 1}`}
-										fill
-										className="object-cover transition-transform group-hover:scale-105"
-									/>
+												<Image
+													src={image.signedUrl}
+													alt={`Property view ${index + 1}`}
+													fill
+													className="object-cover transition-transform group-hover:scale-105"
+												/>
 											</div>
 											<Button
 												type="button"
@@ -585,12 +585,12 @@ export default function EditPropertyPage() {
 									{images.map((image, index) => (
 										<div key={image.name} className="group relative">
 											<div className="aspect-video overflow-hidden rounded-lg bg-muted">
-																					<Image
-										src={URL.createObjectURL(image)}
-										alt={image.name}
-										fill
-										className="object-cover transition-transform group-hover:scale-105"
-									/>
+												<Image
+													src={URL.createObjectURL(image)}
+													alt={image.name}
+													fill
+													className="object-cover transition-transform group-hover:scale-105"
+												/>
 											</div>
 											<Button
 												type="button"

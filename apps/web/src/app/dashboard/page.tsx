@@ -31,6 +31,5 @@ export default function Page() {
 		</div>
 
 		//here add the reset of the page @ghassan
-
 	);
 }

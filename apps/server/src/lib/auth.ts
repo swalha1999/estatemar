@@ -13,7 +13,7 @@ export const auth = betterAuth({
 		enabled: true,
 	},
 	advanced: {
-		database:{
+		database: {
 			generateId: () => crypto.randomUUID(),
 		},
 		defaultCookieAttributes: {
