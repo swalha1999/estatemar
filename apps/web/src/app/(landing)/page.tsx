@@ -1,3 +1,4 @@
+import { useId } from "react";
 import { AndroidSmartBanner } from "@/components/landing/android-smart-banner";
 import { CTASection } from "@/components/landing/cta";
 import { FAQSection } from "@/components/landing/faq";
@@ -10,6 +11,13 @@ import { StatisticsSection } from "@/components/landing/statistics";
 import { TestimonialsSection } from "@/components/landing/testimonials";
 
 export default function LandingPage() {
+	const featureId = useId();
+	const statisticsId = useId();
+	const howItWorksId = useId();
+	const testimonialsId = useId();
+	const faqId = useId();
+	const downloadId = useId();
+
 	return (
 		<div className="relative overflow-hidden">
 			{/* Android Smart App Banner */}
@@ -25,22 +33,22 @@ export default function LandingPage() {
 			</div>
 
 			<HeroShowcase />
-			<section id="features">
+			<section id={featureId}>
 				<FeaturesSection />
 			</section>
-			<section id="statistics">
+			<section id={statisticsId}>
 				<StatisticsSection />
 			</section>
-			<section id="how-it-works">
+			<section id={howItWorksId}>
 				<HowItWorksSection />
 			</section>
-			<section id="testimonials">
+			<section id={testimonialsId}>
 				<TestimonialsSection />
 			</section>
-			<section id="faq">
+			<section id={faqId}>
 				<FAQSection />
 			</section>
-			<section id="download">
+			<section id={downloadId}>
 				<CTASection />
 			</section>
 			<Footer />

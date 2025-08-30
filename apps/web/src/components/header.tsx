@@ -1,21 +1,20 @@
-"use client"
+"use client";
 
-import * as React from "react"
-import Link from "next/link"
-import { usePathname } from "next/navigation"
-import { motion } from "motion/react"
-import { Menu, X, ArrowLeft } from "lucide-react"
-import Image from "next/image"
-
-import { Button } from "@/components/ui/button"
-import { ModeToggle } from "@/components/themes/mode-toggle"
+import { ArrowLeft, Menu, X } from "lucide-react";
+import { motion } from "motion/react";
+import Image from "next/image";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import * as React from "react";
+import { ModeToggle } from "@/components/themes/mode-toggle";
+import { Button } from "@/components/ui/button";
 
 export function Header() {
-	const [isMenuOpen, setIsMenuOpen] = React.useState(false)
-	const pathname = usePathname()
-	const isHomePage = pathname === "/"
+	const [isMenuOpen, setIsMenuOpen] = React.useState(false);
+	const pathname = usePathname();
+	const isHomePage = pathname === "/";
 
-	const toggleMenu = () => setIsMenuOpen(!isMenuOpen)
+	const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
 	return (
 		<header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
@@ -23,12 +22,7 @@ export function Header() {
 				{/* Logo and Back Button */}
 				<div className="flex items-center space-x-4">
 					{!isHomePage && (
-						<Button
-							variant="ghost"
-							size="icon"
-							asChild
-							className="mr-2"
-						>
+						<Button variant="ghost" size="icon" asChild className="mr-2">
 							<Link href="/">
 								<ArrowLeft className="h-4 w-4" />
 								<span className="sr-only">Go back to home</span>
@@ -53,34 +47,34 @@ export function Header() {
 
 				{/* Desktop Navigation - Only show on home page */}
 				{isHomePage && (
-					<nav className="hidden md:flex items-center space-x-6">
+					<nav className="hidden items-center space-x-6 md:flex">
 						<Link
 							href="#features"
-							className="text-foreground/70 hover:text-foreground transition-colors"
+							className="text-foreground/70 transition-colors hover:text-foreground"
 						>
 							Features
 						</Link>
 						<Link
 							href="#how-it-works"
-							className="text-foreground/70 hover:text-foreground transition-colors"
+							className="text-foreground/70 transition-colors hover:text-foreground"
 						>
 							How It Works
 						</Link>
 						<Link
 							href="#testimonials"
-							className="text-foreground/70 hover:text-foreground transition-colors"
+							className="text-foreground/70 transition-colors hover:text-foreground"
 						>
 							Reviews
 						</Link>
 						<Link
 							href="#faq"
-							className="text-foreground/70 hover:text-foreground transition-colors"
+							className="text-foreground/70 transition-colors hover:text-foreground"
 						>
 							FAQ
 						</Link>
 						<Link
 							href="#download"
-							className="text-foreground/70 hover:text-foreground transition-colors"
+							className="text-foreground/70 transition-colors hover:text-foreground"
 						>
 							Download
 						</Link>
@@ -88,7 +82,7 @@ export function Header() {
 				)}
 
 				{/* Desktop Actions */}
-				<div className="hidden md:flex items-center space-x-4">
+				<div className="hidden items-center space-x-4 md:flex">
 					<ModeToggle />
 					<Button asChild>
 						<Link href="https://apps.apple.com/us/app/salati-%D8%B5%D9%84%D8%A7%D8%AA%D9%8A/id1546722792">
@@ -98,7 +92,7 @@ export function Header() {
 				</div>
 
 				{/* Mobile Menu Button */}
-				<div className="md:hidden flex items-center space-x-2">
+				<div className="flex items-center space-x-2 md:hidden">
 					<ModeToggle />
 					<Button
 						variant="ghost"
@@ -106,7 +100,11 @@ export function Header() {
 						onClick={toggleMenu}
 						aria-label="Toggle menu"
 					>
-						{isMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+						{isMenuOpen ? (
+							<X className="h-5 w-5" />
+						) : (
+							<Menu className="h-5 w-5" />
+						)}
 					</Button>
 				</div>
 			</div>
@@ -118,43 +116,43 @@ export function Header() {
 					animate={isMenuOpen ? "open" : "closed"}
 					variants={{
 						open: { opacity: 1, height: "auto" },
-						closed: { opacity: 0, height: 0 }
+						closed: { opacity: 0, height: 0 },
 					}}
 					transition={{ duration: 0.2 }}
-					className="md:hidden overflow-hidden border-t bg-background/95 backdrop-blur"
+					className="overflow-hidden border-t bg-background/95 backdrop-blur md:hidden"
 				>
-					<nav className="container mx-auto px-6 py-4 space-y-4">
+					<nav className="container mx-auto space-y-4 px-6 py-4">
 						<Link
 							href="#features"
-							className="block text-foreground/70 hover:text-foreground transition-colors"
+							className="block text-foreground/70 transition-colors hover:text-foreground"
 							onClick={() => setIsMenuOpen(false)}
 						>
 							Features
 						</Link>
 						<Link
 							href="#how-it-works"
-							className="block text-foreground/70 hover:text-foreground transition-colors"
+							className="block text-foreground/70 transition-colors hover:text-foreground"
 							onClick={() => setIsMenuOpen(false)}
 						>
 							How It Works
 						</Link>
 						<Link
 							href="#testimonials"
-							className="block text-foreground/70 hover:text-foreground transition-colors"
+							className="block text-foreground/70 transition-colors hover:text-foreground"
 							onClick={() => setIsMenuOpen(false)}
 						>
 							Reviews
 						</Link>
 						<Link
 							href="#faq"
-							className="block text-foreground/70 hover:text-foreground transition-colors"
+							className="block text-foreground/70 transition-colors hover:text-foreground"
 							onClick={() => setIsMenuOpen(false)}
 						>
 							FAQ
 						</Link>
 						<Link
 							href="#download"
-							className="block text-foreground/70 hover:text-foreground transition-colors"
+							className="block text-foreground/70 transition-colors hover:text-foreground"
 							onClick={() => setIsMenuOpen(false)}
 						>
 							Download
@@ -171,5 +169,5 @@ export function Header() {
 				</motion.div>
 			)}
 		</header>
-	)
+	);
 }

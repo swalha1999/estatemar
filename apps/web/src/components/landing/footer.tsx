@@ -113,22 +113,6 @@ export function Footer() {
 									Terms of Service
 								</Link>
 							</li>
-							<li>
-								<Link
-									href="/contact"
-									className="text-foreground/70 transition-colors hover:text-foreground"
-								>
-									Contact Us
-								</Link>
-							</li>
-							<li>
-								<Link
-									href="/feedback"
-									className="text-foreground/70 transition-colors hover:text-foreground"
-								>
-									Feedback
-								</Link>
-							</li>
 						</ul>
 					</motion.div>
 				</div>

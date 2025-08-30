@@ -72,6 +72,7 @@ function FAQItem({ faq, index }: { faq: (typeof faqs)[0]; index: number }) {
 			<Card className="overflow-hidden">
 				<CardContent className="p-0">
 					<button
+						type="button"
 						onClick={() => setIsOpen(!isOpen)}
 						className="flex w-full items-center justify-between p-6 text-left transition-colors hover:bg-muted/50"
 					>
@@ -106,7 +107,7 @@ export function FAQSection() {
 	const containerRef = useRef(null);
 	const titleRef = useRef(null);
 	const isTitleInView = useInView(titleRef, { once: true });
-
+	
 	return (
 		<section ref={containerRef} className="bg-background/50 py-16 md:py-32">
 			<div className="container mx-auto max-w-4xl px-6">
@@ -128,7 +129,7 @@ export function FAQSection() {
 
 				<div className="space-y-4">
 					{faqs.map((faq, index) => (
-						<FAQItem key={index} faq={faq} index={index} />
+						<FAQItem key={faq.question} faq={faq} index={index} />
 					))}
 				</div>
 			</div>
