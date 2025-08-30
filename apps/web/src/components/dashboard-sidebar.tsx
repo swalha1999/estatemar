@@ -1,15 +1,12 @@
 import {
 	IconCamera,
-	IconChartBar,
 	IconDashboard,
 	IconDatabase,
 	IconFileAi,
 	IconFileDescription,
 	IconFileWord,
-	IconHelp,
 	IconHome,
 	IconReport,
-	IconSearch,
 	IconSettings,
 	IconUser,
 	IconUsers,
@@ -50,11 +47,6 @@ const data = {
 			title: "Profile",
 			url: "/dashboard/profile" as const,
 			icon: IconUser,
-		},
-		{
-			title: "Analytics",
-			url: "#" as const,
-			icon: IconChartBar,
 		},
 		{
 			title: "Team",
@@ -115,16 +107,7 @@ const data = {
 			title: "Settings",
 			url: "#",
 			icon: IconSettings,
-		},
-		{
-			title: "Get Help",
-			url: "#",
-			icon: IconHelp,
-		},
-		{
-			title: "Search",
-			url: "#",
-			icon: IconSearch,
+			disabled: true,
 		},
 	],
 	documents: [
@@ -132,16 +115,19 @@ const data = {
 			name: "Data Library",
 			url: "#",
 			icon: IconDatabase,
+			disabled: true,
 		},
 		{
 			name: "Reports",
 			url: "#",
 			icon: IconReport,
+			disabled: true,
 		},
 		{
 			name: "Word Assistant",
 			url: "#",
 			icon: IconFileWord,
+			disabled: true,
 		},
 	],
 };
@@ -161,16 +147,6 @@ export function DashboardSidebar({
 			title: "Properties",
 			url: "/dashboard/properties" as const,
 			icon: IconHome,
-		},
-		{
-			title: "Profile",
-			url: "/dashboard/profile" as const,
-			icon: IconUser,
-		},
-		{
-			title: "Analytics",
-			url: "#" as const,
-			icon: IconChartBar,
 		},
 		{
 			title: "Team",

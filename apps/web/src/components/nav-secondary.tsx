@@ -19,6 +19,7 @@ export function NavSecondary({
 		title: string;
 		url: string;
 		icon: Icon;
+		disabled?: boolean;
 	}[];
 } & React.ComponentPropsWithoutRef<typeof SidebarGroup>) {
 	return (
@@ -27,11 +28,22 @@ export function NavSecondary({
 				<SidebarMenu>
 					{items.map((item) => (
 						<SidebarMenuItem key={item.title}>
-							<SidebarMenuButton asChild>
-								<a href={item.url}>
-									<item.icon />
-									<span>{item.title}</span>
-								</a>
+							<SidebarMenuButton 
+								asChild={!item.disabled}
+								disabled={item.disabled}
+								className={item.disabled ? "opacity-50 cursor-not-allowed" : ""}
+							>
+								{item.disabled ? (
+									<div className="flex items-center gap-2 px-3 py-2 text-sm">
+										<item.icon className="size-4" />
+										<span>{item.title}</span>
+									</div>
+								) : (
+									<a href={item.url}>
+										<item.icon className="size-4" />
+										<span>{item.title}</span>
+									</a>
+								)}
 							</SidebarMenuButton>
 						</SidebarMenuItem>
 					))}

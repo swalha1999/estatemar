@@ -46,7 +46,7 @@ export default function ProfilePage() {
 		<>
 			<div className="flex items-center justify-between">
 				<div>
-					<h1 className="font-bold text-3xl">Profile</h1>
+					<h1 className="font-bold text-3xl">Account</h1>
 					<p className="text-muted-foreground">
 						Manage your account information and preferences
 					</p>
