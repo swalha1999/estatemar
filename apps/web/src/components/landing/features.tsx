@@ -1,20 +1,11 @@
 "use client";
 
-import { TrendingUp, Building2, Scale, Eye, Users, Shield } from "lucide-react";
+import { Building2, Eye, Scale, TrendingUp, Users } from "lucide-react";
 import { motion, useInView } from "motion/react";
-import { useRef } from "react";
-import { Card, CardContent } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
 import Link from "next/link";
-
-// Import Montserrat font
-import { Montserrat } from 'next/font/google'
-
-const montserrat = Montserrat({ 
-  subsets: ['latin'],
-  weight: ['300', '400', '500', '600', '700'],
-  variable: '--font-montserrat'
-})
+import { useRef } from "react";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 // Animated card wrapper component
 function AnimatedCard({
@@ -63,11 +54,11 @@ export default function FeaturesSection() {
 	const isTitleInView = useInView(titleRef, { once: true });
 
 	return (
-			<section
-		ref={containerRef}
-		id="why-estatemar"
-		className="overflow-hidden bg-gray-50 py-16 md:py-32 dark:bg-transparent"
-	>
+		<section
+			ref={containerRef}
+			id="why-estatemar"
+			className="overflow-hidden bg-gray-50 py-16 md:py-32 dark:bg-transparent"
+		>
 			<div className="mx-auto max-w-5xl px-6">
 				<div className="relative">
 					{/* Animated section title */}
@@ -80,11 +71,13 @@ export default function FeaturesSection() {
 						transition={{ duration: 0.6 }}
 						className="mb-16 text-center"
 					>
-						<h2 className={`mb-4 font-bold text-3xl md:text-4xl text-primary ${montserrat.className}`}>
+						<h2 className="mb-4 font-bold text-3xl text-foreground tracking-tight md:text-4xl">
 							Why Estatemar?
 						</h2>
-						<p className={`mx-auto max-w-2xl text-foreground/80 text-lg font-medium ${montserrat.className}`}>
-							We bring together real-time data, legal expertise, and innovative technology to make property ownership and investing easier than ever.
+						<p className="mx-auto max-w-2xl text-lg text-muted-foreground">
+							We bring together real-time data, legal expertise, and innovative
+							technology to make property ownership and investing easier than
+							ever.
 						</p>
 					</motion.div>
 
@@ -94,37 +87,17 @@ export default function FeaturesSection() {
 							className="relative col-span-full flex overflow-hidden lg:col-span-2"
 						>
 							<Card className="h-full w-full">
-								<CardContent className="relative m-auto size-fit pt-6">
-									<motion.div
-										className="relative flex h-24 w-56 items-center"
-										whileHover={{ scale: 1.05 }}
-										transition={{ type: "spring", stiffness: 300 }}
-									>
-										<motion.span
-											className="mx-auto block w-fit font-semibold text-5xl"
-											initial={{ scale: 0, rotate: -180 }}
-											animate={{ scale: 1, rotate: 0 }}
-											transition={{ type: "spring", bounce: 0.6, delay: 0.8 }}
-										>
-											Live
-										</motion.span>
-									</motion.div>
-									<motion.h2
-										className="mt-6 text-center font-semibold text-3xl"
-										initial={{ opacity: 0, y: 20 }}
-										animate={{ opacity: 1, y: 0 }}
-										transition={{ delay: 0.6 }}
-									>
-										Real Data & ROI
-									</motion.h2>
-									<motion.p
-										className="mt-2 text-center text-foreground/70"
-										initial={{ opacity: 0 }}
-										animate={{ opacity: 1 }}
-										transition={{ delay: 0.8 }}
-									>
-										Track live market value and rental potential of your properties
-									</motion.p>
+								<CardHeader className="pb-2 text-center">
+									<div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-primary/10">
+										<TrendingUp className="h-8 w-8 text-primary" />
+									</div>
+									<CardTitle className="text-xl">Real Data & ROI</CardTitle>
+								</CardHeader>
+								<CardContent className="text-center">
+									<p className="text-muted-foreground">
+										Track live market value and rental potential of your
+										properties
+									</p>
 								</CardContent>
 							</Card>
 						</AnimatedCard>
@@ -133,43 +106,18 @@ export default function FeaturesSection() {
 							className="relative col-span-full overflow-hidden sm:col-span-3 lg:col-span-2"
 						>
 							<Card className="h-full w-full">
-								<CardContent className="pt-6">
-									<motion.div
-										className="before:-inset-2 relative mx-auto flex aspect-square size-32 rounded-full border before:absolute before:rounded-full before:border dark:border-white/10 dark:before:border-white/5"
-										whileHover={{ rotate: 15 }}
-										transition={{ type: "spring", stiffness: 300 }}
-									>
-										<motion.div
-											initial={{ rotate: 0 }}
-											animate={{ rotate: 360 }}
-											transition={{
-												duration: 20,
-												repeat: Number.POSITIVE_INFINITY,
-												ease: "linear",
-											}}
-											className="m-auto"
-										>
-											<Building2 className="h-16 w-16 text-primary-600 dark:text-primary-500" />
-										</motion.div>
-									</motion.div>
-									<div className="relative z-10 mt-6 space-y-2 text-center">
-										<motion.h2
-											className="font-medium text-lg transition dark:text-white"
-											initial={{ opacity: 0, y: 20 }}
-											animate={{ opacity: 1, y: 0 }}
-											transition={{ delay: 0.4 }}
-										>
-											Projects & Financing
-										</motion.h2>
-										<motion.p
-											className="text-foreground/70"
-											initial={{ opacity: 0 }}
-											animate={{ opacity: 1 }}
-											transition={{ delay: 0.6 }}
-										>
-											Explore developments with flexible financing options
-										</motion.p>
+								<CardHeader className="pb-2 text-center">
+									<div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-primary/10">
+										<Building2 className="h-8 w-8 text-primary" />
 									</div>
+									<CardTitle className="text-xl">
+										Projects & Financing
+									</CardTitle>
+								</CardHeader>
+								<CardContent className="text-center">
+									<p className="text-muted-foreground">
+										Explore developments with flexible financing options
+									</p>
 								</CardContent>
 							</Card>
 						</AnimatedCard>
@@ -178,223 +126,94 @@ export default function FeaturesSection() {
 							className="relative col-span-full overflow-hidden sm:col-span-3 lg:col-span-2"
 						>
 							<Card className="h-full w-full">
-								<CardContent className="pt-6">
-									<motion.div className="relative pt-6 lg:px-6">
-										<div className="before:-inset-2 relative mx-auto mb-6 flex aspect-square size-32 items-center justify-center rounded-full border before:absolute before:rounded-full before:border dark:border-white/10 dark:before:border-white/5">
-											<motion.div
-												whileHover={{ scale: 1.1 }}
-												transition={{ type: "spring", stiffness: 400 }}
-												className="flex items-center justify-center"
-											>
-												<Scale className="h-16 w-16 text-primary-600 dark:text-primary-500" />
-											</motion.div>
-										</div>
-									</motion.div>
-									<div className="relative z-10 mt-6 space-y-2 text-center">
-										<motion.h2
-											className="font-medium text-lg transition"
-											initial={{ opacity: 0, y: 20 }}
-											animate={{ opacity: 1, y: 0 }}
-											transition={{ delay: 0.5 }}
-										>
-											Legal Support
-										</motion.h2>
-										<motion.p
-											className="text-foreground/70"
-											initial={{ opacity: 0 }}
-											animate={{ opacity: 1 }}
-											transition={{ delay: 0.7 }}
-										>
-											In-house legal experts ensure safe and transparent transactions
-										</motion.p>
+								<CardHeader className="pb-2 text-center">
+									<div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-primary/10">
+										<Scale className="h-8 w-8 text-primary" />
 									</div>
+									<CardTitle className="text-xl">Legal Support</CardTitle>
+								</CardHeader>
+								<CardContent className="text-center">
+									<p className="text-muted-foreground">
+										In-house legal experts ensure safe and transparent
+										transactions
+									</p>
 								</CardContent>
 							</Card>
 						</AnimatedCard>
 						<AnimatedCard
 							delay={0.4}
-							className="card variant-outlined relative col-span-full overflow-hidden lg:col-span-3"
+							className="relative col-span-full overflow-hidden lg:col-span-3"
 						>
 							<Card className="h-full w-full">
-								<CardContent className="grid pt-6 sm:grid-cols-2">
-									<div className="relative z-10 flex flex-col justify-between space-y-12 lg:space-y-6">
-										<motion.div
-											className="before:-inset-2 relative flex aspect-square size-12 rounded-full border before:absolute before:rounded-full before:border dark:border-white/10 dark:before:border-white/5"
-											whileHover={{ scale: 1.1, rotate: 5 }}
-											transition={{ type: "spring", stiffness: 300 }}
-										>
-											<Eye
-												className="m-auto size-5 text-primary-600 dark:text-primary-500"
-												strokeWidth={1}
-											/>
-										</motion.div>
-										<motion.div
-											className="space-y-2"
-											initial={{ opacity: 0, x: -30 }}
-											animate={{ opacity: 1, x: 0 }}
-											transition={{ delay: 0.6 }}
-										>
-											<h2 className="font-medium text-lg text-zinc-800 transition dark:text-white">
-												Virtual 3D Tours
-											</h2>
-											<p className="text-foreground/70">
-												Walk through properties anytime, anywhere with immersive virtual tours
-											</p>
-										</motion.div>
+								<CardHeader className="pb-2">
+									<div className="mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-primary/10">
+										<Eye className="h-6 w-6 text-primary" />
 									</div>
-									<motion.div
-										className="-mb-6 -mr-6 relative mt-6 h-fit rounded-tl-(--radius) border-t border-l p-6 py-6 sm:ml-6"
-										initial={{ opacity: 0, x: 30 }}
-										animate={{ opacity: 1, x: 0 }}
-										transition={{ delay: 0.8 }}
-									>
-										<div className="absolute top-2 left-3 flex gap-1">
-											<motion.span
-												className="block size-2 rounded-full border dark:border-white/10 dark:bg-white/10"
-												animate={{ scale: [1, 1.2, 1] }}
-												transition={{
-													duration: 2,
-													repeat: Number.POSITIVE_INFINITY,
-													delay: 0,
-												}}
-											/>
-											<motion.span
-												className="block size-2 rounded-full border dark:border-white/10 dark:bg-white/10"
-												animate={{ scale: [1, 1.2, 1] }}
-												transition={{
-													duration: 2,
-													repeat: Number.POSITIVE_INFINITY,
-													delay: 0.3,
-												}}
-											/>
-											<motion.span
-												className="block size-2 rounded-full border dark:border-white/10 dark:bg-white/10"
-												animate={{ scale: [1, 1.2, 1] }}
-												transition={{
-													duration: 2,
-													repeat: Number.POSITIVE_INFINITY,
-													delay: 0.6,
-												}}
-											/>
-										</div>
-
-										{/* 3D Tour visualization */}
-										<div className="flex h-32 items-center justify-center space-x-1">
-											{Array.from({ length: 20 }).map((_, i) => (
-												<motion.div
-													key={i}
-													className="w-2 rounded-full bg-primary-500 dark:bg-primary-400"
-													animate={{
-														height: [8, Math.random() * 60 + 20, 8],
-													}}
-													transition={{
-														duration: Math.random() * 2 + 1,
-														repeat: Number.POSITIVE_INFINITY,
-														repeatType: "reverse",
-														ease: "easeInOut",
-													}}
-													style={{ height: 8 }}
-												/>
-											))}
-										</div>
-									</motion.div>
+									<CardTitle className="text-xl">Virtual 3D Tours</CardTitle>
+								</CardHeader>
+								<CardContent>
+									<p className="text-muted-foreground">
+										Walk through properties anytime, anywhere with immersive
+										virtual tours
+									</p>
+									<div className="mt-6 rounded-lg border bg-muted/50 p-1">
+										<iframe
+											src="https://tourin3d.com/"
+											className="h-48 w-full rounded-md"
+											title="Virtual 3D Tour Demo"
+											allowFullScreen
+										/>
+									</div>
 								</CardContent>
 							</Card>
 						</AnimatedCard>
 						<AnimatedCard
 							delay={0.5}
-							className="card variant-outlined relative col-span-full overflow-hidden lg:col-span-3"
+							className="relative col-span-full overflow-hidden lg:col-span-3"
 						>
 							<Card className="h-full w-full">
-								<CardContent className="grid h-full pt-6 sm:grid-cols-2">
-									<div className="relative z-10 flex flex-col justify-between space-y-12 lg:space-y-6">
-										<motion.div
-											className="before:-inset-2 relative flex aspect-square size-12 rounded-full border before:absolute before:rounded-full before:border dark:border-white/10 dark:before:border-white/5"
-											whileHover={{ scale: 1.1 }}
-											transition={{ type: "spring", stiffness: 300 }}
-										>
-											<Users
-												className="m-auto size-6 text-primary-600 dark:text-primary-500"
-												strokeWidth={1}
-											/>
-										</motion.div>
-										<motion.div
-											className="space-y-2"
-											initial={{ opacity: 0, x: -30 }}
-											animate={{ opacity: 1, x: 0 }}
-											transition={{ delay: 0.7 }}
-										>
-											<h2 className="font-medium text-lg transition">
-												Free Dashboard
-											</h2>
-											<p className="text-foreground/70">
-												Free property management dashboard for agents & partners
-											</p>
-										</motion.div>
+								<CardHeader className="pb-2">
+									<div className="mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-primary/10">
+										<Users className="h-6 w-6 text-primary" />
 									</div>
-									<motion.div
-										className="sm:-my-6 sm:-mr-6 relative mt-6 before:absolute before:inset-0 before:mx-auto before:w-px before:bg-(--color-border)"
-										initial={{ opacity: 0, x: 30 }}
-										animate={{ opacity: 1, x: 0 }}
-										transition={{ delay: 0.9 }}
-									>
-										<div className="relative flex h-full flex-col justify-center space-y-6 py-6">
-											<motion.div
-												className="relative flex w-[calc(50%+0.875rem)] items-center justify-end gap-2"
-												initial={{ opacity: 0, x: 20 }}
-												animate={{ opacity: 1, x: 0 }}
-												transition={{ delay: 1.1 }}
-											>
-												<span className="block h-fit rounded border px-2 py-1 text-xs shadow-sm">
-													Agents
-												</span>
-												<motion.div
-													className="flex size-7 items-center justify-center rounded-full bg-blue-100 ring-4 ring-background dark:bg-blue-900"
-													whileHover={{ scale: 1.1 }}
-												>
-													<div className="h-2 w-2 rounded-full bg-blue-500" />
-												</motion.div>
-											</motion.div>
-											<motion.div
-												className="relative ml-[calc(50%-1rem)] flex items-center gap-2"
-												initial={{ opacity: 0, x: -20 }}
-												animate={{ opacity: 1, x: 0 }}
-												transition={{ delay: 1.3 }}
-											>
-												<motion.div
-													className="flex size-8 items-center justify-center rounded-full bg-orange-100 ring-4 ring-background dark:bg-orange-900"
-													whileHover={{ scale: 1.1 }}
-												>
-													<div className="h-3 w-3 rounded-full bg-orange-500" />
-												</motion.div>
-												<span className="block h-fit rounded border px-2 py-1 text-xs shadow-sm">
-													Partners
-												</span>
-											</motion.div>
-											<motion.div
-												className="relative flex w-[calc(50%+0.875rem)] items-center justify-end gap-2"
-												initial={{ opacity: 0, x: 20 }}
-												animate={{ opacity: 1, x: 0 }}
-												transition={{ delay: 1.5 }}
-											>
-												<span className="block h-fit rounded border px-2 py-1 text-xs shadow-sm">
-													Companies
-												</span>
-												<motion.div
-													className="flex size-7 items-center justify-center rounded-full bg-purple-100 ring-4 ring-background dark:bg-purple-900"
-													whileHover={{ scale: 1.1 }}
-												>
-													<div className="h-2 w-2 rounded-full bg-purple-500" />
-												</motion.div>
-											</motion.div>
+									<CardTitle className="text-xl">Free Dashboard</CardTitle>
+								</CardHeader>
+								<CardContent>
+									<p className="mb-6 text-muted-foreground">
+										Free property management dashboard for agents & partners
+									</p>
+									<div className="space-y-4">
+										<div className="flex items-center gap-3">
+											<div className="flex h-8 w-8 items-center justify-center rounded-full bg-blue-100 dark:bg-blue-900/30">
+												<div className="h-2 w-2 rounded-full bg-blue-500" />
+											</div>
+											<span className="text-muted-foreground text-sm">
+												Agents
+											</span>
 										</div>
-									</motion.div>
+										<div className="flex items-center gap-3">
+											<div className="flex h-8 w-8 items-center justify-center rounded-full bg-orange-100 dark:bg-orange-900/30">
+												<div className="h-2 w-2 rounded-full bg-orange-500" />
+											</div>
+											<span className="text-muted-foreground text-sm">
+												Partners
+											</span>
+										</div>
+										<div className="flex items-center gap-3">
+											<div className="flex h-8 w-8 items-center justify-center rounded-full bg-purple-100 dark:bg-purple-900/30">
+												<div className="h-2 w-2 rounded-full bg-purple-500" />
+											</div>
+											<span className="text-muted-foreground text-sm">
+												Companies
+											</span>
+										</div>
+									</div>
 								</CardContent>
 							</Card>
 						</AnimatedCard>
 					</div>
 				</div>
-				
+
 				{/* Dashboard CTA for Partners */}
 				<motion.div
 					initial={{ opacity: 0, y: 30 }}
@@ -403,16 +222,15 @@ export default function FeaturesSection() {
 					className="mt-16 text-center"
 				>
 					<div className="mx-auto max-w-2xl">
-						<h3 className="mb-4 text-2xl font-semibold">
+						<h3 className="mb-4 font-semibold text-2xl text-foreground tracking-tight">
 							Ready to Get Started?
 						</h3>
-						<p className="mb-8 text-foreground/70">
-							Join thousands of real estate professionals who are already using Estatemar to grow their business.
+						<p className="mb-8 text-muted-foreground">
+							Join thousands of real estate professionals who are already using
+							Estatemar to grow their business.
 						</p>
 						<Button asChild size="lg">
-							<Link href="/dashboard">
-								Go To Dashboard
-							</Link>
+							<Link href="/dashboard">Go To Dashboard</Link>
 						</Button>
 					</div>
 				</motion.div>
