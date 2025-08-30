@@ -1,11 +1,10 @@
 "use client";
 
-import { IconUpload, IconX } from "@tabler/icons-react";
 import { useQuery } from "@tanstack/react-query";
-import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useId, useState } from "react";
+import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import {
 	Card,
@@ -25,6 +24,7 @@ import {
 	SelectValue,
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
+import { FileUpload } from "@/components/file-upload";
 import { authClient } from "@/lib/auth-client";
 import { useOrganization } from "@/contexts/organization-context";
 import { client, orpc } from "@/utils/orpc";
@@ -73,7 +73,6 @@ export default function AddPropertyPage() {
 	const yearBuiltId = useId();
 	const parkingId = useId();
 	const statusId = useId();
-	const imageUploadId = useId();
 
 	const [formData, setFormData] = useState({
 		name: "",
@@ -92,6 +91,9 @@ export default function AddPropertyPage() {
 
 	const [selectedAmenities, setSelectedAmenities] = useState<string[]>([]);
 	const [images, setImages] = useState<File[]>([]);
+	const [uploadedImages, setUploadedImages] = useState<
+		Array<{ objectKey: string; signedUrl: string }>
+	>([]);
 	const [isSubmitting, setIsSubmitting] = useState(false);
 
 	useQuery(orpc.privateData.queryOptions());
@@ -119,13 +121,15 @@ export default function AddPropertyPage() {
 		);
 	};
 
-	const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
-		const files = Array.from(e.target.files || []);
-		setImages((prev) => [...prev, ...files]);
+	const handleUploadSuccess = (
+		uploadedFiles: Array<{ objectKey: string; signedUrl: string }>,
+	) => {
+		setUploadedImages(uploadedFiles);
+		toast.success(`Successfully uploaded ${uploadedFiles.length} image(s)`);
 	};
 
-	const removeImage = (index: number) => {
-		setImages((prev) => prev.filter((_, i) => i !== index));
+	const handleUploadError = (error: string) => {
+		toast.error(error);
 	};
 
 	const handleSubmit = async (e: React.FormEvent) => {
@@ -135,7 +139,18 @@ export default function AddPropertyPage() {
 		try {
 			// Validate required fields
 			if (!formData.type) {
-				throw new Error("Property type is required");
+				toast.error("Property type is required");
+				return;
+			}
+
+			if (!formData.name.trim()) {
+				toast.error("Property name is required");
+				return;
+			}
+
+			if (!formData.price || Number.parseFloat(formData.price) <= 0) {
+				toast.error("Valid property price is required");
+				return;
 			}
 
 			// Create the property first
@@ -166,45 +181,77 @@ export default function AddPropertyPage() {
 			});
 
 			if (!propertyResult.success || !propertyResult.data) {
-				throw new Error(propertyResult.error || "Failed to create property");
+				toast.error(propertyResult.error || "Failed to create property");
+				return;
 			}
 
 			const propertyId = propertyResult.data.id;
+			toast.success("Property created successfully!");
 
-			// Upload images and associate them with the property
-			for (let i = 0; i < images.length; i++) {
-				const image = images[i];
-				const uploadResult = await client.uploadFile({
-					file: image,
-					fileName: `properties/${propertyId}/${Date.now()}-${image.name}`,
-				});
+			// Associate uploaded images with the property
+			for (let i = 0; i < uploadedImages.length; i++) {
+				const uploadedImage = uploadedImages[i];
+				const imageFile = images[i]; // Get corresponding file for metadata
 
-				if (uploadResult.success && uploadResult.data) {
-					// Add the image to the property
-					await client.addPropertyImage({
+				try {
+					const addImageResult = await client.addPropertyImage({
 						propertyId,
-						objectKey: uploadResult.data.objectKey,
-						fileName: image.name,
-						mimeType: image.type || "application/octet-stream",
-						fileSize: image.size,
+						objectKey: uploadedImage.objectKey,
+						fileName: imageFile?.name || `image-${i + 1}`,
+						mimeType: imageFile?.type || "image/jpeg",
+						fileSize: imageFile?.size || 0,
 						isPrimary: i === 0, // First image is primary
 						sortOrder: i,
 					});
+
+					if (!addImageResult.success) {
+						console.warn(
+							`Failed to associate image ${i + 1}:`,
+							addImageResult.error,
+						);
+						toast.error(`Failed to associate image ${i + 1}`);
+					}
+				} catch (error) {
+					console.error(`Error associating image ${i + 1}:`, error);
+					toast.error(`Error associating image ${i + 1}`);
 				}
 			}
 
 			// Add amenities to the property
+			let amenitiesAdded = 0;
 			for (const amenity of selectedAmenities) {
-				await client.addPropertyAmenity({
-					propertyId,
-					name: amenity,
-				});
+				try {
+					const amenityResult = await client.addPropertyAmenity({
+						propertyId,
+						name: amenity,
+					});
+
+					if (amenityResult.success) {
+						amenitiesAdded++;
+					} else {
+						console.warn(
+							`Failed to add amenity "${amenity}":`,
+							amenityResult.error,
+						);
+						toast.error(`Failed to add amenity: ${amenity}`);
+					}
+				} catch (error) {
+					console.error(`Error adding amenity "${amenity}":`, error);
+					toast.error(`Error adding amenity: ${amenity}`);
+				}
 			}
 
+			if (amenitiesAdded > 0) {
+				toast.success(`Added ${amenitiesAdded} amenities`);
+			}
+
+			// Navigate to properties list
 			router.push("/dashboard/properties");
 		} catch (error) {
 			console.error("Error submitting property:", error);
-			// You might want to show an error toast here
+			toast.error(
+				error instanceof Error ? error.message : "Failed to create property",
+			);
 		} finally {
 			setIsSubmitting(false);
 		}
@@ -413,55 +460,17 @@ export default function AddPropertyPage() {
 							Upload high-quality images to showcase your property
 						</CardDescription>
 					</CardHeader>
-					<CardContent className="space-y-4">
-						<div className="rounded-lg border-2 border-muted-foreground/25 border-dashed p-6 text-center">
-							<input
-								type="file"
-								accept="image/*"
-								multiple
-								onChange={handleImageUpload}
-								className="hidden"
-								id={imageUploadId}
-							/>
-							<label htmlFor={imageUploadId} className="cursor-pointer">
-								<IconUpload className="mx-auto mb-2 h-8 w-8 text-muted-foreground" />
-								<p className="text-muted-foreground text-sm">
-									Click to upload images or drag and drop
-								</p>
-								<p className="mt-1 text-muted-foreground text-xs">
-									PNG, JPG, WEBP up to 10MB each
-								</p>
-							</label>
-						</div>
-
-						{images.length > 0 && (
-							<div className="grid grid-cols-2 gap-4 md:grid-cols-4">
-								{images.map((image, index) => (
-									<div key={image.name} className="group relative">
-										<div className="aspect-video overflow-hidden rounded-lg bg-muted">
-											<Image
-												src={URL.createObjectURL(image)}
-												alt={image.name}
-												fill
-												className="object-cover transition-transform group-hover:scale-105"
-											/>
-										</div>
-										<Button
-											type="button"
-											variant="destructive"
-											size="sm"
-											className="-top-2 -right-2 absolute h-6 w-6 p-0 opacity-0 transition-opacity group-hover:opacity-100"
-											onClick={() => removeImage(index)}
-										>
-											<IconX className="h-4 w-4" />
-										</Button>
-										<div className="absolute right-0 bottom-0 left-0 truncate bg-black/50 p-1 text-white text-xs opacity-0 transition-opacity group-hover:opacity-100">
-											{image.name}
-										</div>
-									</div>
-								))}
-							</div>
-						)}
+					<CardContent>
+						<FileUpload
+							files={images}
+							onFilesChange={setImages}
+							onUploadSuccess={handleUploadSuccess}
+							onUploadError={handleUploadError}
+							accept="image/*"
+							multiple={true}
+							maxSize={10}
+							showPreview={true}
+						/>
 					</CardContent>
 				</Card>
 

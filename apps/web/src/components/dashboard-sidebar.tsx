@@ -28,7 +28,6 @@ import {
 	SidebarMenuItem,
 	SidebarSeparator,
 } from "@/components/ui/sidebar";
-import { useOrganization } from "@/contexts/organization-context";
 import { authClient } from "@/lib/auth-client";
 
 const data = {
