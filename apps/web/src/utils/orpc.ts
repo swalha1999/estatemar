@@ -20,12 +20,19 @@ export const queryClient = new QueryClient({
 	}),
 });
 
+// Store dynamic headers
+let dynamicHeaders: Record<string, string> = {};
+
 export const link = new RPCLink({
 	url: `${process.env.NEXT_PUBLIC_SERVER_URL}/rpc`,
 	fetch(url, options) {
 		return fetch(url, {
 			...options,
 			credentials: "include",
+			headers: {
+				...(options as RequestInit)?.headers,
+				...dynamicHeaders,
+			},
 		});
 	},
 });
@@ -33,3 +40,13 @@ export const link = new RPCLink({
 export const client: AppRouterClient = createORPCClient(link);
 
 export const orpc = createTanstackQueryUtils(client);
+
+// Helper function to set headers dynamically
+export const setOrpcHeaders = (headers: Record<string, string>) => {
+	dynamicHeaders = { ...dynamicHeaders, ...headers };
+};
+
+// Helper function to clear specific header
+export const clearOrpcHeader = (headerName: string) => {
+	delete dynamicHeaders[headerName];
+};

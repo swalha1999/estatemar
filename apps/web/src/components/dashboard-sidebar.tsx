@@ -14,6 +14,7 @@ import { NavDocuments } from "@/components/nav-documents";
 import { NavMain } from "@/components/nav-main";
 import { NavSecondary } from "@/components/nav-secondary";
 import { NavUser } from "@/components/nav-user";
+import { OrganizationSwitcher } from "@/components/organization-switcher";
 import {
 	Sidebar,
 	SidebarContent,
@@ -85,6 +86,10 @@ export function DashboardSidebar({
 						</SidebarMenuButton>
 					</SidebarMenuItem>
 				</SidebarMenu>
+				<SidebarSeparator className="mx-0" />
+				<div className="px-2 py-2">
+					<OrganizationSwitcher />
+				</div>
 				<SidebarSeparator className="mx-0" />
 			</SidebarHeader>
 			<SidebarContent>

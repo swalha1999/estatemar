@@ -1,6 +1,28 @@
-import { boolean, pgEnum, pgTable, text, timestamp, uuid } from "drizzle-orm/pg-core";
+import {
+	boolean,
+	pgEnum,
+	pgTable,
+	text,
+	timestamp,
+	uniqueIndex,
+	uuid,
+} from "drizzle-orm/pg-core";
 
-export const userTypeEnum = pgEnum("user_type", ["super_admin", "admin", "partner", "customer"]);
+export const userTypeEnum = pgEnum("user_type", [
+	"super_admin",
+	"admin",
+	"partner",
+	"customer",
+]);
+export const organizationTypeEnum = pgEnum("organization_type", [
+	"personal",
+	"team",
+]);
+export const organizationRoleEnum = pgEnum("organization_role", [
+	"owner",
+	"admin",
+	"member",
+]);
 
 export const user = pgTable("user", {
 	id: uuid("id").primaryKey().defaultRandom(),
@@ -10,7 +32,7 @@ export const user = pgTable("user", {
 	image: text("image"),
 	createdAt: timestamp("created_at").notNull(),
 	updatedAt: timestamp("updated_at").notNull(),
-	type: userTypeEnum("type").notNull().default("customer"),
+	type: userTypeEnum("type").notNull().default("partner"),
 });
 
 export const session = pgTable("session", {
@@ -52,3 +74,37 @@ export const verification = pgTable("verification", {
 	createdAt: timestamp("created_at"),
 	updatedAt: timestamp("updated_at"),
 });
+
+export const organization = pgTable("organization", {
+	id: uuid("id").primaryKey().defaultRandom(),
+	name: text("name").notNull(),
+	slug: text("slug").notNull().unique(),
+	type: organizationTypeEnum("type").notNull().default("team"),
+	image: text("image"),
+	createdAt: timestamp("created_at").notNull().defaultNow(),
+	updatedAt: timestamp("updated_at").notNull().defaultNow(),
+	createdBy: uuid("created_by")
+		.notNull()
+		.references(() => user.id, { onDelete: "cascade" }),
+});
+
+export const organizationMember = pgTable(
+	"organization_member",
+	{
+		id: uuid("id").primaryKey().defaultRandom(),
+		organizationId: uuid("organization_id")
+			.notNull()
+			.references(() => organization.id, { onDelete: "cascade" }),
+		userId: uuid("user_id")
+			.notNull()
+			.references(() => user.id, { onDelete: "cascade" }),
+		role: organizationRoleEnum("role").notNull().default("member"),
+		joinedAt: timestamp("joined_at").notNull().defaultNow(),
+	},
+	(table) => ({
+		orgMemberUnique: uniqueIndex("org_member_unique").on(
+			table.organizationId,
+			table.userId,
+		),
+	}),
+);
