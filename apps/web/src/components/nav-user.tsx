@@ -1,9 +1,7 @@
 import {
 	IconDotsVertical,
 	IconLogout,
-	IconUserCircle,
 } from "@tabler/icons-react";
-import Link from "next/link";
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
@@ -83,18 +81,11 @@ export function NavUser({
 						</DropdownMenuLabel>
 						<DropdownMenuSeparator />
 						<DropdownMenuGroup>
-							<DropdownMenuItem asChild>
-								<Link href="/dashboard/profile">
-									<IconUserCircle />
-									Account
-								</Link>
+							<DropdownMenuItem onClick={handleLogout}>
+								<IconLogout />
+								Log out
 							</DropdownMenuItem>
 						</DropdownMenuGroup>
-						<DropdownMenuSeparator />
-						<DropdownMenuItem onClick={handleLogout}>
-							<IconLogout />
-							Log out
-						</DropdownMenuItem>
 					</DropdownMenuContent>
 				</DropdownMenu>
 			</SidebarMenuItem>

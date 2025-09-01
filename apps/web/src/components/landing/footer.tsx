@@ -28,7 +28,9 @@ export function Footer() {
 								/>
 							</div>
 							<p className="mb-6 max-w-md text-foreground/70">
-								Your complete real estate platform for data-driven investing, property management, and seamless experiences. With Estatemar, you invest with confidence.
+								Your complete real estate platform for data-driven investing,
+								property management, and seamless experiences. With Estatemar,
+								you invest with confidence.
 							</p>
 							<div className="flex items-center gap-4">
 								<Link

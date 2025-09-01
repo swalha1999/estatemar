@@ -1,12 +1,12 @@
 {
-    "language-name-en": "English",
-    "language-name-ar": "العربية",
-    "language-name-he": "עברית",
-    "backToHome": "الرئيسية",
-    "location": "الموقع",
-    "minPrice": "السعر الأدنى",
-    "maxPrice": "السعر الأقصى",
-    "beds": "غرف النوم",
-    "backToPartners": "الرجوع",
-    "backToArticles": "العودة إلى المقالات"
+	"language-name-en": "English",
+	"language-name-ar": "العربية",
+	"language-name-he": "עברית",
+	"backToHome": "الرئيسية",
+	"location": "الموقع",
+	"minPrice": "السعر الأدنى",
+	"maxPrice": "السعر الأقصى",
+	"beds": "غرف النوم",
+	"backToPartners": "الرجوع",
+	"backToArticles": "العودة إلى المقالات"
 }

@@ -107,9 +107,13 @@ export function FAQSection() {
 	const containerRef = useRef(null);
 	const titleRef = useRef(null);
 	const isTitleInView = useInView(titleRef, { once: true });
-	
+
 	return (
-		<section ref={containerRef} id="faq" className="bg-background/50 py-16 md:py-32">
+		<section
+			ref={containerRef}
+			id="faq"
+			className="bg-background/50 py-16 md:py-32"
+		>
 			<div className="container mx-auto max-w-4xl px-6">
 				<motion.div
 					ref={titleRef}
@@ -122,8 +126,8 @@ export function FAQSection() {
 						Frequently Asked Questions
 					</h2>
 					<p className="mx-auto max-w-2xl text-foreground/70">
-						Find answers to common questions about Estatemar and how it can enhance
-						your real estate experience
+						Find answers to common questions about Estatemar and how it can
+						enhance your real estate experience
 					</p>
 				</motion.div>
 

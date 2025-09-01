@@ -80,9 +80,7 @@ export function Header() {
 				<div className="hidden items-center space-x-4 md:flex">
 					<ModeToggle />
 					<Button asChild>
-						<Link href="/dashboard">
-							Dashboard
-						</Link>
+						<Link href="/dashboard">Dashboard</Link>
 					</Button>
 				</div>
 
@@ -146,10 +144,7 @@ export function Header() {
 							FAQ
 						</Link>
 						<Button asChild className="w-full">
-							<Link
-								href="/dashboard"
-								onClick={() => setIsMenuOpen(false)}
-							>
+							<Link href="/dashboard" onClick={() => setIsMenuOpen(false)}>
 								Dashboard
 							</Link>
 						</Button>

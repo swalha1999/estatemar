@@ -1,16 +1,16 @@
 "use client";
 
-import { ArticleForm } from "../components/article-form";
 import { handleArticleCreate } from "../actions";
+import { ArticleForm } from "../components/article-form";
 
 interface NewArticleFormProps {
-    lng: string;
+	lng: string;
 }
 
 export function NewArticleForm({ lng }: NewArticleFormProps) {
-    async function onSubmit(data: any) {
-        await handleArticleCreate(data, lng);
-    }
+	async function onSubmit(data: any) {
+		await handleArticleCreate(data, lng);
+	}
 
-    return <ArticleForm onSubmit={onSubmit} lng={lng} />;
+	return <ArticleForm onSubmit={onSubmit} lng={lng} />;
 }

@@ -1,6 +1,7 @@
 {
+	"extends": "../../tsconfig.json",
 	"compilerOptions": {
-		"target": "ES2017",
+		"target": "ES2022",
 		"lib": ["dom", "dom.iterable", "esnext"],
 		"allowJs": true,
 		"skipLibCheck": true,
@@ -21,7 +22,10 @@
 		],
 		"paths": {
 			"@/*": ["./src/*"]
-		}
+		},
+		"composite": true,
+		"tsBuildInfoFile": "./node_modules/.cache/.tsbuildinfo",
+		"allowImportingTsExtensions": false
 	},
 	"include": [
 		"./**/*.ts",
@@ -34,6 +38,9 @@
 	"references": [
 		{
 			"path": "../server"
+		},
+		{
+			"path": "../../packages/cloudflare-r2"
 		}
 	]
 }

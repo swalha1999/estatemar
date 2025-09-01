@@ -125,7 +125,11 @@ export function TestimonialsSection() {
 	const isTitleInView = useInView(titleRef, { once: true });
 
 	return (
-		<section ref={containerRef} id="testimonials" className="bg-background/50 py-16 md:py-32">
+		<section
+			ref={containerRef}
+			id="testimonials"
+			className="bg-background/50 py-16 md:py-32"
+		>
 			<div className="container mx-auto max-w-6xl px-6">
 				<motion.div
 					ref={titleRef}
@@ -138,8 +142,8 @@ export function TestimonialsSection() {
 						Loved by real estate professionals
 					</h2>
 					<p className="mx-auto max-w-2xl text-foreground/70">
-						Join thousands of users who have transformed their real estate experience
-						with Estatemar
+						Join thousands of users who have transformed their real estate
+						experience with Estatemar
 					</p>
 				</motion.div>
 

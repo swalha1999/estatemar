@@ -1,12 +1,12 @@
 {
-    "language-name-en": "English",
-    "language-name-ar": "العربية",
-    "language-name-he": "עברית",
-    "backToHome": "Home",
-    "location": "Location",
-    "minPrice": "Min Price",
-    "maxPrice": "Max Price",
-    "beds": "Beds",
-    "backToPartners": "Back to Partners",
-    "backToArticles": "Back to Articles"
+	"language-name-en": "English",
+	"language-name-ar": "العربية",
+	"language-name-he": "עברית",
+	"backToHome": "Home",
+	"location": "Location",
+	"minPrice": "Min Price",
+	"maxPrice": "Max Price",
+	"beds": "Beds",
+	"backToPartners": "Back to Partners",
+	"backToArticles": "Back to Articles"
 }

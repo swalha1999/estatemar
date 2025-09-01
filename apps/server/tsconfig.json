@@ -1,6 +1,7 @@
 {
+	"extends": "../../tsconfig.json",
 	"compilerOptions": {
-		"target": "ESNext",
+		"target": "ES2022",
 		"module": "ESNext",
 		"moduleResolution": "bundler",
 		"verbatimModuleSyntax": true,
@@ -12,9 +13,28 @@
 		},
 		"outDir": "./dist",
 		"declaration": true,
+		"declarationMap": true,
+		"sourceMap": true,
 		"types": ["node"],
 		"composite": true,
+		"incremental": true,
+		"tsBuildInfoFile": "./node_modules/.cache/.tsbuildinfo",
 		"jsx": "react-jsx",
-		"jsxImportSource": "hono/jsx"
-	}
+		"jsxImportSource": "hono/jsx",
+		"allowImportingTsExtensions": false,
+		"noEmit": false
+	},
+	"include": [
+		"src/**/*.ts",
+		"src/**/*.tsx"
+	],
+	"exclude": [
+		"node_modules",
+		"dist"
+	],
+	"references": [
+		{
+			"path": "../../packages/cloudflare-r2"
+		}
+	]
 }

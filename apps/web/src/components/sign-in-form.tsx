@@ -1,13 +1,19 @@
-import { signInSchema } from "@estatemar/schemas/auth";
 import { useForm } from "@tanstack/react-form";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
+import { z } from "zod";
 import { authClient } from "@/lib/auth-client";
 import Loader from "./loader";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 import { Label } from "./ui/label";
+
+// Auth schemas
+const signInSchema = z.object({
+	email: z.string().email("Please enter a valid email address"),
+	password: z.string().min(6, "Password must be at least 6 characters"),
+});
 
 export default function SignInForm() {
 	const router = useRouter();

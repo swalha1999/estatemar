@@ -1,23 +1,22 @@
-import { Metadata } from "next";
-import React from "react";
+import type { Metadata } from "next";
 import { redirect } from "next/navigation";
+import type React from "react";
 export const metadata: Metadata = {
-    title: "Estatemar Debug",
-    description: "Debug panel for Estatemar",
+	title: "Estatemar Debug",
+	description: "Debug panel for Estatemar",
 };
 
 export default async function DebugLayout(props: {
-    children: React.ReactNode;
+	children: React.ReactNode;
 }) {
+	// this to prevent access to the debug panel from outside debug mode
+	if (process.env.DEBUG !== "true") {
+		return redirect("/");
+	}
 
-    // this to prevent access to the debug panel from outside debug mode
-    if (process.env.DEBUG !== "true") {
-        return redirect("/");
-    }
-
-    return (
-        <main className="min-h-scree" style={{ backgroundColor: "#f0f2f5" }}>
-            {props.children}
-        </main>
-    );
+	return (
+		<main className="min-h-scree" style={{ backgroundColor: "#f0f2f5" }}>
+			{props.children}
+		</main>
+	);
 }

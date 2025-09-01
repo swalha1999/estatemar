@@ -42,7 +42,14 @@
 			"dependsOn": ["^lint"]
 		},
 		"check-types": {
-			"dependsOn": ["^check-types"]
+			"dependsOn": ["^check-types"],
+			"inputs": ["$TURBO_DEFAULT$", "tsconfig.json", "tsconfig.*.json"],
+			"outputs": ["node_modules/.cache/.tsbuildinfo"]
+		},
+		"type-check": {
+			"dependsOn": ["^type-check"],
+			"inputs": ["$TURBO_DEFAULT$", "tsconfig.json", "tsconfig.*.json"],
+			"outputs": ["node_modules/.cache/.tsbuildinfo"]
 		},
 		"test": {
 			"dependsOn": ["^test"],

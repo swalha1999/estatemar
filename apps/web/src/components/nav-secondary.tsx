@@ -28,10 +28,10 @@ export function NavSecondary({
 				<SidebarMenu>
 					{items.map((item) => (
 						<SidebarMenuItem key={item.title}>
-							<SidebarMenuButton 
+							<SidebarMenuButton
 								asChild={!item.disabled}
 								disabled={item.disabled}
-								className={item.disabled ? "opacity-50 cursor-not-allowed" : ""}
+								className={item.disabled ? "cursor-not-allowed opacity-50" : ""}
 							>
 								{item.disabled ? (
 									<div className="flex items-center gap-2 px-3 py-2 text-sm">

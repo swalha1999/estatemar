@@ -1,12 +1,13 @@
-'use client';
+"use client";
 
-import React, { useEffect } from 'react';
+import type React from "react";
+import { useEffect } from "react";
 
 interface ChatwootSettings {
 	hideMessageBubble: boolean;
-	position: 'left' | 'right';
+	position: "left" | "right";
 	locale: string;
-	type: 'standard' | 'expanded_bubble';
+	type: "standard" | "expanded_bubble";
 }
 
 declare global {
@@ -27,13 +28,13 @@ const ChatwootWidget: React.FC<ChatwootWidgetProps> = ({ locale }) => {
 		// Add Chatwoot Settings
 		window.chatwootSettings = {
 			hideMessageBubble: false,
-			position: 'right',
+			position: "right",
 			locale: locale,
-			type: 'standard',
+			type: "standard",
 		};
 
 		// Chatwoot SDK initialization
-		(function (d, t) {
+		((d, t) => {
 			const BASE_URL = "https://chat.techween.io/";
 			const g = d.createElement(t) as HTMLScriptElement;
 			const s = d.getElementsByTagName(t)[0];
@@ -43,10 +44,10 @@ const ChatwootWidget: React.FC<ChatwootWidgetProps> = ({ locale }) => {
 			if (s?.parentNode) {
 				s.parentNode.insertBefore(g, s);
 			}
-			g.onload = function () {
+			g.onload = () => {
 				window.chatwootSDK.run({
-					websiteToken: 'Ats8Yz4x5F9rymo7fHmv9qsM',
-					baseUrl: BASE_URL
+					websiteToken: "Ats8Yz4x5F9rymo7fHmv9qsM",
+					baseUrl: BASE_URL,
 				});
 			};
 		})(document, "script");
@@ -55,4 +56,4 @@ const ChatwootWidget: React.FC<ChatwootWidgetProps> = ({ locale }) => {
 	return null;
 };
 
-export default ChatwootWidget; 
+export default ChatwootWidget;

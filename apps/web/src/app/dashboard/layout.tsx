@@ -1,42 +1,13 @@
 "use client";
 
-import { usePathname, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import { DashboardSidebar } from "@/components/dashboard-sidebar";
 import { SiteHeader } from "@/components/site-header";
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
-import { OrganizationProvider, useOrganization } from "@/contexts/organization-context";
 import { authClient } from "@/lib/auth-client";
 
 function DashboardContent({ children }: { children: React.ReactNode }) {
-	const router = useRouter();
-	const pathname = usePathname();
-	const { userOrgs, isLoading: orgsLoading } = useOrganization();
-	const { data: session } = authClient.useSession();
-
-	useEffect(() => {
-		if (
-			session &&
-			!orgsLoading &&
-			userOrgs.length === 0 &&
-			pathname !== "/dashboard/onboarding"
-		) {
-			router.push("/dashboard/onboarding");
-		}
-	}, [session, orgsLoading, userOrgs.length, pathname, router]);
-
-	if (orgsLoading) {
-		return (
-			<div className="flex h-screen items-center justify-center">
-				<div className="h-8 w-8 animate-spin rounded-full border-gray-900 border-b-2" />
-			</div>
-		);
-	}
-
-	if (userOrgs.length === 0 && pathname !== "/dashboard/onboarding") {
-		return null;
-	}
-
 	return (
 		<SidebarProvider
 			style={
@@ -83,9 +54,5 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 		return null;
 	}
 
-	return (
-		<OrganizationProvider>
-			<DashboardContent>{children}</DashboardContent>
-		</OrganizationProvider>
-	);
+	return <DashboardContent>{children}</DashboardContent>;
 }

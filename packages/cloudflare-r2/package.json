@@ -7,10 +7,13 @@
 		"build": "pnpm clean && tsc",
 		"build:watch": "pnpm clean && tsc --watch",
 		"check-types": "tsc --noEmit",
+		"type-check": "tsc --noEmit",
+		"type-check:watch": "tsc --noEmit --watch",
 		"clean": "rimraf lib/",
 		"test": "jest",
 		"test:coverage": "jest --coverage",
-		"lint": "biome check ."
+		"lint": "biome check .",
+		"lint:fix": "biome check --write ."
 	},
 	"keywords": [
 		"cloudflare",

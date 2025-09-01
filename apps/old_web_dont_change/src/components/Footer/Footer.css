@@ -1,95 +1,95 @@
 .footer {
-    background-color: #f8f8f8;
-    padding: 20px 10px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-    text-align: center;
+	background-color: #f8f8f8;
+	padding: 20px 10px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	width: 100%;
+	text-align: center;
 }
 
 .footer-content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-    max-width: 1200px;
-    margin: 0 auto;
-    text-align: center;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	width: 100%;
+	max-width: 1200px;
+	margin: 0 auto;
+	text-align: center;
 }
 
 .footer-logo img {
-    max-width: 120px;
-    margin-bottom: 20px;
+	max-width: 120px;
+	margin-bottom: 20px;
 }
 
 .footer-contact,
 .footer-socials {
-    color: #333;
-    text-align: center;
-    margin-bottom: 20px;
+	color: #333;
+	text-align: center;
+	margin-bottom: 20px;
 }
 
 .footer-contact h3,
 .footer-socials h3 {
-    padding-bottom: 5px;
-    border-bottom: #333 1px solid;
-    font-size: medium;
-    margin-bottom: 10px;
+	padding-bottom: 5px;
+	border-bottom: #333 1px solid;
+	font-size: medium;
+	margin-bottom: 10px;
 }
 
 .footer-contact p,
 .footer-socials p {
-    font-size: small;
-    margin: 5px 0;
-    display: flex;
-    align-items: center;
+	font-size: small;
+	margin: 5px 0;
+	display: flex;
+	align-items: center;
 }
 
 .footer-contact a,
 .footer-socials a {
-    color: #01ade2;
-    text-decoration: none;
+	color: #01ade2;
+	text-decoration: none;
 }
 
 .footer-contact a:hover,
 .footer-socials a:hover {
-    text-decoration: underline;
+	text-decoration: underline;
 }
 
 /* Add to existing Footer.css */
 .footer-link-button {
-    background: none;
-    border: none;
-    color: #01ade2;
-    padding: 0;
-    font: inherit;
-    cursor: pointer;
-    text-decoration: none;
+	background: none;
+	border: none;
+	color: #01ade2;
+	padding: 0;
+	font: inherit;
+	cursor: pointer;
+	text-decoration: none;
 }
 
 .footer-link-button:hover {
-    text-decoration: underline;
+	text-decoration: underline;
 }
 
 .footer-icon {
-    margin-right: 8px;
-    margin-left: 8px;
+	margin-right: 8px;
+	margin-left: 8px;
 }
 
 @media (min-width: 768px) {
-    .footer {
-        padding: 40px 20px;
-    }
+	.footer {
+		padding: 40px 20px;
+	}
 
-    .footer-content {
-        flex-direction: row;
-        justify-content: space-between;
-        text-align: left;
-    }
+	.footer-content {
+		flex-direction: row;
+		justify-content: space-between;
+		text-align: left;
+	}
 
-    .footer-contact,
-    .footer-socials {
-        margin-bottom: 0;
-    }
+	.footer-contact,
+	.footer-socials {
+		margin-bottom: 0;
+	}
 }

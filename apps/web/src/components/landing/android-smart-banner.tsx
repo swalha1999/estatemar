@@ -1,9 +1,9 @@
 "use client";
 
 import { X } from "lucide-react";
+import Image from "next/image";
 import { useEffect, useState } from "react";
 import { Button } from "../ui/button";
-import Image from "next/image";
 
 export function AndroidSmartBanner() {
 	const [isVisible, setIsVisible] = useState(false);
@@ -30,10 +30,7 @@ export function AndroidSmartBanner() {
 
 	const handleInstall = () => {
 		// Replace with your Android app's Play Store URL
-		window.open(
-			"#",
-			"_blank",
-		);
+		window.open("#", "_blank");
 	};
 
 	if (!isVisible || !isAndroid) {

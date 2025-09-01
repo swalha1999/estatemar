@@ -5,10 +5,13 @@
 	"scripts": {
 		"build": "pnpm db:migrate && tsdown",
 		"check-types": "tsc -b",
+		"type-check": "tsc -b",
+		"type-check:watch": "tsc -b --watch",
 		"compile": "bun build --compile --minify --sourcemap --bytecode ./src/index.ts --outfile server",
 		"dev": "tsx watch src/index.ts",
 		"start": "node dist/index.js",
 		"lint": "biome check .",
+		"lint:fix": "biome check --write .",
 		"clean": "rm -rf dist/",
 		"db:push": "drizzle-kit push",
 		"db:studio": "drizzle-kit studio",
@@ -20,7 +23,6 @@
 		"db:down": "docker compose down"
 	},
 	"dependencies": {
-		"@estatemar/schemas": "workspace:*",
 		"@hono/node-server": "^1.14.4",
 		"@orpc/client": "^1.8.5",
 		"@orpc/openapi": "^1.8.5",

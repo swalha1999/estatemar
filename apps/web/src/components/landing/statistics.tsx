@@ -1,18 +1,17 @@
 "use client";
 
-import { TrendingUp, Building2, DollarSign, Award, Users } from "lucide-react";
+import { Award, Building2, DollarSign, TrendingUp, Users } from "lucide-react";
 import { motion, useInView } from "motion/react";
+// Import Montserrat font
+import { Montserrat } from "next/font/google";
 import { useEffect, useRef, useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 
-// Import Montserrat font
-import { Montserrat } from 'next/font/google'
-
-const montserrat = Montserrat({ 
-  subsets: ['latin'],
-  weight: ['300', '400', '500', '600', '700'],
-  variable: '--font-montserrat'
-})
+const montserrat = Montserrat({
+	subsets: ["latin"],
+	weight: ["300", "400", "500", "600", "700"],
+	variable: "--font-montserrat",
+});
 
 const stats = [
 	{
@@ -154,11 +153,16 @@ export function StatisticsSection() {
 					transition={{ duration: 0.6 }}
 					className="mb-16 text-center"
 				>
-					<h2 className={`mb-4 font-bold text-3xl md:text-4xl text-primary ${montserrat.className}`}>
+					<h2
+						className={`mb-4 font-bold text-3xl text-primary md:text-4xl ${montserrat.className}`}
+					>
 						Trusted Expertise
 					</h2>
-					<p className={`mx-auto max-w-2xl text-foreground/80 text-lg font-medium ${montserrat.className}`}>
-						Our co-founders are seasoned real estate lawyers with a proven track record
+					<p
+						className={`mx-auto max-w-2xl font-medium text-foreground/80 text-lg ${montserrat.className}`}
+					>
+						Our co-founders are seasoned real estate lawyers with a proven track
+						record
 					</p>
 				</motion.div>
 

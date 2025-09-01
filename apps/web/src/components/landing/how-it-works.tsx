@@ -1,18 +1,17 @@
 "use client";
 
-import { Search, Building2, Scale, TrendingUp } from "lucide-react";
+import { Building2, Scale, Search, TrendingUp } from "lucide-react";
 import { motion, useInView } from "motion/react";
+// Import Montserrat font
+import { Montserrat } from "next/font/google";
 import { useRef } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 
-// Import Montserrat font
-import { Montserrat } from 'next/font/google'
-
-const montserrat = Montserrat({ 
-  subsets: ['latin'],
-  weight: ['300', '400', '500', '600', '700'],
-  variable: '--font-montserrat'
-})
+const montserrat = Montserrat({
+	subsets: ["latin"],
+	weight: ["300", "400", "500", "600", "700"],
+	variable: "--font-montserrat",
+});
 
 const steps = [
 	{
@@ -98,8 +97,14 @@ function StepCard({ step, index }: { step: (typeof steps)[0]; index: number }) {
 					</motion.div>
 
 					{/* Content */}
-					<h3 className={`mb-4 font-semibold text-xl text-primary ${montserrat.className}`}>{step.title}</h3>
-					<p className={`text-foreground/80 leading-relaxed font-medium ${montserrat.className}`}>
+					<h3
+						className={`mb-4 font-semibold text-primary text-xl ${montserrat.className}`}
+					>
+						{step.title}
+					</h3>
+					<p
+						className={`font-medium text-foreground/80 leading-relaxed ${montserrat.className}`}
+					>
 						{step.description}
 					</p>
 				</CardContent>
@@ -114,7 +119,11 @@ export function HowItWorksSection() {
 	const isTitleInView = useInView(titleRef, { once: true });
 
 	return (
-		<section ref={containerRef} id="how-it-works" className="bg-background py-16 md:py-32">
+		<section
+			ref={containerRef}
+			id="how-it-works"
+			className="bg-background py-16 md:py-32"
+		>
 			<div className="container mx-auto max-w-6xl px-6">
 				<motion.div
 					ref={titleRef}
@@ -123,10 +132,14 @@ export function HowItWorksSection() {
 					transition={{ duration: 0.6 }}
 					className="mb-16 text-center"
 				>
-					<h2 className={`mb-4 font-bold text-3xl md:text-4xl text-primary ${montserrat.className}`}>
+					<h2
+						className={`mb-4 font-bold text-3xl text-primary md:text-4xl ${montserrat.className}`}
+					>
 						How Estatemar Works
 					</h2>
-					<p className={`mx-auto max-w-2xl text-foreground/80 text-lg font-medium ${montserrat.className}`}>
+					<p
+						className={`mx-auto max-w-2xl font-medium text-foreground/80 text-lg ${montserrat.className}`}
+					>
 						Get started with Estatemar in just a few simple steps and transform
 						your real estate experience
 					</p>

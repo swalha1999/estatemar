@@ -1,4 +1,6 @@
-import { boolean, pgTable, text, timestamp, uuid } from "drizzle-orm/pg-core";
+import { boolean, pgEnum, pgTable, text, timestamp, uuid } from "drizzle-orm/pg-core";
+
+export const userTypeEnum = pgEnum("user_type", ["super_admin", "admin", "partner", "customer"]);
 
 export const user = pgTable("user", {
 	id: uuid("id").primaryKey().defaultRandom(),
@@ -8,6 +10,7 @@ export const user = pgTable("user", {
 	image: text("image"),
 	createdAt: timestamp("created_at").notNull(),
 	updatedAt: timestamp("updated_at").notNull(),
+	type: userTypeEnum("type").notNull().default("customer"),
 });
 
 export const session = pgTable("session", {

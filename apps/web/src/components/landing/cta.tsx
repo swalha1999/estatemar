@@ -23,8 +23,9 @@ export function CTASection() {
 						Start Your Smarter Real Estate Journey Today
 					</h2>
 					<p className="mx-auto mb-8 max-w-2xl text-foreground/70 text-lg">
-						Join thousands of real estate professionals worldwide who have transformed their
-						business with Estatemar. Download now and experience the future of property management.
+						Join thousands of real estate professionals worldwide who have
+						transformed their business with Estatemar. Download now and
+						experience the future of property management.
 					</p>
 
 					{/* Stats */}
@@ -71,20 +72,14 @@ export function CTASection() {
 						transition={{ delay: 0.5 }}
 						className="flex flex-col items-center justify-center gap-4 sm:flex-row"
 					>
-						<a
-							href="#"
-							className="inline-block"
-						>
+						<a href="#" className="inline-block">
 							<img
 								src="https://toolbox.marketingtools.apple.com/api/v2/badges/download-on-the-app-store/black/en-us?releaseDate=1649462400"
 								alt="Download on the App Store"
 								className="h-16 w-auto object-contain transition-transform hover:scale-105"
 							/>
 						</a>
-						<a
-							href="#"
-							className="inline-block"
-						>
+						<a href="#" className="inline-block">
 							<img
 								src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg"
 								alt="Get it on Google Play"
@@ -101,7 +96,8 @@ export function CTASection() {
 						className="mt-8"
 					>
 						<p className="text-foreground/60 text-sm">
-							Free dashboard for agents • Real-time data • Legal support included
+							Free dashboard for agents • Real-time data • Legal support
+							included
 						</p>
 					</motion.div>
 				</motion.div>

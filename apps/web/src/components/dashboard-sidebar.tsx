@@ -1,15 +1,12 @@
 import {
-	IconCamera,
 	IconDashboard,
 	IconDatabase,
 	IconFileAi,
 	IconFileDescription,
 	IconFileWord,
-	IconHome,
 	IconReport,
 	IconSettings,
 	IconUser,
-	IconUsers,
 } from "@tabler/icons-react";
 import type * as React from "react";
 
@@ -17,7 +14,6 @@ import { NavDocuments } from "@/components/nav-documents";
 import { NavMain } from "@/components/nav-main";
 import { NavSecondary } from "@/components/nav-secondary";
 import { NavUser } from "@/components/nav-user";
-import { OrgSwitcher } from "@/components/org-switcher";
 import {
 	Sidebar,
 	SidebarContent,
@@ -31,76 +27,6 @@ import {
 import { authClient } from "@/lib/auth-client";
 
 const data = {
-	navMain: [
-		{
-			title: "Dashboard",
-			url: "/dashboard" as const,
-			icon: IconDashboard,
-		},
-		{
-			title: "My Properties",
-			url: "/dashboard/properties" as const,
-			icon: IconHome,
-		},
-		{
-			title: "Profile",
-			url: "/dashboard/profile" as const,
-			icon: IconUser,
-		},
-		{
-			title: "Team",
-			url: "#" as const,
-			icon: IconUsers,
-		},
-	],
-	navClouds: [
-		{
-			title: "Capture",
-			icon: IconCamera,
-			isActive: true,
-			url: "#",
-			items: [
-				{
-					title: "Active Proposals",
-					url: "#",
-				},
-				{
-					title: "Archived",
-					url: "#",
-				},
-			],
-		},
-		{
-			title: "Proposal",
-			icon: IconFileDescription,
-			url: "#",
-			items: [
-				{
-					title: "Active Proposals",
-					url: "#",
-				},
-				{
-					title: "Archived",
-					url: "#",
-				},
-			],
-		},
-		{
-			title: "Prompts",
-			icon: IconFileAi,
-			url: "#",
-			items: [
-				{
-					title: "Active Proposals",
-					url: "#",
-				},
-				{
-					title: "Archived",
-					url: "#",
-				},
-			],
-		},
-	],
 	navSecondary: [
 		{
 			title: "Settings",
@@ -142,16 +68,6 @@ export function DashboardSidebar({
 			url: "/dashboard" as const,
 			icon: IconDashboard,
 		},
-		{
-			title: "Properties",
-			url: "/dashboard/properties" as const,
-			icon: IconHome,
-		},
-		{
-			title: "Team",
-			url: "/dashboard/team" as const,
-			icon: IconUsers,
-		},
 	];
 
 	return (
@@ -170,9 +86,6 @@ export function DashboardSidebar({
 					</SidebarMenuItem>
 				</SidebarMenu>
 				<SidebarSeparator className="mx-0" />
-				<div className="px-2">
-					<OrgSwitcher />
-				</div>
 			</SidebarHeader>
 			<SidebarContent>
 				<NavMain items={navigationItems} />

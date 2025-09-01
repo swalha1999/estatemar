@@ -1,0 +1,51 @@
+version: "3.8"
+services:
+  postgres:
+    image: postgres:16
+
+    volumes:
+      - documenso-data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_USER=documenso
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=documenso
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U documenso"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+
+  documenso:
+    image: documenso/documenso:v1.12.1
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      - PORT=3000
+      - NEXTAUTH_URL=https://sign.estatemar.com
+      - NEXTAUTH_SECRET=YiyGtb2r2E6/Nyu6w+1GFm2inmZcNgXN9ITC/X61830=
+      - NEXT_PRIVATE_ENCRYPTION_KEY=tcaayqanedtzg3w5und4jyod4lny0bny
+      - NEXT_PRIVATE_ENCRYPTION_SECONDARY_KEY=wyg0l0cqinf5eyq3hp8kvabc83jngcolebot4vwx3xca7rsv6kkdow8nyolhlo9a
+      - NEXT_PUBLIC_WEBAPP_URL=https://sign.estatemar.com
+      - NEXT_PRIVATE_DATABASE_URL=postgres://documenso:password@postgres:5432/documenso
+      - NEXT_PRIVATE_DIRECT_DATABASE_URL=postgres://documenso:password@postgres:5432/documenso
+      - NEXT_PUBLIC_UPLOAD_TRANSPORT=database
+      - NEXT_PRIVATE_SMTP_TRANSPORT=smtp-auth
+      - NEXT_PRIVATE_SMTP_HOST=smtp.resend.com
+      - NEXT_PRIVATE_SMTP_PORT=587
+      - NEXT_PRIVATE_SMTP_USERNAME=resend
+      - NEXT_PRIVATE_SMTP_PASSWORD=re_M5vdnhLJ_7ceaF2tvDxru4K2dnxSje6cw
+      - NEXT_PRIVATE_SMTP_SECURE=false
+      - NEXT_PRIVATE_SMTP_FROM_NAME=Estatemar Sign
+      - NEXT_PRIVATE_SMTP_FROM_ADDRESS=noreply@estatemar.com
+      - NEXT_DISABLE_IMAGE_OPTIMIZATION=true
+      - NEXT_PRIVATE_SIGNING_LOCAL_FILE_PATH=/opt/documenso/cert.p12
+      - NEXT_PUBLIC_DISABLE_SIGNUP=false
+    ports:
+      - ${DOCUMENSO_PORT}
+    volumes:
+      - /opt/documenso/cert.p12:/opt/documenso/cert.p12
+
+volumes:
+  documenso-data:

@@ -19,8 +19,3 @@ export interface AuthContext {
 	userId: string;
 	userEmail: string;
 }
-
-export interface OrganizationContext extends AuthContext {
-	organizationId: string;
-	userRole: string;
-}

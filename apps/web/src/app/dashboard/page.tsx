@@ -1,9 +1,7 @@
 "use client";
 
-import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
-import { Button } from "@/components/ui/button";
 import { authClient } from "@/lib/auth-client";
 
 export default function Page() {
@@ -21,15 +19,9 @@ export default function Page() {
 			<div>
 				<h1 className="font-bold text-3xl">Dashboard</h1>
 				<p className="text-muted-foreground">
-					Here we will add the quick stats of the user and some quick actions to
-					take
+					Welcome to your dashboard. This area is currently empty and ready for future features.
 				</p>
 			</div>
-			<Link href="/dashboard/properties/add">
-				<Button>Add New Property</Button>
-			</Link>
 		</div>
-
-		//here add the reset of the page @ghassan
 	);
 }

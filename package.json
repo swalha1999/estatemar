@@ -13,6 +13,8 @@
 		"dev": "turbo build && turbo dev",
 		"build": "turbo build",
 		"check-types": "turbo check-types",
+		"type-check": "tsc --build",
+		"type-check:watch": "tsc --build --watch",
 		"clean": "turbo clean",
 		"test": "turbo test",
 		"dev:native": "turbo -F native dev",
@@ -30,7 +32,8 @@
 	"dependencies": {},
 	"devDependencies": {
 		"turbo": "^2.5.4",
-		"@biomejs/biome": "^2.2.0"
+		"@biomejs/biome": "^2.2.0",
+		"typescript": "^5.8.0"
 	},
 	"packageManager": "pnpm@10.12.1"
 }

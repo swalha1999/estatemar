@@ -1,45 +1,45 @@
 {
-    "metaTitle": "Our Partners | Estatemar",
-    "metaDescription": "Discover our network of trusted partners in the real estate industry. Learn how you can become a partner and benefit from our collaborative platform.",
-    "partnersTitle": "Our Partners",
-    "partnersDescription": "We are proud to work with these leading companies in the real estate industry. Our partners play a crucial role in helping us deliver exceptional services and investment opportunities to our clients.",
-    "becomePartnerTitle": "Become Our Partner",
-    "becomePartnerDescription": "Join our network of esteemed partners and elevate your investment opportunities. We offer a collaborative platform that benefits both parties and drives growth in the real estate market.",
-    "partnerBenefits": [
-        "A dedicated project showcase page",
-        "Performance metrics and analytics",
-        "3D virtual tours",
-        "Prioritized listing",
-        "Customized content",
-        "Marketing campaigns"
-    ],
-    "contactUsButton": "Contact Us to Partner",
-    "featuredProjects": "Featured Projects",
-    "contactInformation": "Contact Information",
-    "projectsCompleted": "Projects Completed",
-    "activeProjects": "Active Projects",
-    "yearsInBusiness": "Years in Business",
-    "totalInvestmentValue": "Total Investment Value",
-    "status": "Status",
-    "location": "Location",
-    "email": "Email",
-    "phone": "Phone",
-    "address": "Address",
-    "formTitle": "Partner Application Form",
-    "partnerApplicationFormTitle": "Partner Application Form",
-    "formSuccess": "Thank you for your application! We'll be in touch soon.",
-    "formError": "Something went wrong. Please try again later.",
-    "companyName": "Company Name",
-    "submitting": "Submitting...",
-    "submitApplication": "Submit Application",
-    "partner": {
-        "form": {
-            "companyName": "Company Name",
-            "email": "Email",
-            "phone": "Phone Number",
-            "submit": "Submit Application",
-            "success": "Thank you for your application! We'll be in touch soon.",
-            "error": "Something went wrong. Please try again."
-        }
-    }
+	"metaTitle": "Our Partners | Estatemar",
+	"metaDescription": "Discover our network of trusted partners in the real estate industry. Learn how you can become a partner and benefit from our collaborative platform.",
+	"partnersTitle": "Our Partners",
+	"partnersDescription": "We are proud to work with these leading companies in the real estate industry. Our partners play a crucial role in helping us deliver exceptional services and investment opportunities to our clients.",
+	"becomePartnerTitle": "Become Our Partner",
+	"becomePartnerDescription": "Join our network of esteemed partners and elevate your investment opportunities. We offer a collaborative platform that benefits both parties and drives growth in the real estate market.",
+	"partnerBenefits": [
+		"A dedicated project showcase page",
+		"Performance metrics and analytics",
+		"3D virtual tours",
+		"Prioritized listing",
+		"Customized content",
+		"Marketing campaigns"
+	],
+	"contactUsButton": "Contact Us to Partner",
+	"featuredProjects": "Featured Projects",
+	"contactInformation": "Contact Information",
+	"projectsCompleted": "Projects Completed",
+	"activeProjects": "Active Projects",
+	"yearsInBusiness": "Years in Business",
+	"totalInvestmentValue": "Total Investment Value",
+	"status": "Status",
+	"location": "Location",
+	"email": "Email",
+	"phone": "Phone",
+	"address": "Address",
+	"formTitle": "Partner Application Form",
+	"partnerApplicationFormTitle": "Partner Application Form",
+	"formSuccess": "Thank you for your application! We'll be in touch soon.",
+	"formError": "Something went wrong. Please try again later.",
+	"companyName": "Company Name",
+	"submitting": "Submitting...",
+	"submitApplication": "Submit Application",
+	"partner": {
+		"form": {
+			"companyName": "Company Name",
+			"email": "Email",
+			"phone": "Phone Number",
+			"submit": "Submit Application",
+			"success": "Thank you for your application! We'll be in touch soon.",
+			"error": "Something went wrong. Please try again."
+		}
+	}
 }
