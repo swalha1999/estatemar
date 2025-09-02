@@ -1,6 +1,6 @@
 import { betterAuth } from "better-auth";
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
-import { openAPI, organization } from "better-auth/plugins";
+import { openAPI, organization, username } from "better-auth/plugins";
 import { db } from "../db";
 import * as schema from "../db/schema/auth";
 
@@ -8,7 +8,6 @@ export const auth = betterAuth({
 	onAPIError: {
 		throw: true,
 		onError: (error, ctx) => {
-			// Custom error handling
 			console.error("Auth error:", error);
 		},
 		errorURL: "/auth/error"
@@ -16,8 +15,10 @@ export const auth = betterAuth({
 	database: drizzleAdapter(db, {
 		provider: "pg",
 		schema: schema,
+		debugLogs: true,
 	}),
 	plugins: [
+		username(),
 		openAPI(),
 		organization({
 			allowUserToCreateOrganization: true,
