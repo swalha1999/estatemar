@@ -17,10 +17,20 @@ export const user = pgTable(
 		username: text("username"),
 		displayUsername: text("display_username"),
 		email: text("email").notNull().unique(),
-		emailVerified: boolean("email_verified").notNull(),
+		emailVerified: boolean("email_verified")
+			.$defaultFn(() => false)
+			.notNull(),
 		image: text("image"),
-		createdAt: timestamp("created_at").notNull(),
-		updatedAt: timestamp("updated_at").notNull(),
+		createdAt: timestamp("created_at")
+			.$defaultFn(() => /* @__PURE__ */ new Date())
+			.notNull(),
+		updatedAt: timestamp("updated_at")
+			.$defaultFn(() => /* @__PURE__ */ new Date())
+			.notNull(),
+		role: text("role").default("user"),
+		banned: boolean("banned").default(false),
+		banReason: text("ban_reason"),
+		banExpires: timestamp("ban_expires"),
 	},
 	(table) => [
 		index("user_username_idx").on(table.username),
@@ -47,6 +57,7 @@ export const session = pgTable(
 			() => organization.id,
 			{ onDelete: "set null" },
 		),
+		impersonatedBy: text("impersonated_by"),
 	},
 	(table) => [
 		index("session_user_id_idx").on(table.userId),
@@ -98,18 +109,22 @@ export const verification = pgTable(
 		identifier: text("identifier").notNull(),
 		value: text("value").notNull(),
 		expiresAt: timestamp("expires_at").notNull(),
-		createdAt: timestamp("created_at"),
-		updatedAt: timestamp("updated_at"),
+		createdAt: timestamp("created_at").$defaultFn(
+			() => /* @__PURE__ */ new Date(),
+		),
+		updatedAt: timestamp("updated_at").$defaultFn(
+			() => /* @__PURE__ */ new Date(),
+		),
 	},
-	(table) => ({
-		identifierIdx: index("verification_identifier_idx").on(table.identifier),
-		valueIdx: index("verification_value_idx").on(table.value),
-		expiresAtIdx: index("verification_expires_at_idx").on(table.expiresAt),
-		identifierValueIdx: index("verification_identifier_value_idx").on(
+	(table) => [
+		index("verification_identifier_idx").on(table.identifier),
+		index("verification_value_idx").on(table.value),
+		index("verification_expires_at_idx").on(table.expiresAt),
+		index("verification_identifier_value_idx").on(
 			table.identifier,
 			table.value,
 		),
-	}),
+	],
 );
 
 // Better Auth organization plugin tables

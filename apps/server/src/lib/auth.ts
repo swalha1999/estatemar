@@ -5,13 +5,6 @@ import { db } from "../db";
 import * as schema from "../db/schema/auth";
 
 export const auth = betterAuth({
-	onAPIError: {
-		throw: true,
-		onError: (error, ctx) => {
-			console.error("Auth error:", error);
-		},
-		errorURL: "/auth/error"
-	},
 	database: drizzleAdapter(db, {
 		provider: "pg",
 		schema: schema,
@@ -21,8 +14,7 @@ export const auth = betterAuth({
 		openAPI(),
 		organization({
 			allowUserToCreateOrganization: true,
-			organizationLimit: 10,
-			membershipLimit: 100,
+			organizationLimit: 9,
 			creatorRole: "owner",
 		}),
 	],
