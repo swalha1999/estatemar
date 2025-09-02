@@ -3,7 +3,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import { z } from "zod";
-import { authClient } from "@/lib/auth-client";
+import { authClient_betterAuth } from "@/lib/auth-client";
 import Loader from "./loader";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
@@ -18,7 +18,7 @@ const signUpSchema = z.object({
 
 export default function SignUpForm() {
 	const router = useRouter();
-	const { isPending } = authClient.useSession();
+	const { isPending } = authClient_betterAuth.useSession();
 
 	const form = useForm({
 		defaultValues: {
@@ -27,7 +27,7 @@ export default function SignUpForm() {
 			name: "",
 		},
 		onSubmit: async ({ value }) => {
-			await authClient.signUp.email(
+			await authClient_betterAuth.signUp.email(
 				{
 					email: value.email,
 					password: value.password,

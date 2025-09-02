@@ -5,6 +5,14 @@ import { db } from "../db";
 import * as schema from "../db/schema/auth";
 
 export const auth = betterAuth({
+	onAPIError: {
+		throw: true,
+		onError: (error, ctx) => {
+			// Custom error handling
+			console.error("Auth error:", error);
+		},
+		errorURL: "/auth/error"
+	},
 	database: drizzleAdapter(db, {
 		provider: "pg",
 		schema: schema,
@@ -31,5 +39,6 @@ export const auth = betterAuth({
 			secure: true,
 			httpOnly: true,
 		},
+		
 	},
 });
