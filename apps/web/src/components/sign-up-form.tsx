@@ -1,12 +1,9 @@
 import { useForm } from "@tanstack/react-form";
-import { useMutation } from "@tanstack/react-query";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
 import { toast } from "sonner";
 import { z } from "zod";
 import { authClient } from "@/lib/auth-client";
-import { orpc } from "@/utils/orpc";
 import Loader from "./loader";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
@@ -22,9 +19,6 @@ const signUpSchema = z.object({
 export default function SignUpForm() {
 	const router = useRouter();
 	const { isPending } = authClient.useSession();
-	const createPersonalOrganizationMutation = useMutation(
-		orpc.organization.createOrganization.mutationOptions({}),
-	);
 
 	const form = useForm({
 		defaultValues: {
@@ -34,7 +28,6 @@ export default function SignUpForm() {
 		},
 		onSubmit: async ({ value }) => {
 			await authClient.signUp.email(
-
 				{
 					email: value.email,
 					password: value.password,
@@ -42,12 +35,6 @@ export default function SignUpForm() {
 				},
 				{
 					onSuccess: () => {
-						
-						createPersonalOrganizationMutation.mutate({
-							name: `${value.name} Personal`,
-						});
-
-
 						toast.success("Sign up successful");
 						router.push("/dashboard");
 					},

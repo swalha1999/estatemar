@@ -1,7 +1,4 @@
-import {
-	IconDotsVertical,
-	IconLogout,
-} from "@tabler/icons-react";
+import { IconDotsVertical, IconLogout } from "@tabler/icons-react";
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {

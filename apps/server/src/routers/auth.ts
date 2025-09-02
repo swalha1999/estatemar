@@ -1,61 +1,75 @@
-import { publicProcedure, protectedProcedure } from "../lib/orpc";
-import { createPersonalOrganization, auth } from "../lib/auth";
 import { z } from "zod";
+import { auth } from "@/lib/auth";
+import { protectedProcedure } from "../lib/orpc";
 
-const signUpSchema = z.object({
-	name: z.string().min(1, "Name is required"),
-	email: z.string().email({ message: "Please enter a valid email address" }),
-	password: z.string().min(6, "Password must be at least 6 characters"),
-});
-
-export const authRouter = {
-	privateData: protectedProcedure.handler(({ context }) => {
-		return {
-			message: "This is private",
-			user: context.session?.user,
-		};
-	}),
-
-	signUpWithOrganization: publicProcedure
-		.input(signUpSchema)
-		.handler(async ({ input }) => {
-			try {
-				// First create the user using Better Auth
-				const signUpResult = await auth.api.signUpEmail({
-					body: {
-						email: input.email,
-						password: input.password,
-						name: input.name,
-					},
-				});
-
-				// If signup was successful, create personal organization
-				if (signUpResult && signUpResult.user) {
-					await createPersonalOrganization(
-						signUpResult.user.id,
-						signUpResult.user.name,
-						signUpResult.user.email,
-					);
-				}
-
-				return {
-					success: true,
-					user: signUpResult?.user,
-					token: signUpResult?.token,
-				};
-			} catch (error) {
-				console.error("Signup error:", error);
-				throw new Error("Failed to create account");
-			}
+const organizationRouter = {
+	setActive: protectedProcedure
+		.input(
+			z.object({
+				organizationId: z.string(),
+				organizationSlug: z.string(),
+			}),
+		)
+		.handler(async ({ input, context }) => {
+			return await auth.api.setActiveOrganization({
+				headers: context.honoContext.req.raw.headers,
+				body: {
+					organizationId: input.organizationId,
+					organizationSlug: input.organizationSlug,
+				},
+			});
 		}),
 
-	ensurePersonalOrganization: protectedProcedure.handler(
+	getActiveOrganizationMembers: protectedProcedure.handler(
 		async ({ context }) => {
-			const user = context.session.user;
-			if (user.id && user.email) {
-				await createPersonalOrganization(user.id, user.name, user.email);
-			}
-			return { success: true };
+			return await auth.api.listMembers({
+				headers: context.honoContext.req.raw.headers,
+			});
 		},
 	),
+
+	inviteMember: protectedProcedure
+		.input(
+			z.object({
+				email: z.string(),
+				role: z.enum(["member", "owner", "admin"]),
+				organizationId: z.string(),
+			}),
+		)
+		.handler(async ({ input, context }) => {
+			return await auth.api.createInvitation({
+				headers: context.honoContext.req.raw.headers,
+				body: {
+					email: input.email,
+					role: input.role,
+					organizationId: input.organizationId,
+				},
+			});
+		}),
+
+	createOrganization: protectedProcedure
+		.input(
+			z.object({
+				name: z.string(),
+				slug: z.string(),
+				logo: z.string(),
+				metadata: z.string(),
+			}),
+		)
+		.handler(async ({ input, context }) => {
+			return await auth.api.createOrganization({
+				headers: context.honoContext.req.raw.headers,
+				body: {
+					name: input.name,
+					slug: input.slug,
+					logo: input.logo,
+					userId: context.session.user.id,
+					keepCurrentActiveOrganization: false,
+				},
+			});
+		}),
+};
+
+export const authRouter = {
+	organization: organizationRouter,
 };

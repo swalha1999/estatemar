@@ -19,7 +19,8 @@ export default function Page() {
 			<div>
 				<h1 className="font-bold text-3xl">Dashboard</h1>
 				<p className="text-muted-foreground">
-					Welcome to your dashboard. This area is currently empty and ready for future features.
+					Welcome to your dashboard. This area is currently empty and ready for
+					future features.
 				</p>
 			</div>
 		</div>

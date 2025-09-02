@@ -5,8 +5,36 @@
     {
       "idx": 0,
       "version": "7",
-      "when": 1756761121726,
-      "tag": "0000_light_mandroid",
+      "when": 1756768512555,
+      "tag": "0000_yellow_gambit",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1756772327343,
+      "tag": "0001_lethal_obadiah_stane",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1756772897600,
+      "tag": "0002_ancient_sinister_six",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1756773126134,
+      "tag": "0003_noisy_steel_serpent",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1756779926352,
+      "tag": "0004_icy_blindfold",
       "breakpoints": true
     }
   ]

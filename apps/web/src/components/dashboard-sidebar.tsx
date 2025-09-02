@@ -14,7 +14,7 @@ import { NavDocuments } from "@/components/nav-documents";
 import { NavMain } from "@/components/nav-main";
 import { NavSecondary } from "@/components/nav-secondary";
 import { NavUser } from "@/components/nav-user";
-import { OrganizationSwitcher } from "@/components/organization-switcher";
+import { OrganizationSwitcher } from "@/components/organization/organization-switcher";
 import {
 	Sidebar,
 	SidebarContent,

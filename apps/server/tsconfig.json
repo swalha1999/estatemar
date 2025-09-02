@@ -24,14 +24,8 @@
 		"allowImportingTsExtensions": false,
 		"noEmit": false
 	},
-	"include": [
-		"src/**/*.ts",
-		"src/**/*.tsx"
-	],
-	"exclude": [
-		"node_modules",
-		"dist"
-	],
+	"include": ["src/**/*.ts", "src/**/*.tsx"],
+	"exclude": ["node_modules", "dist"],
 	"references": [
 		{
 			"path": "../../packages/cloudflare-r2"

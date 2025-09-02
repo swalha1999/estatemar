@@ -19,7 +19,7 @@ function AnimatedCard({
 	className?: string;
 } & Omit<
 	React.HTMLAttributes<HTMLDivElement>,
-	"onDrag" | "onDragEnd" | "onDragStart" | "onAnimationStart" | "onAnimationEnd"
+	"onDrag" | "onDragEnd" | "onDragStart" | "onAnimationStart" | "onAnimationEnd" | "style"
 >) {
 	const ref = useRef(null);
 	const isInView = useInView(ref, { once: true, margin: "-100px" });
