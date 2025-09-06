@@ -115,7 +115,7 @@ export default function SignIn() {
 								await authClient.signIn.social(
 									{
 										provider: "google",
-										callbackURL: "/dashboard",
+										callbackURL: "https://estatemar.com/dashboard",
 									},
 									{
 										onRequest: (ctx) => {

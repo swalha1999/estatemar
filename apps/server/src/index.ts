@@ -36,8 +36,8 @@ app.use("/rpc/*", async (c, next) => {
 	return next();
 });
 
-app.get("/*", (c) => {
-	return c.redirect(`https://estatemar.com${c.req.path}`);
+app.get("/", (c) => {
+	return c.text("OK");
 });
 
 import { serve } from "@hono/node-server";
