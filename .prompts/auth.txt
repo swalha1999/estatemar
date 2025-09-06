@@ -1,0 +1,2 @@
+// adding email sending with resend:
+the auth system is using better auth for

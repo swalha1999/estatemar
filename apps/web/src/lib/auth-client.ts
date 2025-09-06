@@ -4,7 +4,10 @@ import { createAuthClient } from "better-auth/react";
 
 export const authClient_betterAuth = createAuthClient({
 	baseURL: process.env.NEXT_PUBLIC_SERVER_URL || "",
-	plugins: [organizationClient()],
+	plugins: [
+		organizationClient(),
+		
+	],
 });
 
 export const authClient = {
@@ -19,4 +22,9 @@ export const authClient = {
 	accountInfo: authClient_betterAuth.accountInfo,
 	verifyEmail: authClient_betterAuth.verifyEmail,
 	forgetPassword: authClient_betterAuth.forgetPassword,
+	organization: {
+		// here is the problem that here is only this fuction on authClient_betterAuth.organization
+		// so i will start rewriting the client using orpc and tanstack query
+		checkRolePermission: authClient_betterAuth.organization.checkRolePermission
+	}
 }

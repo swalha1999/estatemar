@@ -1,161 +1,202 @@
-import { useForm } from "@tanstack/react-form";
-import Link from "next/link";
+"use client";
+
+import { Loader2, X } from "lucide-react";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 import { toast } from "sonner";
-import { z } from "zod";
-import { authClient_betterAuth } from "@/lib/auth-client";
-import Loader from "./loader";
-import { Button } from "./ui/button";
-import { Input } from "./ui/input";
-import { Label } from "./ui/label";
+import { Button } from "@/components/ui/button";
+import {
+	Card,
+	CardContent,
+	CardDescription,
+	CardFooter,
+	CardHeader,
+	CardTitle,
+} from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { signUp } from "@/lib/auth-client";
 
-// Auth schemas
-const signUpSchema = z.object({
-	name: z.string().min(1, "Name is required"),
-	email: z.string().email("Please enter a valid email address"),
-	password: z.string().min(6, "Password must be at least 6 characters"),
-});
-
-export default function SignUpForm() {
+export default function SignUp() {
+	const [firstName, setFirstName] = useState("");
+	const [lastName, setLastName] = useState("");
+	const [email, setEmail] = useState("");
+	const [password, setPassword] = useState("");
+	const [passwordConfirmation, setPasswordConfirmation] = useState("");
+	const [image, setImage] = useState<File | null>(null);
+	const [imagePreview, setImagePreview] = useState<string | null>(null);
 	const router = useRouter();
-	const { isPending } = authClient_betterAuth.useSession();
+	const [loading, setLoading] = useState(false);
 
-	const form = useForm({
-		defaultValues: {
-			email: "",
-			password: "",
-			name: "",
-		},
-		onSubmit: async ({ value }) => {
-			await authClient_betterAuth.signUp.email(
-				{
-					email: value.email,
-					password: value.password,
-					name: value.name,
-				},
-				{
-					onSuccess: () => {
-						toast.success("Sign up successful");
-						router.push("/dashboard");
-					},
-					onError: (error) => {
-						toast.error(error.error.message || error.error.statusText);
-					},
-				},
-			);
-		},
-		validators: {
-			onSubmit: signUpSchema,
-		},
-	});
-
-	if (isPending) {
-		return <Loader />;
-	}
+	const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+		const file = e.target.files?.[0];
+		if (file) {
+			setImage(file);
+			const reader = new FileReader();
+			reader.onloadend = () => {
+				setImagePreview(reader.result as string);
+			};
+			reader.readAsDataURL(file);
+		}
+	};
 
 	return (
-		<div className="mx-auto mt-10 w-full max-w-md p-6">
-			<h1 className="mb-6 text-center font-bold text-3xl">Create Account</h1>
-
-			<form
-				onSubmit={(e) => {
-					e.preventDefault();
-					e.stopPropagation();
-					form.handleSubmit();
-				}}
-				className="space-y-4"
-			>
-				<div>
-					<form.Field name="name">
-						{(field) => (
-							<div className="space-y-2">
-								<Label htmlFor={field.name}>Name</Label>
+		<Card className="z-50 max-w-md rounded-md rounded-t-none">
+			<CardHeader>
+				<CardTitle className="text-lg md:text-xl">Sign Up</CardTitle>
+				<CardDescription className="text-xs md:text-sm">
+					Enter your information to create an account
+				</CardDescription>
+			</CardHeader>
+			<CardContent>
+				<div className="grid gap-4">
+					<div className="grid grid-cols-2 gap-4">
+						<div className="grid gap-2">
+							<Label htmlFor="first-name">First name</Label>
+							<Input
+								id="first-name"
+								placeholder="Max"
+								required
+								onChange={(e) => {
+									setFirstName(e.target.value);
+								}}
+								value={firstName}
+							/>
+						</div>
+						<div className="grid gap-2">
+							<Label htmlFor="last-name">Last name</Label>
+							<Input
+								id="last-name"
+								placeholder="Robinson"
+								required
+								onChange={(e) => {
+									setLastName(e.target.value);
+								}}
+								value={lastName}
+							/>
+						</div>
+					</div>
+					<div className="grid gap-2">
+						<Label htmlFor="email">Email</Label>
+						<Input
+							id="email"
+							type="email"
+							placeholder="m@example.com"
+							required
+							onChange={(e) => {
+								setEmail(e.target.value);
+							}}
+							value={email}
+						/>
+					</div>
+					<div className="grid gap-2">
+						<Label htmlFor="password">Password</Label>
+						<Input
+							id="password"
+							type="password"
+							value={password}
+							onChange={(e) => setPassword(e.target.value)}
+							autoComplete="new-password"
+							placeholder="Password"
+						/>
+					</div>
+					<div className="grid gap-2">
+						<Label htmlFor="password">Confirm Password</Label>
+						<Input
+							id="password_confirmation"
+							type="password"
+							value={passwordConfirmation}
+							onChange={(e) => setPasswordConfirmation(e.target.value)}
+							autoComplete="new-password"
+							placeholder="Confirm Password"
+						/>
+					</div>
+					<div className="grid gap-2">
+						<Label htmlFor="image">Profile Image (optional)</Label>
+						<div className="flex items-end gap-4">
+							{imagePreview && (
+								<div className="relative h-16 w-16 overflow-hidden rounded-sm">
+									<Image
+										src={imagePreview}
+										alt="Profile preview"
+										layout="fill"
+										objectFit="cover"
+									/>
+								</div>
+							)}
+							<div className="flex w-full items-center gap-2">
 								<Input
-									id={field.name}
-									name={field.name}
-									value={field.state.value}
-									onBlur={field.handleBlur}
-									onChange={(e) => field.handleChange(e.target.value)}
+									id="image"
+									type="file"
+									accept="image/*"
+									onChange={handleImageChange}
+									className="w-full"
 								/>
-								{field.state.meta.errors.map((error) => (
-									<p key={error?.message} className="text-red-500">
-										{error?.message}
-									</p>
-								))}
+								{imagePreview && (
+									<X
+										className="cursor-pointer"
+										onClick={() => {
+											setImage(null);
+											setImagePreview(null);
+										}}
+									/>
+								)}
 							</div>
-						)}
-					</form.Field>
-				</div>
-
-				<div>
-					<form.Field name="email">
-						{(field) => (
-							<div className="space-y-2">
-								<Label htmlFor={field.name}>Email</Label>
-								<Input
-									id={field.name}
-									name={field.name}
-									type="email"
-									value={field.state.value}
-									onBlur={field.handleBlur}
-									onChange={(e) => field.handleChange(e.target.value)}
-								/>
-								{field.state.meta.errors.map((error) => (
-									<p key={error?.message} className="text-red-500">
-										{error?.message}
-									</p>
-								))}
-							</div>
-						)}
-					</form.Field>
-				</div>
-
-				<div>
-					<form.Field name="password">
-						{(field) => (
-							<div className="space-y-2">
-								<Label htmlFor={field.name}>Password</Label>
-								<Input
-									id={field.name}
-									name={field.name}
-									type="password"
-									value={field.state.value}
-									onBlur={field.handleBlur}
-									onChange={(e) => field.handleChange(e.target.value)}
-								/>
-								{field.state.meta.errors.map((error) => (
-									<p key={error?.message} className="text-red-500">
-										{error?.message}
-									</p>
-								))}
-							</div>
-						)}
-					</form.Field>
-				</div>
-
-				<form.Subscribe>
-					{(state) => (
-						<Button
-							type="submit"
-							className="w-full"
-							disabled={!state.canSubmit || state.isSubmitting}
-						>
-							{state.isSubmitting ? "Submitting..." : "Sign Up"}
-						</Button>
-					)}
-				</form.Subscribe>
-			</form>
-
-			<div className="mt-4 text-center">
-				<Link href="/login">
+						</div>
+					</div>
 					<Button
-						variant="link"
-						className="text-indigo-600 hover:text-indigo-800"
+						type="submit"
+						className="w-full"
+						disabled={loading}
+						onClick={async () => {
+							await signUp.email({
+								email,
+								password,
+								name: `${firstName} ${lastName}`,
+								image: image ? await convertImageToBase64(image) : "",
+								callbackURL: "/dashboard",
+								fetchOptions: {
+									onResponse: () => {
+										setLoading(false);
+									},
+									onRequest: () => {
+										setLoading(true);
+									},
+									onError: (ctx) => {
+										toast.error(ctx.error.message);
+									},
+									onSuccess: async () => {
+										router.push("/dashboard");
+									},
+								},
+							});
+						}}
 					>
-						Already have an account? Sign In
+						{loading ? (
+							<Loader2 size={16} className="animate-spin" />
+						) : (
+							"Create an account"
+						)}
 					</Button>
-				</Link>
-			</div>
-		</div>
+				</div>
+			</CardContent>
+			<CardFooter>
+				<div className="flex w-full justify-center border-t py-4">
+					<p className="text-center text-neutral-500 text-xs">
+						Secured by <span className="text-orange-400">better-auth.</span>
+					</p>
+				</div>
+			</CardFooter>
+		</Card>
 	);
+}
+
+async function convertImageToBase64(file: File): Promise<string> {
+	return new Promise((resolve, reject) => {
+		const reader = new FileReader();
+		reader.onloadend = () => resolve(reader.result as string);
+		reader.onerror = reject;
+		reader.readAsDataURL(file);
+	});
 }
