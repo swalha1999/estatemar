@@ -2,6 +2,7 @@
 
 import { Loader2, X } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { toast } from "sonner";
@@ -16,7 +17,7 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { signUp } from "@/lib/auth-client";
+import { authClient } from "@/lib/auth-client";
 
 export default function SignUp() {
 	const [firstName, setFirstName] = useState("");
@@ -150,7 +151,7 @@ export default function SignUp() {
 						className="w-full"
 						disabled={loading}
 						onClick={async () => {
-							await signUp.email({
+							await authClient.signUp.email({
 								email,
 								password,
 								name: `${firstName} ${lastName}`,
@@ -182,9 +183,18 @@ export default function SignUp() {
 				</div>
 			</CardContent>
 			<CardFooter>
-				<div className="flex w-full justify-center border-t py-4">
+				<div className="flex w-full flex-col items-center gap-2 border-t py-4">
 					<p className="text-center text-neutral-500 text-xs">
-						Secured by <span className="text-orange-400">better-auth.</span>
+						Already have an account?{" "}
+						<Link
+							href="/login"
+							className="text-primary hover:underline"
+						>
+							Sign in
+						</Link>
+					</p>
+					<p className="text-center text-neutral-500 text-xs">
+						thank you for using our platform
 					</p>
 				</div>
 			</CardFooter>

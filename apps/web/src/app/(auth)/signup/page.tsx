@@ -10,9 +10,5 @@ export default function SignUpPage() {
 	if (session) {
 		redirect("/dashboard");
 	}
-	return (
-		<div className="flex min-h-screen items-center justify-center">
-			<SignUpForm />
-		</div>
-	);
+	return <SignUpForm />;
 }

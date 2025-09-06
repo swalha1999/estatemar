@@ -159,18 +159,18 @@ export default function SignIn() {
 				</div>
 			</CardContent>
 			<CardFooter>
-				<div className="flex w-full justify-center border-t py-4">
+				<div className="flex w-full flex-col items-center gap-2 border-t py-4">
 					<p className="text-center text-neutral-500 text-xs">
-						built with{" "}
+						Don't have an account?{" "}
 						<Link
-							href="https://better-auth.com"
-							className="underline"
-							target="_blank"
+							href="/signup"
+							className="text-primary hover:underline"
 						>
-							<span className="cursor-pointer dark:text-white/70">
-								better-auth.
-							</span>
+							Sign up
 						</Link>
+					</p>
+					<p className="text-center text-neutral-500 text-xs">
+						thank you for using our platform
 					</p>
 				</div>
 			</CardFooter>
