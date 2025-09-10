@@ -62,9 +62,7 @@ export const session = pgTable(
 	(table) => [
 		index("session_user_id_idx").on(table.userId),
 		index("session_expires_at_idx").on(table.expiresAt),
-		index("session_active_organization_id_idx").on(
-			table.activeOrganizationId,
-		),
+		index("session_active_organization_id_idx").on(table.activeOrganizationId),
 		index("session_created_at_idx").on(table.createdAt),
 	],
 );
@@ -92,13 +90,8 @@ export const account = pgTable(
 		index("account_user_id_idx").on(table.userId),
 		index("account_provider_id_idx").on(table.providerId),
 		index("account_account_id_idx").on(table.accountId),
-		index("account_user_provider_idx").on(
-			table.userId,
-			table.providerId,
-		),
-		index("account_access_token_expires_at_idx").on(
-			table.accessTokenExpiresAt,
-		),
+		index("account_user_provider_idx").on(table.userId, table.providerId),
+		index("account_access_token_expires_at_idx").on(table.accessTokenExpiresAt),
 	],
 );
 
@@ -158,20 +151,12 @@ export const member = pgTable(
 		createdAt: timestamp("created_at").notNull().defaultNow(),
 	},
 	(table) => [
-		uniqueIndex("member_unique").on(
-			table.organizationId,
-			table.userId,
-		),
+		uniqueIndex("member_unique").on(table.organizationId, table.userId),
 		index("member_user_id_idx").on(table.userId),
-		index("member_organization_id_idx").on(
-			table.organizationId,
-		),
+		index("member_organization_id_idx").on(table.organizationId),
 		index("member_role_idx").on(table.role),
 		index("member_created_at_idx").on(table.createdAt),
-		index("member_organization_role_idx").on(
-			table.organizationId,
-			table.role,
-		),
+		index("member_organization_role_idx").on(table.organizationId, table.role),
 	],
 );
 
@@ -193,10 +178,8 @@ export const invitation = pgTable(
 	},
 	(table) => [
 		index("invitation_email_idx").on(table.email),
-		index("invitation_organization_id_idx").on(
-			table.organizationId,
-		),
-			index("invitation_status_idx").on(table.status),
+		index("invitation_organization_id_idx").on(table.organizationId),
+		index("invitation_status_idx").on(table.status),
 		index("invitation_expires_at_idx").on(table.expiresAt),
 		index("invitation_inviter_id_idx").on(table.inviterId),
 		index("invitation_email_organization_idx").on(

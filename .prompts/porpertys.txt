@@ -1,3 +1,15 @@
 
 
-we need to add propertys
+we need to add a propertys to the backend with messages and image upload
+use the package of the R2 the upload should be client side 
+the backed send a siged url to the client and the client must upload dirctly to R2
+
+this is a propert managment site so add the feilds that are requred and 
+
+add a button to sidebar called my propertys with a new page that will list all the propertys of the org
+after that make the form to add it must be super good 
+
+
+
+use Shadcn componots and all
+

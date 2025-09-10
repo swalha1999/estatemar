@@ -45,8 +45,6 @@ export function OrganizationSwitcher() {
 		}),
 	);
 
-	
-
 	if (isPending || isOrganizationsPending || isRefetching || isOrganizationsRefetching || setActiveOrganization.isPending) {
 		return (
 			<div className="flex items-center space-x-2">
