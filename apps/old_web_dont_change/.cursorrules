@@ -1,6 +1,0 @@
-always use server actions not api routes and use the data access layer to interact with the database
-always make the page params a promise
-dont use any in the types (write typesafe code)
-dont use display:box in css its deprecated
-always include the path of the file in the import statement
-always import the absolute path of the file

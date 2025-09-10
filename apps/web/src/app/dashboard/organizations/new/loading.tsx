@@ -1,3 +1,4 @@
+import type { ReactElement } from "react";
 import {
 	Card,
 	CardContent,
@@ -5,7 +6,7 @@ import {
 } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
 
-export default function CreateOrganizationLoading() {
+export default function CreateOrganizationLoading(): ReactElement {
 	return (
 		<div className="container mx-auto py-8">
 			<div className="mx-auto max-w-2xl">

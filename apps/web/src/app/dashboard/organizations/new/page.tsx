@@ -11,7 +11,7 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useId, useState } from "react";
+import { type ReactElement, useId, useState } from "react";
 import { toast } from "sonner";
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -38,7 +38,7 @@ import { orpc } from "@/utils/orpc";
 // 	metadata: z.any().optional(),
 // });
 
-export default function CreateOrganizationPage() {
+export default function CreateOrganizationPage(): ReactElement {
 	const router = useRouter();
 	const [isSubmitting, setIsSubmitting] = useState(false);
 	const createOrganizationMutation = useMutation(

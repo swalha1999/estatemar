@@ -42,5 +42,8 @@
 		"tsdown": "^0.14.0",
 		"tsx": "^4.19.0",
 		"typescript": "^5.8.0"
+	},
+	"optionalDependencies": {
+		"@rolldown/binding-linux-x64-gnu": "1.0.0-beta.37"
 	}
 }
