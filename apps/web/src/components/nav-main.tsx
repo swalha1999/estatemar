@@ -24,18 +24,14 @@ export function NavMain({
 		icon?: Icon;
 	}[];
 }) {
-	const { data: session } = authClient.useSession();
 	const { data: invitations = [] } = useQuery(
-		orpc.auth.organization.getInvitations.queryOptions({
-			staleTime: 1000 * 10, // 10 sec cache
-		})
+		orpc.auth.organization.getUserInvitations.queryOptions()
 	);
 
 	// Count received invitations (not sent by current user)
 	const notificationCount = Array.isArray(invitations)
 		? invitations.filter(
-			(invitation: any) =>
-				invitation.inviterId !== session?.user?.id &&
+			(invitation) =>
 				invitation.status === "pending",
 		).length
 		: 0;

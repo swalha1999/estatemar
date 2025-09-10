@@ -2,7 +2,7 @@
 
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { Bell, Check } from "lucide-react";
-import React from "react";
+import type React from "react";
 import { toast } from "sonner";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
@@ -24,7 +24,7 @@ export default function NotificationsPage(): React.JSX.Element {
 		data: invitations = [],
 		isPending: isInvitationsLoading,
 		refetch: refetchInvitations,
-	} = useQuery(orpc.auth.organization.getInvitations.queryOptions());
+	} = useQuery(orpc.auth.organization.getUserInvitations.queryOptions());
 
 	const acceptInvitationMutation = useMutation(
 		orpc.auth.organization.acceptInvitation.mutationOptions({
@@ -35,7 +35,7 @@ export default function NotificationsPage(): React.JSX.Element {
 				});
 				refetchInvitations();
 			},
-			onError: (error: any) => {
+			onError: (error) => {
 				toast.error(error.message || "Failed to accept invitation");
 			},
 		}),
@@ -44,7 +44,7 @@ export default function NotificationsPage(): React.JSX.Element {
 	// Filter invitations received by current user (not sent)
 	const receivedInvitations = Array.isArray(invitations)
 		? invitations.filter(
-				(invitation: any) =>
+				(invitation) =>
 					invitation.inviterId !== session?.user?.id &&
 					invitation.status === "pending",
 			)
@@ -95,7 +95,7 @@ export default function NotificationsPage(): React.JSX.Element {
 						</CardDescription>
 					</CardHeader>
 					<CardContent className="space-y-4">
-						{receivedInvitations.map((invitation: any) => (
+						{receivedInvitations.map((invitation) => (
 							<div
 								key={invitation.id}
 								className="flex items-center justify-between rounded-lg border p-4"
@@ -122,8 +122,8 @@ export default function NotificationsPage(): React.JSX.Element {
 										</p>
 										<p className="text-muted-foreground text-xs">
 											Invited by{" "}
-											{invitation.inviter?.name ||
-												invitation.inviter?.email ||
+											{invitation.inviter?.user.name ||
+												invitation.inviter?.user.email ||
 												"Unknown"}
 										</p>
 									</div>
