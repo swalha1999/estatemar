@@ -47,6 +47,70 @@ const organizationRouter = {
 			});
 		}),
 
+	getInvitations: protectedProcedure.handler(async ({ context }) => {
+		return await auth.api.listInvitations({
+			headers: context.honoContext.req.raw.headers,
+		});
+	}),
+
+	acceptInvitation: protectedProcedure.input(z.object({
+		invitationId: z.string(),
+	})).handler(async ({ input, context }) => {
+		return await auth.api.acceptInvitation({
+			headers: context.honoContext.req.raw.headers,
+			body: {
+				invitationId: input.invitationId,
+			},
+		});
+	}),
+
+	rejectInvitation: protectedProcedure.input(z.object({
+		invitationId: z.string(),
+	})).handler(async ({ input, context }) => {
+		return await auth.api.rejectInvitation({
+			headers: context.honoContext.req.raw.headers,
+			body: {
+				invitationId: input.invitationId,
+			},
+		});
+	}),
+
+	cancelInvitation: protectedProcedure.input(z.object({
+		invitationId: z.string(),
+	})).handler(async ({ input, context }) => {
+		return await auth.api.cancelInvitation({
+			headers: context.honoContext.req.raw.headers,
+			body: {
+				invitationId: input.invitationId,
+			},
+		});
+	}),
+
+
+	leaveOrganization: protectedProcedure.input(z.object({
+		organizationId: z.string(),
+	})).handler(async ({ input, context }) => {
+		return await auth.api.leaveOrganization({
+			headers: context.honoContext.req.raw.headers,
+			body: {
+				organizationId: input.organizationId,
+			},
+		});
+	}),
+
+	removeMember: protectedProcedure.input(z.object({
+		memberIdOrEmail: z.string(),
+		organizationId: z.string(),
+	})).handler(async ({ input, context }) => {
+		return await auth.api.removeMember({
+			headers: context.honoContext.req.raw.headers,
+			body: {
+				memberIdOrEmail: input.memberIdOrEmail,
+				organizationId: input.organizationId,
+			},
+		});
+	}),
+
 	createOrganization: protectedProcedure
 		.input(
 			z.object({
