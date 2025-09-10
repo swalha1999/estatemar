@@ -1,26 +1,18 @@
 "use client";
 
-import { useMutation, useQuery } from "@tanstack/react-query";
-import React from "react";
-import { Building2, Calendar, Mail, Plus, Users, X } from "lucide-react";
+import { Building2, Calendar, Plus, Users } from "lucide-react";
 import Link from "next/link";
-import { toast } from "sonner";
+import type React from "react";
 import { OrganizationMembers } from "@/components/organization/organization-members";
 import { OrganizationSwitcher } from "@/components/organization/organization-switcher";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import {
-	Card,
-	CardContent,
-	CardDescription,
-	CardHeader,
-	CardTitle,
-} from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { Skeleton } from "@/components/ui/skeleton";
 import { authClient } from "@/lib/auth-client";
-import { orpc, queryClient } from "@/utils/orpc";
+import { PendingSentInvitations } from "./pending-sent-invitations";
 
 export default function OrganizationsPage(): React.JSX.Element {
 	const {
@@ -33,41 +25,6 @@ export default function OrganizationsPage(): React.JSX.Element {
 		isPending: isActiveOrganizationPending,
 		isRefetching: isActiveOrganizationRefetching,
 	} = authClient.useActiveOrganization();
-
-	const { data: session } = authClient.useSession();
-	const {
-		data: invitations = [],
-		isPending: isInvitationsLoading,
-		refetch: refetchInvitations,
-	} = useQuery(orpc.auth.organization.getInvitations.queryOptions());
-
-	const cancelInvitationMutation = useMutation(
-		orpc.auth.organization.cancelInvitation.mutationOptions({
-			onSuccess: () => {
-				toast.success("Invitation cancelled successfully!");
-				queryClient.invalidateQueries({
-					queryKey: orpc.auth.organization.key(),
-				});
-				refetchInvitations();
-			},
-			onError: (error: any) => {
-				toast.error(error.message || "Failed to cancel invitation");
-			},
-		}),
-	);
-
-	// Filter invitations sent by current user
-	const sentInvitations = Array.isArray(invitations)
-		? invitations.filter(
-				(invitation: any) =>
-					invitation.inviterId === session?.user?.id &&
-					invitation.status === "pending",
-			)
-		: [];
-
-	const handleCancelInvitation = (invitationId: string) => {
-		cancelInvitationMutation.mutate({ invitationId });
-	};
 
 	return (
 		<div className="container mx-auto space-y-8 py-8">
@@ -94,8 +51,7 @@ export default function OrganizationsPage(): React.JSX.Element {
 				{isPending ||
 				isActiveOrganizationPending ||
 				isRefetching ||
-				isActiveOrganizationRefetching ||
-				isInvitationsLoading ? (
+				isActiveOrganizationRefetching ? (
 					Array.from({ length: 6 }).map((_, i) => (
 						<Card key={i} className="overflow-hidden">
 							<CardHeader className="pb-3">
@@ -226,69 +182,7 @@ export default function OrganizationsPage(): React.JSX.Element {
 			</div>
 
 			{/* Pending Sent Invitations */}
-			{sentInvitations.length > 0 && (
-				<Card>
-					<CardHeader>
-						<CardTitle className="flex items-center space-x-2">
-							<Mail className="h-5 w-5" />
-							<span>Pending Sent Invitations</span>
-							<Badge variant="secondary">{sentInvitations.length}</Badge>
-						</CardTitle>
-						<CardDescription>
-							Invitations you have sent that are still pending response.
-						</CardDescription>
-					</CardHeader>
-					<CardContent className="space-y-4">
-						{sentInvitations.map((invitation: any) => (
-							<div
-								key={invitation.id}
-								className="flex items-center justify-between rounded-lg border p-4"
-							>
-								<div className="flex items-center space-x-4">
-									<Avatar className="h-10 w-10">
-										<AvatarImage
-											src={invitation.organization?.logo || ""}
-											alt={invitation.organization?.name || "Organization"}
-										/>
-										<AvatarFallback className="bg-gradient-to-br from-blue-500 to-purple-600 font-medium text-white">
-											{invitation.organization?.name?.[0]?.toUpperCase() || "O"}
-										</AvatarFallback>
-									</Avatar>
-									<div>
-										<h4 className="font-semibold">{invitation.email}</h4>
-										<p className="text-muted-foreground text-sm">
-											Invited to:{" "}
-											<span className="font-medium">
-												{invitation.organization?.name ||
-													"Unknown Organization"}
-											</span>
-										</p>
-										<p className="text-muted-foreground text-sm">
-											Role:{" "}
-											<Badge variant="outline" className="capitalize">
-												{invitation.role}
-											</Badge>
-										</p>
-									</div>
-								</div>
-								<div className="flex items-center space-x-2">
-									<Button
-										variant="outline"
-										size="sm"
-										onClick={() => handleCancelInvitation(invitation.id)}
-										disabled={cancelInvitationMutation.isPending}
-									>
-										<X className="mr-1 h-4 w-4" />
-										{cancelInvitationMutation.isPending
-											? "Cancelling..."
-											: "Cancel"}
-									</Button>
-								</div>
-							</div>
-						))}
-					</CardContent>
-				</Card>
-			)}
+			<PendingSentInvitations />
 
 			<OrganizationMembers />
 		</div>
