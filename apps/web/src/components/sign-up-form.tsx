@@ -30,6 +30,9 @@ export default function SignUp() {
 	const router = useRouter();
 	const [loading, setLoading] = useState(false);
 
+	const passwordsMatch = password === passwordConfirmation;
+	const isFormValid = firstName && lastName && email && password && passwordConfirmation && passwordsMatch;
+
 	const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		const file = e.target.files?.[0];
 		if (file) {
@@ -111,7 +114,11 @@ export default function SignUp() {
 							onChange={(e) => setPasswordConfirmation(e.target.value)}
 							autoComplete="new-password"
 							placeholder="Confirm Password"
+							className={passwordConfirmation && !passwordsMatch ? "border-red-500" : ""}
 						/>
+						{passwordConfirmation && !passwordsMatch && (
+							<p className="text-red-500 text-sm">Passwords do not match</p>
+						)}
 					</div>
 					<div className="grid gap-2">
 						<Label htmlFor="image">Profile Image (optional)</Label>
@@ -149,8 +156,13 @@ export default function SignUp() {
 					<Button
 						type="submit"
 						className="w-full"
-						disabled={loading}
+						disabled={loading || !isFormValid}
 						onClick={async () => {
+							if (!passwordsMatch) {
+								toast.error("Passwords do not match");
+								return;
+							}
+							
 							await authClient.signUp.email({
 								email,
 								password,
