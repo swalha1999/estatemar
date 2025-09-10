@@ -1,12 +1,9 @@
 import {
 	IconDashboard,
 	IconDatabase,
-	IconFileAi,
-	IconFileDescription,
 	IconFileWord,
 	IconReport,
 	IconSettings,
-	IconUser,
 } from "@tabler/icons-react";
 import type * as React from "react";
 

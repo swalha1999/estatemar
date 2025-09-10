@@ -1,6 +1,9 @@
 import { type Icon, IconCirclePlusFilled, IconMail } from "@tabler/icons-react";
+import { useQuery } from "@tanstack/react-query";
+import { Bell } from "lucide-react";
 import type { RouteType } from "next/dist/lib/load-custom-routes";
 import Link, { type LinkProps } from "next/link";
+import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
 	SidebarGroup,
@@ -9,6 +12,8 @@ import {
 	SidebarMenuButton,
 	SidebarMenuItem,
 } from "@/components/ui/sidebar";
+import { authClient } from "@/lib/auth-client";
+import { orpc } from "@/utils/orpc";
 
 export function NavMain({
 	items,
@@ -19,6 +24,19 @@ export function NavMain({
 		icon?: Icon;
 	}[];
 }) {
+	const { data: session } = authClient.useSession();
+	const { data: invitations = [] } = useQuery(
+		orpc.auth.organization.getInvitations.queryOptions(),
+	);
+
+	// Count received invitations (not sent by current user)
+	const notificationCount = Array.isArray(invitations)
+		? invitations.filter(
+			(invitation: any) =>
+				invitation.inviterId !== session?.user?.id &&
+				invitation.status === "pending",
+		).length
+		: 0;
 	return (
 		<SidebarGroup>
 			<SidebarGroupContent className="flex flex-col gap-2">
@@ -31,14 +49,26 @@ export function NavMain({
 							<IconCirclePlusFilled className="size-4" />
 							<span>Quick Create</span>
 						</SidebarMenuButton>
-						<Button
-							size="icon"
-							className="size-8 group-data-[collapsible=icon]:opacity-0"
-							variant="outline"
-						>
-							<IconMail className="size-4" />
-							<span className="sr-only">Inbox</span>
-						</Button>
+						<Link href="/dashboard/notifications">
+							<Button
+								size="icon"
+								className="relative size-8 group-data-[collapsible=icon]:opacity-0"
+								variant="outline"
+							>
+								<Bell className="size-4" />
+								{notificationCount > 0 && (
+									<Badge
+										className="-right-1 -top-1 absolute h-4 w-4 rounded-full p-0 font-bold text-xs"
+										variant="default"
+									>
+										{notificationCount > 9 ? "9+" : notificationCount}
+									</Badge>
+								)}
+								<span className="sr-only">
+									Notifications ({notificationCount})
+								</span>
+							</Button>
+						</Link>
 					</SidebarMenuItem>
 				</SidebarMenu>
 				<SidebarMenu>
