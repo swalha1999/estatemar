@@ -4,6 +4,7 @@ import {
 	IconFileWord,
 	IconReport,
 	IconSettings,
+	IconUsersGroup
 } from "@tabler/icons-react";
 import type * as React from "react";
 
@@ -65,6 +66,11 @@ export function DashboardSidebar({
 			title: "Dashboard",
 			url: "/dashboard" as const,
 			icon: IconDashboard,
+		},
+		{
+			title: "My Organizations",
+			url: "/dashboard/organizations" as const,
+			icon: IconUsersGroup,
 		},
 	];
 
