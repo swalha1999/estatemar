@@ -55,24 +55,24 @@ const organizationRouter = {
 			},
 		});
 
-		// add the organization to the invitations with full data
-		const invitationsWithOrganization = await Promise.all(invitations.map(async (invitation) => ({
-			...invitation,
-			organization: await auth.api.getFullOrganization({
-				headers: context.honoContext.req.raw.headers,
-				query: {
-					organizationId: invitation.organizationId,
-				},
-			}),
-			inviter: await auth.api.accountInfo({
-				headers: context.honoContext.req.raw.headers,
-				body: {
-					accountId: invitation.inviterId,
-				},
-			}),
-		})));
+		// // add the organization to the invitations with full data
+		// const invitationsWithOrganization = await Promise.all(invitations.map(async (invitation) => ({
+		// 	...invitation,
+		// 	organization: await auth.api.getFullOrganization({
+		// 		headers: context.honoContext.req.raw.headers,
+		// 		query: {
+		// 			organizationId: invitation.organizationId,
+		// 		},
+		// 	}),
+		// 	inviter: await auth.api.accountInfo({
+		// 		headers: context.honoContext.req.raw.headers,
+		// 		body: {
+		// 			accountId: invitation.inviterId,
+		// 		},
+		// 	}),
+		// })));
 
-		return invitationsWithOrganization;
+		return invitations;
 	}),
 
 	acceptInvitation: protectedProcedure.input(z.object({
