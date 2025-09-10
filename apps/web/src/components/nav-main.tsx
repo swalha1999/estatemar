@@ -26,7 +26,9 @@ export function NavMain({
 }) {
 	const { data: session } = authClient.useSession();
 	const { data: invitations = [] } = useQuery(
-		orpc.auth.organization.getInvitations.queryOptions(),
+		orpc.auth.organization.getInvitations.queryOptions({
+			staleTime: 1000 * 10, // 10 sec cache
+		})
 	);
 
 	// Count received invitations (not sent by current user)
