@@ -3,6 +3,7 @@
 import { Loader2 } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
+import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import {
 	Card,
@@ -23,6 +24,7 @@ export default function SignIn() {
 	const [password, setPassword] = useState("");
 	const [loading, setLoading] = useState(false);
 	const [rememberMe, setRememberMe] = useState(false);
+	const [error, setError] = useState("");
 
 	return (
 		<Card className="max-w-md">
@@ -43,6 +45,7 @@ export default function SignIn() {
 							required
 							onChange={(e) => {
 								setEmail(e.target.value);
+								if (error) setError("");
 							}}
 							value={email}
 						/>
@@ -59,7 +62,10 @@ export default function SignIn() {
 							placeholder="password"
 							autoComplete="password"
 							value={password}
-							onChange={(e) => setPassword(e.target.value)}
+							onChange={(e) => {
+								setPassword(e.target.value);
+								if (error) setError("");
+							}}
 						/>
 					</div>
 
@@ -73,22 +79,42 @@ export default function SignIn() {
 						<Label htmlFor="remember">Remember me</Label>
 					</div>
 
+					{error && (
+						<div className="rounded-md bg-red-50 p-3 text-red-600 text-sm">
+							{error}
+						</div>
+					)}
+
 					<Button
 						type="submit"
 						className="w-full"
 						disabled={loading}
 						onClick={async () => {
+							setError("");
 							await authClient.signIn.email(
 								{
 									email,
 									password,
 								},
 								{
-									onRequest: (ctx) => {
+									onRequest: (_ctx) => {
 										setLoading(true);
 									},
-									onResponse: (ctx) => {
+									onResponse: (_ctx) => {
 										setLoading(false);
+									},
+									onError: (ctx) => {
+										setLoading(false);
+										const errorMessage = ctx.error.message;
+										if (errorMessage.includes("Invalid credentials") || errorMessage.includes("password") || errorMessage.includes("incorrect")) {
+											setError("Incorrect email or password. Please try again.");
+										} else {
+											setError(errorMessage);
+										}
+										toast.error("Sign in failed");
+									},
+									onSuccess: () => {
+										setError("");
 									},
 								},
 							);
@@ -118,10 +144,10 @@ export default function SignIn() {
 										callbackURL: "https://estatemar.com/dashboard",
 									},
 									{
-										onRequest: (ctx) => {
+										onRequest: (_ctx) => {
 											setLoading(true);
 										},
-										onResponse: (ctx) => {
+										onResponse: (_ctx) => {
 											setLoading(false);
 										},
 									},
