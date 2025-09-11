@@ -24,13 +24,11 @@ export function NavMain({
 		icon?: Icon;
 	}[];
 }) {
-	const { data: invitations = [] } = useQuery(
-		orpc.auth.organization.getUserInvitations.queryOptions(
-			{
-				staleTime: 1000 * 10, // 10 sec cache
-			}
-		)
-	);
+	const { data: invitations = [] } = useQuery({
+		...orpc.auth.organization.getUserInvitations.queryOptions({
+			refetchInterval: 1000 * 10, // 10 sec cache
+		}),
+	});
 
 	// Count received invitations (not sent by current user)
 	const notificationCount = Array.isArray(invitations)
@@ -39,6 +37,7 @@ export function NavMain({
 				invitation.status === "pending",
 		).length
 		: 0;
+	
 	return (
 		<SidebarGroup>
 			<SidebarGroupContent className="flex flex-col gap-2">

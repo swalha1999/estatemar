@@ -8,7 +8,8 @@ import type { AppRouterClient } from "../../../server/src/routers/index";
 export const queryClient = new QueryClient({
 	defaultOptions: {
 		queries: {
-			refetchInterval: 5 * 60 * 1000, // 5 minutes
+			refetchInterval: 30 * 1000, // 30 seconds
+			refetchOnWindowFocus: true,
 		},
 	},
 	queryCache: new QueryCache({
