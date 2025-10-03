@@ -38,7 +38,8 @@ export default function PropertiesPage() {
             page,
             limit: 20,
             listingType,
-        }
+        },
+        refetchInterval: 1000 * 10, // 10 sec cache
     }));
 
 	const properties = data?.data?.properties || [];

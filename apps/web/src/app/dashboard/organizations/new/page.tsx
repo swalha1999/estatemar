@@ -42,7 +42,7 @@ export default function CreateOrganizationPage(): ReactElement {
 	const router = useRouter();
 	const [isSubmitting, setIsSubmitting] = useState(false);
 	const createOrganizationMutation = useMutation(
-		orpc.auth.organization.createOrganization.mutationOptions(),
+		orpc.user.organization.createOrganization.mutationOptions(),
 	);
 	const nameId = useId();
 	const slugId = useId();
