@@ -9,6 +9,5 @@ export const db = drizzle(process.env.DATABASE_URL || "", {
 	},
 });
 
-
 export * from "./schema/auth";
 export * from "./schema/real_estate";

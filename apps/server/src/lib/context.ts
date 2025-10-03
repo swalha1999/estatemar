@@ -9,7 +9,7 @@ export async function createContext({ context }: CreateContextOptions) {
 	const session = await auth.api.getSession({
 		headers: context.req.raw.headers,
 	});
-	
+
 	// Only try to get organization if user is authenticated
 	let activeOrganization = null;
 	if (session?.user) {
@@ -22,7 +22,7 @@ export async function createContext({ context }: CreateContextOptions) {
 			console.warn("Failed to fetch active organization:", error);
 		}
 	}
-	
+
 	const headers = context.req.raw.headers;
 	return {
 		headers,

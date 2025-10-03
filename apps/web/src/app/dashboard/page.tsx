@@ -20,8 +20,8 @@ export default function Page(): React.JSX.Element {
 			<div className="container mx-auto space-y-8 py-8">
 				<div className="flex items-center justify-between">
 					<div>
-						<div className="mb-2 h-8 w-48 animate-pulse bg-muted rounded" />
-						<div className="h-4 w-96 animate-pulse bg-muted rounded" />
+						<div className="mb-2 h-8 w-48 animate-pulse rounded bg-muted" />
+						<div className="h-4 w-96 animate-pulse rounded bg-muted" />
 					</div>
 				</div>
 			</div>

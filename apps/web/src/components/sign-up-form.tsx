@@ -31,7 +31,13 @@ export default function SignUp() {
 	const [loading, setLoading] = useState(false);
 
 	const passwordsMatch = password === passwordConfirmation;
-	const isFormValid = firstName && lastName && email && password && passwordConfirmation && passwordsMatch;
+	const isFormValid =
+		firstName &&
+		lastName &&
+		email &&
+		password &&
+		passwordConfirmation &&
+		passwordsMatch;
 
 	const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		const file = e.target.files?.[0];
@@ -114,7 +120,9 @@ export default function SignUp() {
 							onChange={(e) => setPasswordConfirmation(e.target.value)}
 							autoComplete="new-password"
 							placeholder="Confirm Password"
-							className={passwordConfirmation && !passwordsMatch ? "border-red-500" : ""}
+							className={
+								passwordConfirmation && !passwordsMatch ? "border-red-500" : ""
+							}
 						/>
 						{passwordConfirmation && !passwordsMatch && (
 							<p className="text-red-500 text-sm">Passwords do not match</p>
@@ -162,7 +170,7 @@ export default function SignUp() {
 								toast.error("Passwords do not match");
 								return;
 							}
-							
+
 							await authClient.signUp.email({
 								email,
 								password,
@@ -198,10 +206,7 @@ export default function SignUp() {
 				<div className="flex w-full flex-col items-center gap-2 border-t py-4">
 					<p className="text-center text-neutral-500 text-xs">
 						Already have an account?{" "}
-						<Link
-							href="/login"
-							className="text-primary hover:underline"
-						>
+						<Link href="/login" className="text-primary hover:underline">
 							Sign in
 						</Link>
 					</p>

@@ -4,7 +4,7 @@ import {
 	IconFileWord,
 	IconReport,
 	IconSettings,
-	IconUsersGroup
+	IconUsersGroup,
 } from "@tabler/icons-react";
 import type * as React from "react";
 

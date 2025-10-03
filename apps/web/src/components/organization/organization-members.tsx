@@ -64,7 +64,7 @@ export function OrganizationMembers() {
 	const [email, setEmail] = useState("");
 	const [role, setRole] = useState("member");
 	const { data: activeOrganization } = authClient.useActiveOrganization();
-	
+
 	const inviteMemberMutator = useMutation(
 		orpc.auth.organization.inviteMember.mutationOptions(),
 	);

@@ -32,12 +32,9 @@ export function NavMain({
 
 	// Count received invitations (not sent by current user)
 	const notificationCount = Array.isArray(invitations)
-		? invitations.filter(
-			(invitation) =>
-				invitation.status === "pending",
-		).length
+		? invitations.filter((invitation) => invitation.status === "pending").length
 		: 0;
-	
+
 	return (
 		<SidebarGroup>
 			<SidebarGroupContent className="flex flex-col gap-2">

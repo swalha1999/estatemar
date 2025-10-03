@@ -616,5 +616,3 @@ export const propertyInsertSchema = createInsertSchema(property, {
 
 // we can use the createUpdateSchema(property).pick({title : true})
 export const propertyUpdateSchema = createUpdateSchema(property);
-
-

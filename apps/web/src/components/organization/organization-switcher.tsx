@@ -28,10 +28,18 @@ import { orpc, queryClient } from "@/utils/orpc";
 export function OrganizationSwitcher() {
 	const [open, setOpen] = useState(false);
 	const router = useRouter();
-	const { data: activeOrganization, isPending, refetch: refetchActiveOrganization ,isRefetching} =
-		authClient.useActiveOrganization();
-	const { data: organizations, isPending: isOrganizationsPending, refetch: refetchOrganizations, isRefetching: isOrganizationsRefetching } =
-		authClient.useListOrganizations();
+	const {
+		data: activeOrganization,
+		isPending,
+		refetch: refetchActiveOrganization,
+		isRefetching,
+	} = authClient.useActiveOrganization();
+	const {
+		data: organizations,
+		isPending: isOrganizationsPending,
+		refetch: refetchOrganizations,
+		isRefetching: isOrganizationsRefetching,
+	} = authClient.useListOrganizations();
 
 	const setActiveOrganization = useMutation(
 		orpc.auth.organization.setActive.mutationOptions({
@@ -45,7 +53,13 @@ export function OrganizationSwitcher() {
 		}),
 	);
 
-	if (isPending || isOrganizationsPending || isRefetching || isOrganizationsRefetching || setActiveOrganization.isPending) {
+	if (
+		isPending ||
+		isOrganizationsPending ||
+		isRefetching ||
+		isOrganizationsRefetching ||
+		setActiveOrganization.isPending
+	) {
 		return (
 			<div className="flex items-center space-x-2">
 				<Skeleton className="h-8 w-8 rounded-full" />

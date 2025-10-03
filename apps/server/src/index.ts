@@ -14,7 +14,6 @@ import { OpenAPIReferencePlugin } from "@orpc/openapi/plugins";
 import { onError } from "@orpc/server";
 import { ZodToJsonSchemaConverter } from "@orpc/zod/zod4";
 
-
 const app = new Hono();
 
 app.use(logger());
@@ -29,7 +28,6 @@ app.use(
 );
 
 app.on(["POST", "GET"], "/api/auth/**", (c) => auth.handler(c.req.raw));
-
 
 export const apiHandler = new OpenAPIHandler(appRouter, {
 	plugins: [
@@ -57,9 +55,7 @@ const generateSpec = async () => {
 				title: "Estatemar API",
 				version: "0.0.1",
 			},
-			servers: [
-				{ url: '/api' },
-			],
+			servers: [{ url: "/api" }],
 		});
 	}
 	return spec;

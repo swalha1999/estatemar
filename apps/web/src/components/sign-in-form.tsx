@@ -106,8 +106,14 @@ export default function SignIn() {
 									onError: (ctx) => {
 										setLoading(false);
 										const errorMessage = ctx.error.message;
-										if (errorMessage.includes("Invalid credentials") || errorMessage.includes("password") || errorMessage.includes("incorrect")) {
-											setError("Incorrect email or password. Please try again.");
+										if (
+											errorMessage.includes("Invalid credentials") ||
+											errorMessage.includes("password") ||
+											errorMessage.includes("incorrect")
+										) {
+											setError(
+												"Incorrect email or password. Please try again.",
+											);
 										} else {
 											setError(errorMessage);
 										}
@@ -188,10 +194,7 @@ export default function SignIn() {
 				<div className="flex w-full flex-col items-center gap-2 border-t py-4">
 					<p className="text-center text-neutral-500 text-xs">
 						Don't have an account?{" "}
-						<Link
-							href="/signup"
-							className="text-primary hover:underline"
-						>
+						<Link href="/signup" className="text-primary hover:underline">
 							Sign up
 						</Link>
 					</p>

@@ -359,10 +359,7 @@ const propertyRouter = {
 					eq(property.id, amenity.propertyId),
 					or(
 						eq(property.userId, context.session.user.id),
-						eq(
-							property.organizationId,
-							context.activeOrganization?.id || "",
-						),
+						eq(property.organizationId, context.activeOrganization?.id || ""),
 					),
 				),
 			});
@@ -444,10 +441,7 @@ const propertyRouter = {
 					eq(property.id, view.propertyId),
 					or(
 						eq(property.userId, context.session.user.id),
-						eq(
-							property.organizationId,
-							context.activeOrganization?.id || "",
-						),
+						eq(property.organizationId, context.activeOrganization?.id || ""),
 					),
 				),
 			});

@@ -80,19 +80,19 @@ export function PendingSentInvitations(): React.JSX.Element {
 	// 	</Card>
 	// );
 
-	return <Card>
-	<CardHeader>
-		<CardTitle className="flex items-center space-x-2">
-			<Mail className="h-5 w-5" />
-			<span>Pending Sent Invitations</span>
-			<Badge variant="secondary">{0}</Badge>
-		</CardTitle>
-		<CardDescription>
-			Invitations you have sent that are still pending response.
-		</CardDescription>
-	</CardHeader>
-	<CardContent className="space-y-4">
-		Not implemented yet. 
-	</CardContent>
-	</Card>;
+	return (
+		<Card>
+			<CardHeader>
+				<CardTitle className="flex items-center space-x-2">
+					<Mail className="h-5 w-5" />
+					<span>Pending Sent Invitations</span>
+					<Badge variant="secondary">{0}</Badge>
+				</CardTitle>
+				<CardDescription>
+					Invitations you have sent that are still pending response.
+				</CardDescription>
+			</CardHeader>
+			<CardContent className="space-y-4">Not implemented yet.</CardContent>
+		</Card>
+	);
 }

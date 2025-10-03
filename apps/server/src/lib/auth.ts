@@ -17,16 +17,16 @@ export const auth = betterAuth({
 			organizationLimit: 9,
 			creatorRole: "owner",
 		}),
-		phoneNumber({  
-            sendOTP: ({ phoneNumber, code }, request) => { 
-                console.log(phoneNumber, code, request);
-            } 
-        }),
+		phoneNumber({
+			sendOTP: ({ phoneNumber, code }, request) => {
+				console.log(phoneNumber, code, request);
+			},
+		}),
 	],
 	socialProviders: {
 		google: {
-			clientId: process.env.GOOGLE_CLIENT_ID as string, 
-            clientSecret: process.env.GOOGLE_CLIENT_SECRET as string, 
+			clientId: process.env.GOOGLE_CLIENT_ID as string,
+			clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
 		},
 	},
 	trustedOrigins: [process.env.CORS_ORIGIN || ""],

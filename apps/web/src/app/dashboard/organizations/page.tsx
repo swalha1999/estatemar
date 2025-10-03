@@ -14,7 +14,6 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { authClient } from "@/lib/auth-client";
 import { PendingSentInvitations } from "./pending-sent-invitations";
 
-
 export default function OrganizationsPage(): React.JSX.Element {
 	const {
 		data: organizations,
