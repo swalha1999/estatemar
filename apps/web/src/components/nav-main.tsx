@@ -25,7 +25,7 @@ export function NavMain({
 	}[];
 }) {
 	const { data: invitations = [] } = useQuery({
-		...orpc.auth.organization.getUserInvitations.queryOptions({
+		...orpc.user.organization.getUserInvitations.queryOptions({
 			refetchInterval: 1000 * 10, // 10 sec cache
 		}),
 	});

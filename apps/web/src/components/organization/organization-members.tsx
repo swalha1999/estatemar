@@ -66,7 +66,7 @@ export function OrganizationMembers() {
 	const { data: activeOrganization } = authClient.useActiveOrganization();
 
 	const inviteMemberMutator = useMutation(
-		orpc.auth.organization.inviteMember.mutationOptions(),
+		orpc.user.organization.inviteMember.mutationOptions(),
 	);
 
 	// Get members for the active organization
@@ -75,7 +75,7 @@ export function OrganizationMembers() {
 		isPending,
 		refetch,
 	} = useQuery(
-		orpc.auth.organization.getActiveOrganizationMembers.queryOptions(),
+		orpc.user.organization.getActiveOrganizationMembers.queryOptions(),
 	);
 
 	const handleInviteMember = async (e: React.FormEvent) => {

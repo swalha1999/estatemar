@@ -19,15 +19,15 @@ import { SentInvitationItem } from "./sent-invitation-item";
 export function PendingSentInvitations(): React.JSX.Element {
 	// const { data: session } = authClient.useSession();
 	// const { data: invitations = [], refetch: refetchInvitations } = useQuery(
-	// 	orpc.auth.organization.getUserInvitations.queryOptions(),
+	// 	orpc.user.organization.getUserInvitations.queryOptions(),
 	// );
 
 	// const cancelInvitationMutation = useMutation(
-	// 	orpc.auth.organization.cancelInvitation.mutationOptions({
+	// 	orpc.user.organization.cancelInvitation.mutationOptions({
 	// 		onSuccess: () => {
 	// 			toast.success("Invitation cancelled successfully!");
 	// 			queryClient.invalidateQueries({
-	// 				queryKey: orpc.auth.organization.key(),
+	// 				queryKey: orpc.user.organization.key(),
 	// 			});
 	// 			refetchInvitations();
 	// 		},
