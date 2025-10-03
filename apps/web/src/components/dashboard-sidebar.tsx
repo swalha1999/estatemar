@@ -1,4 +1,5 @@
 import {
+	IconBuilding,
 	IconDashboard,
 	IconDatabase,
 	IconFileWord,
@@ -66,6 +67,11 @@ export function DashboardSidebar({
 			title: "Dashboard",
 			url: "/dashboard" as const,
 			icon: IconDashboard,
+		},
+		{
+			title: "Properties",
+			url: "/dashboard/properties" as const,
+			icon: IconBuilding,
 		},
 		{
 			title: "My Organizations",
