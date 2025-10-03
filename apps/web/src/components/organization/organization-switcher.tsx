@@ -42,10 +42,10 @@ export function OrganizationSwitcher() {
 	} = authClient.useListOrganizations();
 
 	const setActiveOrganization = useMutation(
-		orpc.auth.organization.setActive.mutationOptions({
+		orpc.user.organization.setActive.mutationOptions({
 			onSuccess: () => {
 				queryClient.invalidateQueries({
-					queryKey: orpc.auth.organization.key(),
+					queryKey: orpc.user.organization.key(),
 				});
 				refetchActiveOrganization();
 				refetchOrganizations();
