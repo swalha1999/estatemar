@@ -46,6 +46,6 @@
 		"typescript": "^5.8.0"
 	},
 	"optionalDependencies": {
-		"@rolldown/binding-linux-x64-gnu": "v1.0.0-beta.41"
+		"@rolldown/binding-linux-x64-gnu": "v1.0.0-beta.40"
 	}
 }
