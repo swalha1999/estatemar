@@ -305,11 +305,11 @@ export const property = pgTable(
 		tags: jsonb("tags"), // Array of tags for search
 
 		// Ownership and relationships
-		organizationId: uuid("organization_id").references(() => organization.id, {
+		organizationId: text("organization_id").references(() => organization.id, {
 			onDelete: "cascade",
 		}),
-		userId: uuid("user_id").references(() => user.id, { onDelete: "cascade" }),
-		agentId: uuid("agent_id").references(() => user.id, {
+		userId: text("user_id").references(() => user.id, { onDelete: "cascade" }),
+		agentId: text("agent_id").references(() => user.id, {
 			onDelete: "set null",
 		}),
 
@@ -432,7 +432,7 @@ export const propertyInquiry = pgTable(
 		propertyId: uuid("property_id")
 			.notNull()
 			.references(() => property.id, { onDelete: "cascade" }),
-		userId: uuid("user_id").references(() => user.id, { onDelete: "set null" }),
+		userId: text("user_id").references(() => user.id, { onDelete: "set null" }),
 		name: text("name").notNull(),
 		email: text("email").notNull(),
 		phone: text("phone"),
@@ -460,7 +460,7 @@ export const propertyFavorite = pgTable(
 		propertyId: uuid("property_id")
 			.notNull()
 			.references(() => property.id, { onDelete: "cascade" }),
-		userId: uuid("user_id")
+		userId: text("user_id")
 			.notNull()
 			.references(() => user.id, { onDelete: "cascade" }),
 		createdAt: timestamp("created_at").notNull().defaultNow(),
@@ -523,7 +523,7 @@ export const propertyValuation = pgTable(
 		notes: text("notes"),
 
 		// Professional valuation details
-		valuerId: uuid("valuer_id").references(() => user.id, {
+		valuerId: text("valuer_id").references(() => user.id, {
 			onDelete: "set null",
 		}),
 		valuationCompany: text("valuation_company"),
@@ -561,10 +561,10 @@ export const propertyPortfolioMetrics = pgTable(
 		propertyId: uuid("property_id")
 			.notNull()
 			.references(() => property.id, { onDelete: "cascade" }),
-		userId: uuid("user_id")
+		userId: text("user_id")
 			.notNull()
 			.references(() => user.id, { onDelete: "cascade" }),
-		organizationId: uuid("organization_id").references(() => organization.id, {
+		organizationId: text("organization_id").references(() => organization.id, {
 			onDelete: "cascade",
 		}),
 

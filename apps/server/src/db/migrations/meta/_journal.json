@@ -5,57 +5,8 @@
     {
       "idx": 0,
       "version": "7",
-      "when": 1756768512555,
-      "tag": "0000_yellow_gambit",
-      "breakpoints": true
-    },
-    {
-      "idx": 1,
-      "version": "7",
-      "when": 1756772327343,
-      "tag": "0001_lethal_obadiah_stane",
-      "breakpoints": true
-    },
-    {
-      "idx": 2,
-      "version": "7",
-      "when": 1756772897600,
-      "tag": "0002_ancient_sinister_six",
-      "breakpoints": true
-    },
-    {
-      "idx": 3,
-      "version": "7",
-      "when": 1756773126134,
-      "tag": "0003_noisy_steel_serpent",
-      "breakpoints": true
-    },
-    {
-      "idx": 4,
-      "version": "7",
-      "when": 1756779926352,
-      "tag": "0004_icy_blindfold",
-      "breakpoints": true
-    },
-    {
-      "idx": 5,
-      "version": "7",
-      "when": 1756782393774,
-      "tag": "0005_broken_ravenous",
-      "breakpoints": true
-    },
-    {
-      "idx": 6,
-      "version": "7",
-      "when": 1756825551106,
-      "tag": "0006_melted_ser_duncan",
-      "breakpoints": true
-    },
-    {
-      "idx": 7,
-      "version": "7",
-      "when": 1759508844950,
-      "tag": "0007_conscious_grandmaster",
+      "when": 1759509593304,
+      "tag": "0000_zippy_stick",
       "breakpoints": true
     }
   ]

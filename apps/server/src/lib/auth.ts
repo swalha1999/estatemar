@@ -33,15 +33,4 @@ export const auth = betterAuth({
 	emailAndPassword: {
 		enabled: true,
 	},
-	advanced: {
-		database: {
-			generateId: () => crypto.randomUUID(),
-		},
-		defaultCookieAttributes: {
-			sameSite: "none",
-			secure: true,
-			httpOnly: true,
-		},
-		
-	},
 });
