@@ -611,7 +611,7 @@ export const propertyPortfolioMetrics = pgTable(
 );
 
 export const propertyInsertSchema = createInsertSchema(property, {
-	pricePerSqm: z.number().min(0),
+	pricePerSqm: z.number().min(0).optional(),
 });
 
 // we can use the createUpdateSchema(property).pick({title : true})
