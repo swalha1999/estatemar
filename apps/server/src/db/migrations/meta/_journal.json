@@ -50,6 +50,13 @@
       "when": 1756825551106,
       "tag": "0006_melted_ser_duncan",
       "breakpoints": true
+    },
+    {
+      "idx": 7,
+      "version": "7",
+      "when": 1759508844950,
+      "tag": "0007_conscious_grandmaster",
+      "breakpoints": true
     }
   ]
 }

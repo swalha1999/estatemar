@@ -1,6 +1,6 @@
 import { betterAuth } from "better-auth";
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
-import { openAPI, organization } from "better-auth/plugins";
+import { openAPI, organization, phoneNumber } from "better-auth/plugins";
 import { db } from "../db";
 import * as schema from "../db/schema/auth";
 
@@ -17,6 +17,11 @@ export const auth = betterAuth({
 			organizationLimit: 9,
 			creatorRole: "owner",
 		}),
+		phoneNumber({  
+            sendOTP: ({ phoneNumber, code }, request) => { 
+                console.log(phoneNumber, code, request);
+            } 
+        }),
 	],
 	socialProviders: {
 		google: {
