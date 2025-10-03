@@ -153,6 +153,17 @@ const organizationRouter = {
 				},
 			});
 		}),
+	
+	addPhoneNumber: protectedProcedure.input(z.object({
+		phoneNumber: z.string(),
+	})).handler(async ({ input, context }) => {
+		return await auth.api.updateUser({
+			headers: context.honoContext.req.raw.headers,
+			body: {
+				phoneNumber: input.phoneNumber,
+			},
+		});
+	}),
 };
 
 export const authRouter = {
