@@ -190,12 +190,10 @@ const organizationRouter = {
 		}),
 
 	getUserData: protectedProcedure.handler(async ({ context }) => {
-		return await auth.api.accountInfo({
-			headers: context.honoContext.req.raw.headers,
-			body: {
-				accountId: context.session.user.id,
-			},
-		});
+		return {
+			user: context.session.user,
+			session: context.session.session,
+		};
 	}),
 };
 

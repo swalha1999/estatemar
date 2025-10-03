@@ -33,14 +33,16 @@ export default function PropertiesPage() {
 		undefined,
 	);
 
-	const { data, isLoading } = useQuery(orpc.realEstate.property.getMyProperties.queryOptions({
-        input:{
-            page,
-            limit: 20,
-            listingType,
-        },
-        refetchInterval: 1000 * 10, // 10 sec cache
-    }));
+	const { data, isLoading } = useQuery(
+		orpc.realEstate.property.getMyProperties.queryOptions({
+			input: {
+				page,
+				limit: 20,
+				listingType,
+			},
+			refetchInterval: 1000 * 10, // 10 sec cache
+		}),
+	);
 
 	const properties = data?.data?.properties || [];
 	const pagination = data?.data?.pagination;
@@ -245,9 +247,7 @@ export default function PropertiesPage() {
 									</Link>
 								</Button>
 								<Button className="flex-1" asChild>
-									<Link
-										href={`/dashboard/properties/${property.id}/edit`}
-									>
+									<Link href={`/dashboard/properties/${property.id}/edit`}>
 										Edit
 									</Link>
 								</Button>

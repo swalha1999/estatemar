@@ -37,10 +37,10 @@ export default function EditPropertyPage() {
 
 	const { data, isLoading } = useQuery(
 		orpc.realEstate.property.getById.queryOptions({
-            input: {
-                id: propertyId,
-            },
-        }),
+			input: {
+				id: propertyId,
+			},
+		}),
 	);
 
 	const updatePropertyMutation = useMutation(
