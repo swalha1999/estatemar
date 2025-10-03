@@ -24,14 +24,14 @@ export default function NotificationsPage(): React.JSX.Element {
 		data: invitations = [],
 		isPending: isInvitationsLoading,
 		refetch: refetchInvitations,
-	} = useQuery(orpc.auth.organization.getUserInvitations.queryOptions());
+	} = useQuery(orpc.user.organization.getUserInvitations.queryOptions());
 
 	const acceptInvitationMutation = useMutation(
-		orpc.auth.organization.acceptInvitation.mutationOptions({
+		orpc.user.organization.acceptInvitation.mutationOptions({
 			onSuccess: () => {
 				toast.success("Invitation accepted successfully!");
 				queryClient.invalidateQueries({
-					queryKey: orpc.auth.organization.key(),
+					queryKey: orpc.user.organization.key(),
 				});
 				refetchInvitations();
 			},
