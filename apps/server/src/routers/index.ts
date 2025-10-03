@@ -5,7 +5,7 @@ import { realEstateRouter } from "./real-estate";
 
 export const appRouter = {
 	health: healthRouter,
-	auth: authRouter,
+	user: authRouter,
 	realEstate: realEstateRouter,
 };
 
