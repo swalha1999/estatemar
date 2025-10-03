@@ -45,6 +45,21 @@ export const theme = {
 			ring: "hsl(var(--ring))",
 			radius: "var(--radius)",
 		},
+		fontFamily: {
+			sans: ["Montserrat_400Regular", "sans-serif"],
+			montserrat: ["Montserrat_400Regular", "sans-serif"],
+		},
+		fontWeight: {
+			thin: "100",
+			extralight: "200",
+			light: "300",
+			normal: "400",
+			medium: "500",
+			semibold: "600",
+			bold: "700",
+			extrabold: "800",
+			black: "900",
+		},
 		borderRadius: {
 			xl: "calc(var(--radius) + 4px)",
 			lg: "var(--radius)",

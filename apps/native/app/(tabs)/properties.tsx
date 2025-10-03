@@ -7,6 +7,8 @@ import {
 	TouchableOpacity,
 	View,
 } from "react-native";
+import { Ionicons } from "@expo/vector-icons";
+import { LinearGradient } from "expo-linear-gradient";
 import { Container } from "@/components/container";
 import { SignIn } from "@/components/sign-in";
 import { SafeImage } from "@/components/ui/safe-image";
@@ -110,63 +112,156 @@ export default function PropertiesScreen() {
 
 		return (
 			<TouchableOpacity
-				className="mx-4 mb-4 rounded-xl bg-card shadow-sm"
-				style={{ borderWidth: 1, borderColor: colors.border.light }}
+				style={{
+					marginHorizontal: 20,
+					marginBottom: 16,
+					borderRadius: 16,
+					backgroundColor: colors.background.card,
+					shadowColor: colors.shadow.lg,
+					shadowOffset: { width: 0, height: 2 },
+					shadowOpacity: 1,
+					shadowRadius: 8,
+					elevation: 3,
+					overflow: "hidden",
+				}}
 				onPress={() => router.push(`/property/${item.id}`)}
 			>
-				<SafeImage
-					uri={images[0] || null}
-					style={{
-						width: "100%",
-						height: 180,
-						borderTopLeftRadius: 12,
-						borderTopRightRadius: 12,
-					}}
-				/>
-				<View className="p-4">
-					<Text
-						className="font-semibold text-foreground text-lg"
-						numberOfLines={1}
+				<View>
+					<SafeImage
+						uri={images[0] || null}
+						style={{
+							width: "100%",
+							height: 180,
+						}}
+					/>
+					<LinearGradient
+						colors={["transparent", "rgba(0,0,0,0.75)"]}
+						style={{
+							position: "absolute",
+							bottom: 0,
+							left: 0,
+							right: 0,
+							height: 70,
+							justifyContent: "flex-end",
+							paddingHorizontal: 16,
+							paddingBottom: 12,
+						}}
 					>
-						{item.title}
-					</Text>
-					<View className="mt-3 flex-row items-center justify-between">
-						<View>
-							<Text className="text-muted-foreground text-xs">
+						<Text
+							numberOfLines={1}
+							style={{ 
+								fontFamily: "Montserrat_700Bold", 
+								fontSize: 15, 
+								color: "#fff",
+								marginBottom: 4 
+							}}
+						>
+							{item.title}
+						</Text>
+						<View style={{ flexDirection: "row", alignItems: "center" }}>
+							<Ionicons name="location" size={11} color="#fff" />
+							<Text style={{ 
+								marginLeft: 4, 
+								color: "#fff", 
+								fontSize: 11,
+								fontFamily: "Montserrat_500Medium",
+								opacity: 0.9
+							}}>
+								{item.area}, {item.city}
+							</Text>
+						</View>
+					</LinearGradient>
+				</View>
+
+					<View style={{ padding: 14 }}>
+					<View style={{ flexDirection: "row", marginBottom: 10 }}>
+						<View style={{ flex: 1, marginRight: 8 }}>
+							<Text
+								style={{ 
+									fontFamily: "Montserrat_500Medium", 
+									fontSize: 10, 
+									color: colors.text.tertiary,
+									marginBottom: 3
+								}}
+							>
 								Purchase Price
 							</Text>
-							<Text className="font-semibold text-foreground">
+							<Text
+								numberOfLines={1}
+								style={{ 
+									fontFamily: "Montserrat_700Bold", 
+									fontSize: 14, 
+									color: colors.text.primary
+								}}
+							>
 								{formatCurrency(purchasePrice, item.currency)}
 							</Text>
 						</View>
-						<View>
-							<Text className="text-right text-muted-foreground text-xs">
+						<View style={{ flex: 1, marginLeft: 8, alignItems: "flex-end" }}>
+							<Text
+								style={{ 
+									fontFamily: "Montserrat_500Medium", 
+									fontSize: 10, 
+									color: colors.text.tertiary,
+									marginBottom: 3
+								}}
+							>
 								Current Value
 							</Text>
-							<Text className="text-right font-semibold text-foreground">
+							<Text
+								numberOfLines={1}
+								style={{ 
+									fontFamily: "Montserrat_700Bold", 
+									fontSize: 14, 
+									color: colors.text.primary
+								}}
+							>
 								{formatCurrency(marketValue, item.currency)}
 							</Text>
 						</View>
 					</View>
+
 					<View
-						className="mt-3 rounded-lg p-3"
 						style={{
+							flexDirection: "row",
+							alignItems: "center",
+							justifyContent: "space-between",
 							backgroundColor:
 								profitLoss >= 0
 									? colors.status.successLight
 									: colors.status.errorLight,
+							borderRadius: 10,
+							padding: 10,
 						}}
 					>
+						<View style={{ flexDirection: "row", alignItems: "center", flex: 1 }}>
+							<Ionicons
+								name={profitLoss >= 0 ? "trending-up" : "trending-down"}
+								size={16}
+								color={profitLoss >= 0 ? colors.status.success : colors.status.error}
+							/>
+							<Text
+								numberOfLines={1}
+								style={{
+									marginLeft: 6,
+									color: profitLoss >= 0 ? colors.status.success : colors.status.error,
+									fontFamily: "Montserrat_700Bold",
+									fontSize: 13,
+									flex: 1
+								}}
+							>
+								{formatCurrency(profitLoss, item.currency)}
+							</Text>
+						</View>
 						<Text
-							className="text-center font-bold text-sm"
 							style={{
-								color:
-									profitLoss >= 0 ? colors.status.success : colors.status.error,
+								color: profitLoss >= 0 ? colors.status.success : colors.status.error,
+								fontFamily: "Montserrat_600SemiBold",
+								fontSize: 13,
+								marginLeft: 6
 							}}
 						>
-							{profitLoss >= 0 ? "📈" : "📉"}{" "}
-							{formatCurrency(profitLoss, item.currency)} (
-							{profitLossPercentage.toFixed(2)}%)
+							{profitLossPercentage >= 0 ? "+" : ""}{profitLossPercentage.toFixed(2)}%
 						</Text>
 					</View>
 				</View>
@@ -176,19 +271,53 @@ export default function PropertiesScreen() {
 
 	return (
 		<Container>
-			<View className="flex-1">
-				<View className="flex-row items-center justify-between border-border border-b bg-card px-4 py-4">
-					<Text className="font-bold text-2xl text-foreground">
-						My Properties
-					</Text>
-					<TouchableOpacity
-						className="items-center justify-center rounded-full bg-primary"
-						style={{ width: 40, height: 40 }}
-						onPress={() => router.push("/add-property")}
-					>
-						<Text className="font-bold text-2xl text-white">+</Text>
-					</TouchableOpacity>
-				</View>
+			<View className="flex-1 bg-background">
+				<LinearGradient
+					colors={[colors.primary.main, colors.primary.dark]}
+					style={{
+						paddingHorizontal: 20,
+						paddingTop: 56,
+						paddingBottom: 20,
+						shadowColor: colors.shadow.md,
+						shadowOffset: { width: 0, height: 2 },
+						shadowOpacity: 1,
+						shadowRadius: 8,
+						elevation: 4,
+					}}
+				>
+					<View className="flex-row items-center justify-between">
+						<View className="flex-1">
+							<Text
+								className="font-bold text-white"
+								style={{ fontFamily: "Montserrat_700Bold", fontSize: 24, lineHeight: 30 }}
+							>
+								My Properties
+							</Text>
+							<Text 
+								className="mt-1 text-white"
+								style={{ fontFamily: "Montserrat_500Medium", fontSize: 13, opacity: 0.9 }}
+							>
+								Manage your portfolio
+							</Text>
+						</View>
+						<TouchableOpacity
+							className="items-center justify-center rounded-2xl bg-white"
+							style={{ 
+								width: 52, 
+								height: 52, 
+								shadowColor: "#000", 
+								shadowOffset: { width: 0, height: 3 }, 
+								shadowOpacity: 0.15, 
+								shadowRadius: 6, 
+								elevation: 4,
+								marginLeft: 16 
+							}}
+							onPress={() => router.push("/add-property")}
+						>
+							<Ionicons name="add" size={28} color={colors.primary.main} />
+						</TouchableOpacity>
+					</View>
+				</LinearGradient>
 
 				{isLoading ? (
 					<View className="flex-1 items-center justify-center">
@@ -201,56 +330,221 @@ export default function PropertiesScreen() {
 						keyExtractor={(item) => item.id}
 						ListHeaderComponent={
 							properties.length > 0 ? (
-								<View className="mx-4 mt-4 mb-2 rounded-xl bg-primary p-4">
-									<Text className="mb-4 text-center font-bold text-white text-xl">
+								<View style={{ marginHorizontal: 20, marginTop: 20, marginBottom: 8 }}>
+									<Text
+										style={{ 
+											fontFamily: "Montserrat_700Bold", 
+											fontSize: 18, 
+											color: colors.text.primary,
+											marginBottom: 14
+										}}
+									>
 										Portfolio Overview
 									</Text>
-									<View className="flex-row flex-wrap gap-4">
-										<View className="min-w-[45%] flex-1">
-											<Text className="text-white text-xs opacity-80">
-												Properties
-											</Text>
-											<Text className="font-bold text-lg text-white">
-												{metrics.totalProperties}
-											</Text>
-										</View>
-										<View className="min-w-[45%] flex-1">
-											<Text className="text-white text-xs opacity-80">
-												Total Investment
-											</Text>
-											<Text className="font-bold text-lg text-white">
-												{formatCurrency(metrics.totalInvestment)}
-											</Text>
-										</View>
-										<View className="min-w-[45%] flex-1">
-											<Text className="text-white text-xs opacity-80">
-												Current Value
-											</Text>
-											<Text className="font-bold text-lg text-white">
-												{formatCurrency(metrics.totalCurrentValue)}
-											</Text>
-										</View>
-										<View className="min-w-[45%] flex-1">
-											<Text className="text-white text-xs opacity-80">
-												Total Profit/Loss
-											</Text>
-											<Text className="font-bold text-lg text-white">
-												{formatCurrency(metrics.totalProfitLoss)} (
-												{metrics.totalProfitLossPercentage.toFixed(2)}%)
-											</Text>
-										</View>
+									<View
+										style={{
+											borderRadius: 16,
+											overflow: "hidden",
+											shadowColor: colors.shadow.md,
+											shadowOffset: { width: 0, height: 2 },
+											shadowOpacity: 1,
+											shadowRadius: 8,
+											elevation: 3,
+										}}
+									>
+										<LinearGradient
+											colors={[colors.primary.main, colors.secondary.main]}
+											style={{ padding: 14 }}
+										>
+											<View style={{ flexDirection: "row", flexWrap: "wrap", gap: 10 }}>
+												<View style={{ flex: 1, minWidth: "45%", backgroundColor: "rgba(255,255,255,0.15)", borderRadius: 10, padding: 12 }}>
+													<View style={{ flexDirection: "row", alignItems: "center", marginBottom: 6 }}>
+														<Ionicons name="home" size={14} color="#fff" />
+														<Text
+															style={{ 
+																marginLeft: 5, 
+																color: "#fff", 
+																fontSize: 11,
+																fontFamily: "Montserrat_500Medium",
+																opacity: 0.95
+															}}
+														>
+															Properties
+														</Text>
+													</View>
+													<Text
+														style={{ 
+															fontFamily: "Montserrat_700Bold", 
+															fontSize: 22, 
+															color: "#fff"
+														}}
+													>
+														{metrics.totalProperties}
+													</Text>
+												</View>
+												<View style={{ flex: 1, minWidth: "45%", backgroundColor: "rgba(255,255,255,0.15)", borderRadius: 10, padding: 12 }}>
+													<View style={{ flexDirection: "row", alignItems: "center", marginBottom: 6 }}>
+														<Ionicons name="wallet" size={14} color="#fff" />
+														<Text
+															style={{ 
+																marginLeft: 5, 
+																color: "#fff", 
+																fontSize: 11,
+																fontFamily: "Montserrat_500Medium",
+																opacity: 0.95
+															}}
+														>
+															Investment
+														</Text>
+													</View>
+													<Text
+														numberOfLines={1}
+														style={{ 
+															fontFamily: "Montserrat_700Bold", 
+															fontSize: 15, 
+															color: "#fff"
+														}}
+													>
+														{formatCurrency(metrics.totalInvestment)}
+													</Text>
+												</View>
+												<View style={{ flex: 1, minWidth: "45%", backgroundColor: "rgba(255,255,255,0.15)", borderRadius: 10, padding: 12 }}>
+													<View style={{ flexDirection: "row", alignItems: "center", marginBottom: 6 }}>
+														<Ionicons name="trending-up" size={14} color="#fff" />
+														<Text
+															style={{ 
+																marginLeft: 5, 
+																color: "#fff", 
+																fontSize: 11,
+																fontFamily: "Montserrat_500Medium",
+																opacity: 0.95
+															}}
+														>
+															Current Value
+														</Text>
+													</View>
+													<Text
+														numberOfLines={1}
+														style={{ 
+															fontFamily: "Montserrat_700Bold", 
+															fontSize: 15, 
+															color: "#fff"
+														}}
+													>
+														{formatCurrency(metrics.totalCurrentValue)}
+													</Text>
+												</View>
+												<View style={{ flex: 1, minWidth: "45%", backgroundColor: "rgba(255,255,255,0.15)", borderRadius: 10, padding: 12 }}>
+													<View style={{ flexDirection: "row", alignItems: "center", marginBottom: 6 }}>
+														<Ionicons name="stats-chart" size={14} color="#fff" />
+														<Text
+															style={{ 
+																marginLeft: 5, 
+																color: "#fff", 
+																fontSize: 11,
+																fontFamily: "Montserrat_500Medium",
+																opacity: 0.95
+															}}
+														>
+															Profit/Loss
+														</Text>
+													</View>
+													<Text
+														numberOfLines={1}
+														style={{ 
+															fontFamily: "Montserrat_700Bold", 
+															fontSize: 14, 
+															color: "#fff"
+														}}
+													>
+														{formatCurrency(metrics.totalProfitLoss)}
+													</Text>
+													<Text
+														style={{ 
+															color: "#fff", 
+															fontSize: 12,
+															fontFamily: "Montserrat_600SemiBold",
+															marginTop: 2,
+															opacity: 0.9
+														}}
+													>
+														{metrics.totalProfitLossPercentage >= 0 ? "+" : ""}
+														{metrics.totalProfitLossPercentage.toFixed(2)}%
+													</Text>
+												</View>
+											</View>
+										</LinearGradient>
 									</View>
 								</View>
 							) : null
 						}
 						ListEmptyComponent={
-							<View className="flex-1 items-center justify-center p-4">
-								<Text className="mb-2 text-center font-semibold text-foreground text-lg">
-									No properties yet
+							<View style={{ flex: 1, alignItems: "center", justifyContent: "center", paddingHorizontal: 32, paddingVertical: 60 }}>
+								<View
+									style={{ 
+										width: 100, 
+										height: 100, 
+										borderRadius: 50,
+										backgroundColor: colors.primary.lighter,
+										alignItems: "center",
+										justifyContent: "center",
+										marginBottom: 20
+									}}
+								>
+									<Ionicons name="home-outline" size={48} color={colors.primary.main} />
+								</View>
+								<Text
+									style={{ 
+										fontFamily: "Montserrat_700Bold", 
+										fontSize: 20, 
+										color: colors.text.primary,
+										textAlign: "center",
+										marginBottom: 10
+									}}
+								>
+									No Properties Yet
 								</Text>
-								<Text className="text-center text-muted-foreground">
-									Add properties to track your portfolio
+								<Text
+									style={{ 
+										fontFamily: "Montserrat_400Regular", 
+										fontSize: 14, 
+										color: colors.text.secondary,
+										textAlign: "center",
+										lineHeight: 20,
+										maxWidth: 280,
+										marginBottom: 28
+									}}
+								>
+									Start building your property portfolio by adding your first property
 								</Text>
+								<TouchableOpacity
+									style={{
+										backgroundColor: colors.primary.main,
+										borderRadius: 12,
+										paddingHorizontal: 24,
+										paddingVertical: 14,
+										flexDirection: "row",
+										alignItems: "center",
+										shadowColor: colors.shadow.md,
+										shadowOffset: { width: 0, height: 3 },
+										shadowOpacity: 1,
+										shadowRadius: 8,
+										elevation: 4,
+									}}
+									onPress={() => router.push("/add-property")}
+								>
+									<Ionicons name="add-circle" size={20} color="#fff" />
+									<Text
+										style={{ 
+											marginLeft: 8, 
+											fontFamily: "Montserrat_600SemiBold", 
+											fontSize: 15, 
+											color: "#fff"
+										}}
+									>
+										Add Your First Property
+									</Text>
+								</TouchableOpacity>
 							</View>
 						}
 						contentContainerStyle={{ paddingBottom: spacing.base }}

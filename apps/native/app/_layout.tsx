@@ -15,6 +15,31 @@ import { setAndroidNavigationBar } from "@/lib/android-navigation-bar";
 import { NAV_THEME } from "@/lib/constants";
 import { useColorScheme } from "@/lib/use-color-scheme";
 import { queryClient } from "@/utils/orpc";
+import {
+	useFonts,
+	Montserrat_100Thin,
+	Montserrat_200ExtraLight,
+	Montserrat_300Light,
+	Montserrat_400Regular,
+	Montserrat_500Medium,
+	Montserrat_600SemiBold,
+	Montserrat_700Bold,
+	Montserrat_800ExtraBold,
+	Montserrat_900Black,
+	Montserrat_100Thin_Italic,
+	Montserrat_200ExtraLight_Italic,
+	Montserrat_300Light_Italic,
+	Montserrat_400Regular_Italic,
+	Montserrat_500Medium_Italic,
+	Montserrat_600SemiBold_Italic,
+	Montserrat_700Bold_Italic,
+	Montserrat_800ExtraBold_Italic,
+	Montserrat_900Black_Italic,
+} from "@expo-google-fonts/montserrat";
+import * as SplashScreen from "expo-splash-screen";
+
+// Keep the splash screen visible while we load fonts
+SplashScreen.preventAutoHideAsync();
 
 const LIGHT_THEME: Theme = {
 	...DefaultTheme,
@@ -34,6 +59,27 @@ export default function RootLayout() {
 	const { colorScheme, isDarkColorScheme } = useColorScheme();
 	const [isColorSchemeLoaded, setIsColorSchemeLoaded] = React.useState(false);
 
+	const [fontsLoaded, fontError] = useFonts({
+		Montserrat_100Thin,
+		Montserrat_200ExtraLight,
+		Montserrat_300Light,
+		Montserrat_400Regular,
+		Montserrat_500Medium,
+		Montserrat_600SemiBold,
+		Montserrat_700Bold,
+		Montserrat_800ExtraBold,
+		Montserrat_900Black,
+		Montserrat_100Thin_Italic,
+		Montserrat_200ExtraLight_Italic,
+		Montserrat_300Light_Italic,
+		Montserrat_400Regular_Italic,
+		Montserrat_500Medium_Italic,
+		Montserrat_600SemiBold_Italic,
+		Montserrat_700Bold_Italic,
+		Montserrat_800ExtraBold_Italic,
+		Montserrat_900Black_Italic,
+	});
+
 	useIsomorphicLayoutEffect(() => {
 		if (hasMounted.current) {
 			return;
@@ -47,7 +93,17 @@ export default function RootLayout() {
 		hasMounted.current = true;
 	}, []);
 
-	if (!isColorSchemeLoaded) {
+	React.useEffect(() => {
+		if (fontError) throw fontError;
+	}, [fontError]);
+
+	React.useEffect(() => {
+		if (fontsLoaded) {
+			SplashScreen.hideAsync();
+		}
+	}, [fontsLoaded]);
+
+	if (!isColorSchemeLoaded || !fontsLoaded) {
 		return null;
 	}
 	return (
