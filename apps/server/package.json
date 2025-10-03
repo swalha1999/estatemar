@@ -3,7 +3,7 @@
 	"main": "src/index.ts",
 	"type": "module",
 	"scripts": {
-		"build": "pnpm db:migrate && tsdown",
+		"build": "pnpm db:migrate && tsup",
 		"check-types": "tsc -b",
 		"type-check": "tsc -b",
 		"type-check:watch": "tsc -b --watch",
@@ -41,11 +41,8 @@
 		"@types/node": "^22.0.0",
 		"@types/pg": "^8.11.0",
 		"drizzle-kit": "^0.31.4",
-		"tsdown": "^0.14.0",
+		"tsup": "^8.3.5",
 		"tsx": "^4.19.0",
 		"typescript": "^5.8.0"
-	},
-	"optionalDependencies": {
-		"@rolldown/binding-linux-x64-gnu": "v1.0.0-beta.40"
 	}
 }
