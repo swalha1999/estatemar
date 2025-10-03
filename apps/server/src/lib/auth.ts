@@ -1,3 +1,4 @@
+import { expo } from "@better-auth/expo";
 import { betterAuth } from "better-auth";
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
 import { openAPI, organization, phoneNumber } from "better-auth/plugins";
@@ -11,6 +12,7 @@ export const auth = betterAuth({
 		// debugLogs: true,
 	}),
 	plugins: [
+		expo(),
 		openAPI(),
 		organization({
 			allowUserToCreateOrganization: true,
@@ -29,7 +31,7 @@ export const auth = betterAuth({
 			clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
 		},
 	},
-	trustedOrigins: [process.env.CORS_ORIGIN || ""],
+	trustedOrigins: [process.env.CORS_ORIGIN || "", "mybettertapp://", "exp://"],
 	emailAndPassword: {
 		enabled: true,
 	},
