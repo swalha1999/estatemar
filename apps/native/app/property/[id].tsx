@@ -175,7 +175,7 @@ export default function PropertyDetailScreen() {
 								</Text>
 							</View>
 						)}
-						{property.parkingSpaces > 0 && (
+						{property.parkingSpaces && property.parkingSpaces > 0 && (
 							<View className="rounded-lg bg-card p-3" style={{ minWidth: 80 }}>
 								<Text className="text-center text-muted-foreground text-xs">
 									Parking
