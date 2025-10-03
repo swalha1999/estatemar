@@ -48,18 +48,26 @@ const openAPIgenerator = new OpenAPIGenerator({
 	schemaConverters: [new ZodToJsonSchemaConverter()],
 });
 
-const spec = await openAPIgenerator.generate(appRouter, {
-	info: {
-		title: "Heshbonit API",
-		version: "0.0.1",
-	},
-	servers: [
-        { url: '/api' },
-      ],
-});
+let spec: object | null = null;
 
-app.get("/api/openapi.json", (c) => {
-	return c.json(spec);
+const generateSpec = async () => {
+	if (!spec) {
+		spec = await openAPIgenerator.generate(appRouter, {
+			info: {
+				title: "Estatemar API",
+				version: "0.0.1",
+			},
+			servers: [
+				{ url: '/api' },
+			],
+		});
+	}
+	return spec;
+};
+
+app.get("/api/openapi.json", async (c) => {
+	const openApiSpec = await generateSpec();
+	return c.json(openApiSpec);
 });
 
 app.get("/api/openapi_swagger", (c) => {
@@ -67,7 +75,7 @@ app.get("/api/openapi_swagger", (c) => {
     <!doctype html>
     <html>
       <head>
-        <title>My Client</title>
+        <title>Estatemar API Documentation</title>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" type="image/svg+xml" href="https://orpc.unnoq.com/icon.svg" />
@@ -82,7 +90,9 @@ app.get("/api/openapi_swagger", (c) => {
             authentication: {
               securitySchemes: {
                 bearerAuth: {
-                  token: 'default-token',
+                  type: 'http',
+                  scheme: 'bearer',
+                  bearerFormat: 'JWT'
                 },
               },
             },
